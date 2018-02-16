@@ -114,7 +114,7 @@ void TGroup::remove(TView* p)
 
 static int force_redraw = 0;
 
-void TGroup::Redraw()
+void TGroup::CLY_Redraw()
 {
   force_redraw++;
   redraw();
@@ -222,6 +222,7 @@ ushort TGroup::execView( TView* p )
       }
 
     ushort retval = p->execute();
+    p->setState(sfActive, False);
 
     // Re-lock if needed
     lockFlag=oldLock;

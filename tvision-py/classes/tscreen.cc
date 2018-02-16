@@ -1,6 +1,6 @@
 /**[txh]********************************************************************
 
-  Copyright 2001-2003 by Salvador E. Tropea
+  Copyright 2001-2009 by Salvador E. Tropea
   This file is covered by the GPL license.
   
   Module: Screen
@@ -23,6 +23,7 @@ same used in original Turbo Vision for compatibility purposes.
 #define Uses_ctype
 #define Uses_TScreen
 #define Uses_TVConfigFile
+#define Uses_TGKey
 #include <tv.h>
 #include <tv/drivers.h>
 
@@ -54,6 +55,9 @@ TVScreenFontRequestCallBack
 long     TScreen::forcedAppCP=-1,
          TScreen::forcedScrCP=-1,
          TScreen::forcedInpCP=-1;
+int      TScreen::maxAppHelperHandlers=8;
+const char
+        *TScreen::windowClass="XTVApp";
 
 /*****************************************************************************
   Function pointer members initialization
@@ -73,21 +77,29 @@ void   (*TScreen::setCharacter)(unsigned offset, uint32 value)
                                                 =TScreen::defaultSetCharacter;
 void   (*TScreen::setCharacters)(unsigned offset, ushort *values, unsigned count)
                                                 =TScreen::defaultSetCharacters;
-int    (*TScreen::SystemP)(const char *command, pid_t *pidChild, int in,
-                          int out, int err)
+int    (*TScreen::System_p)(const char *command, pid_t *pidChild, int in,
+                            int out, int err)
                                                 =TScreen::defaultSystem;
 int    (*TScreen::getFontGeometry)(unsigned &w, unsigned &h)
                                                 =TScreen::defaultGetFontGeometry;
 int    (*TScreen::getFontGeometryRange)(unsigned &wmin, unsigned &hmin,
                                        unsigned &umax, unsigned &hmax)
                                                 =TScreen::defaultGetFontGeometryRange;
-int    (*TScreen::setFontP)(int changeP, TScreenFont256 *fontP,
-                           int changeS, TScreenFont256 *fontS,
-                           int fontCP, int appCP)
+int    (*TScreen::setFont_p)(int changeP, TScreenFont256 *fontP,
+                             int changeS, TScreenFont256 *fontS,
+                             int fontCP, int appCP)
                                                 =TScreen::defaultSetFont;
 void   (*TScreen::restoreFonts)()               =TScreen::defaultRestoreFonts;
-int    (*TScreen::setVideoModeResP)(unsigned w, unsigned h, int fW, int fH)
+int    (*TScreen::setVideoModeRes_p)(unsigned w, unsigned h, int fW, int fH)
                                                 =TScreen::defaultSetVideoModeRes;
+TScreen::appHelperHandler (*TScreen::openHelperApp)(AppHelper kind)
+                                                =TScreen::defaultOpenHelperApp;
+Boolean (*TScreen::closeHelperApp)(appHelperHandler id)
+                                                =TScreen::defaultCloseHelperApp;
+Boolean (*TScreen::sendFileToHelper)(appHelperHandler id, const char *file, void *extra)
+                                                =TScreen::defaultSendFileToHelper;
+const char *(*TScreen::getHelperAppError)()     =TScreen::defaultGetHelperAppError;
+
 
 /*****************************************************************************
   Default behaviors for the members
@@ -188,6 +200,16 @@ int  TScreen::defaultSetFont(int , TScreenFont256 *, int , TScreenFont256 *,
                              int, int) { return 0; }
 void TScreen::defaultRestoreFonts() {}
 
+TScreen::appHelperHandler TScreen::defaultOpenHelperApp(TScreen::AppHelper)
+{ return -1; }
+Boolean TScreen::defaultCloseHelperApp(appHelperHandler) { return False; }
+Boolean TScreen::defaultSendFileToHelper(appHelperHandler, const char *, void *)
+{ return False; }
+const char *TScreen::defaultGetHelperAppError()
+{
+ return __("This feature isn't implemented by the current driver.");
+}
+
 /*****************************************************************************
   Real members
 *****************************************************************************/
@@ -201,6 +223,12 @@ struct stDriver
  // Configuration section name for this driver
  const char *name;
 };
+
+#ifdef TV_Disable_WinGr_Driver
+  #define TV_WinGr_Driver_Entry
+#else
+  #define TV_WinGr_Driver_Entry { TV_WinGrDriverCheck,  80, "WinGr" },
+#endif
 
 static
 stDriver Drivers[]=
@@ -219,6 +247,9 @@ stDriver Drivers[]=
   #ifdef TVOSf_QNXRtP
    { TV_QNXRtPDriverCheck, 90, "QNX" },
   #else
+   #ifdef TVOSf_QNX4
+    { TV_QNX4DriverCheck, 90, "QNX4" },
+   #endif // TVOSf_QNX4
    { TV_XTermDriverCheck, 60, "XTerm" },
    #ifdef HAVE_NCURSES
    { TV_UNIXDriverCheck, 10, "UNIX" },
@@ -233,13 +264,17 @@ stDriver Drivers[]=
   #endif // HAVE_X11
   #ifdef TVOSf_NT
    { TV_WinNTDriverCheck,  90, "WinNT" },
-   { TV_WinGrDriverCheck,  80, "WinGr" },
+   TV_WinGr_Driver_Entry
    { TV_Win32DriverCheck,  50, "Win32" },
   #else
    { TV_Win32DriverCheck,  90, "Win32" },
-   { TV_WinGrDriverCheck,  80, "WinGr" },
+   TV_WinGr_Driver_Entry
    { TV_WinNTDriverCheck,  50, "WinNT" },
   #endif
+ #endif
+
+ #ifdef HAVE_ALLEGRO
+   { TV_AlconDriverCheck,  30, "AlCon" },
  #endif
 };
 
@@ -300,6 +335,12 @@ TScreen::TScreen() :
     currentDriverShortName=NULL;
     exit(1);
    }
+ long val=0;
+ if (optSearch("AvoidMoire",val))
+    avoidMoire=val;
+ val=0;
+ if (optSearch("AltKeysSetting",val))
+    TGKey::SetAltSettings(val);
 }
 
 TScreen::~TScreen()

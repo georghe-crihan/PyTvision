@@ -31,6 +31,7 @@
 #define Uses_TProgram
 #define Uses_TDeskTop
 #define Uses_TStreamableClass
+#define Uses_TEditor          // JASC, cmOpen
 #include <tv.h>
 __link(RScroller)
 __link(RScrollBar)
@@ -58,7 +59,7 @@ TFileViewer::TFileViewer( const TRect& bounds,
 TFileViewer::~TFileViewer()
 {
      delete [] fileName;
-     destroy (fileLines);
+     CLY_destroy(fileLines);
 }
 
 void TFileViewer::draw()
@@ -118,7 +119,7 @@ void TFileViewer::readFile( const char *fName )
                IfStreamGetLine(fileToView,line,sizeof line)
              )
             {
-            limit.x = max( limit.x, strlen( line ) );
+            limit.x = max( limit.x, (int)strlen( line ) );
             fileLines->insert( newStr( line ) );
             }
         isValid = True;

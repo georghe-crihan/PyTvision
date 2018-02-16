@@ -26,7 +26,8 @@ class TDirListBox : public TListBox
 
 public:
 
-    TDirListBox( const TRect& bounds, TScrollBar *aScrollBar );
+    TDirListBox( const TRect& bounds, TScrollBar *aVScrollBar,
+                 TScrollBar *aHScrollBar = NULL );
     ~TDirListBox();
 
     virtual void getText( char *, ccIndex, short );
@@ -34,6 +35,9 @@ public:
     virtual Boolean isSelected( ccIndex );
     void newDirectory( const char * );
     virtual void setState( ushort aState, Boolean enable );
+    virtual void draw();
+    // SET: Now we use the cursor to help in incremental searches
+    void updateCursorPos();
 
     TDirCollection *list();
 
@@ -55,6 +59,10 @@ private:
 
     char dir[PATH_MAX];
     ushort cur;
+
+    // SET: Incremental search
+    char incremental[PATH_MAX];
+    int  incPos;
 
 #if !defined( NO_STREAM )
     virtual const char *streamableName() const

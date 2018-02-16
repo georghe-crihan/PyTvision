@@ -149,7 +149,7 @@ static char * TheClassName[vtDialog + 1] = { "TUser",
 
 // Commom changeBounds code fragment for editable classes
 #define _chgbnds_(a) a::changeBounds(bounds); \
-        setPos(origin, size); ObjEdit->Redraw(); \
+        setPos(origin, size); ObjEdit->CLY_Redraw(); \
         EditDlg->modified = true;
 
 // Commom setState code fragment for all editable classes
@@ -208,7 +208,7 @@ static bool GridState = true;
 void SetGrid(bool enable)
 {
    GridState = enable;
-   EditDlg->Redraw();
+   EditDlg->CLY_Redraw();
 }
 
 bool GetGrid()
@@ -275,7 +275,7 @@ void InitDlgEditor(const char * FileName)
      else if ((EditDlg) && EditDlg->modified)
      {
          if (!EditDlg->Save(cmCancel)) return;
-         TProgram::destroy(EditDlg);
+         TProgram::CLY_destroy(EditDlg);
          EditDlg = new TDDialog();
      }
    TProgram::deskTop->insert(EditDlg);
@@ -632,7 +632,8 @@ void SaveObject( ofpstream& s, TDsgObj * obj )
         }
         else s << Count;
         break;
-      case vtRadioButton...vtCheckBox:
+      case vtRadioButton:
+      case vtCheckBox:
         items = (TStringCollection *)((TDClusterData *)obj->attributes)->items;
         Count = items->getCount();
         s << Count;
@@ -824,7 +825,7 @@ void TDsgObj::dsgUpdate()
    if (r != me->getBounds()) me->changeBounds(r);
    if (tabStop()) ObjectLinker()->doReOrder();
    ((TDDialog *)me->owner)->setModified(True);
-   me->owner->Redraw();
+   me->owner->CLY_Redraw();
 }
 
 /* TDDialog =============================================================*/
@@ -935,7 +936,7 @@ void TDDialog::dlgRun()
    d->selectNext(false);
    TProgram::deskTop->execView(d);
    changeBounds(d->getBounds());
-   TObject::destroy(d);
+   TObject::CLY_destroy(d);
    show();
 }
 
@@ -972,7 +973,7 @@ void * TDDialog::dsgGetData() { return (void *)title; }
 
 Boolean TDDialog::Save(int aCommand)
 {
-   const char * f;
+   char * f;
    int cmd = aCommand;
    if (modified)
    {
@@ -984,8 +985,8 @@ Boolean TDDialog::Save(int aCommand)
          f = getFileName(_("Save dialog"), "*.fdg", 1);
          if (f)
          {
-            if (fileName) delete[] fileName;
-            fileName = newStr(f);
+            delete[] fileName;
+            fileName = f;
             return True;
          }
       }
@@ -1025,7 +1026,7 @@ Boolean TDDialog::saveToFile(const char * FileName)
         ofpstream& s = *S;
         s << viewType;
         s.writeBytes(attributes, vtAttrSize[viewType]);
-        s << GridState ? (char)1 : (char)0;
+        s << (GridState ? (char)1 : (char)0);
         s << LabelCount  << InputCount   << MemoCount
           << StaticCount << ButtonCount  << ListBoxCount << RadioCount
           << CheckCount  << VScrollCount << HScrollCount << UserCount;
@@ -1060,7 +1061,7 @@ Boolean TDDialog::loadFromFile(const char * FileName)
    TView * p = last;
    do {
       TView * t = p->prev();
-      if (p != frame) destroy(p);
+      if (p != frame) CLY_destroy(p);
       p = t;
    } while (first() != last);
    

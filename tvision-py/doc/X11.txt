@@ -1,7 +1,7 @@
 Driver: X11
 Author: Salvador E. Tropea
 Status: Not complete, random suggestions and details
-Revision: $Revision: 1.8.2.3 $
+Revision: $Revision: 1.8.2.6 $
 
   This file documents details specific to the X11 driver. By X11 I mean the X
 Window system version 11 release 6 also known as X11R6. The driver was tested
@@ -132,9 +132,12 @@ InpCP             Input encoding.
 
 Font10x20              Selects the 10x20 font instead of 8x16.
 HideCursorWhenNoFocus  By default enabled
-DontResizeToCells      Don't resize the window to a cells multiple size if the
-                       WM fails to follow the hints. This helps to avoid
-                       problems found in KDE 3.1 alpha.
+DontResizeToCells      Don't resize the window to a cells multiple size if
+                       the WM fails to follow the hints. First added to avoid
+                       problems found in KDE 3.1 alpha. Now enabled by default.
+                       Compiz also needs it. Disable it if your WM doesn't
+                       pay attention to the hints and you can correct the
+                       window size to be a multiple of the fonts size.
 InternalBusyCursor     When enabled we use our own mouse cursor for it.
 Unicode16              When selected the driver will try to use 16 bits Unicode
                        mode.
@@ -152,6 +155,40 @@ UseX11Fonts            Use the X11 fonts instead of internal fonts. It have
                        the same you get with other drivers, etc.
 X11Font                Suggested X11 font, note that the first match will be
                        used, be careful.
+UseUpdateThread        When this option is enabled the driver updates the
+                       window content even if the TV application is blocking
+                       the CPU. That's very useful when the application
+                       blocks and the window becomes "exposed". If this isn't
+                       enabled X will fill the exposed area with black and
+                       the user won't see the window content until the
+                       application collects events.
+                       It is available using two mechanisms selected at
+                       compilation time:
+                       1) Using setitimer and signals:
+                       It seems to be stable but the TV application must
+                       avoid using setitimer and SIGALRM.
+                       I only tested it for Linux but I'm using concepts I
+                       successfuly used for Solaris in older versions of the
+                       driver.
+                       That's the default compilation option.
+                       2) Using POSIX threads (preemptive)                       
+                       Only available for Linux.
+                       When enabled the driver uses a separated thread to
+                       collect the "expose" events and update the screen.
+                       That's good because even when the application is
+                       blocking (calling system, performing a long
+                       calculation, etc.) the window can be exposed and the
+                       contents of the screen will be updated (you don't get
+                       a black window). But the problem is that Linux
+                       implementation of POSIX threads is quite poor and
+                       mixing threads with fork/exec doesn't work for big
+                       applications. The driver implements it using
+                       fork/system (system function is "thread protected")
+                       but you must avoid killing your child or the update
+                       thread will most probably die. The driver have a watch
+                       dog timer and if the update thread dies will revert to
+                       manual screen update in less than 2 seconds (>=1s &
+                       <2s aprox.).
 
 * I don't know if anybody can be interested on it, but this driver compiles
 and run for Windows. You need to use Cygwin with the XFree86 port installed

@@ -1,0 +1,659 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.5.4	//
+ALL_OBJFILES	demo.mak	/^ALL_OBJFILES=ascii.o calendar.o fileview.o gadgets.o mousedlg.o puzzle.o\\$/;"	kind:m	language:Make
+C	demo.mak	/^RHIDE_TYPED_LIBS.C=$(RHIDE_TYPED_LIBS.cc)$/;"	kind:m	language:Make
+CFLAGS	demo.mak	/^FLAGS_FOR_SUBPROJECTS=RHIDE_OS_="$(RHIDE_OS_)" CFLAGS="$(CFLAGS)"\\$/;"	kind:m	language:Make
+CLEAN_FILES	demo.mak	/^CLEAN_FILES=$(MAIN_TARGET) $(OBJFILES)$/;"	kind:m	language:Make
+CPPFLAGS	demo.mak	/^	CXXFLAGS="$(CXXFLAGS)" LDFLAGS="$(LDFLAGS)" CPPFLAGS="$(CPPFLAGS)"$/;"	kind:m	language:Make
+CXXFLAGS	demo.mak	/^	CXXFLAGS="$(CXXFLAGS)" LDFLAGS="$(LDFLAGS)" CPPFLAGS="$(CPPFLAGS)"$/;"	kind:m	language:Make
+C_ADA_LANG_FLAGS	demo.mak	/^C_ADA_LANG_FLAGS=$/;"	kind:m	language:Make
+C_CXX_LANG_FLAGS	demo.mak	/^C_CXX_LANG_FLAGS=$/;"	kind:m	language:Make
+C_C_LANG_FLAGS	demo.mak	/^C_C_LANG_FLAGS=$/;"	kind:m	language:Make
+C_DEBUG_FLAGS	demo.mak	/^C_DEBUG_FLAGS=-g$/;"	kind:m	language:Make
+C_EXTRA_FLAGS	demo.mak	/^C_EXTRA_FLAGS=$/;"	kind:m	language:Make
+C_FPC_LANG_FLAGS	demo.mak	/^C_FPC_LANG_FLAGS=$/;"	kind:m	language:Make
+C_F_LANG_FLAGS	demo.mak	/^C_F_LANG_FLAGS=$/;"	kind:m	language:Make
+C_OPT_FLAGS	demo.mak	/^C_OPT_FLAGS=$/;"	kind:m	language:Make
+C_P_LANG_FLAGS	demo.mak	/^C_P_LANG_FLAGS=$/;"	kind:m	language:Make
+C_WARN_FLAGS	demo.mak	/^C_WARN_FLAGS=$/;"	kind:m	language:Make
+DEFAULT_GREP_MASK	demo.mak	/^DEFAULT_GREP_MASK=*.[cfhmnps]*$/;"	kind:m	language:Make
+DEFAULT_MASK	demo.mak	/^DEFAULT_MASK=*$/;"	kind:m	language:Make
+DEPS_0	demo.mak	/^DEPS_0= ascii.o calendar.o fileview.o gadgets.o mousedlg.o puzzle.o\\$/;"	kind:m	language:Make
+DEPS_1	demo.mak	/^DEPS_1=ascii.cc ascii.h$/;"	kind:m	language:Make
+DEPS_2	demo.mak	/^DEPS_2=calendar.cc calendar.h$/;"	kind:m	language:Make
+DEPS_3	demo.mak	/^DEPS_3=fileview.cc fileview.h tvcmds.h$/;"	kind:m	language:Make
+DEPS_4	demo.mak	/^DEPS_4=gadgets.cc gadgets.h$/;"	kind:m	language:Make
+DEPS_5	demo.mak	/^DEPS_5=mousedlg.cc mousedlg.h$/;"	kind:m	language:Make
+DEPS_6	demo.mak	/^DEPS_6=puzzle.cc puzzle.h$/;"	kind:m	language:Make
+DEPS_7	demo.mak	/^DEPS_7=tvdemo1.cc demohelp.h fileview.h gadgets.h puzzle.h tvdemo.h$/;"	kind:m	language:Make
+DEPS_8	demo.mak	/^DEPS_8=tvdemo2.cc ascii.h calendar.h demohelp.h tvcmds.h tvdemo.h$/;"	kind:m	language:Make
+DEPS_9	demo.mak	/^DEPS_9=tvdemo3.cc calendar.h demohelp.h fileview.h gadgets.h mousedlg.h\\$/;"	kind:m	language:Make
+EDITORS	demo.mak	/^EDITORS=$/;"	kind:m	language:Make
+F	demo.mak	/^RHIDE_TYPED_LIBS.F=$(RHIDE_TYPED_LIBS.f)$/;"	kind:m	language:Make
+FLAGS_FOR_SUBPROJECTS	demo.mak	/^FLAGS_FOR_SUBPROJECTS=RHIDE_OS_="$(RHIDE_OS_)" CFLAGS="$(CFLAGS)"\\$/;"	kind:m	language:Make
+FPC	demo.mak	/^RHIDE_COMPILE.pas.s.FPC=$(RHIDE_COMPILE_FPC) -a -s$/;"	kind:m	language:Make
+GET_HOME	demo.mak	/^GET_HOME=$(HOME)$/;"	kind:m	language:Make
+GPC	demo.mak	/^RHIDE_COMPILE.pas.s.GPC=$(subst -c $(SOURCE_NAME),-S\\$/;"	kind:m	language:Make
+HELP_FILENAME	tvdemo1.cc	58;"	kind:d	language:C++	file:
+INCLUDE_DIRS	demo.mak	/^INCLUDE_DIRS=. $(TVSRC)$/;"	kind:m	language:Make
+LDFLAGS	demo.mak	/^	CXXFLAGS="$(CXXFLAGS)" LDFLAGS="$(LDFLAGS)" CPPFLAGS="$(CPPFLAGS)"$/;"	kind:m	language:Make
+LD_EXTRA_FLAGS	demo.mak	/^LD_EXTRA_FLAGS=$/;"	kind:m	language:Make
+LIBRARIES	demo.mak	/^LIBRARIES=$/;"	kind:m	language:Make
+LIBS	demo.mak	/^LIBS=rhtv$/;"	kind:m	language:Make
+LIB_DIRS	demo.mak	/^LIB_DIRS=$(TVOBJ)$/;"	kind:m	language:Make
+LINK_FILES	demo.mak	/^LINK_FILES=$(filter-out $(NO_LINK),$(DEPS_0))$/;"	kind:m	language:Make
+LOCAL_OPT	demo.mak	/^LOCAL_OPT=$(subst ___~~~___, ,$(subst $(notdir $<)___,,$(filter $(notdir\\$/;"	kind:m	language:Make
+MAIN_TARGET	demo.mak	/^MAIN_TARGET=demo.exe$/;"	kind:m	language:Make
+NO_LINK	demo.mak	/^NO_LINK=$/;"	kind:m	language:Make
+OBJFILES	demo.mak	/^OBJFILES=ascii.o calendar.o fileview.o gadgets.o mousedlg.o puzzle.o\\$/;"	kind:m	language:Make
+OUTFILE	demo.mak	/^OUTFILE=$@$/;"	kind:m	language:Make
+PASCAL_TYPE	demo.mak	/^PASCAL_TYPE=GPC$/;"	kind:m	language:Make
+PROG_ARGS	demo.mak	/^PROG_ARGS=$/;"	kind:m	language:Make
+PROJECT_ITEMS	demo.mak	/^PROJECT_ITEMS=ascii.cc calendar.cc fileview.cc gadgets.cc mousedlg.cc\\$/;"	kind:m	language:Make
+RCalcDisplay	tvdemo1.cc	/^__link(RCalcDisplay);$/;"	kind:v	language:C++
+RHIDE_ADA_BIND_FILE	demo.mak	/^RHIDE_ADA_BIND_FILE=$(addprefix _,$(setsuffix .c,$(OUTFILE)))$/;"	kind:m	language:Make
+RHIDE_AR	demo.mak	/^RHIDE_AR=ar$/;"	kind:m	language:Make
+RHIDE_ARFLAGS	demo.mak	/^RHIDE_ARFLAGS=rcs$/;"	kind:m	language:Make
+RHIDE_AS	demo.mak	/^RHIDE_AS=$(RHIDE_GCC)$/;"	kind:m	language:Make
+RHIDE_BIN_DIR	demo.mak	/^RHIDE_BIN_DIR=\/usr\/bin$/;"	kind:m	language:Make
+RHIDE_CO	demo.mak	/^RHIDE_CO=$(shell co -q $(co_arg))$/;"	kind:m	language:Make
+RHIDE_COMPILE_ADA	demo.mak	/^RHIDE_COMPILE_ADA=$(RHIDE_GCC) $(RHIDE_INCLUDES) $(C_DEBUG_FLAGS)\\$/;"	kind:m	language:Make
+RHIDE_COMPILE_ARCHIVE	demo.mak	/^RHIDE_COMPILE_ARCHIVE=$(RHIDE_AR) $(RHIDE_ARFLAGS) $(OUTFILE)\\$/;"	kind:m	language:Make
+RHIDE_COMPILE_ASM	demo.mak	/^RHIDE_COMPILE_ASM=$(RHIDE_AS) $(RHIDE_INCLUDES) $(C_DEBUG_FLAGS)\\$/;"	kind:m	language:Make
+RHIDE_COMPILE_ASM_FORCE	demo.mak	/^RHIDE_COMPILE_ASM_FORCE=$(RHIDE_AS) $(RHIDE_INCLUDES) $(C_DEBUG_FLAGS)\\$/;"	kind:m	language:Make
+RHIDE_COMPILE_C	demo.mak	/^RHIDE_COMPILE_C=$(RHIDE_GCC) $(RHIDE_INCLUDES) $(C_DEBUG_FLAGS)\\$/;"	kind:m	language:Make
+RHIDE_COMPILE_CC	demo.mak	/^RHIDE_COMPILE_CC=$(RHIDE_GXX) $(RHIDE_INCLUDES) $(C_DEBUG_FLAGS)\\$/;"	kind:m	language:Make
+RHIDE_COMPILE_CC_FORCE	demo.mak	/^RHIDE_COMPILE_CC_FORCE=$(RHIDE_GXX) $(RHIDE_INCLUDES) $(C_DEBUG_FLAGS)\\$/;"	kind:m	language:Make
+RHIDE_COMPILE_C_FORCE	demo.mak	/^RHIDE_COMPILE_C_FORCE=$(RHIDE_GCC) $(RHIDE_INCLUDES) $(C_DEBUG_FLAGS)\\$/;"	kind:m	language:Make
+RHIDE_COMPILE_FORTRAN	demo.mak	/^RHIDE_COMPILE_FORTRAN=$(RHIDE_G77) $(RHIDE_INCLUDES) $(C_DEBUG_FLAGS)\\$/;"	kind:m	language:Make
+RHIDE_COMPILE_FORTRAN_FORCE	demo.mak	/^RHIDE_COMPILE_FORTRAN_FORCE=$(RHIDE_G77) $(RHIDE_INCLUDES) $(C_DEBUG_FLAGS)\\$/;"	kind:m	language:Make
+RHIDE_COMPILE_FPC	demo.mak	/^RHIDE_COMPILE_FPC=$(RHIDE_FPC) $(RHIDE_FPC_FLAGS) -E- $(SOURCE_NAME)$/;"	kind:m	language:Make
+RHIDE_COMPILE_FPC_FORCE	demo.mak	/^RHIDE_COMPILE_FPC_FORCE=$(RHIDE_FPC) $(RHIDE_FPC_FLAGS) -B -E-\\$/;"	kind:m	language:Make
+RHIDE_COMPILE_GPC	demo.mak	/^RHIDE_COMPILE_GPC=$(RHIDE_GPC) $(RHIDE_GPC_FLAGS) $(LOCAL_OPT)  -c\\$/;"	kind:m	language:Make
+RHIDE_COMPILE_GPC_FORCE	demo.mak	/^RHIDE_COMPILE_GPC_FORCE=$(RHIDE_GPC) $(RHIDE_GPC_FLAGS) -x pascal\\$/;"	kind:m	language:Make
+RHIDE_COMPILE_LINK	demo.mak	/^RHIDE_COMPILE_LINK=$(RHIDE_LD) $(RHIDE_LIBDIRS) $(C_EXTRA_FLAGS) -o\\$/;"	kind:m	language:Make
+RHIDE_COMPILE_LINK_ADA	demo.mak	/^RHIDE_COMPILE_LINK_ADA=gnatbl $(RHIDE_LIBDIRS) $(C_EXTRA_FLAGS) -o\\$/;"	kind:m	language:Make
+RHIDE_COMPILE_LINK_ADA_BIND	demo.mak	/^RHIDE_COMPILE_LINK_ADA_BIND=$(RHIDE_GNATBIND) -o $(RHIDE_ADA_BIND_FILE)\\$/;"	kind:m	language:Make
+RHIDE_COMPILE_LINK_ADA_LINK	demo.mak	/^RHIDE_COMPILE_LINK_ADA_LINK=$(RHIDE_LD) $(RHIDE_LIBDIRS) $(C_EXTRA_FLAGS) -o\\$/;"	kind:m	language:Make
+RHIDE_COMPILE_LINK_DLL	demo.mak	/^RHIDE_COMPILE_LINK_DLL=$(RHIDE_LD) $(RHIDE_LIBDIRS) $(C_EXTRA_FLAGS) -o\\$/;"	kind:m	language:Make
+RHIDE_COMPILE_LINK_FPC	demo.mak	/^RHIDE_COMPILE_LINK_FPC=echo 'separate linking for FPK is not supported.\\$/;"	kind:m	language:Make
+RHIDE_COMPILE_LINK_FPC_AUTOMAKE	demo.mak	/^RHIDE_COMPILE_LINK_FPC_AUTOMAKE=$(RHIDE_FPC) -o$(OUTFILE) $(SOURCE_NAME)\\$/;"	kind:m	language:Make
+RHIDE_COMPILE_LINK_GPC	demo.mak	/^RHIDE_COMPILE_LINK_GPC=$(RHIDE_LD_PASCAL) $(RHIDE_LIBDIRS) $(C_EXTRA_FLAGS)\\$/;"	kind:m	language:Make
+RHIDE_COMPILE_LINK_GPC_AUTOMAKE	demo.mak	/^RHIDE_COMPILE_LINK_GPC_AUTOMAKE=$(RHIDE_LD_PASCAL) $(RHIDE_LIBDIRS)  -o\\$/;"	kind:m	language:Make
+RHIDE_COMPILE_LINK_PASCAL	demo.mak	/^RHIDE_COMPILE_LINK_PASCAL=$(RHIDE_COMPILE_LINK_$(PASCAL_TYPE))$/;"	kind:m	language:Make
+RHIDE_COMPILE_LINK_PASCAL_AUTOMAKE	demo.mak	/^RHIDE_COMPILE_LINK_PASCAL_AUTOMAKE=$(RHIDE_COMPILE_LINK_$(PASCAL_TYPE)_AUTOMAKE)$/;"	kind:m	language:Make
+RHIDE_COMPILE_NASM	demo.mak	/^RHIDE_COMPILE_NASM=$(RHIDE_NASM) -f $(RHIDE_NASM_TARGET) $(LOCAL_OPT) -o\\$/;"	kind:m	language:Make
+RHIDE_COMPILE_PASCAL	demo.mak	/^RHIDE_COMPILE_PASCAL=$(RHIDE_COMPILE_$(PASCAL_TYPE))$/;"	kind:m	language:Make
+RHIDE_COMPILE_PASCAL_FORCE	demo.mak	/^RHIDE_COMPILE_PASCAL_FORCE=$(RHIDE_COMPILE_$(PASCAL_TYPE)_FORCE)$/;"	kind:m	language:Make
+RHIDE_CONFIG_DIRS	demo.mak	/^RHIDE_CONFIG_DIRS=. $(RHIDE_SHARE) $(GET_HOME)   $(RHIDE_CONFIG_DIRS_COMMON)\\$/;"	kind:m	language:Make
+RHIDE_CONFIG_DIRS_COMMON	demo.mak	/^RHIDE_CONFIG_DIRS_COMMON=$(RHIDE_CONFIG_DIRS_$(RHIDE_OS))\\$/;"	kind:m	language:Make
+RHIDE_CONFIG_DIRS_DJGPP	demo.mak	/^RHIDE_CONFIG_DIRS_DJGPP=$(DJDIR)\/share\/rhide$/;"	kind:m	language:Make
+RHIDE_CONFIG_DIRS_Linux	demo.mak	/^RHIDE_CONFIG_DIRS_Linux=\/usr\/local\/share\/rhide \/usr\/share\/rhide \\$/;"	kind:m	language:Make
+RHIDE_EMPTY	demo.mak	/^RHIDE_EMPTY=$/;"	kind:m	language:Make
+RHIDE_FPC	demo.mak	/^RHIDE_FPC=ppc386$/;"	kind:m	language:Make
+RHIDE_FPC_FLAGS	demo.mak	/^RHIDE_FPC_FLAGS=$(C_FPC_LANG_FLAGS) $(LOCAL_OPT) $(addprefix\\$/;"	kind:m	language:Make
+RHIDE_FPC_LIBDIRS	demo.mak	/^RHIDE_FPC_LIBDIRS=$(RHIDE_FPC_LIBDIRS_$(RHIDE_OS))$/;"	kind:m	language:Make
+RHIDE_FPC_LIBDIRS_DJGPP	demo.mak	/^RHIDE_FPC_LIBDIRS_DJGPP=$(DJDIR)\/lib$/;"	kind:m	language:Make
+RHIDE_FPC_LIBDIRS_Linux	demo.mak	/^RHIDE_FPC_LIBDIRS_Linux=\/usr\/local\/lib \/usr\/lib \/lib$/;"	kind:m	language:Make
+RHIDE_FPC_LINK_FLAGS	demo.mak	/^RHIDE_FPC_LINK_FLAGS=$(RHIDE_FPC_LINK_FLAGS_$(RHIDE_OS))$/;"	kind:m	language:Make
+RHIDE_FPC_LINK_FLAGS_DJGPP	demo.mak	/^RHIDE_FPC_LINK_FLAGS_DJGPP=-O coff-go32-exe $(RHIDE_LIBDIRS) $(addprefix\\$/;"	kind:m	language:Make
+RHIDE_FPC_LINK_FLAGS_Linux	demo.mak	/^RHIDE_FPC_LINK_FLAGS_Linux=$(RHIDE_LIBDIRS) $(addprefix\\$/;"	kind:m	language:Make
+RHIDE_FSDB	demo.mak	/^RHIDE_FSDB=fsdb $(OUTFILE) $(addprefix -p ,$(SRC_DIRS)) $(PROG_ARGS)$/;"	kind:m	language:Make
+RHIDE_G77	demo.mak	/^RHIDE_G77=g77$/;"	kind:m	language:Make
+RHIDE_GCC	demo.mak	/^RHIDE_GCC=gcc$/;"	kind:m	language:Make
+RHIDE_GDB	demo.mak	/^RHIDE_GDB=gdb $(OUTFILE) $(addprefix -d ,$(SRC_DIRS))$/;"	kind:m	language:Make
+RHIDE_GNATBIND	demo.mak	/^RHIDE_GNATBIND=gnatbind$/;"	kind:m	language:Make
+RHIDE_GPC	demo.mak	/^RHIDE_GPC=gpc$/;"	kind:m	language:Make
+RHIDE_GPC_FLAGS	demo.mak	/^RHIDE_GPC_FLAGS=$(RHIDE_INCLUDES) $(C_DEBUG_FLAGS) $(C_OPT_FLAGS)\\$/;"	kind:m	language:Make
+RHIDE_GPROF	demo.mak	/^RHIDE_GPROF=gprof $(OUTFILE)$/;"	kind:m	language:Make
+RHIDE_GREP	demo.mak	/^RHIDE_GREP=grep -n $(prompt arguments for GREP,$(WUC) $(DEFAULT_GREP_MASK))$/;"	kind:m	language:Make
+RHIDE_GXX	demo.mak	/^RHIDE_GXX=g++$/;"	kind:m	language:Make
+RHIDE_INCLUDES	demo.mak	/^RHIDE_INCLUDES=$(SPECIAL_CFLAGS) $(addprefix -I,$(INCLUDE_DIRS))$/;"	kind:m	language:Make
+RHIDE_LD	demo.mak	/^RHIDE_LD=g++$/;"	kind:m	language:Make
+RHIDE_LDFLAGS	demo.mak	/^RHIDE_LDFLAGS=-shared -Wl,-soname,librhtv.so.2.0.4 -L\/usr\/X11R6\/lib -lX11 -lXmu -lgpm -lncurses -lstdc++ -lm -lc$/;"	kind:m	language:Make
+RHIDE_LD_FPC	demo.mak	/^RHIDE_LD_FPC=$(RHIDE_FPC) -E+$/;"	kind:m	language:Make
+RHIDE_LD_PASCAL	demo.mak	/^RHIDE_LD_PASCAL=gpc$/;"	kind:m	language:Make
+RHIDE_LIBDIRS	demo.mak	/^RHIDE_LIBDIRS=$(addprefix -L,$(LIB_DIRS))$/;"	kind:m	language:Make
+RHIDE_LIBS	demo.mak	/^RHIDE_LIBS=$(addprefix -l,$(LIBS) $(RHIDE_TYPED_LIBS) $(RHIDE_OS_LIBS))$/;"	kind:m	language:Make
+RHIDE_NASM	demo.mak	/^RHIDE_NASM=nasm$/;"	kind:m	language:Make
+RHIDE_NASM_TARGET	demo.mak	/^RHIDE_NASM_TARGET=$(RHIDE_NASM_TARGET_$(RHIDE_OS))$/;"	kind:m	language:Make
+RHIDE_NASM_TARGET_DJGPP	demo.mak	/^RHIDE_NASM_TARGET_DJGPP=coff$/;"	kind:m	language:Make
+RHIDE_NASM_TARGET_Linux	demo.mak	/^RHIDE_NASM_TARGET_Linux=elf$/;"	kind:m	language:Make
+RHIDE_OS	demo.mak	/^RHIDE_OS=$(RHIDE_OS_)$/;"	kind:m	language:Make
+RHIDE_OS_	demo.mak	/^FLAGS_FOR_SUBPROJECTS=RHIDE_OS_="$(RHIDE_OS_)" CFLAGS="$(CFLAGS)"\\$/;"	kind:m	language:Make
+RHIDE_OS_	demo.mak	/^RHIDE_OS_:=$(patsubst CYGWIN%,CYGWIN,$(shell uname))$/;"	kind:m	language:Make
+RHIDE_OS_	demo.mak	/^RHIDE_OS_:=DJGPP$/;"	kind:m	language:Make
+RHIDE_PATH_SEPARATOR	demo.mak	/^RHIDE_PATH_SEPARATOR=$(RHIDE_PATH_SEPARATOR_$(RHIDE_OS))$/;"	kind:m	language:Make
+RHIDE_PATH_SEPARATOR_DJGPP	demo.mak	/^RHIDE_PATH_SEPARATOR_DJGPP=;$/;"	kind:m	language:Make
+RHIDE_PATH_SEPARATOR_Linux	demo.mak	/^RHIDE_PATH_SEPARATOR_Linux=:$/;"	kind:m	language:Make
+RHIDE_RLOG	demo.mak	/^RHIDE_RLOG=$(shell rlog -R $(rlog_arg))$/;"	kind:m	language:Make
+RHIDE_RM	demo.mak	/^RHIDE_RM=rm$/;"	kind:m	language:Make
+RHIDE_SHARED_LDFLAGS	demo.mak	/^RHIDE_SHARED_LDFLAGS=$(RHIDE_SHARED_LDFLAGS_$(RHIDE_OS))$/;"	kind:m	language:Make
+RHIDE_SHARED_LDFLAGS_Linux	demo.mak	/^RHIDE_SHARED_LDFLAGS_Linux=$/;"	kind:m	language:Make
+RHIDE_SHARED_LDFLAGS_Linux	demo.mak	/^RHIDE_SHARED_LDFLAGS_Linux=-shared$/;"	kind:m	language:Make
+RHIDE_SPACE	demo.mak	/^RHIDE_SPACE=$(RHIDE_EMPTY) $(RHIDE_EMPTY)$/;"	kind:m	language:Make
+RHIDE_STANDARD_INCLUDES	demo.mak	/^RHIDE_STANDARD_INCLUDES=$(RHIDE_STANDARD_INCLUDES_$(RHIDE_OS))$/;"	kind:m	language:Make
+RHIDE_STANDARD_INCLUDES_DJGPP	demo.mak	/^RHIDE_STANDARD_INCLUDES_DJGPP=$(addprefix $(DJDIR)\/,include include\/sys\\$/;"	kind:m	language:Make
+RHIDE_STANDARD_INCLUDES_Linux	demo.mak	/^RHIDE_STANDARD_INCLUDES_Linux=$(addprefix \/usr\/,include include\/sys\\$/;"	kind:m	language:Make
+RHIDE_TYPED_LIBS	demo.mak	/^RHIDE_TYPED_LIBS=$(foreach\\$/;"	kind:m	language:Make
+RHIDE_TYPED_LIBS_FPC	demo.mak	/^RHIDE_TYPED_LIBS_FPC=fpc$/;"	kind:m	language:Make
+RHIDE_TYPED_LIBS_GPC	demo.mak	/^RHIDE_TYPED_LIBS_GPC=gpc m$/;"	kind:m	language:Make
+RHIDE_TYPED_LIBS_SUFFIXES	demo.mak	/^RHIDE_TYPED_LIBS_SUFFIXES=$(sort $(foreach item,$(PROJECT_ITEMS),$(suffix\\$/;"	kind:m	language:Make
+SOURCE_NAME	demo.mak	/^SOURCE_NAME=$<$/;"	kind:m	language:Make
+SPECIAL_CFLAGS	demo.mak	/^SPECIAL_CFLAGS=$/;"	kind:m	language:Make
+SPECIAL_LDFLAGS	demo.mak	/^SPECIAL_LDFLAGS=$/;"	kind:m	language:Make
+SRC_DIRS	demo.mak	/^SRC_DIRS=..\/..\/classes$/;"	kind:m	language:Make
+TAsciiChart	ascii.cc	/^TAsciiChart::TAsciiChart() :$/;"	kind:f	language:C++	class:TAsciiChart
+TAsciiChart	ascii.h	/^    TAsciiChart( StreamableInit ) : TWindowInit(&initFrame),$/;"	kind:f	language:C++	class:TAsciiChart
+TAsciiChart	ascii.h	/^class TAsciiChart : public TWindow$/;"	kind:c	language:C++	inherits:TWindow
+TCalendarView	calendar.cc	/^TCalendarView::TCalendarView(TRect& r) : TView( r )$/;"	kind:f	language:C++	class:TCalendarView
+TCalendarView	calendar.h	/^    TCalendarView( StreamableInit ) : TView(streamableInit) { };$/;"	kind:f	language:C++	class:TCalendarView
+TCalendarView	calendar.h	/^class TCalendarView : public TView$/;"	kind:c	language:C++	inherits:TView
+TCalendarWindow	calendar.cc	/^TCalendarWindow::TCalendarWindow() :$/;"	kind:f	language:C++	class:TCalendarWindow
+TCalendarWindow	calendar.h	/^    TCalendarWindow( StreamableInit ) :$/;"	kind:f	language:C++	class:TCalendarWindow
+TCalendarWindow	calendar.h	/^class TCalendarWindow : public TWindow$/;"	kind:c	language:C++	inherits:TWindow
+TClickTester	mousedlg.cc	/^TClickTester::TClickTester(TRect& r, char *aText) :$/;"	kind:f	language:C++	class:TClickTester
+TClickTester	mousedlg.h	/^class TClickTester : public TStaticText$/;"	kind:c	language:C++	inherits:TStaticText
+TClockView	gadgets.cc	/^TClockView::TClockView( TRect& r ) : TView( r )$/;"	kind:f	language:C++	class:TClockView
+TClockView	gadgets.h	/^class TClockView : public TView$/;"	kind:c	language:C++	inherits:TView
+TFileViewer	fileview.cc	/^TFileViewer::TFileViewer( const TRect& bounds,$/;"	kind:f	language:C++	class:TFileViewer
+TFileViewer	fileview.h	/^    TFileViewer( StreamableInit ) : TScroller(streamableInit) { };$/;"	kind:f	language:C++	class:TFileViewer
+TFileViewer	fileview.h	/^class TFileViewer : public TScroller$/;"	kind:c	language:C++	inherits:TScroller
+TFileWindow	fileview.cc	/^TFileWindow::TFileWindow( const char *fileName ) :$/;"	kind:f	language:C++	class:TFileWindow
+TFileWindow	fileview.h	/^class TFileWindow : public TWindow$/;"	kind:c	language:C++	inherits:TWindow
+THeapView	diffs.cc	/^ class THeapView : public TView$/;"	kind:c	language:C++	file:	inherits:TViewOnlyinE:,DJ,CONTRIB,tvision,examples,demo,:help,ccOnlyinE:nE:,DJ,CONTRIB,tvision,examples,demo,:help,hOnlyinE::nE:,DJ,CONTRIB,tvision,examples,demo,:helpbase,ccOnlyinE:nE:,DJ,CONTRIB,tvision,examples,demo,:helpbase,hdiff,u,mousedlg,ccE:edlg,DJ,CONTRIB,tvision,examples,demo,mousedlg,cc,mousedlg,ccMonJan,:cMonJan,:cMonJan,E:MonJan,DJ,CONTRIB,tvision,examples,demo,mousedlg,ccSatJan,:cSatJan,:cSatJan,include,defineUses_TPalette,include,event,what,evMouseDown
+THeapView	gadgets.cc	/^THeapView::THeapView(TRect& r) : TView( r )$/;"	kind:f	language:C++	class:THeapView
+THeapView	gadgets.h	/^class THeapView : public TView$/;"	kind:c	language:C++	inherits:TView
+TLineCollection	fileview.h	/^    TLineCollection(short lim, short delta) : TCollection(lim, delta) {}$/;"	kind:f	language:C++	class:TLineCollection
+TLineCollection	fileview.h	/^class TLineCollection : public TCollection$/;"	kind:c	language:C++	inherits:TCollection
+TMouseDialog	mousedlg.cc	/^TMouseDialog::TMouseDialog() :$/;"	kind:f	language:C++	class:TMouseDialog
+TMouseDialog	mousedlg.h	/^class TMouseDialog : public TDialog$/;"	kind:c	language:C++	inherits:TDialog
+TPuzzleView	puzzle.cc	/^TPuzzleView::TPuzzleView(TRect& r) : TView(r)$/;"	kind:f	language:C++	class:TPuzzleView
+TPuzzleView	puzzle.h	/^    TPuzzleView( StreamableInit ) : TView(streamableInit) { };$/;"	kind:f	language:C++	class:TPuzzleView
+TPuzzleView	puzzle.h	/^class TPuzzleView : public TView$/;"	kind:c	language:C++	inherits:TView
+TPuzzleWindow	puzzle.cc	/^TPuzzleWindow::TPuzzleWindow() :$/;"	kind:f	language:C++	class:TPuzzleWindow
+TPuzzleWindow	puzzle.h	/^    TPuzzleWindow( StreamableInit ) :$/;"	kind:f	language:C++	class:TPuzzleWindow
+TPuzzleWindow	puzzle.h	/^class TPuzzleWindow : public TWindow$/;"	kind:c	language:C++	inherits:TWindow
+TReport	ascii.cc	/^TReport::TReport(TRect& r) :$/;"	kind:f	language:C++	class:TReport
+TReport	ascii.h	/^    TReport( StreamableInit ) : TView(streamableInit) { };$/;"	kind:f	language:C++	class:TReport
+TReport	ascii.h	/^class TReport : public TView$/;"	kind:c	language:C++	inherits:TView
+TTable	ascii.cc	/^TTable::TTable(TRect& r) :$/;"	kind:f	language:C++	class:TTable
+TTable	ascii.h	/^    TTable( StreamableInit ) : TView(streamableInit) { };$/;"	kind:f	language:C++	class:TTable
+TTable	ascii.h	/^class TTable : public TView$/;"	kind:c	language:C++	inherits:TView
+TVDemo	tvdemo.h	/^class TVDemo : public TApplication $/;"	kind:c	language:C++	inherits:TApplication
+TVDemo	tvdemo1.cc	/^TVDemo::TVDemo( int argc, char **argv ) :$/;"	kind:f	language:C++	class:TVDemo
+TVDemoFile	tvdemo1.cc	/^static const char *TVDemoFile="tvdemo.dst";$/;"	kind:v	language:C++	file:
+Uses_AllocLocal	calendar.cc	25;"	kind:d	language:C++	file:
+Uses_IOS_BIN	tvdemo1.cc	39;"	kind:d	language:C++	file:
+Uses_IfStreamGetLine	fileview.cc	23;"	kind:d	language:C++	file:
+Uses_MsgBox	fileview.cc	26;"	kind:d	language:C++	file:
+Uses_MsgBox	tvdemo1.cc	31;"	kind:d	language:C++	file:
+Uses_MsgBox	tvdemo2.cc	39;"	kind:d	language:C++	file:
+Uses_MsgBox	tvdemo3.cc	26;"	kind:d	language:C++	file:
+Uses_TApplication	tvdemo1.cc	35;"	kind:d	language:C++	file:
+Uses_TApplication	tvdemo2.cc	32;"	kind:d	language:C++	file:
+Uses_TApplication	tvdemo3.cc	28;"	kind:d	language:C++	file:
+Uses_TButton	diffs.cc	212;"	kind:d	language:C++	file:
+Uses_TButton	mousedlg.cc	34;"	kind:d	language:C++	file:
+Uses_TButton	tvdemo2.cc	24;"	kind:d	language:C++	file:
+Uses_TCalculator	tvdemo2.cc	35;"	kind:d	language:C++	file:
+Uses_TChDirDialog	diffs.cc	282;"	kind:d	language:C++	file:
+Uses_TChDirDialog	tvdemo2.cc	33;"	kind:d	language:C++	file:
+Uses_TCheckBoxes	mousedlg.cc	33;"	kind:d	language:C++	file:
+Uses_TCollection	diffs.cc	172;"	kind:d	language:C++	file:
+Uses_TCollection	fileview.h	17;"	kind:d	language:C++
+Uses_TColorDialog	tvdemo2.cc	29;"	kind:d	language:C++	file:
+Uses_TColorGroup	tvdemo2.cc	27;"	kind:d	language:C++	file:
+Uses_TColorItem	tvdemo2.cc	28;"	kind:d	language:C++	file:
+Uses_TDeskTop	diffs.cc	161;"	kind:d	language:C++	file:
+Uses_TDeskTop	diffs.cc	263;"	kind:d	language:C++	file:
+Uses_TDeskTop	fileview.cc	32;"	kind:d	language:C++	file:
+Uses_TDeskTop	tvdemo1.cc	34;"	kind:d	language:C++	file:
+Uses_TDeskTop	tvdemo1.cc	37;"	kind:d	language:C++	file:
+Uses_TDeskTop	tvdemo2.cc	31;"	kind:d	language:C++	file:
+Uses_TDeskTop	tvdemo3.cc	29;"	kind:d	language:C++	file:
+Uses_TDialog	diffs.cc	56;"	kind:d	language:C++	file:
+Uses_TDialog	mousedlg.cc	30;"	kind:d	language:C++	file:
+Uses_TDialog	tvdemo2.cc	21;"	kind:d	language:C++	file:
+Uses_TDialog	tvdemo3.cc	31;"	kind:d	language:C++	file:
+Uses_TDrawBuffer	ascii.cc	31;"	kind:d	language:C++	file:
+Uses_TDrawBuffer	calendar.cc	30;"	kind:d	language:C++	file:
+Uses_TDrawBuffer	diffs.cc	186;"	kind:d	language:C++	file:
+Uses_TDrawBuffer	fileview.cc	29;"	kind:d	language:C++	file:
+Uses_TDrawBuffer	gadgets.cc	39;"	kind:d	language:C++	file:
+Uses_TDrawBuffer	mousedlg.cc	29;"	kind:d	language:C++	file:
+Uses_TDrawBuffer	puzzle.cc	29;"	kind:d	language:C++	file:
+Uses_TEvent	ascii.cc	29;"	kind:d	language:C++	file:
+Uses_TEvent	calendar.cc	28;"	kind:d	language:C++	file:
+Uses_TEvent	diffs.cc	196;"	kind:d	language:C++	file:
+Uses_TEvent	gadgets.h	17;"	kind:d	language:C++
+Uses_TEvent	mousedlg.cc	28;"	kind:d	language:C++	file:
+Uses_TEvent	puzzle.cc	27;"	kind:d	language:C++	file:
+Uses_TEvent	tvdemo1.cc	33;"	kind:d	language:C++	file:
+Uses_TEvent	tvdemo2.cc	25;"	kind:d	language:C++	file:
+Uses_TEventQueue	diffs.cc	214;"	kind:d	language:C++	file:
+Uses_TEventQueue	mousedlg.cc	36;"	kind:d	language:C++	file:
+Uses_TEventQueue	tvdemo3.cc	32;"	kind:d	language:C++	file:
+Uses_TFileDialog	tvdemo3.cc	27;"	kind:d	language:C++	file:
+Uses_THelpWindow	tvdemo1.cc	40;"	kind:d	language:C++	file:
+Uses_TKeys	ascii.cc	30;"	kind:d	language:C++	file:
+Uses_TKeys	calendar.cc	29;"	kind:d	language:C++	file:
+Uses_TKeys	fileview.cc	27;"	kind:d	language:C++	file:
+Uses_TKeys	puzzle.cc	28;"	kind:d	language:C++	file:
+Uses_TKeys	tvdemo1.cc	30;"	kind:d	language:C++	file:
+Uses_TKeys	tvdemo3.cc	22;"	kind:d	language:C++	file:
+Uses_TLabel	mousedlg.cc	31;"	kind:d	language:C++	file:
+Uses_TMenuBar	tvdemo3.cc	19;"	kind:d	language:C++	file:
+Uses_TMenuItem	tvdemo3.cc	21;"	kind:d	language:C++	file:
+Uses_TPalette	mousedlg.cc	37;"	kind:d	language:C++	file:
+Uses_TPalette	puzzle.cc	34;"	kind:d	language:C++	file:
+Uses_TPalette	tvdemo2.cc	30;"	kind:d	language:C++	file:
+Uses_TPalette	tvdemo3.cc	25;"	kind:d	language:C++	file:
+Uses_TProgram	diffs.cc	160;"	kind:d	language:C++	file:
+Uses_TProgram	fileview.cc	31;"	kind:d	language:C++	file:
+Uses_TRect	ascii.cc	28;"	kind:d	language:C++	file:
+Uses_TRect	calendar.cc	27;"	kind:d	language:C++	file:
+Uses_TRect	diffs.cc	184;"	kind:d	language:C++	file:
+Uses_TRect	diffs.cc	197;"	kind:d	language:C++	file:
+Uses_TRect	fileview.cc	30;"	kind:d	language:C++	file:
+Uses_TRect	gadgets.cc	37;"	kind:d	language:C++	file:
+Uses_TRect	gadgets.h	18;"	kind:d	language:C++
+Uses_TRect	mousedlg.cc	26;"	kind:d	language:C++	file:
+Uses_TRect	puzzle.cc	26;"	kind:d	language:C++	file:
+Uses_TRect	tvdemo1.cc	26;"	kind:d	language:C++	file:
+Uses_TRect	tvdemo2.cc	22;"	kind:d	language:C++	file:
+Uses_TRect	tvdemo3.cc	18;"	kind:d	language:C++	file:
+Uses_TSItem	diffs.cc	213;"	kind:d	language:C++	file:
+Uses_TSItem	mousedlg.cc	35;"	kind:d	language:C++	file:
+Uses_TScreen	diffs.cc	283;"	kind:d	language:C++	file:
+Uses_TScreen	tvdemo1.cc	38;"	kind:d	language:C++	file:
+Uses_TScreen	tvdemo2.cc	34;"	kind:d	language:C++	file:
+Uses_TScrollBar	mousedlg.cc	32;"	kind:d	language:C++	file:
+Uses_TScroller	diffs.cc	173;"	kind:d	language:C++	file:
+Uses_TScroller	fileview.cc	28;"	kind:d	language:C++	file:
+Uses_TScroller	fileview.h	18;"	kind:d	language:C++
+Uses_TStaticText	mousedlg.cc	27;"	kind:d	language:C++	file:
+Uses_TStaticText	tvdemo2.cc	23;"	kind:d	language:C++	file:
+Uses_TStaticText	tvdemo3.cc	30;"	kind:d	language:C++	file:
+Uses_TStatusDef	tvdemo1.cc	28;"	kind:d	language:C++	file:
+Uses_TStatusItem	tvdemo1.cc	29;"	kind:d	language:C++	file:
+Uses_TStatusLine	tvdemo1.cc	27;"	kind:d	language:C++	file:
+Uses_TStreamable	ascii.cc	33;"	kind:d	language:C++	file:
+Uses_TStreamable	calendar.cc	32;"	kind:d	language:C++	file:
+Uses_TStreamable	diffs.cc	11;"	kind:d	language:C++	file:
+Uses_TStreamable	diffs.cc	236;"	kind:d	language:C++	file:
+Uses_TStreamable	diffs.cc	54;"	kind:d	language:C++	file:
+Uses_TStreamable	diffs.cc	67;"	kind:d	language:C++	file:
+Uses_TStreamable	puzzle.cc	31;"	kind:d	language:C++	file:
+Uses_TStreamableClass	ascii.cc	32;"	kind:d	language:C++	file:
+Uses_TStreamableClass	calendar.cc	31;"	kind:d	language:C++	file:
+Uses_TStreamableClass	diffs.cc	162;"	kind:d	language:C++	file:
+Uses_TStreamableClass	fileview.cc	33;"	kind:d	language:C++	file:
+Uses_TStreamableClass	puzzle.cc	30;"	kind:d	language:C++	file:
+Uses_TStreamableClass	tvdemo1.cc	43;"	kind:d	language:C++	file:
+Uses_TSubMenu	tvdemo3.cc	20;"	kind:d	language:C++	file:
+Uses_TVCodePage	tvdemo1.cc	24;"	kind:d	language:C++	file:
+Uses_TVCodePage	tvdemo1.cc	42;"	kind:d	language:C++	file:
+Uses_TVCodePage	tvdemo2.cc	37;"	kind:d	language:C++	file:
+Uses_TVCodePage	tvdemo3.cc	34;"	kind:d	language:C++	file:
+Uses_TView	ascii.cc	34;"	kind:d	language:C++	file:
+Uses_TView	calendar.cc	33;"	kind:d	language:C++	file:
+Uses_TView	diffs.cc	12;"	kind:d	language:C++	file:
+Uses_TView	diffs.cc	185;"	kind:d	language:C++	file:
+Uses_TView	diffs.cc	198;"	kind:d	language:C++	file:
+Uses_TView	diffs.cc	237;"	kind:d	language:C++	file:
+Uses_TView	diffs.cc	55;"	kind:d	language:C++	file:
+Uses_TView	diffs.cc	68;"	kind:d	language:C++	file:
+Uses_TView	gadgets.cc	38;"	kind:d	language:C++	file:
+Uses_TView	gadgets.h	19;"	kind:d	language:C++
+Uses_TView	puzzle.cc	32;"	kind:d	language:C++	file:
+Uses_TView	tvdemo1.cc	25;"	kind:d	language:C++	file:
+Uses_TView	tvdemo3.cc	24;"	kind:d	language:C++	file:
+Uses_TWindow	ascii.cc	35;"	kind:d	language:C++	file:
+Uses_TWindow	calendar.cc	34;"	kind:d	language:C++	file:
+Uses_TWindow	diffs.cc	13;"	kind:d	language:C++	file:
+Uses_TWindow	diffs.cc	174;"	kind:d	language:C++	file:
+Uses_TWindow	diffs.cc	238;"	kind:d	language:C++	file:
+Uses_TWindow	diffs.cc	262;"	kind:d	language:C++	file:
+Uses_TWindow	diffs.cc	69;"	kind:d	language:C++	file:
+Uses_TWindow	fileview.h	19;"	kind:d	language:C++
+Uses_TWindow	puzzle.cc	33;"	kind:d	language:C++	file:
+Uses_TWindow	tvdemo1.cc	36;"	kind:d	language:C++	file:
+Uses_TWindow	tvdemo2.cc	26;"	kind:d	language:C++	file:
+Uses_ctype	fileview.cc	22;"	kind:d	language:C++	file:
+Uses_ctype	gadgets.cc	29;"	kind:d	language:C++	file:
+Uses_ctype	mousedlg.cc	24;"	kind:d	language:C++	file:
+Uses_ctype	puzzle.cc	23;"	kind:d	language:C++	file:
+Uses_fpstream	tvdemo1.cc	32;"	kind:d	language:C++	file:
+Uses_fpstream	tvdemo3.cc	23;"	kind:d	language:C++	file:
+Uses_fstream	fileview.cc	24;"	kind:d	language:C++	file:
+Uses_iomanip	gadgets.cc	31;"	kind:d	language:C++	file:
+Uses_iomanip	mousedlg.cc	38;"	kind:d	language:C++	file:
+Uses_iomanip	puzzle.cc	24;"	kind:d	language:C++	file:
+Uses_signal	tvdemo2.cc	20;"	kind:d	language:C++	file:
+Uses_stdio	fileview.cc	19;"	kind:d	language:C++	file:
+Uses_stdio	gadgets.cc	33;"	kind:d	language:C++	file:
+Uses_stdio	puzzle.cc	21;"	kind:d	language:C++	file:
+Uses_stdlib	calendar.cc	21;"	kind:d	language:C++	file:
+Uses_stdlib	fileview.cc	21;"	kind:d	language:C++	file:
+Uses_stdlib	gadgets.cc	28;"	kind:d	language:C++	file:
+Uses_stdlib	mousedlg.cc	23;"	kind:d	language:C++	file:
+Uses_stdlib	puzzle.cc	22;"	kind:d	language:C++	file:
+Uses_stdlib	tvdemo2.cc	19;"	kind:d	language:C++	file:
+Uses_string	ascii.cc	22;"	kind:d	language:C++	file:
+Uses_string	calendar.cc	20;"	kind:d	language:C++	file:
+Uses_string	fileview.cc	20;"	kind:d	language:C++	file:
+Uses_string	gadgets.cc	27;"	kind:d	language:C++	file:
+Uses_string	mousedlg.cc	22;"	kind:d	language:C++	file:
+Uses_string	puzzle.cc	20;"	kind:d	language:C++	file:
+Uses_string	tvdemo1.cc	22;"	kind:d	language:C++	file:
+Uses_sys_stat	gadgets.cc	34;"	kind:d	language:C++	file:
+Uses_time	gadgets.cc	30;"	kind:d	language:C++	file:
+WUC	demo.mak	/^WUC=$/;"	kind:m	language:Make
+_RHIDE_COMPILE_LINK_ADA	demo.mak	/^_RHIDE_COMPILE_LINK_ADA=$(RHIDE_COMPILE_LINK_ADA_BIND);\\$/;"	kind:m	language:Make
+__ASCII_H	ascii.h	15;"	kind:d	language:C++
+__CALENDAR_H	calendar.h	15;"	kind:d	language:C++
+__FILEVIEW_H	fileview.h	15;"	kind:d	language:C++
+__GADGETS_H	gadgets.h	15;"	kind:d	language:C++
+__PUZZLE_H	puzzle.h	15;"	kind:d	language:C++
+aboutDlgBox	tvdemo2.cc	/^void TVDemo::aboutDlgBox()$/;"	kind:f	language:C++	class:TVDemo
+adb	demo.mak	/^RHIDE_TYPED_LIBS.adb=gnat$/;"	kind:m	language:Make
+asciiChar	ascii.h	/^    long asciiChar;$/;"	kind:m	language:C++	class:TReport
+asciiTable	tvdemo2.cc	/^void TVDemo::asciiTable()$/;"	kind:f	language:C++	class:TVDemo
+board	puzzle.h	/^    char board[6][6];$/;"	kind:m	language:C++	class:TPuzzleView
+boardStart	puzzle.cc	/^static char boardStart[16] =$/;"	kind:v	language:C++	file:
+buf	diffs.cc	/^     TDrawBuffer buf;$/;"	kind:v	language:C++
+build	ascii.cc	/^TStreamable *TAsciiChart::build()$/;"	kind:f	language:C++	class:TAsciiChart
+build	ascii.cc	/^TStreamable *TReport::build()$/;"	kind:f	language:C++	class:TReport
+build	ascii.cc	/^TStreamable *TTable::build()$/;"	kind:f	language:C++	class:TTable
+build	calendar.cc	/^TStreamable *TCalendarView::build()$/;"	kind:f	language:C++	class:TCalendarView
+build	calendar.cc	/^TStreamable *TCalendarWindow::build()$/;"	kind:f	language:C++	class:TCalendarWindow
+build	fileview.cc	/^TStreamable *TFileViewer::build()$/;"	kind:f	language:C++	class:TFileViewer
+build	puzzle.cc	/^TStreamable *TPuzzleView::build()$/;"	kind:f	language:C++	class:TPuzzleView
+build	puzzle.cc	/^TStreamable *TPuzzleWindow::build()$/;"	kind:f	language:C++	class:TPuzzleWindow
+c	diffs.cc	/^+    TColorDialog *c = new TColorDialog(temp_pal, &group5 );$/;"	kind:m	language:C++	class:THeapView	file:
+calculator	tvdemo2.cc	/^void TVDemo::calculator()$/;"	kind:f	language:C++	class:TVDemo
+calendar	tvdemo2.cc	/^void TVDemo::calendar()$/;"	kind:f	language:C++	class:TVDemo
+cascade	tvdemo2.cc	/^void TVDemo::cascade()$/;"	kind:f	language:C++	class:TVDemo
+cc	demo.mak	/^RHIDE_TYPED_LIBS.cc=$(RHIDE_TYPED_LIBS_$(RHIDE_OS).cc)$/;"	kind:m	language:Make
+cc	demo.mak	/^RHIDE_TYPED_LIBS_DJGPP.cc=stdcxx m$/;"	kind:m	language:Make
+cc	demo.mak	/^RHIDE_TYPED_LIBS_Linux.cc=stdc++ m$/;"	kind:m	language:Make
+changeDir	tvdemo2.cc	/^void TVDemo::changeDir()$/;"	kind:f	language:C++	class:TVDemo
+charFocused	ascii.cc	/^void TTable::charFocused()$/;"	kind:f	language:C++	class:TTable
+clicked	mousedlg.h	/^    char clicked;$/;"	kind:m	language:C++	class:TClickTester
+clock	tvdemo.h	/^    TClockView *clock;                \/\/ Clock view$/;"	kind:m	language:C++	class:TVDemo
+closeView	tvdemo3.cc	/^static void closeView(TView *p, void *p1)$/;"	kind:f	language:C++	file:
+cmAboutCmd	tvcmds.h	/^const int cmAboutCmd    = 100;$/;"	kind:v	language:C++
+cmAsciiCmd	tvcmds.h	/^const int cmAsciiCmd    = 103;$/;"	kind:v	language:C++
+cmAsciiTableCmdBase	ascii.h	/^const int cmAsciiTableCmdBase = 910;$/;"	kind:v	language:C++
+cmCalcCmd	tvcmds.h	/^const int cmCalcCmd     = 104;$/;"	kind:v	language:C++
+cmCalendarCmd	tvcmds.h	/^const int cmCalendarCmd = 102;$/;"	kind:v	language:C++
+cmChDirCmd	tvcmds.h	/^const int cmChDirCmd    = 106;$/;"	kind:v	language:C++
+cmCharFocused	ascii.h	/^const int cmCharFocused       =   0;$/;"	kind:v	language:C++
+cmColorCmd	tvcmds.h	/^const int cmColorCmd    = 109;$/;"	kind:v	language:C++
+cmMouseCmd	tvcmds.h	/^const int cmMouseCmd    = 108;$/;"	kind:v	language:C++
+cmOpenCmd	tvcmds.h	/^const int cmOpenCmd     = 105;$/;"	kind:v	language:C++
+cmPuzzleCmd	tvcmds.h	/^const int cmPuzzleCmd   = 101;$/;"	kind:v	language:C++
+cmRestoreCmd	tvcmds.h	/^const int cmRestoreCmd  = 111;$/;"	kind:v	language:C++
+cmSaveCmd	tvcmds.h	/^const int cmSaveCmd     = 110;$/;"	kind:v	language:C++
+cmTestInputBox	tvcmds.h	/^const int cmTestInputBox= 112;$/;"	kind:v	language:C++
+color	diffs.cc	/^     char        color = getColor(6);$/;"	kind:v	language:C++
+colors	tvdemo2.cc	/^void TVDemo::colors()$/;"	kind:f	language:C++	class:TVDemo
+cpAppBlackWhite	tvdemo3.cc	116;"	kind:d	language:C++	file:
+cpAppColor	tvdemo3.cc	105;"	kind:d	language:C++	file:
+cpAppMonochrome	tvdemo3.cc	127;"	kind:d	language:C++	file:
+cpCallBack	tvdemo3.cc	/^void TVDemo::cpCallBack(ushort *map)$/;"	kind:f	language:C++	class:TVDemo
+cpMousePalette	mousedlg.cc	44;"	kind:d	language:C++	file:
+cpPuzzlePalette	puzzle.cc	52;"	kind:d	language:C++	file:
+cpp	demo.mak	/^RHIDE_TYPED_LIBS.cpp=$(RHIDE_TYPED_LIBS.cc)$/;"	kind:m	language:Make
+curDay	calendar.h	/^    unsigned curDay, curMonth, curYear;$/;"	kind:m	language:C++	class:TCalendarView
+curMonth	calendar.h	/^    unsigned curDay, curMonth, curYear;$/;"	kind:m	language:C++	class:TCalendarView
+curTime	gadgets.h	/^    char curTime[9];$/;"	kind:m	language:C++	class:TClockView
+curYear	calendar.h	/^    unsigned curDay, curMonth, curYear;$/;"	kind:m	language:C++	class:TCalendarView
+cxx	demo.mak	/^RHIDE_TYPED_LIBS.cxx=$(RHIDE_TYPED_LIBS.cc)$/;"	kind:m	language:Make
+dayOfWeek	calendar.cc	/^int dayOfWeek(int day, int month, int year)$/;"	kind:f	language:C++
+days	calendar.h	/^    unsigned days, month, year;$/;"	kind:m	language:C++	class:TCalendarView
+daysInMonth	calendar.cc	/^static unsigned char daysInMonth[] = {$/;"	kind:v	language:C++	file:
+downArrowChar	calendar.cc	/^char TCalendarView::downArrowChar ='\\037';$/;"	kind:m	language:C++	class:TCalendarView	file:
+downArrowChar	calendar.h	/^    static char downArrowChar;$/;"	kind:m	language:C++	class:TCalendarView
+draw	ascii.cc	/^void TReport::draw()$/;"	kind:f	language:C++	class:TReport
+draw	ascii.cc	/^void TTable::draw()$/;"	kind:f	language:C++	class:TTable
+draw	calendar.cc	/^void TCalendarView::draw()$/;"	kind:f	language:C++	class:TCalendarView
+draw	diffs.cc	/^ void TCalendarView::draw()$/;"	kind:f	language:C++	class:TCalendarView
+draw	fileview.cc	/^void TFileViewer::draw()$/;"	kind:f	language:C++	class:TFileViewer
+draw	gadgets.cc	/^void TClockView::draw()$/;"	kind:f	language:C++	class:TClockView
+draw	gadgets.cc	/^void THeapView::draw()$/;"	kind:f	language:C++	class:THeapView
+draw	mousedlg.cc	/^void TClickTester::draw()$/;"	kind:f	language:C++	class:TClickTester
+draw	puzzle.cc	/^void TPuzzleView::draw()$/;"	kind:f	language:C++	class:TPuzzleView
+executeDialog	diffs.cc	/^+ushort executeDialog( TDialog* pD, void* data=0 )$/;"	kind:f	language:C++	class:THeapView	file:
+executeDialog	tvdemo2.cc	/^ushort executeDialog( TDialog* pD, void* data=0 )$/;"	kind:f	language:C++
+f	demo.mak	/^RHIDE_TYPED_LIBS.f=g2c m$/;"	kind:m	language:Make
+fileLines	fileview.h	/^    TCollection *fileLines;$/;"	kind:m	language:C++	class:TFileViewer
+fileName	fileview.h	/^    char *fileName;$/;"	kind:m	language:C++	class:TFileViewer
+for	demo.mak	/^RHIDE_TYPED_LIBS.for=$(RHIDE_TYPED_LIBS.f)$/;"	kind:m	language:Make
+fpp	demo.mak	/^RHIDE_TYPED_LIBS.fpp=$(RHIDE_TYPED_LIBS.f)$/;"	kind:m	language:Make
+freeItem	fileview.h	/^    virtual void  freeItem(void *p) { delete[] (char *)p; }$/;"	kind:f	language:C++	class:TLineCollection	implementation:virtual
+getEvent	tvdemo1.cc	/^void TVDemo::getEvent(TEvent &event)$/;"	kind:f	language:C++	class:TVDemo
+getPalette	mousedlg.cc	/^TPalette& TClickTester::getPalette() const$/;"	kind:f	language:C++	class:TClickTester
+getPalette	puzzle.cc	/^TPalette& TPuzzleView::getPalette() const$/;"	kind:f	language:C++	class:TPuzzleView
+getPalette	tvdemo3.cc	/^TPalette& TVDemo::getPalette() const$/;"	kind:f	language:C++	class:TVDemo
+group5	diffs.cc	/^     TColorGroup &group5 = group1 + group2 + group3 + group4;$/;"	kind:m	language:C++	class:THeapView	file:
+handleEvent	ascii.cc	/^void TAsciiChart::handleEvent( TEvent &event ) {$/;"	kind:f	language:C++	class:TAsciiChart
+handleEvent	ascii.cc	/^void TReport::handleEvent(TEvent& event)$/;"	kind:f	language:C++	class:TReport
+handleEvent	ascii.cc	/^void TTable::handleEvent(TEvent& event)$/;"	kind:f	language:C++	class:TTable
+handleEvent	calendar.cc	/^void TCalendarView::handleEvent(TEvent& event)$/;"	kind:f	language:C++	class:TCalendarView
+handleEvent	mousedlg.cc	/^void TClickTester::handleEvent(TEvent& event)$/;"	kind:f	language:C++	class:TClickTester
+handleEvent	mousedlg.cc	/^void TMouseDialog::handleEvent(TEvent& event)$/;"	kind:f	language:C++	class:TMouseDialog
+handleEvent	puzzle.cc	/^void TPuzzleView::handleEvent(TEvent& event)$/;"	kind:f	language:C++	class:TPuzzleView
+handleEvent	tvdemo2.cc	/^void TVDemo::handleEvent(TEvent &event)$/;"	kind:f	language:C++	class:TVDemo
+hcAsciiTable	demohelp.h	/^  hcAsciiTable           = 6,$/;"	kind:v	language:C++
+hcCalculator	demohelp.h	/^  hcCalculator           = 4,$/;"	kind:v	language:C++
+hcCalendar	demohelp.h	/^  hcCalendar             = 5,$/;"	kind:v	language:C++
+hcCancelBtn	demohelp.h	/^  hcCancelBtn            = 35,$/;"	kind:v	language:C++
+hcFCChDirDBox	demohelp.h	/^  hcFCChDirDBox          = 37,$/;"	kind:v	language:C++
+hcFChangeDir	demohelp.h	/^  hcFChangeDir           = 15,$/;"	kind:v	language:C++
+hcFDosShell	demohelp.h	/^  hcFDosShell            = 16,$/;"	kind:v	language:C++
+hcFExit	demohelp.h	/^  hcFExit                = 17,$/;"	kind:v	language:C++
+hcFOFileOpenDBox	demohelp.h	/^  hcFOFileOpenDBox       = 31,$/;"	kind:v	language:C++
+hcFOFiles	demohelp.h	/^  hcFOFiles              = 33,$/;"	kind:v	language:C++
+hcFOName	demohelp.h	/^  hcFOName               = 32,$/;"	kind:v	language:C++
+hcFOOpenBtn	demohelp.h	/^  hcFOOpenBtn            = 34,$/;"	kind:v	language:C++
+hcFOpen	demohelp.h	/^  hcFOpen                = 14,$/;"	kind:v	language:C++
+hcFile	demohelp.h	/^  hcFile                 = 13,$/;"	kind:v	language:C++
+hcNocontext	demohelp.h	/^  hcNocontext            = 0,$/;"	kind:v	language:C++
+hcOCColorsDBox	demohelp.h	/^  hcOCColorsDBox         = 39,$/;"	kind:v	language:C++
+hcOColors	demohelp.h	/^  hcOColors              = 28,$/;"	kind:v	language:C++
+hcOMMouseDBox	demohelp.h	/^  hcOMMouseDBox          = 38,$/;"	kind:v	language:C++
+hcOMouse	demohelp.h	/^  hcOMouse               = 27,$/;"	kind:v	language:C++
+hcORestoreDesktop	demohelp.h	/^  hcORestoreDesktop      = 30,$/;"	kind:v	language:C++
+hcOSaveDesktop	demohelp.h	/^  hcOSaveDesktop         = 29,$/;"	kind:v	language:C++
+hcOpenBtn	demohelp.h	/^  hcOpenBtn              = 36,$/;"	kind:v	language:C++
+hcOptions	demohelp.h	/^  hcOptions              = 26,$/;"	kind:v	language:C++
+hcPuzzle	demohelp.h	/^  hcPuzzle               = 3,$/;"	kind:v	language:C++
+hcSAbout	demohelp.h	/^  hcSAbout               = 8,$/;"	kind:v	language:C++
+hcSAsciiTable	demohelp.h	/^  hcSAsciiTable          = 11,$/;"	kind:v	language:C++
+hcSCalculator	demohelp.h	/^  hcSCalculator          = 12,$/;"	kind:v	language:C++
+hcSCalendar	demohelp.h	/^  hcSCalendar            = 10,$/;"	kind:v	language:C++
+hcSPuzzle	demohelp.h	/^  hcSPuzzle              = 9,$/;"	kind:v	language:C++
+hcSystem	demohelp.h	/^  hcSystem               = 7,$/;"	kind:v	language:C++
+hcViewer	demohelp.h	/^  hcViewer               = 2,$/;"	kind:v	language:C++
+hcWCascade	demohelp.h	/^  hcWCascade             = 22,$/;"	kind:v	language:C++
+hcWClose	demohelp.h	/^  hcWClose               = 25,$/;"	kind:v	language:C++
+hcWNext	demohelp.h	/^  hcWNext                = 23,$/;"	kind:v	language:C++
+hcWPrevious	demohelp.h	/^  hcWPrevious            = 24,$/;"	kind:v	language:C++
+hcWSizeMove	demohelp.h	/^  hcWSizeMove            = 19,$/;"	kind:v	language:C++
+hcWTile	demohelp.h	/^  hcWTile                = 21,$/;"	kind:v	language:C++
+hcWZoom	demohelp.h	/^  hcWZoom                = 20,$/;"	kind:v	language:C++
+hcWindows	demohelp.h	/^  hcWindows              = 18;$/;"	kind:v	language:C++
+heap	tvdemo.h	/^    THeapView *heap;                  \/\/ Heap view$/;"	kind:m	language:C++	class:TVDemo
+heapSize	gadgets.cc	/^long THeapView::heapSize()$/;"	kind:f	language:C++	class:THeapView
+heapStr	gadgets.h	/^    char heapStr[16];$/;"	kind:m	language:C++	class:THeapView
+hlChangeDir	fileview.h	/^const int hlChangeDir = cmChangeDir;$/;"	kind:v	language:C++
+i	demo.mak	/^RHIDE_COMPILE.c.i=$(subst -c $(SOURCE_NAME),-E\\$/;"	kind:m	language:Make
+idle	tvdemo3.cc	/^void TVDemo::idle()$/;"	kind:f	language:C++	class:TVDemo
+ii	demo.mak	/^RHIDE_COMPILE.C.ii=$(RHIDE_COMPILE.cc.ii)$/;"	kind:m	language:Make
+ii	demo.mak	/^RHIDE_COMPILE.cc.ii=$(subst -c $(SOURCE_NAME),-E\\$/;"	kind:m	language:Make
+ii	demo.mak	/^RHIDE_COMPILE.cpp.ii=$(RHIDE_COMPILE.cc.ii)$/;"	kind:m	language:Make
+ii	demo.mak	/^RHIDE_COMPILE.cxx.ii=$(RHIDE_COMPILE.cc.ii)$/;"	kind:m	language:Make
+ii	demo.mak	/^RHIDE_TYPED_LIBS.ii=$(RHIDE_TYPED_LIBS.cc)$/;"	kind:m	language:Make
+initMenuBar	tvdemo3.cc	/^TMenuBar *TVDemo::initMenuBar(TRect r)$/;"	kind:f	language:C++	class:TVDemo
+initStatusLine	tvdemo1.cc	/^TStatusLine *TVDemo::initStatusLine( TRect r )$/;"	kind:f	language:C++	class:TVDemo
+isTileable	tvdemo3.cc	/^static Boolean isTileable(TView *p, void * )$/;"	kind:f	language:C++	file:
+isValid	fileview.h	/^    Boolean isValid;$/;"	kind:m	language:C++	class:TFileViewer
+l	demo.mak	/^RHIDE_TYPED_LIBS.l=fl$/;"	kind:m	language:Make
+lastTime	gadgets.h	/^    char lastTime[9];$/;"	kind:m	language:C++	class:TClockView
+loadDesktop	tvdemo3.cc	/^void TVDemo::loadDesktop(fpstream &s)$/;"	kind:f	language:C++	class:TVDemo
+m	demo.mak	/^RHIDE_TYPED_LIBS.m=objc$/;"	kind:m	language:Make
+main	tvdemo1.cc	/^int main(int argc, char **argv, char **envir)$/;"	kind:f	language:C++
+map	puzzle.cc	/^static char map[15] =$/;"	kind:v	language:C++	file:
+maxLineLength	fileview.h	/^const int maxLineLength = 256;$/;"	kind:v	language:C++
+month	calendar.h	/^    unsigned days, month, year;$/;"	kind:m	language:C++	class:TCalendarView
+monthNames	calendar.cc	/^static char *monthNames[] = {$/;"	kind:v	language:C++	file:
+mouse	tvdemo3.cc	/^void TVDemo::mouse()$/;"	kind:f	language:C++	class:TVDemo
+mouseScrollBar	mousedlg.h	/^    TScrollBar *mouseScrollBar;$/;"	kind:m	language:C++	class:TMouseDialog
+moveKey	puzzle.cc	/^void TPuzzleView::moveKey(int key)$/;"	kind:f	language:C++	class:TPuzzleView
+moveTile	puzzle.cc	/^void TPuzzleView::moveTile(TPoint p)$/;"	kind:f	language:C++	class:TPuzzleView
+moves	puzzle.h	/^    int moves;$/;"	kind:m	language:C++	class:TPuzzleView
+name	ascii.cc	/^const char * const TAsciiChart::name = "TAsciiChart";$/;"	kind:m	language:C++	class:TAsciiChart	file:
+name	ascii.cc	/^const char * const TReport::name = "TReport";$/;"	kind:m	language:C++	class:TReport	file:
+name	ascii.cc	/^const char * const TTable::name = "TTable";$/;"	kind:m	language:C++	class:TTable	file:
+name	ascii.h	/^    static const char * const name;$/;"	kind:m	language:C++	class:TAsciiChart
+name	ascii.h	/^    static const char * const name;$/;"	kind:m	language:C++	class:TReport
+name	ascii.h	/^    static const char * const name;$/;"	kind:m	language:C++	class:TTable
+name	calendar.cc	/^const char * const TCalendarView::name = "TCalendarView";$/;"	kind:m	language:C++	class:TCalendarView	file:
+name	calendar.cc	/^const char * const TCalendarWindow::name = "TCalendarWindow";$/;"	kind:m	language:C++	class:TCalendarWindow	file:
+name	calendar.h	/^    static const char * const name;$/;"	kind:m	language:C++	class:TCalendarView
+name	calendar.h	/^    static const char * const name;$/;"	kind:m	language:C++	class:TCalendarWindow
+name	fileview.cc	/^const char * const TFileViewer::name = "TFileViewer";$/;"	kind:m	language:C++	class:TFileViewer	file:
+name	fileview.h	/^    static const char * const name;$/;"	kind:m	language:C++	class:TFileViewer
+name	puzzle.cc	/^const char * const TPuzzleView::name = "TPuzzleView";$/;"	kind:m	language:C++	class:TPuzzleView	file:
+name	puzzle.cc	/^const char * const TPuzzleWindow::name = "TPuzzleWindow";$/;"	kind:m	language:C++	class:TPuzzleWindow	file:
+name	puzzle.h	/^    static const char * const name;$/;"	kind:m	language:C++	class:TPuzzleView
+name	puzzle.h	/^    static const char * const name;$/;"	kind:m	language:C++	class:TPuzzleWindow
+newMem	gadgets.h	/^    long oldMem, newMem;$/;"	kind:m	language:C++	class:THeapView
+o	demo.mak	/^RHIDE_COMPILE.C.o=$(RHIDE_COMPILE.cc.o)$/;"	kind:m	language:Make
+o	demo.mak	/^RHIDE_COMPILE.F.o=$(RHIDE_COMPILE.f.o)$/;"	kind:m	language:Make
+o	demo.mak	/^RHIDE_COMPILE.adb.o=$(RHIDE_COMPILE_ADA)$/;"	kind:m	language:Make
+o	demo.mak	/^RHIDE_COMPILE.asm.o=$(RHIDE_COMPILE.nsm.o)$/;"	kind:m	language:Make
+o	demo.mak	/^RHIDE_COMPILE.c.o=$(RHIDE_COMPILE_C)$/;"	kind:m	language:Make
+o	demo.mak	/^RHIDE_COMPILE.cc.o=$(RHIDE_COMPILE_CC)$/;"	kind:m	language:Make
+o	demo.mak	/^RHIDE_COMPILE.cpp.o=$(RHIDE_COMPILE.cc.o)$/;"	kind:m	language:Make
+o	demo.mak	/^RHIDE_COMPILE.cxx.o=$(RHIDE_COMPILE.cc.o)$/;"	kind:m	language:Make
+o	demo.mak	/^RHIDE_COMPILE.f.o=$(RHIDE_COMPILE_FORTRAN)$/;"	kind:m	language:Make
+o	demo.mak	/^RHIDE_COMPILE.for.o=$(RHIDE_COMPILE.f.o)$/;"	kind:m	language:Make
+o	demo.mak	/^RHIDE_COMPILE.fpp.o=$(RHIDE_COMPILE.f.o)$/;"	kind:m	language:Make
+o	demo.mak	/^RHIDE_COMPILE.nsm.o=$(RHIDE_COMPILE_NASM)$/;"	kind:m	language:Make
+o	demo.mak	/^RHIDE_COMPILE.p.o=$(RHIDE_COMPILE_PASCAL)$/;"	kind:m	language:Make
+o	demo.mak	/^RHIDE_COMPILE.pas.o=$(RHIDE_COMPILE.p.o)$/;"	kind:m	language:Make
+o	demo.mak	/^RHIDE_COMPILE.pp.o=$(RHIDE_COMPILE_FPC)$/;"	kind:m	language:Make
+o	demo.mak	/^RHIDE_COMPILE.s.o=$(RHIDE_COMPILE_ASM)$/;"	kind:m	language:Make
+odownArrowChar	calendar.cc	/^char TCalendarView::odownArrowChar='\\037';$/;"	kind:m	language:C++	class:TCalendarView	file:
+odownArrowChar	calendar.h	/^    static char odownArrowChar;$/;"	kind:m	language:C++	class:TCalendarView
+oldCPCallBack	tvdemo.h	/^    static TVCodePageCallBack oldCPCallBack;$/;"	kind:m	language:C++	class:TVDemo
+oldCPCallBack	tvdemo3.cc	/^TVCodePageCallBack TVDemo::oldCPCallBack=NULL;$/;"	kind:m	language:C++	class:TVDemo	file:
+oldDelay	mousedlg.h	/^    short oldDelay;$/;"	kind:m	language:C++	class:TMouseDialog
+oldMem	gadgets.h	/^    long oldMem, newMem;$/;"	kind:m	language:C++	class:THeapView
+openFile	tvdemo3.cc	/^void TVDemo::openFile( char *fileSpec )$/;"	kind:f	language:C++	class:TVDemo
+operator <<	ascii.h	/^inline opstream& operator << ( opstream& os, TAsciiChart& cl )$/;"	kind:f	language:C++
+operator <<	ascii.h	/^inline opstream& operator << ( opstream& os, TAsciiChart* cl )$/;"	kind:f	language:C++
+operator <<	ascii.h	/^inline opstream& operator << ( opstream& os, TReport& cl )$/;"	kind:f	language:C++
+operator <<	ascii.h	/^inline opstream& operator << ( opstream& os, TReport* cl )$/;"	kind:f	language:C++
+operator <<	ascii.h	/^inline opstream& operator << ( opstream& os, TTable& cl )$/;"	kind:f	language:C++
+operator <<	ascii.h	/^inline opstream& operator << ( opstream& os, TTable* cl )$/;"	kind:f	language:C++
+operator <<	calendar.h	/^inline opstream& operator << ( opstream& os, TCalendarView& cl )$/;"	kind:f	language:C++
+operator <<	calendar.h	/^inline opstream& operator << ( opstream& os, TCalendarView* cl )$/;"	kind:f	language:C++
+operator <<	calendar.h	/^inline opstream& operator << ( opstream& os, TCalendarWindow& cl )$/;"	kind:f	language:C++
+operator <<	calendar.h	/^inline opstream& operator << ( opstream& os, TCalendarWindow* cl )$/;"	kind:f	language:C++
+operator <<	puzzle.h	/^inline opstream& operator << ( opstream& os, TPuzzleView& cl )$/;"	kind:f	language:C++
+operator <<	puzzle.h	/^inline opstream& operator << ( opstream& os, TPuzzleView* cl )$/;"	kind:f	language:C++
+operator <<	puzzle.h	/^inline opstream& operator << ( opstream& os, TPuzzleWindow& cl )$/;"	kind:f	language:C++
+operator <<	puzzle.h	/^inline opstream& operator << ( opstream& os, TPuzzleWindow* cl )$/;"	kind:f	language:C++
+operator >>	ascii.h	/^inline ipstream& operator >> ( ipstream& is, TAsciiChart& cl )$/;"	kind:f	language:C++
+operator >>	ascii.h	/^inline ipstream& operator >> ( ipstream& is, TAsciiChart*& cl )$/;"	kind:f	language:C++
+operator >>	ascii.h	/^inline ipstream& operator >> ( ipstream& is, TReport& cl )$/;"	kind:f	language:C++
+operator >>	ascii.h	/^inline ipstream& operator >> ( ipstream& is, TReport*& cl )$/;"	kind:f	language:C++
+operator >>	ascii.h	/^inline ipstream& operator >> ( ipstream& is, TTable& cl )$/;"	kind:f	language:C++
+operator >>	ascii.h	/^inline ipstream& operator >> ( ipstream& is, TTable*& cl )$/;"	kind:f	language:C++
+operator >>	calendar.h	/^inline ipstream& operator >> ( ipstream& is, TCalendarView& cl )$/;"	kind:f	language:C++
+operator >>	calendar.h	/^inline ipstream& operator >> ( ipstream& is, TCalendarView*& cl )$/;"	kind:f	language:C++
+operator >>	calendar.h	/^inline ipstream& operator >> ( ipstream& is, TCalendarWindow& cl )$/;"	kind:f	language:C++
+operator >>	calendar.h	/^inline ipstream& operator >> ( ipstream& is, TCalendarWindow*& cl )$/;"	kind:f	language:C++
+operator >>	puzzle.h	/^inline ipstream& operator >> ( ipstream& is, TPuzzleView& cl )$/;"	kind:f	language:C++
+operator >>	puzzle.h	/^inline ipstream& operator >> ( ipstream& is, TPuzzleView*& cl )$/;"	kind:f	language:C++
+operator >>	puzzle.h	/^inline ipstream& operator >> ( ipstream& is, TPuzzleWindow& cl )$/;"	kind:f	language:C++
+operator >>	puzzle.h	/^inline ipstream& operator >> ( ipstream& is, TPuzzleWindow*& cl )$/;"	kind:f	language:C++
+osystemMenuIcon	tvdemo.h	/^    static uchar osystemMenuIcon[];   \/\/ Same encoded in CP 437, used as$/;"	kind:m	language:C++	class:TVDemo
+osystemMenuIcon	tvdemo3.cc	/^uchar TVDemo::osystemMenuIcon[]="~\\360~";$/;"	kind:m	language:C++	class:TVDemo	file:
+oupArrowChar	calendar.cc	/^char TCalendarView::oupArrowChar ='\\036';$/;"	kind:m	language:C++	class:TCalendarView	file:
+oupArrowChar	calendar.h	/^    static char oupArrowChar;$/;"	kind:m	language:C++	class:TCalendarView
+outOfMemory	tvdemo3.cc	/^void TVDemo::outOfMemory()$/;"	kind:f	language:C++	class:TVDemo
+p	demo.mak	/^RHIDE_TYPED_LIBS.p=$(RHIDE_TYPED_LIBS_$(PASCAL_TYPE))$/;"	kind:m	language:Make
+pas	demo.mak	/^RHIDE_TYPED_LIBS.pas=$(RHIDE_TYPED_LIBS.p)$/;"	kind:m	language:Make
+pp	demo.mak	/^RHIDE_TYPED_LIBS.pp=$(RHIDE_TYPED_LIBS_FPC)$/;"	kind:m	language:Make
+puzzle	tvdemo1.cc	/^void TVDemo::puzzle()$/;"	kind:f	language:C++	class:TVDemo
+read	ascii.cc	/^void *TAsciiChart::read( ipstream& is )$/;"	kind:f	language:C++	class:TAsciiChart
+read	ascii.cc	/^void *TReport::read( ipstream& is )$/;"	kind:f	language:C++	class:TReport
+read	ascii.cc	/^void *TTable::read( ipstream& is )$/;"	kind:f	language:C++	class:TTable
+read	calendar.cc	/^void *TCalendarView::read( ipstream& is )$/;"	kind:f	language:C++	class:TCalendarView
+read	calendar.cc	/^void *TCalendarWindow::read( ipstream& is )$/;"	kind:f	language:C++	class:TCalendarWindow
+read	fileview.cc	/^void *TFileViewer::read(ipstream& is)$/;"	kind:f	language:C++	class:TFileViewer
+read	puzzle.cc	/^void *TPuzzleView::read( ipstream& is )$/;"	kind:f	language:C++	class:TPuzzleView
+read	puzzle.cc	/^void *TPuzzleWindow::read( ipstream& is )$/;"	kind:f	language:C++	class:TPuzzleWindow
+readFile	fileview.cc	/^void TFileViewer::readFile( const char *fName )$/;"	kind:f	language:C++	class:TFileViewer
+readItem	fileview.h	/^    virtual void *readItem( ipstream& ) { return 0; }$/;"	kind:f	language:C++	class:TLineCollection	implementation:virtual
+retrieveDesktop	tvdemo1.cc	/^void TVDemo::retrieveDesktop()$/;"	kind:f	language:C++	class:TVDemo
+s	demo.mak	/^RHIDE_COMPILE.C.s=$(RHIDE_COMPILE.cc.s)$/;"	kind:m	language:Make
+s	demo.mak	/^RHIDE_COMPILE.c.s=$(subst -c $(SOURCE_NAME),-S\\$/;"	kind:m	language:Make
+s	demo.mak	/^RHIDE_COMPILE.cc.s=$(subst -c $(SOURCE_NAME),-S\\$/;"	kind:m	language:Make
+s	demo.mak	/^RHIDE_COMPILE.cpp.s=$(RHIDE_COMPILE.cc.s)$/;"	kind:m	language:Make
+s	demo.mak	/^RHIDE_COMPILE.cxx.s=$(RHIDE_COMPILE.cc.s)$/;"	kind:m	language:Make
+s	demo.mak	/^RHIDE_COMPILE.i.s=$(RHIDE_COMPILE.c.s)$/;"	kind:m	language:Make
+s	demo.mak	/^RHIDE_COMPILE.ii.s=$(RHIDE_COMPILE.cc.s)$/;"	kind:m	language:Make
+s	demo.mak	/^RHIDE_COMPILE.pas.s=$(RHIDE_COMPILE.pas.s.$(PASCAL_TYPE))$/;"	kind:m	language:Make
+saveDesktop	tvdemo1.cc	/^void TVDemo::saveDesktop()$/;"	kind:f	language:C++	class:TVDemo
+scramble	puzzle.cc	/^void TPuzzleView::scramble()$/;"	kind:f	language:C++	class:TPuzzleView
+scrollDraw	fileview.cc	/^void TFileViewer::scrollDraw()$/;"	kind:f	language:C++	class:TFileViewer
+setState	fileview.cc	/^void TFileViewer::setState( ushort aState, Boolean enable )$/;"	kind:f	language:C++	class:TFileViewer
+shell	tvdemo2.cc	/^void TVDemo::shell()$/;"	kind:f	language:C++	class:TVDemo
+solution	puzzle.cc	/^static char *solution = "ABCDEFGHIJKLMNO ";$/;"	kind:v	language:C++	file:
+solved	puzzle.h	/^    char solved;$/;"	kind:m	language:C++	class:TPuzzleView
+storeDesktop	tvdemo1.cc	/^void TVDemo::storeDesktop(fpstream& s)$/;"	kind:f	language:C++	class:TVDemo
+str	diffs.cc	/^     char        str[80];$/;"	kind:v	language:C++
+streamableName	ascii.h	/^    virtual const char *streamableName() const$/;"	kind:f	language:C++	class:TAsciiChart	implementation:virtual
+streamableName	ascii.h	/^    virtual const char *streamableName() const$/;"	kind:f	language:C++	class:TReport	implementation:virtual
+streamableName	ascii.h	/^    virtual const char *streamableName() const$/;"	kind:f	language:C++	class:TTable	implementation:virtual
+streamableName	calendar.h	/^    virtual const char *streamableName() const$/;"	kind:f	language:C++	class:TCalendarView	implementation:virtual
+streamableName	calendar.h	/^    virtual const char *streamableName() const$/;"	kind:f	language:C++	class:TCalendarWindow	implementation:virtual
+streamableName	fileview.h	/^    virtual const char *streamableName() const$/;"	kind:f	language:C++	class:TFileViewer	implementation:virtual
+streamableName	puzzle.h	/^    virtual const char *streamableName() const$/;"	kind:f	language:C++	class:TPuzzleView	implementation:virtual
+streamableName	puzzle.h	/^    virtual const char *streamableName() const$/;"	kind:f	language:C++	class:TPuzzleWindow	implementation:virtual
+systemMenuIcon	tvdemo.h	/^    static uchar systemMenuIcon[];    \/\/ Menu name for the "system menu"$/;"	kind:m	language:C++	class:TVDemo
+systemMenuIcon	tvdemo3.cc	/^uchar TVDemo::systemMenuIcon[]="~\\360~";$/;"	kind:m	language:C++	class:TVDemo	file:
+temp_pal	diffs.cc	/^+    TPalette *temp_pal=new TPalette(getPalette());$/;"	kind:m	language:C++	class:THeapView	file:
+testInputBox	tvdemo2.cc	/^void TVDemo::testInputBox()$/;"	kind:f	language:C++	class:TVDemo
+tile	tvdemo1.cc	/^void TVDemo::tile()$/;"	kind:f	language:C++	class:TVDemo
+upArrowChar	calendar.cc	/^char TCalendarView::upArrowChar  ='\\036';$/;"	kind:m	language:C++	class:TCalendarView	file:
+upArrowChar	calendar.h	/^    static char upArrowChar;$/;"	kind:m	language:C++	class:TCalendarView
+update	gadgets.cc	/^void TClockView::update()$/;"	kind:f	language:C++	class:TClockView
+update	gadgets.cc	/^void THeapView::update()$/;"	kind:f	language:C++	class:THeapView
+valid	fileview.cc	/^Boolean TFileViewer::valid( ushort )$/;"	kind:f	language:C++	class:TFileViewer
+vpath_header	demo.mak	/^vpath_header=. $(TVSRC)$/;"	kind:m	language:Make
+vpath_src	demo.mak	/^vpath_src=..\/..\/classes$/;"	kind:m	language:Make
+winCheck	puzzle.cc	/^void TPuzzleView::winCheck()$/;"	kind:f	language:C++	class:TPuzzleView
+winNumber	fileview.cc	/^static short winNumber = 0;$/;"	kind:v	language:C++	file:
+write	ascii.cc	/^void TAsciiChart::write( opstream& os )$/;"	kind:f	language:C++	class:TAsciiChart
+write	ascii.cc	/^void TReport::write( opstream& os )$/;"	kind:f	language:C++	class:TReport
+write	ascii.cc	/^void TTable::write( opstream& os )$/;"	kind:f	language:C++	class:TTable
+write	calendar.cc	/^void TCalendarView::write( opstream& os )$/;"	kind:f	language:C++	class:TCalendarView
+write	calendar.cc	/^void TCalendarWindow::write( opstream& os )$/;"	kind:f	language:C++	class:TCalendarWindow
+write	fileview.cc	/^void TFileViewer::write(opstream& os)$/;"	kind:f	language:C++	class:TFileViewer
+write	puzzle.cc	/^void TPuzzleView::write( opstream& os )$/;"	kind:f	language:C++	class:TPuzzleView
+write	puzzle.cc	/^void TPuzzleWindow::write( opstream& os )$/;"	kind:f	language:C++	class:TPuzzleWindow
+writeItem	fileview.h	/^    virtual void writeItem( void *, opstream& ) {}$/;"	kind:f	language:C++	class:TLineCollection	implementation:virtual
+writeView	tvdemo1.cc	/^static void writeView(TView *p, void *strm)$/;"	kind:f	language:C++	file:
+year	calendar.h	/^    unsigned days, month, year;$/;"	kind:m	language:C++	class:TCalendarView
+~TFileViewer	fileview.cc	/^TFileViewer::~TFileViewer()$/;"	kind:f	language:C++	class:TFileViewer

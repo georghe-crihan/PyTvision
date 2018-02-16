@@ -1,6 +1,6 @@
 /**[txh]********************************************************************
 
-  Copyright (c) 2003 by Salvador Eduardo Tropea.
+  Copyright (c) 2003-2004 by Salvador Eduardo Tropea.
   Covered by the GPL license.
   Description:
   This program generates a .imk file containing the dependencies for a
@@ -57,6 +57,25 @@ stIncDir incDirs[]=
 {"CLASSES_DIR",      "../classes", 0},
 {"EXTRA_SRC_DIR",    "..",         0},
 {0,0}
+};
+
+char *srcDirs[]=
+{
+ "../classes",
+ "../classes/dos",
+ "../classes/linux",
+ "../classes/qnx4",
+ "../classes/qnxrtp",
+ "../classes/unix",
+ "../classes/win32",
+ "../classes/wingr",
+ "../classes/winnt",
+ "../classes/x11",
+ "../names",
+ "../stream",
+ "../compat",
+ "..",
+ NULL
 };
 
 static
@@ -148,16 +167,38 @@ void ExtractSources(FILE *f, stMak &mk)
 static
 void AddDependency(const char *name, node *p)
 {
+ node *nNode=new node;
+ nNode->next=NULL;
  if (p->deps)
    {
-    p->ldep->next=new node;
-    p->ldep=p->ldep->next;
+    node *r=p->deps, *a=NULL;
+    // Force the list to be sorted, it reduces the output of diff
+    while (r && strcmp(r->name,name)<0)
+      {
+       a=r;
+       r=r->next;
+      }
+    if (!r)
+      {// @ the end
+       p->ldep->next=nNode;
+       p->ldep=nNode;
+      }
+    else if (!a) // @ the beggining
+      {
+       nNode->next=p->deps;
+       p->deps=nNode;
+      }
+    else // in the middle
+      {
+       a->next=nNode;
+       nNode->next=r;
+      }
    }
  else
-    p->deps=p->ldep=new node;
- p->ldep->name=strdup(name);
- p->ldep->next=p->ldep->deps=p->ldep->ldep=NULL;
- p->ldep->subprj=NULL;
+    p->deps=p->ldep=nNode;
+ nNode->name=strdup(name);
+ nNode->deps=nNode->ldep=NULL;
+ nNode->subprj=NULL;
 }
 
 static
@@ -259,6 +300,36 @@ int AddFixedDeps(FILE *d, int l)
 }
 
 static
+char *SearchSrc(char *toStat)
+{
+ struct stat st;
+ if (stat(toStat,&st))
+   {
+    int i;
+    char buf[PATH_MAX];
+    for (i=0; srcDirs[i]; i++)
+       {
+        strcpy(buf,srcDirs[i]);
+        strcat(buf,"/");
+        strcat(buf,toStat);
+        if (stat(buf,&st)==0)
+           return strdup(buf);
+       }
+   }
+ return toStat;
+}
+
+static
+int IsAbsolute(const char *s)
+{
+ #if defined(__DJGPP__)
+ return *s=='/' || (isalpha(*s) && s[1]==':');
+ #else
+ return *s=='/';
+ #endif
+}
+
+static
 void GenerateDepFor(node *p, FILE *d, stMak &mk)
 {
  char *baseName=strdup(p->name);
@@ -270,38 +341,39 @@ void GenerateDepFor(node *p, FILE *d, stMak &mk)
  if (strcmp(ext,"o")==0 || strcmp(ext,"a")==0)
     return;
 
- int l=fprintf(d,"%s/%s$(ExOBJ):: %s ",mk.objDir,baseName,p->name);
+ int isExample=mk.baseDir && strstr(mk.baseDir,"example"), l;
+ if (isExample)
+   {
+    l=fprintf(d,"%s/%s$(ExOBJ):: %s ",mk.objDir,baseName,p->name);
+   }
+ else
+   {
+    char *relName=SearchSrc(p->name);
+    l=fprintf(d,"%s/%s$(ExOBJ):: %s ",mk.objDir,baseName,relName);
+    if (relName!=p->name)
+       free(relName);
+   }
  node *c=p->deps;
+ int isCompat=mk.baseDir && strstr(mk.baseDir,"compat");
  while (c)
    {
     s=c->name;
-    char *toStat=NULL;
+    if (strstr(s,p->name)!=NULL)
+      {// RHIDE 1.5 duplicates the source as dependency
+       c=c->next;
+       continue;
+      }
+    char *toStat;
     struct stat st;
 
-    //fprintf(stderr,"Dependencia: %s\n",s);
-    if (s[0]=='/' || s[0]=='\\' || (isalpha(s[0]) && s[1]==':'))
-      {// Absolute path
-       //fprintf(stderr,"Chequeando con la base: %s (%d)\n",projectBase,projectBaseL);
-       if (strncmp(s,projectBase,projectBaseL)==0)
-         {
-          char *sub=s+projectBaseL;
-          toStat=(char *)malloc(strlen(sub)+3+1);
-          sprintf(toStat,"../%s",sub);
-          //fprintf(stderr,"Transformada a relativa: %s\n",toStat);
-         }
-      }
-    if (!toStat)
+    if (mk.baseDir && !isCompat && !IsAbsolute(s))
       {
-       if (mk.baseDir)
-         {
-          toStat=new char[strlen(mk.baseDir)+strlen(s)+1];
-          strcpy(toStat,mk.baseDir);
-          strcat(toStat,s);
-          //fprintf(stderr,"Agregada base relativa: %s\n",toStat);
-         }
-       else
-          toStat=strdup(s);
+       toStat=new char[strlen(mk.baseDir)+strlen(s)+1];
+       strcpy(toStat,mk.baseDir);
+       strcat(toStat,s);
       }
+    else
+       toStat=strdup(s);
     int foundOnVPath=0;
     if (stat(toStat,&st))
       {
@@ -317,21 +389,18 @@ void GenerateDepFor(node *p, FILE *d, stMak &mk)
            if (stat(buf,&st)==0)
               foundOnVPath=1;
           }
+       for (i=0; !foundOnVPath && srcDirs[i]; i++)
+          {
+           strcpy(buf,srcDirs[i]);
+           strcat(buf,"/");
+           strcat(buf,toStat);
+           if (stat(buf,&st)==0)
+              foundOnVPath=1;
+          }
        if (!foundOnVPath)
-         {// Try without the base directory.
-          for (i=0; !foundOnVPath && incDirs[i].var; i++)
-             {
-              strcpy(buf,incDirs[i].dir);
-              strcat(buf,"/");
-              strcat(buf,s);
-              if (stat(buf,&st)==0)
-                 foundOnVPath=1;
-             }
-          if (!foundOnVPath)
-            {
-             fprintf(stderr,"Can't stat %s dependency\n",toStat);
-             exit(12);
-            }
+         {
+          fprintf(stderr,"Can't stat %s dependency\n",toStat);
+          exit(12);
          }
       }
     free(toStat);
@@ -731,8 +800,24 @@ void ProcessMakefile(const char *mak, stMak &mk, int level)
  time(&now);
  struct tm *brkT=localtime(&now);
  strftime(timeBuf,32,"%Y-%m-%d %H:%M",brkT);
- fprintf(stdout,"#!/usr/bin/make\n# Automatically generated from RHIDE projects, don't edit\n# %s\n#\n\n",timeBuf);
- GenerateAll(stdout,mk);
+ //fprintf(stdout,"#!/usr/bin/make\n# Automatically generated from RHIDE projects, don't edit\n# %s\n#\n\n",timeBuf);
+ // Don't know why I needed the time, so I'm disabling it.
+ fprintf(stdout,"#!/usr/bin/make\n# Automatically generated from RHIDE projects, don't edit\n#\n\n");
+
+ // Write the body to a temporal
+ char bNameT[12];
+ strcpy(bNameT,"mkXXXXXX");
+ int hT=mkstemp(bNameT);
+ FILE *fT=fdopen(hT,"wt");
+ if (hT==-1 || !fT)
+   {
+    fprintf(stderr,"Unable to create temporal\n");
+    exit(31);
+   }
+ GenerateAll(fT,mk);
+ fclose(fT);
+
+ // Write the variables now
  if (mk.mainTarget && *mk.mainTarget)
    {
     char *ext=strrchr(mk.mainTarget,'.');
@@ -743,6 +828,22 @@ void ProcessMakefile(const char *mak, stMak &mk, int level)
        GenerateLibs(stdout,mk);
       }
    }
+
+ // Now copy the body
+ fT=fopen(bNameT,"rt");
+ if (!fT)
+   {
+    fprintf(stderr,"Unable to copy temporal\n");
+    exit(32);
+   }
+ char buffer[maxLine];
+ while (!feof(fT))
+   {
+    if (fgets(buffer,maxLine,fT))
+       fputs(buffer,stdout);
+   }
+ fclose(fT);
+ unlink(bNameT);
 }
 
 static

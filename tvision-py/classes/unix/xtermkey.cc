@@ -1,7 +1,7 @@
 /*****************************************************************************
 
   XTerm keyboard routines.
-  Copyright (c) 2002 by Salvador E. Tropea (SET)
+  Copyright (c) 2002-2010 by Salvador E. Tropea (SET)
   Covered by the GPL license.
 
   Module: XTerm Keyboard
@@ -25,6 +25,7 @@
 #define Uses_string
 #define Uses_stdlib
 #define Uses_unistd
+#define Uses_ioctl
 #define Uses_TEvent
 #define Uses_TGKey
 #define Uses_FullSingleKeySymbols
@@ -35,7 +36,6 @@
 
 #include <termios.h>
 #include <fcntl.h>
-#include <sys/ioctl.h>
 
 #include <tv/unix/xtkey.h>
 #include <tv/linux/log.h>
@@ -109,12 +109,18 @@ int TGKeyXTerm::InitOnce()
  inTermiosNew.c_iflag&= ~(IXOFF | IXON);
  // Character oriented, no echo, no signals
  inTermiosNew.c_lflag&= ~(ICANON | ECHO | ISIG);
- // The following are needed for Solaris. In 2.7 MIN is around 4 and TIME 0
+
+ // The following are needed for Solaris. In 2.7 MIN is 4 and TIME 0
  // making things really annoying. In the future they could be driver
  // variables to make the use of bandwidth smaller. A value of 4 and 1 looks
- // usable.
- inTermiosNew.c_cc[VMIN]=0;
- inTermiosNew.c_cc[VTIME]=0;
+ // usable. I verified that Solaris 9 (2.9) also uses 4/0.
+ //
+ // *BSD systems seems interpret 0/0 value in a different way and they need
+ // 1/0 in order work properly (otherwise blocks forever). I verified that
+ // 1/0 works for OpenBSD 3.4, FreeBSD 4.8 and NetBSD 1.6.1. All of them uses
+ // 1/0 as default, Linux also does it.
+ inTermiosNew.c_cc[VMIN]=1;
+ inTermiosNew.c_cc[VTIME]=0; // No timeout, just don't block
  if (tcsetattr(hIn,TCSAFLUSH,&inTermiosNew))
    {
     error=_("can't set input terminal attributes");
@@ -232,7 +238,7 @@ unsigned char TGKeyXTerm::kbExtraFlags[128] =
 };
 
 /************************** Escape sequences tree **************************/
-typedef struct node
+struct node
 {
  union
  {
@@ -272,12 +278,14 @@ typedef struct
 } stEtKey;
 
 // CSI Number ; Modifiers ~
-const int cCsiKeys1=14;
+const int cCsiKeys1=16;
 static
 stCsiKey csiKeys1[cCsiKeys1]=
 {
+ {  1, kbHome }, // Putty
  {  2, kbInsert },
  {  3, kbDelete },
+ {  4, kbEnd },  // Putty
  {  5, kbPgUp }, // Prior
  {  6, kbPgDn }, // Next
  {  7, kbHome },
@@ -293,11 +301,12 @@ stCsiKey csiKeys1[cCsiKeys1]=
 };
 
 static
-uchar csiFgKeys1[]=
+uchar csiFgKeys1[cCsiKeys1]=
 {
  fgEterm,fgEterm,fgEterm,fgEterm,
- fgOnlyEterm|fgEterm,fgOnlyEterm|fgEterm, // Home & End
- 0,0,0,0,0,0,0,0
+ //fgOnlyEterm|fgEterm,fgOnlyEterm|fgEterm, // PgUp & PgDown
+ fgEterm,fgEterm,
+ 0,0,0,0,0,0,0,0,0,0
 };
 
 // CSI Modifiers Letter
@@ -528,6 +537,9 @@ void TGKeyXTerm::PopulateTree()
         {
          sprintf(b,"[%d%c",j+2,csiKeys2[i].number);
          AddKey((uchar *)b,csiKeys2[i].code,xtMods[j]);
+         // Newer versions:
+         sprintf(b,"[1;%d%c",j+2,csiKeys2[i].number);
+         AddKey((uchar *)b,csiKeys2[i].code,xtMods[j]);
         }
     }
  for (i=0; i<cCsiKeys3; i++)
@@ -592,6 +604,7 @@ void TGKeyXTerm::PopulateTree()
  AddKey((uchar *)"[34^",kbF10,kblCtrl | kblShift);
  AddKey((uchar *)"[23@",kbF11,kblCtrl | kblShift);
  AddKey((uchar *)"[24@",kbF12,kblCtrl | kblShift);
+ AddKey((uchar *)"]lTerminal", 0, 0); // Suppress the lTerminal escape sequence xterm sends
 
  // The mouse reporting mechanism:
  AddKey((uchar *)"[M",kbMouse,0);

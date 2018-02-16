@@ -1,7 +1,13 @@
 #!/usr/bin/make
 # Automatically generated from RHIDE projects, don't edit
-# 2003-06-20 13:50
 #
+
+OBJFILES=\
+	./main$(ExOBJ) \
+	./scrldlg$(ExOBJ) \
+	./scrlgrp$(ExOBJ) 
+
+LIBRARIES=
 
 test$(ExEXE):: \
 	./main$(ExOBJ) \
@@ -24,11 +30,4 @@ test$(ExEXE):: \
 	dlg.h \
 	$(MAKEFILE_DEPS) 
 	$(RHIDE_COMPILE_CC)
-
-OBJFILES=\
-	./main$(ExOBJ) \
-	./scrldlg$(ExOBJ) \
-	./scrlgrp$(ExOBJ) 
-
-LIBRARIES=
 

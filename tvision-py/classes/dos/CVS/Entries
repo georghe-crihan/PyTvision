@@ -1,0 +1,15 @@
+/.cvsignore/1.1/Mon May  6 13:32:17 2002//Tr2_0_1u
+/rhscreen.cc/1.3/Wed Jul 10 19:28:39 2002//Tr2_0_1u
+/screen.cc/1.2/Mon Jul  1 19:02:46 2002//Tr2_0_1u
+/sescreen.cc/1.2/Mon Jul  1 19:02:46 2002//Tr2_0_1u
+/vesa.cc/1.1/Mon May  6 13:32:17 2002//Tr2_0_1u
+/vga.cc/1.4/Mon Sep 23 12:34:25 2002//Tr2_0_1u
+/vgaregs.c/1.2/Mon Jul  1 19:02:46 2002//Tr2_0_1u
+/vgaregs.h/1.2/Mon Jul  1 19:02:46 2002//Tr2_0_1u
+/vgastate.h/1.2/Mon Jul  1 19:02:46 2002//Tr2_0_1u
+/dosmouse.cc/1.8.2.1/Mon May  5 13:23:47 2003//Tr2_0_1u
+/dosscr.cc/1.33.2.3/Tue Dec  2 13:47:35 2003//Tr2_0_1u
+/vgastate.c/1.2.2.1/Fri Sep 17 14:38:11 2004//Tr2_0_1u
+/doskey.cc/1.9.2.1/Tue Oct  5 14:22:58 2004//Tr2_0_1u
+/dosdis.cc/1.15.2.2/Fri Jul  8 16:35:01 2005//Tr2_0_1u
+D

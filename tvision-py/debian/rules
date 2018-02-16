@@ -9,11 +9,23 @@ version=$(shell cat version.txt)
 package=rhtvision
 destdir=$(shell pwd)/debian/tmp/usr
 
+LIB_SUBDIR=$(shell dpkg-architecture -qDEB_TARGET_MULTIARCH)
+
 # Uncomment this to turn on verbose mode:
 #export DH_VERBOSE=1
 
 # This is the debhelper compatibility version to use:
 export DH_COMPAT=1
+
+# Set CFLAGS according to the Debian Policy:
+CFLAGS = -D_REENTRANT -g -Wall
+ifneq (,$(findstring noopt,$(DEB_BUILD_OPTIONS)))
+	CFLAGS += -O0
+else
+	CFLAGS += -O2
+endif
+CXXFLAGS = $(CFLAGS)
+
 
 # Compile the beast!:
 build: build-stamp
@@ -24,24 +36,25 @@ ifneq ($(wildcard debian/rhtvision.postinst),)
 	mv debian/rhtvision.postinst debian/rhtvision$(version).postinst
 	mv debian/rhtvision.postrm debian/rhtvision$(version).postrm
 endif
-	./configure --prefix=$(destdir) --fhs --no-libs-here --real-prefix=/usr
-	$(MAKE) CPPFLAGS="-D_REENTRANT"   
+	CFLAGS="$(CFLAGS)" CXXFLAGS="$(CXXFLAGS)" ./configure \
+		--prefix=$(destdir) --fhs --no-libs-here --real-prefix=/usr \
+		--libs-subdir=$(LIB_SUBDIR)
+	CFLAGS="$(CFLAGS)" CXXFLAGS="$(CXXFLAGS)" $(MAKE) -j `nproc`
 	touch build-stamp
 
 
 # Clean everything as if nothing happened :) :
 clean: clean-debian debianbackup.tar
 # If we don't configure there is no guarantee that we have a Makefile:
-	./configure --prefix=$(destdir) --fhs --no-libs-here --real-prefix=/usr
+	./configure --prefix=$(destdir) --fhs --no-libs-here --real-prefix=/usr \
+		--libs-subdir=$(LIB_SUBDIR)
 	$(MAKE) clean
 # Restore upstream provided regenerated files:
 	test -e debianbackup.tar && tar -xf debianbackup.tar
 	rm -f debianbackup.tar
 # FIXME: ask upstream about adding the next files to his clean target:
-	rm -f linuxso/gkeyli.cc linuxso/instlib linuxso/rhide.env \
-		Makefile compat/rhide.env examples/rhide.env include/tv/configtv.h \
-		linux/rhide.env linuxso/Makefile linuxso/compat.mak \
-		intl/es_iso.mo intl/es_iso.po intl/es.mo intl/ru.mo
+	rm -f compat/rhide.env examples/rhide.env include/tv/configtv.h Makefile \
+		makes/rhide.env redhat/librhtv-*.spec makes/libtvfintl.a
 	rm -f build-stamp
 
 # Use the following target when you just want for example to rebuild the
@@ -60,7 +73,7 @@ endif
 debianbackup.tar:
 	dh_testdir
 # Backup upstream provided regenerated files:
-	tar -cf debianbackup.tar --files-from=debian/files_to_backup
+	-tar -cf debianbackup.tar --files-from=debian/files_to_backup
 
 
 # Copy needed files to the temporary directories for the packages:
@@ -77,7 +90,7 @@ install: build
 		usr/share/doc/$(package)$(version)/eterm
 	$(MAKE) install
 # We need to move files for other packages than the first one in the control file:
-	dh_movefiles -p $(package)$(version) usr/lib/librhtv.so.$(version) \
+	dh_movefiles -p $(package)$(version) usr/lib/$(LIB_SUBDIR)/librhtv.so.$(version) \
 		usr/share/locale/
 
 
@@ -88,7 +101,8 @@ binary-arch: build install
 	dh_installdocs -A borland.txt copying copying.rh readme.txt \
 		doc/CodePages.txt doc/ConfigFile.txt doc/Eterm.txt doc/Linux.txt \
 		doc/X11.txt doc/XTerm.txt THANKS
-	dh_installdocs -p $(package)$(version)-dev doc/TVReference.html
+	dh_installdocs -p $(package)$(version)-dev doc/TVReference.html \
+		doc/I18n.txt doc/Streams.txt
 	dh_installdocs -p $(package)$(version) extra/eterm/ debian/README.debian
 	mv debian/$(package)$(version)/usr/share/doc/$(package)$(version)/README.debian \
 		debian/$(package)$(version)/usr/share/doc/$(package)$(version)/README.Debian

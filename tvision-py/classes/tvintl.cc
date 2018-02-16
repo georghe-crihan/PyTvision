@@ -1,5 +1,5 @@
 /* Internationalization support routines.
-   Copyright by Salvador E. Tropea (SET) (2003)
+   Copyright by Salvador E. Tropea (SET) (2003-2005)
    Covered by the GPL license. */
 
 #define Uses_string
@@ -9,11 +9,20 @@
 #define Uses_stdio
 #define Uses_snprintf
 #define Uses_limits
+#ifdef MSS
+ #define __MSS_USED__
+ #undef MSS
+#endif 
 #include <compatlayer.h>
+#ifdef __MSS_USED__
+ #define MSS
+ #undef __MSS_USED__
+#endif 
 #include <locale.h>
 #include <tv/ttypes.h>
 #define Uses_intl_fprintf
 #include <tv/intl.h>
+#include <tv.h>
 
 #ifdef HAVE_INTL_SUPPORT
 
@@ -22,6 +31,7 @@ class TVPartitionTree556;
 #include <tv/codepage.h>
 
 // Prototypes, we know they exists
+#ifndef _LIBINTL_H
 extern "C" {
 char *textdomain(const char *domainname);
 char *bindtextdomain(const char *domainname, const char *dirname);
@@ -30,6 +40,7 @@ char *dgettext(const char *domain, const char *msgid);
 char *gettext__(const char *msgid);
 char *__gettext(const char *msgid);
 }
+#endif
 
 // Small mess to determine which function provides "gettext"
 // Must use __DJGPP__ here
@@ -54,20 +65,31 @@ char TVIntl::initialized=0;
 char TVIntl::needsRecode=0;
 int  TVIntl::forcedCatalogEncoding=-1;
 int  TVIntl::catalogEncoding=885901;
+const char *TVIntl::catalogEncodingName="8859_1";
 uchar TVIntl::recodeTable[256];
 void *TVIntl::previousCPCallBack=NULL;
+char  TVIntl::packageName[20];
 
 const char *TVIntl::defaultEncodingNames[]=
 {
  "de",
  "es",
+ "pl",
  "ru"
 };
 int TVIntl::defaultEncodings[]=
 {
- 885901,
- 885901,
- 100000
+ 885901, // de
+ 885901, // es
+ 885902, // pl
+ 100000  // ru
+};
+const char *TVIntl::defaultEncodingsNames[]=
+{
+ "8859_1", // de
+ "8859_1", // es
+ "8859_2", // pl
+ "KOI8R"   // ru
 };
 const int numEncs=3;
 
@@ -91,6 +113,7 @@ void TVIntl::initialize()
           }
     previousCPCallBack=(void *)TVCodePage::SetCallBack(codePageCB);
     codePageCB(NULL);
+    CLY_snprintf(packageName,libPackageNameLen,"tvision%s",TV_VERSION);
    }
 }
 
@@ -117,14 +140,18 @@ const char *TVIntl::textDomain(const char *domainname)
 const char *TVIntl::bindTextDomain(const char *domainname, const char *dirname)
 {
  initialize();
- return (const char *)bindtextdomain(domainname,dirname);
+ const char *ret=bindtextdomain(domainname,dirname);
+ bind_textdomain_codeset(domainname,catalogEncodingName);
+ return ret;
 }
 
 const char *TVIntl::getText(const char *msgid)
 {
+ if (!msgid || !msgid[0]) // gettext 0.14.4 feature: "" -> "Project-Id-Version...
+    return msgid;
  const char *msgstr=LibGetTextLow(msgid);
  if (msgid==msgstr)
-    msgstr=dgettext("tvision",msgstr);
+    msgstr=dgettext(packageName,msgstr);
  return msgstr;
 }
 

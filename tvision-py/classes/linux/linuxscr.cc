@@ -2,7 +2,7 @@
 
   Linux screen routines.
   Copyright (c) 1996-1998 by Robert Hoehne.
-  Copyright (c) 1999-2003 by Salvador E. Tropea (SET)
+  Copyright (c) 1999-2004 by Salvador E. Tropea (SET)
   Covered by the GPL license.
 
   Important note:
@@ -101,13 +101,13 @@ are just broken.
 #define Uses_TVCodePage
 #define Uses_string
 #define Uses_ctype
+#define Uses_signal
 #include <tv.h>
 
 // I delay the check to generate as much dependencies as possible
 #ifdef TVOSf_Linux
 
 #include <fcntl.h>
-#include <signal.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
@@ -123,7 +123,11 @@ are just broken.
 #include <tv/linux/log.h>
 
 #ifdef h386LowLevel
- #include <asm/io.h>
+ #if HAVE_OUTB_IN_SYS
+  #include <sys/io.h>
+ #else
+  #include <asm/io.h>
+ #endif
 #endif
 
 // What a hell is that?!
@@ -233,7 +237,7 @@ struct stCodePageLang TScreenLinux::langCodePages[]=
 // dependent.
 typedef struct
 {
- char service    __attribute__((packed));
+ char service;//    __attribute__((packed));
  ushort xs       __attribute__((packed));
  ushort ys       __attribute__((packed));
  ushort xe       __attribute__((packed));
@@ -269,10 +273,10 @@ void TScreenLinux::Init(int mode)
  TScreen::setVideoMode=SetVideoMode;
  TScreen::setVideoModeExt=SetVideoModeExt;
  TScreen::getCharacter=GetCharacter;
- TScreen::System=System;
+ TScreen::System_p=System;
  TDisplay::checkForWindowSize=CheckForWindowSize;
  TScreen::getFontGeometry=GetFontGeometry;
- TScreen::setFont=SetFont;
+ TScreen::setFont_p=SetFont;
  TScreen::restoreFonts=RestoreFonts;
 
  switch (mode)
@@ -323,11 +327,12 @@ int TScreenLinux::AnalyzeCodePage()
  int i,j;
 
  // GIO_UNIMAP: get unicode-to-font mapping from kernel
- int success=0;
+ int success;
  struct unimapdesc map;
  map.entry_ct=firstTrySize;
  map.entries=new struct unipair[firstTrySize];
- if (ioctl(hOut,GIO_UNIMAP,&map)==-1 && map.entry_ct>firstTrySize)
+ success= ioctl(hOut,GIO_UNIMAP,&map)!=-1;
+ if (!success && map.entry_ct>firstTrySize)
    {
     LOG("The starting size of " << firstTrySize << " wasn't enough, we need " << map.entry_ct);
     delete[] map.entries;
@@ -404,7 +409,6 @@ int TScreenLinux::AnalyzeCodePage()
            fprintf(stderr,"%03d U+%04x\n",i,v);
        }
     fputs("-------------\n",stderr);
-    char SFMCreated=0;
     for (i=0; knownFonts[i].codepage && knownFonts[i].checksum!=cks; i++);
     if (knownFonts[i].codepage)
       {
@@ -415,7 +419,6 @@ int TScreenLinux::AnalyzeCodePage()
       {
        fputs("Unknown code page, creating a custom one\n",stderr);
        CreateSFMFromTable(UnicodeMap);
-       SFMCreated=1;
       }
    }
  else
@@ -498,11 +501,12 @@ int TScreenLinux::AnalyzeCodePage()
 {
  // Get the font unicode map (SFM)
  // GIO_UNIMAP: get unicode-to-font mapping from kernel
- int success=0;
+ int success;
  struct unimapdesc map;
  map.entry_ct=firstTrySize;
  map.entries=new struct unipair[firstTrySize];
- if (ioctl(hOut,GIO_UNIMAP,&map)==-1 && map.entry_ct>firstTrySize)
+ success= ioctl(hOut,GIO_UNIMAP,&map)!=-1;
+ if (!success && map.entry_ct>firstTrySize)
    {
     LOG("The starting size of " << firstTrySize << " wasn't enough, we need " << map.entry_ct);
     delete[] map.entries;
@@ -531,7 +535,6 @@ int TScreenLinux::AnalyzeCodePage()
     }
  // Compute a good check sum of it
  uint32 cks=adler32(0,(char *)UnicodeMap,256*sizeof(ushort));
- char SFMCreated=0;
  // Find if we know about this one
  for (i=0; knownFonts[i].codepage && knownFonts[i].checksum!=cks; i++);
  if (knownFonts[i].codepage)
@@ -544,7 +547,6 @@ int TScreenLinux::AnalyzeCodePage()
     LOG("Unknown SFM: " << cks);
     // We don't know about it, but we have enough information to try using it
     CreateSFMFromTable(UnicodeMap);
-    SFMCreated=1;
    }
  // Now look for the ACM
  // GIO_UNISCRNMAP: get full Unicode screen mapping
@@ -761,6 +763,16 @@ int TScreenLinux::InitOnce()
    {
     GuessCodePageFromLANG();
    }
+
+ #ifdef DEBUG_CODEPAGE
+ fprintf(stderr,"Using: AppCP: 0x%08lX ScrCP: 0x%08lX InpCP: 0x%08lX\n",
+         forcedAppCP!=-1 ? forcedAppCP : installedACM,
+         forcedScrCP!=-1 ? forcedScrCP : installedSFM,
+         forcedInpCP!=-1 ? forcedInpCP : installedACM);
+ fprintf(stderr,"Default: AppCP: 0x%08X ScrCP: 0x%08X InpCP: 0x%08X\n",
+         installedACM,installedSFM,installedACM);
+ #endif
+
  // User settings have more priority than detected settings
  codePage=new TVCodePage(forcedAppCP!=-1 ? forcedAppCP : installedACM,
                          forcedScrCP!=-1 ? forcedScrCP : installedSFM,
@@ -1184,7 +1196,8 @@ void TScreenLinux::SaveScreen()
                 else
                   {
                    val[0]=character ? character : ' ';
-                   *(s++)=*((ushort *)val);
+                   //*(s++)=*((ushort *)val);
+                   *(s++)=val[0]|(val[1]<<8);
                    w--;
                    if (!w) w=width; // Auto LF ;-)
                   }
@@ -1271,6 +1284,19 @@ void TScreenLinux::GetCharactersVCS(unsigned offset, ushort *buf, unsigned count
 {
  lseek(vcsRfd,offset*sizeof(ushort)+4,SEEK_SET);
  read(vcsRfd,buf,count*sizeof(ushort));
+ #if TV_BIG_ENDIAN
+   {
+    unsigned i;
+    uchar *s=(uchar *)buf,aux;
+    count*=2;
+    for (i=0; i<count; i+=2)
+       {
+        aux=s[i];
+        s[i]=s[i+1];
+        s[i+1]=aux;
+       }
+   }
+ #endif
 }
 
 /*
@@ -1305,7 +1331,21 @@ void TScreenLinux::SetCharactersVCS(unsigned dst, ushort *src, unsigned len)
    }
 
  lseek(vcsWfd,dst*sizeof(ushort)+4,SEEK_SET);
- write(vcsWfd,src,length);
+ #if TV_BIG_ENDIAN
+   {
+    unsigned i;
+    uchar *s=(uchar *)src;
+    uchar b[length*2];
+    for (i=0; i<length; i+=2)
+       {
+        b[i]=s[i+1];
+        b[i+1]=s[i];
+       }
+    write(vcsWfd,b,length);
+   }
+ #else
+    write(vcsWfd,src,length);
+ #endif
  if (!canReadVCS())
     // SET: cache it to avoid reads that needs special priviledges
     memcpy(screenBuffer+dst,src,length);
@@ -1493,14 +1533,19 @@ int TScreenLinux::System(const char *command, pid_t *pidChild, int in,
        dup2(out,STDOUT_FILENO);
     if (err!=-1)
        dup2(err,STDERR_FILENO);
-   
-    argv[0]=getenv("SHELL");
+
+    // Note: execvp takes a char * const argument, but I think it should
+    // take a const char *
+    argv[0]=newStr(getenv("SHELL"));
     if (!argv[0])
-       argv[0]="/bin/sh";
-    argv[1]="-c";
-    argv[2]=(char *)command;
-    argv[3]=0;
+       argv[0]=newStr("/bin/sh");
+    argv[1]=newStr("-c");
+    argv[2]=newStr(command);
+    argv[3]=NULL;
     execvp(argv[0],argv);
+    delete[] argv[0];
+    delete[] argv[1];
+    delete[] argv[2];
     // We get here only if exec failed
     _exit(127);
    }

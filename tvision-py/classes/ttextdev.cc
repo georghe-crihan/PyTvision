@@ -12,8 +12,6 @@ Modified by Robert H”hne to be used for RHIDE.
  */
 
 #include <tv/configtv.h>
-// The SSC code doesn't support as much as needed for it.
-#ifndef HAVE_SSC
 
 #define Uses_TTextDevice
 #include <tv.h>
@@ -25,7 +23,6 @@ TTextDevice::TTextDevice( const TRect& bounds,
 {
 }
 
-/*
 int TTextDevice::overflow( int c )
 {
     if( c != EOF )
@@ -35,6 +32,4 @@ int TTextDevice::overflow( int c )
         }
     return 1;
 }
-*/
 
-#endif

@@ -1,5 +1,5 @@
 /* Internationalization support routines header.
-   Copyright by Salvador E. Tropea (SET) (2003)
+   Copyright by Salvador E. Tropea (SET) (2003-2005)
    Covered by the GPL license. */
 /* The dummies are in nointl.h to make this header less complex */
 
@@ -25,7 +25,9 @@ struct stTVIntl
  int cp;
 };
 
-class TVIntl
+const int libPackageNameLen=20;
+
+class CLY_EXPORT TVIntl
 {
 public:
  TVIntl() {};
@@ -68,11 +70,14 @@ protected:
  // Assumed catalog encoding. This is OS independent and is an arbitrary
  // criteria for TV. It makes easier to create portable programs.
  static int  catalogEncoding;
+ static const char *catalogEncodingName;
  // Default encodings used for TV. Defined only for the available translations.
  static const char *defaultEncodingNames[];
  static int defaultEncodings[];
+ static const char *defaultEncodingsNames[];
  static void *previousCPCallBack;
  static uchar recodeTable[256];
+ static char  packageName[libPackageNameLen];
 
  static void initialize();
  static void codePageCB(ushort *map);

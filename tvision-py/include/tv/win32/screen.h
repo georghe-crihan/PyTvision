@@ -65,11 +65,11 @@ protected:
  // Default: ushort fixCrtMode( ushort mode )
  // Default: static void   setCrtData();
  static void   clearScreen();
- // Default: static void   setVideoMode(ushort mode);
- // Default: static void   setVideoModeExt(char *mode);
+ static void   SetVideoMode(ushort mode);
+ static void   SetVideoModeExt(char *mode);
  // Default: static void   getCharacters(unsigned offset,ushort *buf,unsigned count);
  // Default: static ushort getCharacter(unsigned dst);
- static void   setCharacter(unsigned offset, ushort value);
+ static void   setCharacter(unsigned offset, unsigned int value);
  static void   setCharacters(unsigned dst, ushort *src, unsigned len);
  static int    System(const char *command, pid_t *pidChild, int in, int out,
                       int err);
@@ -81,6 +81,7 @@ protected:
  static void   DoneConsole();
  static DWORD WINAPI HandleEvents(void* p);
  static BOOL  WINAPI ConsoleEventHandler(DWORD dwCtrlType);
+ static void   CheckSizeBuffer(int oldWidth, int oldHeight);
 
  // Support variables
  static CONSOLE_SCREEN_BUFFER_INFO info;

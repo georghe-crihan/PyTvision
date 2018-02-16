@@ -22,28 +22,6 @@ Modified by Robert H”hne to be used for RHIDE.
 TScreen          *TProgInit::tsc=NULL;
 TVMainConfigFile *TProgInit::config=NULL;
 
-#include <stdio.h>
-
-TProgInit::TProgInit() :
-  createStatusLine( NULL ),
-  createMenuBar( NULL ),
-  createDeskTop( NULL )
-{
- // Load the configuration file
- if (!config)
-    config=new TVMainConfigFile();
- config->Load();
- // Read common settings
- long aux;
- if (config->Search("ShowCursorEver",aux))
-    TScreen::setShowCursorEver(aux ? True : False);
- if (config->Search("DontMoveHiddenCursor",aux))
-    TScreen::setDontMoveHiddenCursor(aux ? True : False);
-
- tsc=new TScreen();
-}
-
-
 TProgInit::TProgInit( TStatusLine *(*cStatusLine)( TRect ),
                             TMenuBar *(*cMenuBar)( TRect ),
                             TDeskTop *(*cDeskTop )( TRect )

@@ -1,0 +1,35 @@
+/.cvsignore/1.2/Tue Aug 14 15:21:02 2001//Tr2_0_1u
+/patchenv.pl/1.2/Tue Sep  4 18:05:46 2001//Tr2_0_1u
+/readme.txt/1.20.2.1/Mon Apr 21 16:47:49 2003//Tr2_0_1u
+/porting.txt/1.5.4.1/Mon Jun  2 13:56:34 2003//Tr2_0_1u
+/common.bmk/1.1.2.1/Mon Jun  2 01:40:56 2003//Tr2_0_1u
+D/bhelp////
+D/clipboard////
+D/cyrillic////
+D/demo////
+D/desklogo////
+D/dlgdsn////
+D/dyntxt////
+D/eterm////
+D/fonts////
+D/helpdemo////
+D/i18n////
+D/inplis////
+D/listvi////
+D/msgcls////
+D/progba////
+D/sdlg////
+D/sdlg2////
+D/tcombo////
+D/terminal////
+D/tprogb////
+D/tutorial////
+D/tvedit////
+D/tvhc////
+D/utf8////
+D/videomode////
+D/xterm////
+D/viewers////
+/Makefile/1.12.2.3/Thu May 31 14:02:41 2007//Tr2_0_1u
+/Makefile.nmk/1.1.2.1/Thu Aug 27 14:12:13 2009//Tr2_0_1u
+/gen_mkf.pl/1.1.2.2/Mon Mar 19 13:56:55 2012//Tr2_0_1u

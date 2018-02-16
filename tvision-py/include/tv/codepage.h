@@ -23,8 +23,8 @@ struct CodePage
  char Name[28];       // Descriptive name
  int id;              // Unique ID to identify it
  ushort Font[128];    // High 128 symbols
- char *UpLow;         // Lowecase/Uppercase pairs
- char *MoreLetters;   // Other symbols that should be treat as letters but doesn't
+ const char *UpLow;       // Lowecase/Uppercase pairs
+ const char *MoreLetters; // Other symbols that should be treat as letters but doesn't
                       // have lowecase/uppercase pair.
  int LowRemapNum;     // Most code pages are plain ASCII in the first 128 symbols
  ushort *LowRemap;    // and we don't define them. This information is used when
@@ -35,7 +35,7 @@ typedef void (*TVCodePageCallBack)(ushort *map);
 
 const unsigned rbgDontRemapLow32=1, rbgOnlySelected=2;
 
-class TVCodePage
+class CLY_EXPORT TVCodePage
 {
 public:
  TVCodePage(int idApp, int idScr, int idInp);
@@ -62,6 +62,8 @@ public:
   { return (char)toLowerTable[(uchar)val]; }
  static int     isAlpha(char val)
   { return AlphaTable[(uchar)val] & alphaChar; }
+ static int     isNumber(char val)
+  { return AlphaTable[(uchar)val] & digitChar; }
  static int     isAlNum(char val)
   { return AlphaTable[(uchar)val] & (alphaChar | digitChar); }
  static int     isLower(char val)

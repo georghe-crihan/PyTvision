@@ -6,16 +6,14 @@
  *
 
 Modified by Robert H”hne to be used for RHIDE.
+Modified by Salvador E. Tropea (to be compatible with TV 2.0)
 
  *
  *
  */
-// SET: Moved the standard headers here because according to DJ
-// they can inconditionally declare symbols like NULL
 #define Uses_string
-#include <limits.h>
-#include <stdio.h>
-
+#define Uses_limits
+#define Uses_stdio
 #define Uses_ipstream
 #define Uses_opstream
 #define Uses_TFilterValidator
@@ -24,39 +22,38 @@ Modified by Robert H”hne to be used for RHIDE.
 
 TFilterValidator::TFilterValidator() :
   TValidator(),
-  ValidChars(NULL)
+  validChars(NULL)
 {
 }
 
 TFilterValidator::TFilterValidator(const char * chars) :
   TValidator()
 {
-  ValidChars = new char[strlen(chars)+1];
-  strcpy(ValidChars,chars);
+  validChars = newStr(chars);
 }
 
 TFilterValidator::~TFilterValidator()
 {
-  delete ValidChars;
+  delete[] validChars;
 }
 
-Boolean TFilterValidator::IsValid(const char *S)
+Boolean TFilterValidator::isValid(const char *S)
 {
   int i=0;
   while (S[i])
   {
-    if (!strchr(ValidChars,S[i])) return False;
+    if (!strchr(validChars,S[i])) return False;
     i++;
   }
   return True;
 }
 
-Boolean TFilterValidator::IsValidInput(char *S,Boolean)
+Boolean TFilterValidator::isValidInput(char *S,Boolean)
 {
-  return TFilterValidator::IsValid(S);
+  return TFilterValidator::isValid(S);
 }
 
-void TFilterValidator::Error()
+void TFilterValidator::error()
 {
   messageBox(__("Invalid character in input"),mfError | mfOKButton);
 }
@@ -75,13 +72,13 @@ TStreamable * TFilterValidator::build()
 void TFilterValidator::write(opstream & os)
 {
   TValidator::write(os);
-  os.writeString(ValidChars);
+  os.writeString(validChars);
 }
 
 void * TFilterValidator::read(ipstream & is)
 {
   TValidator::read(is);
-  ValidChars = is.readString();
+  validChars = is.readString();
   return this;
 }
 #endif // NO_STREAM

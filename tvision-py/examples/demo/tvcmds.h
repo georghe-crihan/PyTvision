@@ -11,12 +11,12 @@
  *
  */
 
-const int cmAboutCmd    = 100;
+const int cmAboutCmd    = 105; // JASC, conflict with standard cmOpen
 const int cmPuzzleCmd   = 101;
 const int cmCalendarCmd = 102;
 const int cmAsciiCmd    = 103;
 const int cmCalcCmd     = 104;
-const int cmOpenCmd     = 105;
+#define cmOpenCmd     cmOpen
 const int cmChDirCmd    = 106;
 // SET: Use cmCallShell instead
 //const int cmDOS_Cmd     = 107;
@@ -25,3 +25,4 @@ const int cmColorCmd    = 109;
 const int cmSaveCmd     = 110;
 const int cmRestoreCmd  = 111;
 const int cmTestInputBox= 112;
+const int cmTestPicture = 113;

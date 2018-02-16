@@ -15,8 +15,6 @@ Andris Pavenis.
 // SET: Moved the standard headers here because according to DJ
 // they can inconditionally declare symbols like NULL
 #include <tv/configtv.h>
-// The SSC code doesn't support as much as needed for it.
-#ifndef HAVE_SSC
 
 #define Uses_string
 
@@ -176,6 +174,20 @@ Boolean TTerminal::queEmpty()
     return Boolean( queBack == queFront );
 }
 
+// The SSC code doesn't support as much as needed for it.
+#ifndef HAVE_SSC
+otstream::otstream( TTerminal *tt )
+    #ifdef CLY_ISOCpp98
+    // SET: Andris used it. It looks like the new standard doesn't have a
+    // default constructor
+    : std::ostream (tt)
+    #endif
+{
+    ios::init( tt );
+}
+// HAVE_SSC
+#endif
+
 // SET: It was really broken, but as we never used it...
 // I rewrote it. I also used bufInc and bufDec and made it inline. (instead
 // of the old macros).
@@ -223,9 +235,8 @@ uint32 TTerminal::prevLines(uint32 posStart, uint32 Lines)
          }
       }
    }
- while (pos-->=queBack);
+ while (--pos>=queBack);
 
  return queBack;
 }
 
-#endif

@@ -1,6 +1,6 @@
 /**[txh]********************************************************************
 
-  Copyright (c) 2002 by Salvador E. Tropea (SET)
+  Copyright (c) 2002-2005 by Salvador E. Tropea (SET)
   Based on code contributed by Anatoli Soltan.
 
   Description:
@@ -52,6 +52,7 @@ I think they aren't useful but I left it here in case I need this example.
 
 #define WIN32_LEAN_AND_MEAN
 #include <windows.h>
+#undef YieldProcessor
 
 #include <tv/winnt/screen.h>
 #include <tv/winnt/mouse.h>
@@ -105,6 +106,10 @@ void TScreenWinNT::ensureOutBufCapacity(unsigned count)
 
 int TScreenWinNT::InitOnce()
 {
+ DWORD flags;
+ // Check if we are running in a console
+ if (!GetConsoleMode(GetStdHandle(STD_INPUT_HANDLE),&flags))
+    return 0;
  // SET: On Win32 this value is symbolic, just a number that can't be a
  // malloced pointer, the screenBuffer isn't used to access the screen.
  screenBuffer=(ushort *)-1;
@@ -140,10 +145,10 @@ int TScreenWinNT::InitOnce()
  setCharacters=SetCharacters;
  getCharacter=GetCharacter;
  getCharacters=GetCharacters;
- TScreen::System=System;
+ TScreen::System_p=System;
  TScreen::Resume=Resume;
  TScreen::Suspend=Suspend;
- setCrtModeRes=SetCrtModeRes;
+ setCrtModeRes_p=SetCrtModeRes;
 
  TVWin32Clipboard::Init();
  TGKeyWinNT::Init();
@@ -301,7 +306,7 @@ void TScreenWinNT::GetCharacters(unsigned offset, ushort *buf, unsigned count)
      *buf=(ushort)(outBufAttr[count]<<8) | (ushort)(uchar)outBuf[count];
 }
 
-void TScreenWinNT::SetCharacter(unsigned offset, ushort value)
+void TScreenWinNT::SetCharacter(unsigned offset, unsigned int value)
 {
  ensureOutBufCapacity(1);
  COORD coord;

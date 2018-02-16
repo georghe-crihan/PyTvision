@@ -1,7 +1,18 @@
 #!/usr/bin/make
 # Automatically generated from RHIDE projects, don't edit
-# 2003-06-20 13:50
 #
+
+OBJFILES=\
+	./codebldr$(ExOBJ) \
+	./consted$(ExOBJ) \
+	./dsgobjs$(ExOBJ) \
+	./freedsgn$(ExOBJ) \
+	./propdlgs$(ExOBJ) \
+	./propedit$(ExOBJ) \
+	./strmoper$(ExOBJ) \
+	./tappwnd$(ExOBJ) 
+
+LIBRARIES=
 
 freedsgn$(ExEXE):: \
 	./codebldr$(ExOBJ) \
@@ -77,16 +88,4 @@ freedsgn$(ExEXE):: \
 	propedit.h \
 	$(MAKEFILE_DEPS) 
 	$(RHIDE_COMPILE_CC)
-
-OBJFILES=\
-	./codebldr$(ExOBJ) \
-	./consted$(ExOBJ) \
-	./dsgobjs$(ExOBJ) \
-	./freedsgn$(ExOBJ) \
-	./propdlgs$(ExOBJ) \
-	./propedit$(ExOBJ) \
-	./strmoper$(ExOBJ) \
-	./tappwnd$(ExOBJ) 
-
-LIBRARIES=
 

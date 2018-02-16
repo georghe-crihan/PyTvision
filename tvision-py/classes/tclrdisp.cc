@@ -34,7 +34,7 @@ TColorDisplay::TColorDisplay( const TRect& bounds, const char *aText ) :
 
 TColorDisplay::~TColorDisplay()
 {
-    DeleteArray(text);
+    DeleteArray((char *)text);
 }
 
 void TColorDisplay::draw()
@@ -69,7 +69,7 @@ void TColorDisplay::handleEvent( TEvent& event )
 void TColorDisplay::setColor( uchar *aColor )
 {
     color = aColor;
-    message( owner, evBroadcast, cmColorSet, (void *)(long)(*color) );
+    message( owner, evBroadcast, cmColorSet, (void *)(uipointer)(*color) );
     drawView();
 }
 

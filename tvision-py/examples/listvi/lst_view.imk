@@ -1,7 +1,12 @@
 #!/usr/bin/make
 # Automatically generated from RHIDE projects, don't edit
-# 2003-06-20 13:50
 #
+
+OBJFILES=\
+	./listbox2$(ExOBJ) \
+	./lst_view$(ExOBJ) 
+
+LIBRARIES=
 
 listvi$(ExEXE):: \
 	./listbox2$(ExOBJ) \
@@ -18,10 +23,4 @@ listvi$(ExEXE):: \
 	lst_view.h \
 	$(MAKEFILE_DEPS) 
 	$(RHIDE_COMPILE_CC)
-
-OBJFILES=\
-	./listbox2$(ExOBJ) \
-	./lst_view$(ExOBJ) 
-
-LIBRARIES=
 

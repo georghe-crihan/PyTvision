@@ -1,11 +1,13 @@
 #!/usr/bin/make
 #
-# Copyright (c) 2003 by Salvador E. Tropea.
+# Copyright (c) 2003-2012 by Salvador E. Tropea.
 # Covered by the GPL license.
 #
+C_OPT_FLAGS=-DNO_STREAM
 vpath_src=
 vpath_obj=.
 INCLUDE_DIRS=../../include
-include ../../makes/common.imk
-include implis.umk
-
+COMMON_IMK=../../makes/common.imk
+LIBS=rhtv
+include $(COMMON_IMK)
+include implis$(ExIMK)

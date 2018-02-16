@@ -176,7 +176,7 @@ specified height.
 uchar *TVFontCollection::GetFont(int width, int height)
 {
  int oneMore=0,oneLess=0;
- SizeFont sz={width,height};
+ SizeFont sz={unsigned(width),unsigned(height)};
 
  TVBitmapFont *p=(TVBitmapFont *)firstThat(CheckForLines,&sz);
  // If we can't find a font of the right size look for 1 more and one less
@@ -225,7 +225,7 @@ uchar *TVFontCollection::GetFontFull(int width, int height, int &first,
                                      int &last)
 {
  int oneMore=0,oneLess=0;
- SizeFont sz={width,height};
+ SizeFont sz={unsigned(width),unsigned(height)};
 
  TVBitmapFont *p=(TVBitmapFont *)firstThat(CheckForLines,&sz);
  // If we can't find a font of the right size look for 1 more and one less
@@ -531,12 +531,12 @@ TVBitmapFontDescCol *TVFontCollection::CreateListOfFonts(const char *dir,
                 ReadVersionNum(f,&version,&numfonts);
                 char *name=ReadName(f);
                 TVBitmapFontDesc *d=NULL;
-                int i,j,added;
+                int i,j;
                 ccIndex pos;
                 for (i=0; i<numfonts; i++)
                    {
                     size=ReadFontInfo(f,version,&stF);
-                    for (added=0, j=-1; j<2; j++)
+                    for (j=-1; j<2; j++)
                        {
                         if (stF.width>=wmin && stF.width<=wmax &&
                             (stF.lines+j)>=hmin && (stF.lines+j)<=hmax)
@@ -571,6 +571,7 @@ TVBitmapFontDescCol *TVFontCollection::CreateListOfFonts(const char *dir,
       }
     closedir(d);
    }
+ delete[] FullName;
  if (col->getCount()==0)
    {
     CLY_destroy(col);
@@ -582,8 +583,8 @@ TVBitmapFontDescCol *TVFontCollection::CreateListOfFonts(const char *dir,
 void TVBitmapFontDescCol::freeItem(void *item)
 {
  TVBitmapFontDesc *p=(TVBitmapFontDesc *)item;
- DeleteArray(p->name);
- DeleteArray(p->file);
+ DeleteArray((char *)p->name);
+ DeleteArray((char *)p->file);
  CLY_destroy(p->sizes);
  delete p;
 }

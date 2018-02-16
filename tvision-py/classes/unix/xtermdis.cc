@@ -1,7 +1,7 @@
 /*****************************************************************************
 
   XTerm display routines.
-  Copyright (c) 2002 by Salvador E. Tropea (SET)
+  Copyright (c) 2002,2003 by Salvador E. Tropea (SET)
   Covered by the GPL license.
 
   ToDo:
@@ -13,22 +13,33 @@
 #define Uses_stdio
 #define Uses_stdlib
 #define Uses_unistd
+#define Uses_ioctl
+#define Uses_string
 #define Uses_TDisplay
 #define Uses_TScreen
-#define Uses_string
 #define Uses_TGKey
+#define Uses_signal
 #include <tv.h>
 
 // I delay the check to generate as much dependencies as possible
 #if defined(TVOS_UNIX) && !defined(TVOSf_QNXRtP)
 
 #include <termios.h>
-#include <sys/ioctl.h>
-#include <signal.h>
 
 #include <tv/unix/xtscreen.h>
 #include <tv/unix/xtkey.h>
 #include <tv/linux/log.h>
+
+// GNU libc pulls it but other libc implementations just have a forward
+// declaration for struct timeval.
+#include <sys/time.h>
+// That's a workaround for a bug in the glibc 2.3.2 and 2.3.3:
+// The TEMP_FAILURE_RETRY macro uses errno, but errno.h isn't included!
+#include <errno.h>
+// TEMP_FAILURE_RETRY isn't mandatory.
+#ifndef TEMP_FAILURE_RETRY
+ #define TEMP_FAILURE_RETRY(a) (a)
+#endif
 
 int                   TDisplayXTerm::curX=0;
 int                   TDisplayXTerm::curY=0;
@@ -85,7 +96,7 @@ void TDisplayXTerm::Init()
  winsize win;
  win.ws_col=0xFFFF;
  ioctl(hOut,TIOCGWINSZ,&win);
- if (win.ws_col!=0xFFFF)
+ if ((win.ws_col!=0xFFFF)&&(win.ws_col!=0))
    {// Ok!
     getRows=GetRowsIOCTL;
     getCols=GetColsIOCTL;
@@ -189,12 +200,28 @@ const char *TDisplayXTerm::GetWindowTitle(void)
 {
  char buffer[256]; // Put a max.
  fputs("\E[21t",stdout);
- // This looks dangerous ...
- // Lamentably Xterm doesn't return it inmediatly
- while (fgets(buffer,255,TGKeyXTerm::fIn)==NULL);
+
+ // Nasty:
+ // Lamentably Xterm doesn't return it immediately
+ fd_set set;
+ struct timeval timeout;
+ int ret;
+
+ FD_ZERO(&set);
+ FD_SET(TGKeyXTerm::hIn,&set);
+ timeout.tv_sec=0;
+ timeout.tv_usec=300000;
+ ret=TEMP_FAILURE_RETRY(select(FD_SETSIZE,&set,NULL,NULL,&timeout));
+ // Note: As this feature was reported as potentially exploitable now most
+ // XTerms just ignores this request. So if after 300 ms we didn't get an
+ // answer we assume the XTerm won't reply and report empty title.
+ if (!ret)
+    return newStr("");
+ fgets(buffer,255,TGKeyXTerm::fIn);
+ buffer[255]=0;
  // OSC l Name ST (\E]lName\E\\)
  if (buffer[0]!=27 || buffer[1]!=']' || buffer[2]!='l')
-    return 0;
+    return NULL;
  // Convert it into something the application can use for other things, not
  // only for restoring. Read: get rid of the EOS.
  char *end=strstr(buffer,"\E\\");

@@ -365,7 +365,7 @@ void TMyApp::newDialog()
         pd->insert( new TLabel( TRect( 2,10, 26,11 ),
                 "A value from -20 to 590", inp ));
         TValidator *vld=new TRangeValidator(-20,590);
-        inp->SetValidator( vld );
+        inp->setValidator( vld );
 
         pd->insert( new TButton( TRect( 15, 13, 25, 15 ), "~O~K", cmOK,
                     bfDefault ));
@@ -388,7 +388,7 @@ void TMyApp::newDialog()
                         strtol(demoDialogData->inputLineRangeData,&end,0) );
             }
         }
-    destroy( pd );
+    CLY_destroy( pd );
 }
 
 int main()

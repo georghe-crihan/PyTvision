@@ -29,22 +29,9 @@ Modified for i18n support by Salvador Eduardo Tropea.
 
 const TPoint minWinSize = {16, 6};
 
-#include <stdio.h>
-
-TWindowInit::TWindowInit( ) :
-    createFrame( NULL )
-{
-}
-
 TWindowInit::TWindowInit( TFrame *(*cFrame)( TRect ) ) :
     createFrame( cFrame )
 {
-}
-
-TFrame *TWindowInit::defaultInitFrame( TRect& r )
-{
-  //  printf("C++ defaultInitFrame\n");
-    return new TFrame(r);
 }
 
 #define cpBlueWindow "\x08\x09\x0A\x0B\x0C\x0D\x0E\x0F"
@@ -55,7 +42,7 @@ TWindow::TWindow( const TRect& bounds,
                   const char *aTitle,
                   short aNumber
                 ) :
-  TWindowInit( &TWindow::initFrame ),
+    TWindowInit( &TWindow::initFrame ),
     TGroup( bounds ),
     flags( wfMove | wfGrow | wfClose | wfZoom ),
     zoomRect( getBounds() ),
@@ -68,19 +55,10 @@ TWindow::TWindow( const TRect& bounds,
     options |= ofSelectable | ofTopSelect;
     growMode = gfGrowAll | gfGrowRel;
     eventMask |= evMouseUp; //for TFrame
-
-    //    fprintf(stderr, "TWindow::TWindow: createFrame=%p\n", createFrame);
-
-    frame = NULL;
-    if( createFrame != 0) {
-      frame = createFrame( getExtent() );
-    } else {
-      TRect extent = getExtent();
-      frame = defaultInitFrame( extent );
-    }
-    if (frame)
-      insert( frame );
-    
+    if( createFrame != 0 &&
+        (frame = createFrame( getExtent() )) != 0
+      )
+        insert( frame );
 }
 
 TWindow::~TWindow()

@@ -1,9 +1,12 @@
 /* WinNT screen routines header.
-   Copyright (c) 2002 by Salvador E. Tropea (SET)
+   Copyright (c) 2002-2005 by Salvador E. Tropea (SET)
    Covered by the GPL license. */
 // This headers needs windows header
 #if defined(TVOS_Win32) && !defined(WINNTSCR_HEADER_INCLUDED)
 #define WINNTSCR_HEADER_INCLUDED
+
+// Some windows.h headers defines a macro with this name
+#undef YieldProcessor
 
 #define USE_NEW_BUFFER
 #define hCurrentOut hOut
@@ -78,7 +81,7 @@ protected:
  // Default: static void   setVideoModeExt(char *mode);
  static void   GetCharacters(unsigned offset,ushort *buf,unsigned count);
  static ushort GetCharacter(unsigned dst);
- static void   SetCharacter(unsigned offset, ushort value);
+ static void   SetCharacter(unsigned offset, unsigned int value);
  static void   SetCharacters(unsigned dst, ushort *src, unsigned len);
  static int    System(const char *command, pid_t *pidChild, int in, int out,
                       int err);

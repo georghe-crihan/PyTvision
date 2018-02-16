@@ -55,6 +55,24 @@ class fpbase : virtual public pstream
 
 public:
 
+    fpbase();
+    fpbase( const char *, CLY_OpenModeT, int = CLY_FBOpenProtDef );
+    fpbase( int );
+    fpbase( int, char *, int );
+    ~fpbase();
+
+    void open( const char *, CLY_OpenModeT, int = CLY_FBOpenProtDef );
+    #ifdef CLY_HaveFBAttach
+    void attach( int );
+    #endif
+    void close();
+    void setbuf( char *, int );
+    CLY_filebuf * rdbuf();
+
+private:
+
+    CLY_int_filebuf *buf;
+
 };
 
 #endif  // Uses_fpbase

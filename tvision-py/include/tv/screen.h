@@ -65,7 +65,7 @@ differences.@*
   
 ***************************************************************************/
 
-class TDisplay
+class CLY_EXPORT TDisplay
 {
 public:
  friend class TView;
@@ -121,9 +121,9 @@ public:
  // Returns 0 if the MSB of the background selects more colors.
  static int    (*getBlinkState)();
  // SET: A new and more rasonable way to choose a video mode
- static int    (*setCrtModeResP)(unsigned w, unsigned h, int fW, int fH);
- static inline int    setCrtModeRes(unsigned w, unsigned h, int fW=-1, int fH=-1)
-{ return setCrtModeResP(w, h, fW, fH); }
+ static int    (*setCrtModeRes_p)(unsigned w, unsigned h, int fW, int fH);
+ static int     setCrtModeRes(unsigned w, unsigned h, int fW=-1, int fH=-1)
+                { return setCrtModeRes_p(w,h,fW,fH); };
  // SET: These are the real functions for *CursorType
  static void   (*setCursorShape)(unsigned start, unsigned end);
  static void   (*getCursorShape)(unsigned &start, unsigned &end);
@@ -174,6 +174,9 @@ public:
  // unicode16: cells are 16 bits, the first is the 16 bits unicode value and
  //            the next is the colors attribute.
  enum { codepage=0, unicode16=1 };
+
+ // This flag indicates the user wants to avoid characters that produce moire artifacts
+ static char avoidMoire;
 
  // We must remove it
  static int dual_display;
@@ -263,7 +266,7 @@ private:
 };
 
 // virtual to avoid problems with multiple inheritance
-class TScreen : virtual public TDisplay
+class CLY_EXPORT TScreen : virtual public TDisplay
 {
 public:
  // From original TV 2.0
@@ -314,15 +317,15 @@ public:
  // SET: Used to set the video mode using an external program
  static void   (*setVideoModeExt)(char *mode);
  // SET: Set the video mode using sizes.
- static int    (*setVideoModeResP)(unsigned w, unsigned h, int fW, int fH);
- static inline int    setVideoModeRes(unsigned w, unsigned h, int fW=-1, int fH=-1)
-{ return setVideoModeResP(w, h, fW, fH); }
+ static int    (*setVideoModeRes_p)(unsigned w, unsigned h, int fW, int fH);
+ static int      setVideoModeRes(unsigned w, unsigned h, int fW=-1, int fH=-1)
+                 { return setVideoModeRes_p(w,h,fW,fH); };
  // SET: executes the indicated command
- static int    (*SystemP)(const char *command, pid_t *pidChild, int in,
-                         int out, int err);
- static inline int    System(const char *command, pid_t *pidChild=0, int in=-1,
+ static int    (*System_p)(const char *command, pid_t *pidChild, int in,
+                           int out, int err);
+ static int      System(const char *command, pid_t *pidChild=0, int in=-1,
                          int out=-1, int err=-1)
-{ return SystemP(command, pidChild, in, out, err); }
+                 { return System_p(command,pidChild,in,out,err); };
  // Palette handling, they call the TDisplay members
  static void     getPaletteColors(int from, int number, TScreenColor *colors);
  static void     setPaletteColors(int from, int number, TScreenColor *colors);
@@ -340,15 +343,14 @@ public:
  static int      setSecondaryFont(TScreenFont256 *font)
                    { return setFont(0,NULL,1,font); };
  // That's the real function to set the fonts
- static int    (*setFontP)(int changeP, TScreenFont256 *fontP,
-                          int changeS, TScreenFont256 *fontS,
-                          int fontCP, int appCP);
- static inline int setFont(int changeP, TScreenFont256 *fontP,
-                          int changeS, TScreenFont256 *fontS,
-                          int fontCP=-1, int appCP=-1)
-{ return setFontP(changeP, fontP, changeS, fontS, fontCP, appCP); }
+ static int    (*setFont_p)(int changeP, TScreenFont256 *fontP,
+                            int changeS, TScreenFont256 *fontS,
+                            int fontCP, int appCP);
+ static int    setFont(int changeP, TScreenFont256 *fontP,
+                       int changeS, TScreenFont256 *fontS,
+                       int fontCP=-1, int appCP=-1)
+               { return setFont_p(changeP,fontP,changeS,fontS,fontCP,appCP); };
  static void   (*restoreFonts)();
-// static void   (*restoreFonts)();
  static TVScreenFontRequestCallBack
                  setFontRequestCallBack(TVScreenFontRequestCallBack cb);
  // Helpers:
@@ -362,6 +364,17 @@ public:
                 *getDriverShortName() { return currentDriverShortName; }
  static void     beep() { TDisplay::beep(); };
  static void     bell() { TDisplay::beep(); };
+ // SET: Application Helpers
+ enum AppHelper { FreeHandler, ImageViewer, PDFViewer };
+ typedef ccIndex appHelperHandler;
+ static appHelperHandler (*openHelperApp)(AppHelper kind);
+ static Boolean (*closeHelperApp)(appHelperHandler id);
+ static Boolean (*sendFileToHelper)(appHelperHandler id, const char *file, void *extra);
+ static const char *(*getHelperAppError)();
+ static int maxAppHelperHandlers;
+ // SET: Windows class, for drivers that creates windows and can somehow tag them.
+ // The X Windows driver can do it. Applications could overwrite it.
+ static const char *windowClass;
 
  // SET: flags capabilities flags
  enum Capabilities1
@@ -436,6 +449,10 @@ protected:
                               int changeS, TScreenFont256 *fontS,
                               int fontCP=-1, int appCP=-1);
  static void   defaultRestoreFonts();
+ static appHelperHandler defaultOpenHelperApp(AppHelper kind);
+ static Boolean defaultCloseHelperApp(appHelperHandler id);
+ static Boolean defaultSendFileToHelper(appHelperHandler id, const char *file, void *extra);
+ static const char *defaultGetHelperAppError();
 
  // The following members are used to implement a tricky initialization
  // process.

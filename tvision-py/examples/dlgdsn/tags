@@ -1,0 +1,1005 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.2.2	//
+ALL_OBJFILES	libtest.mak	/^ALL_OBJFILES=codebldr.o consted.o dsgobjs.o freedsgn.o propdlgs.o\\$/;"	kind:m	language:Make
+AddBtn	consted.h	/^   TButton * AddBtn;$/;"	kind:m	language:C++	class:TConstEdit
+AppDataFileSig	strmoper.h	27;"	kind:d	language:C++
+BY_ID	consted.cc	25;"	kind:d	language:C++	file:
+BY_ID	consted.cc	459;"	kind:d	language:C++	file:
+BY_VALUE	consted.cc	26;"	kind:d	language:C++	file:
+BY_VALUE	consted.cc	460;"	kind:d	language:C++	file:
+ButtonCount	dsgobjs.cc	/^static int ButtonCount  = 0;$/;"	kind:v	language:C++	file:
+ButtonFlagEditor	propdlgs.cc	/^TDialog * ButtonFlagEditor()$/;"	kind:f	language:C++
+ButtonFlagStr	propdlgs.cc	/^char * ButtonFlagStr(ushort aButtonFlag)$/;"	kind:f	language:C++
+ByDesktop	dsgobjs.cc	124;"	kind:d	language:C++	file:
+ByEditor	dsgobjs.cc	125;"	kind:d	language:C++	file:
+ByToolDlg	dsgobjs.cc	123;"	kind:d	language:C++	file:
+C	libtest.mak	/^RHIDE_TYPED_LIBS.C=$(RHIDE_TYPED_LIBS.cc)$/;"	kind:m	language:Make
+CFLAGS	libtest.mak	/^FLAGS_FOR_SUBPROJECTS=RHIDE_OS_="$(RHIDE_OS_)" CFLAGS="$(CFLAGS)"\\$/;"	kind:m	language:Make
+CLEAN_FILES	libtest.mak	/^CLEAN_FILES=$(MAIN_TARGET) $(OBJFILES)$/;"	kind:m	language:Make
+CPPFLAGS	libtest.mak	/^	CXXFLAGS="$(CXXFLAGS)" LDFLAGS="$(LDFLAGS)" CPPFLAGS="$(CPPFLAGS)"$/;"	kind:m	language:Make
+CXXFLAGS	libtest.mak	/^	CXXFLAGS="$(CXXFLAGS)" LDFLAGS="$(LDFLAGS)" CPPFLAGS="$(CPPFLAGS)"$/;"	kind:m	language:Make
+C_ADA_LANG_FLAGS	libtest.mak	/^C_ADA_LANG_FLAGS=$/;"	kind:m	language:Make
+C_CXX_LANG_FLAGS	libtest.mak	/^C_CXX_LANG_FLAGS=$/;"	kind:m	language:Make
+C_C_LANG_FLAGS	libtest.mak	/^C_C_LANG_FLAGS=$/;"	kind:m	language:Make
+C_DEBUG_FLAGS	libtest.mak	/^C_DEBUG_FLAGS=-g$/;"	kind:m	language:Make
+C_EXTRA_FLAGS	libtest.mak	/^C_EXTRA_FLAGS=$/;"	kind:m	language:Make
+C_FPC_LANG_FLAGS	libtest.mak	/^C_FPC_LANG_FLAGS=$/;"	kind:m	language:Make
+C_F_LANG_FLAGS	libtest.mak	/^C_F_LANG_FLAGS=$/;"	kind:m	language:Make
+C_OPT_FLAGS	libtest.mak	/^C_OPT_FLAGS=-O2$/;"	kind:m	language:Make
+C_P_LANG_FLAGS	libtest.mak	/^C_P_LANG_FLAGS=$/;"	kind:m	language:Make
+C_WARN_FLAGS	libtest.mak	/^C_WARN_FLAGS=-Wall$/;"	kind:m	language:Make
+CharPtrEditor	propdlgs.cc	/^TDialog * CharPtrEditor()$/;"	kind:f	language:C++
+CharPtrStr	propdlgs.cc	/^char * CharPtrStr(void * aItemPtr)$/;"	kind:f	language:C++
+CheckCount	dsgobjs.cc	/^static int CheckCount   = 0;$/;"	kind:v	language:C++	file:
+ClearBtn	consted.h	/^   TButton * ClearBtn;$/;"	kind:m	language:C++	class:TConstEdit
+CommandEditor	freedsgn.cc	/^    TConstEdit * CommandEditor;$/;"	kind:m	language:C++	class:TFreeDsgnApp	file:
+CommandEditor	propdlgs.cc	/^TDialog * CommandEditor()$/;"	kind:f	language:C++
+CommandList	consted.cc	/^static TConstCollection * CommandList;$/;"	kind:v	language:C++	file:
+CommandStr	propdlgs.cc	/^char * CommandStr(ushort aCommand)$/;"	kind:f	language:C++
+CommandsList	consted.cc	/^TConstCollection *  CommandsList()$/;"	kind:f	language:C++
+CommomHide	freedsgn.cc	318;"	kind:d	language:C++	file:
+ConstInputDlg	consted.cc	/^TDialog * ConstInputDlg(TValidator * aValid)$/;"	kind:f	language:C++
+CreateTool	dsgobjs.cc	/^TDialog * CreateTool()$/;"	kind:f	language:C++
+DEFAULT	consted.cc	24;"	kind:d	language:C++	file:
+DEFAULT	consted.cc	458;"	kind:d	language:C++	file:
+DEFAULT_GREP_MASK	libtest.mak	/^DEFAULT_GREP_MASK=*.[cfhmnps]*$/;"	kind:m	language:Make
+DEFAULT_MASK	libtest.mak	/^DEFAULT_MASK=*$/;"	kind:m	language:Make
+DEPS_0	libtest.mak	/^DEPS_0= codebldr.o consted.o dsgobjs.o freedsgn.o propdlgs.o propedit.o\\$/;"	kind:m	language:Make
+DEPS_1	libtest.mak	/^DEPS_1=codebldr.cc consted.h dsgdata.h dsgobjs.h fdconsts.h propdlgs.h\\$/;"	kind:m	language:Make
+DEPS_2	libtest.mak	/^DEPS_2=consted.cc consted.h$/;"	kind:m	language:Make
+DEPS_3	libtest.mak	/^DEPS_3=dsgobjs.cc dsgdata.h dsgobjs.h fdconsts.h propedit.h strmoper.h$/;"	kind:m	language:Make
+DEPS_4	libtest.mak	/^DEPS_4=freedsgn.cc consted.h dsgdata.h dsgobjs.h fdconsts.h propedit.h\\$/;"	kind:m	language:Make
+DEPS_5	libtest.mak	/^DEPS_5=propdlgs.cc consted.h propedit.h$/;"	kind:m	language:Make
+DEPS_6	libtest.mak	/^DEPS_6=propedit.cc consted.h dsgdata.h dsgobjs.h fdconsts.h propdlgs.h\\$/;"	kind:m	language:Make
+DEPS_7	libtest.mak	/^DEPS_7=strmoper.cc strmoper.h$/;"	kind:m	language:Make
+DEPS_8	libtest.mak	/^DEPS_8=tappwnd.cc dsgdata.h dsgobjs.h fdconsts.h propedit.h$/;"	kind:m	language:Make
+DefineRect	dsgobjs.cc	/^TRect DefineRect(TViewType vt, TPoint p)$/;"	kind:f	language:C++
+DelBtn	consted.h	/^   TButton * DelBtn;$/;"	kind:m	language:C++	class:TConstEdit
+DialogCount	dsgobjs.cc	/^static int DialogCount  = 0;$/;"	kind:v	language:C++	file:
+DialogEditor	dsgobjs.cc	/^TDDialog * DialogEditor() { return EditDlg; }$/;"	kind:f	language:C++
+DlgObjList	propdlgs.cc	/^TDialog * DlgObjList(const char * aTitle)$/;"	kind:f	language:C++
+DlgRefList	propdlgs.cc	/^TDialog * DlgRefList(const char * aTitle)$/;"	kind:f	language:C++
+DragModeEditor	propdlgs.cc	/^TDialog * DragModeEditor()$/;"	kind:f	language:C++
+DragModeStr	propdlgs.cc	/^char * DragModeStr(ushort aDragMode)$/;"	kind:f	language:C++
+DragObject	dsgobjs.cc	/^void DragObject(TView * P, TEvent& Event, TViewType vt)$/;"	kind:f	language:C++
+DsgDragView	dsgobjs.cc	/^void DsgDragView(TView * v, ushort Mode, TEvent& event)$/;"	kind:f	language:C++
+EDITORS	libtest.mak	/^EDITORS=$/;"	kind:m	language:Make
+Edit	consted.cc	/^void TConstEdit::Edit(TConstCollection * AItems)$/;"	kind:f	language:C++	class:TConstEdit
+EditBtn	consted.h	/^   TButton * EditBtn;$/;"	kind:m	language:C++	class:TConstEdit
+EditDialog	freedsgn.cc	/^    TDDialog * EditDialog;$/;"	kind:m	language:C++	class:TFreeDsgnApp	file:
+EditDlg	dsgobjs.cc	/^static TDDialog * EditDlg;$/;"	kind:v	language:C++	file:
+EventMaskEditor	propdlgs.cc	/^TDialog * EventMaskEditor()$/;"	kind:f	language:C++
+EventMaskStr	propdlgs.cc	/^char * EventMaskStr(ushort aEventMask)$/;"	kind:f	language:C++
+F	libtest.mak	/^RHIDE_TYPED_LIBS.F=$(RHIDE_TYPED_LIBS.f)$/;"	kind:m	language:Make
+FLAGS_FOR_SUBPROJECTS	libtest.mak	/^FLAGS_FOR_SUBPROJECTS=RHIDE_OS_="$(RHIDE_OS_)" CFLAGS="$(CFLAGS)"\\$/;"	kind:m	language:Make
+FPC	libtest.mak	/^RHIDE_COMPILE.pas.s.FPC=$(RHIDE_COMPILE_FPC) -a -s$/;"	kind:m	language:Make
+FindScroll	dsgobjs.cc	/^TScrollBar * FindScroll(char * aScroll, TDialog * aOwner)$/;"	kind:f	language:C++
+FloatingView	dsgobjs.cc	/^static TView * FloatingView;$/;"	kind:v	language:C++	file:
+GET_HOME	libtest.mak	/^GET_HOME=$(HOME)$/;"	kind:m	language:Make
+GPC	libtest.mak	/^RHIDE_COMPILE.pas.s.GPC=$(subst -c $(SOURCE_NAME),-S\\$/;"	kind:m	language:Make
+GetGrid	dsgobjs.cc	/^bool GetGrid()$/;"	kind:f	language:C++
+GetSizeLimits	dsgobjs.cc	/^void GetSizeLimits(TPoint& min, TPoint& max, TViewType vt)$/;"	kind:f	language:C++
+GridState	dsgobjs.cc	/^static bool GridState = true;$/;"	kind:v	language:C++	file:
+GrowModeEditor	propdlgs.cc	/^TDialog * GrowModeEditor()$/;"	kind:f	language:C++
+GrowModeStr	propdlgs.cc	/^char * GrowModeStr(ushort aGrowMode)$/;"	kind:f	language:C++
+HScrollCount	dsgobjs.cc	/^static int HScrollCount = 0;$/;"	kind:v	language:C++	file:
+HandleEventOnEditor	dsgobjs.cc	/^bool HandleEventOnEditor(TView * view, TEvent& event,$/;"	kind:f	language:C++
+HandleEventOnToolDlg	dsgobjs.cc	/^bool HandleEventOnToolDlg(TView * view, TEvent& event, TViewType vt)$/;"	kind:f	language:C++
+HelpCtxEditor	freedsgn.cc	/^    TConstEdit * HelpCtxEditor;$/;"	kind:m	language:C++	class:TFreeDsgnApp	file:
+HelpCtxEditor	propdlgs.cc	/^TDialog * HelpCtxEditor()$/;"	kind:f	language:C++
+HelpCtxList	consted.cc	/^static TConstCollection * HelpCtxList;$/;"	kind:v	language:C++	file:
+HelpCtxStr	propdlgs.cc	/^char * HelpCtxStr(ushort aHelpCtx)$/;"	kind:f	language:C++
+HelpCtxsList	consted.cc	/^TConstCollection *  HelpCtxsList()$/;"	kind:f	language:C++
+HintsEditor	freedsgn.cc	/^    TWindow * HintsEditor;$/;"	kind:m	language:C++	class:TFreeDsgnApp	file:
+INCLUDE_DIRS	libtest.mak	/^INCLUDE_DIRS=$(TVSRC)$/;"	kind:m	language:Make
+Id	consted.cc	/^   char * Id;$/;"	kind:m	language:C++	struct:TConstData	file:
+ImOwned	dsgobjs.cc	/^ushort ImOwned(TView * view)$/;"	kind:f	language:C++
+InitCommandLister	consted.cc	/^TConstCollection * InitCommandLister()$/;"	kind:f	language:C++
+InitDlgEditor	dsgobjs.cc	/^void InitDlgEditor(const char * FileName)$/;"	kind:f	language:C++
+InitHelpCtxLister	consted.cc	/^TConstCollection * InitHelpCtxLister()$/;"	kind:f	language:C++
+InitObject	dsgobjs.cc	/^TView * InitObject(TPoint Position, TViewType vt, ushort mode)$/;"	kind:f	language:C++
+InputCount	dsgobjs.cc	/^static int InputCount   = 0;$/;"	kind:v	language:C++	file:
+InsertLink	dsgobjs.cc	/^bool InsertLink(char * aName, TView * aView, TDialog * aOwner)$/;"	kind:f	language:C++
+IntegerEditor	propedit.cc	/^bool IntegerEditor(int& value, TPoint place, TGroup * host)$/;"	kind:f	language:C++
+Items	consted.h	/^   TConstCollection * Items;$/;"	kind:m	language:C++	class:TConstEdit
+ItemsEditor	propdlgs.cc	/^TDialog * ItemsEditor()$/;"	kind:f	language:C++
+ItemsStr	propdlgs.cc	/^char * ItemsStr(void * aItemPtr)$/;"	kind:f	language:C++
+LDFLAGS	libtest.mak	/^	CXXFLAGS="$(CXXFLAGS)" LDFLAGS="$(LDFLAGS)" CPPFLAGS="$(CPPFLAGS)"$/;"	kind:m	language:Make
+LD_EXTRA_FLAGS	libtest.mak	/^LD_EXTRA_FLAGS=-lrhtv$/;"	kind:m	language:Make
+LIBRARIES	libtest.mak	/^LIBRARIES=$/;"	kind:m	language:Make
+LIBS	libtest.mak	/^LIBS=rhtv$/;"	kind:m	language:Make
+LIB_DIRS	libtest.mak	/^LIB_DIRS=$(TVOBJ)$/;"	kind:m	language:Make
+LINK_FILES	libtest.mak	/^LINK_FILES=$(filter-out $(NO_LINK),$(DEPS_0))$/;"	kind:m	language:Make
+LOCAL_OPT	libtest.mak	/^LOCAL_OPT=$(subst ___~~~___, ,$(subst $(notdir $<)___,,$(filter $(notdir\\$/;"	kind:m	language:Make
+LVal	consted.h	/^   TParamText * LVal;$/;"	kind:m	language:C++	class:TConstEdit
+LabelCount	dsgobjs.cc	/^static int LabelCount   = 0;$/;"	kind:v	language:C++	file:
+LinkEditor	propdlgs.cc	/^TDialog * LinkEditor()$/;"	kind:f	language:C++
+LinkList	propedit.cc	/^static TStringCollection * LinkList = 0;$/;"	kind:v	language:C++	file:
+List	consted.h	/^   TIntConstListBox * List;$/;"	kind:m	language:C++	class:TConstEdit
+List	propdlgs.cc	/^   TSafeListBox * List;$/;"	kind:m	language:C++	class:TItemsEditor	file:
+ListBoxCount	dsgobjs.cc	/^static int ListBoxCount = 0;$/;"	kind:v	language:C++	file:
+LoadObject	dsgobjs.cc	/^TView * LoadObject( ipstream& s )$/;"	kind:f	language:C++
+MAIN_TARGET	libtest.mak	/^MAIN_TARGET=freedsgn.exe$/;"	kind:m	language:Make
+MAX_LABEL_LENGTH	dsgdata.h	23;"	kind:d	language:C++
+MAX_TITLE_LENGTH	dsgdata.h	24;"	kind:d	language:C++
+Me	dsgobjs.cc	/^TView * TDButton::Me() { return this; }$/;"	kind:f	language:C++	class:TDButton
+Me	dsgobjs.cc	/^TView * TDCheckBoxes::Me() { return this; }$/;"	kind:f	language:C++	class:TDCheckBoxes
+Me	dsgobjs.cc	/^TView * TDDialog::Me() { return this; }$/;"	kind:f	language:C++	class:TDDialog
+Me	dsgobjs.cc	/^TView * TDInputLine::Me() { return this; }$/;"	kind:f	language:C++	class:TDInputLine
+Me	dsgobjs.cc	/^TView * TDLabel::Me() { return this; }$/;"	kind:f	language:C++	class:TDLabel
+Me	dsgobjs.cc	/^TView * TDListBox::Me() { return this; }$/;"	kind:f	language:C++	class:TDListBox
+Me	dsgobjs.cc	/^TView * TDMemo::Me() { return this; }$/;"	kind:f	language:C++	class:TDMemo
+Me	dsgobjs.cc	/^TView * TDRadioButtons::Me() { return this; }$/;"	kind:f	language:C++	class:TDRadioButtons
+Me	dsgobjs.cc	/^TView * TDStaticText::Me() { return this; }$/;"	kind:f	language:C++	class:TDStaticText
+Me	dsgobjs.cc	/^TView * THScrollBar::Me() { return this; }$/;"	kind:f	language:C++	class:THScrollBar
+Me	dsgobjs.cc	/^TView * TVScrollBar::Me() { return this; }$/;"	kind:f	language:C++	class:TVScrollBar
+Me	dsgobjs.h	/^   virtual TView * Me() { return 0; };$/;"	kind:f	language:C++	class:TDsgObj	implementation:virtual
+MemoCount	dsgobjs.cc	/^static int MemoCount    = 0;$/;"	kind:v	language:C++	file:
+MenusEditor	freedsgn.cc	/^    TWindow * MenusEditor;$/;"	kind:m	language:C++	class:TFreeDsgnApp	file:
+Mouse	dsgobjs.cc	/^static MouseEventType * Mouse;$/;"	kind:v	language:C++	file:
+NO_LINK	libtest.mak	/^NO_LINK=$/;"	kind:m	language:Make
+OBJFILES	libtest.mak	/^OBJFILES=codebldr.o consted.o dsgobjs.o freedsgn.o propdlgs.o propedit.o\\$/;"	kind:m	language:Make
+OUTFILE	libtest.mak	/^OUTFILE=$@$/;"	kind:m	language:Make
+ObjEdit	dsgobjs.cc	/^static TObjEdit * ObjEdit;$/;"	kind:v	language:C++	file:
+ObjEdit	freedsgn.cc	/^    TWindow * ObjEdit;$/;"	kind:m	language:C++	class:TFreeDsgnApp	file:
+ObjEdit	propedit.cc	/^static TObjEdit * ObjEdit;$/;"	kind:v	language:C++	file:
+ObjLink	propedit.cc	/^static TLinkList * ObjLink = 0;$/;"	kind:v	language:C++	file:
+ObjectEditor	dsgobjs.cc	/^TWindow * ObjectEditor() { return ObjEdit; }$/;"	kind:f	language:C++
+ObjectLinker	propedit.cc	/^TLinkList * ObjectLinker() { return ObjLink; }$/;"	kind:f	language:C++
+OptionsEditor	propdlgs.cc	/^TDialog * OptionsEditor()$/;"	kind:f	language:C++
+OptionsStr	propdlgs.cc	/^char * OptionsStr(ushort aOptions)$/;"	kind:f	language:C++
+Order	consted.cc	/^   int Order;$/;"	kind:m	language:C++	struct:TConstData	file:
+PASCAL_TYPE	libtest.mak	/^PASCAL_TYPE=GPC$/;"	kind:m	language:Make
+PROG_ARGS	libtest.mak	/^PROG_ARGS=$/;"	kind:m	language:Make
+PROJECT_ITEMS	libtest.mak	/^PROJECT_ITEMS=codebldr.cc consted.cc dsgobjs.cc freedsgn.cc propdlgs.cc\\$/;"	kind:m	language:Make
+PrjCommands	freedsgn.cc	/^    TConstCollection * PrjCommands;$/;"	kind:m	language:C++	class:TFreeDsgnApp	file:
+PrjHelpCtxs	freedsgn.cc	/^    TConstCollection * PrjHelpCtxs;$/;"	kind:m	language:C++	class:TFreeDsgnApp	file:
+RHIDE_ADA_BIND_FILE	libtest.mak	/^RHIDE_ADA_BIND_FILE=$(addprefix _,$(setsuffix .c,$(OUTFILE)))$/;"	kind:m	language:Make
+RHIDE_AR	libtest.mak	/^RHIDE_AR=ar$/;"	kind:m	language:Make
+RHIDE_ARFLAGS	libtest.mak	/^RHIDE_ARFLAGS=rcs$/;"	kind:m	language:Make
+RHIDE_AS	libtest.mak	/^RHIDE_AS=$(RHIDE_GCC)$/;"	kind:m	language:Make
+RHIDE_BIN_DIR	libtest.mak	/^RHIDE_BIN_DIR=\/usr\/local\/bin$/;"	kind:m	language:Make
+RHIDE_CO	libtest.mak	/^RHIDE_CO=$(shell co -q $(co_arg))$/;"	kind:m	language:Make
+RHIDE_COMPILE_ADA	libtest.mak	/^RHIDE_COMPILE_ADA=$(RHIDE_GCC) $(RHIDE_INCLUDES) $(C_DEBUG_FLAGS)\\$/;"	kind:m	language:Make
+RHIDE_COMPILE_ARCHIVE	libtest.mak	/^RHIDE_COMPILE_ARCHIVE=$(RHIDE_AR) $(RHIDE_ARFLAGS) $(OUTFILE)\\$/;"	kind:m	language:Make
+RHIDE_COMPILE_ASM	libtest.mak	/^RHIDE_COMPILE_ASM=$(RHIDE_AS) $(RHIDE_INCLUDES) $(C_DEBUG_FLAGS)\\$/;"	kind:m	language:Make
+RHIDE_COMPILE_ASM_FORCE	libtest.mak	/^RHIDE_COMPILE_ASM_FORCE=$(RHIDE_AS) $(RHIDE_INCLUDES) $(C_DEBUG_FLAGS)\\$/;"	kind:m	language:Make
+RHIDE_COMPILE_C	libtest.mak	/^RHIDE_COMPILE_C=$(RHIDE_GCC) $(RHIDE_INCLUDES) $(C_DEBUG_FLAGS)\\$/;"	kind:m	language:Make
+RHIDE_COMPILE_CC	libtest.mak	/^RHIDE_COMPILE_CC=$(RHIDE_GXX) $(RHIDE_INCLUDES) $(C_DEBUG_FLAGS)\\$/;"	kind:m	language:Make
+RHIDE_COMPILE_CC_FORCE	libtest.mak	/^RHIDE_COMPILE_CC_FORCE=$(RHIDE_GXX) $(RHIDE_INCLUDES) $(C_DEBUG_FLAGS)\\$/;"	kind:m	language:Make
+RHIDE_COMPILE_C_FORCE	libtest.mak	/^RHIDE_COMPILE_C_FORCE=$(RHIDE_GCC) $(RHIDE_INCLUDES) $(C_DEBUG_FLAGS)\\$/;"	kind:m	language:Make
+RHIDE_COMPILE_FORTRAN	libtest.mak	/^RHIDE_COMPILE_FORTRAN=$(RHIDE_G77) $(RHIDE_INCLUDES) $(C_DEBUG_FLAGS)\\$/;"	kind:m	language:Make
+RHIDE_COMPILE_FORTRAN_FORCE	libtest.mak	/^RHIDE_COMPILE_FORTRAN_FORCE=$(RHIDE_G77) $(RHIDE_INCLUDES) $(C_DEBUG_FLAGS)\\$/;"	kind:m	language:Make
+RHIDE_COMPILE_FPC	libtest.mak	/^RHIDE_COMPILE_FPC=$(RHIDE_FPC) $(RHIDE_FPC_FLAGS) -E- $(SOURCE_NAME)$/;"	kind:m	language:Make
+RHIDE_COMPILE_FPC_FORCE	libtest.mak	/^RHIDE_COMPILE_FPC_FORCE=$(RHIDE_FPC) $(RHIDE_FPC_FLAGS) -B -E-\\$/;"	kind:m	language:Make
+RHIDE_COMPILE_GPC	libtest.mak	/^RHIDE_COMPILE_GPC=$(RHIDE_GPC) $(RHIDE_GPC_FLAGS) $(LOCAL_OPT)  -c\\$/;"	kind:m	language:Make
+RHIDE_COMPILE_GPC_FORCE	libtest.mak	/^RHIDE_COMPILE_GPC_FORCE=$(RHIDE_GPC) $(RHIDE_GPC_FLAGS) -x pascal\\$/;"	kind:m	language:Make
+RHIDE_COMPILE_LINK	libtest.mak	/^RHIDE_COMPILE_LINK=$(RHIDE_LD) $(RHIDE_LIBDIRS) $(C_EXTRA_FLAGS) -o\\$/;"	kind:m	language:Make
+RHIDE_COMPILE_LINK_ADA	libtest.mak	/^RHIDE_COMPILE_LINK_ADA=gnatbl $(RHIDE_LIBDIRS) $(C_EXTRA_FLAGS) -o\\$/;"	kind:m	language:Make
+RHIDE_COMPILE_LINK_ADA_BIND	libtest.mak	/^RHIDE_COMPILE_LINK_ADA_BIND=$(RHIDE_GNATBIND) -o $(RHIDE_ADA_BIND_FILE)\\$/;"	kind:m	language:Make
+RHIDE_COMPILE_LINK_ADA_LINK	libtest.mak	/^RHIDE_COMPILE_LINK_ADA_LINK=$(RHIDE_LD) $(RHIDE_LIBDIRS) $(C_EXTRA_FLAGS) -o\\$/;"	kind:m	language:Make
+RHIDE_COMPILE_LINK_DLL	libtest.mak	/^RHIDE_COMPILE_LINK_DLL=$(RHIDE_LD) $(RHIDE_LIBDIRS) $(C_EXTRA_FLAGS) -o\\$/;"	kind:m	language:Make
+RHIDE_COMPILE_LINK_FPC	libtest.mak	/^RHIDE_COMPILE_LINK_FPC=echo 'separate linking for FPK is not supported.\\$/;"	kind:m	language:Make
+RHIDE_COMPILE_LINK_FPC_AUTOMAKE	libtest.mak	/^RHIDE_COMPILE_LINK_FPC_AUTOMAKE=$(RHIDE_FPC) -o$(OUTFILE) $(SOURCE_NAME)\\$/;"	kind:m	language:Make
+RHIDE_COMPILE_LINK_GPC	libtest.mak	/^RHIDE_COMPILE_LINK_GPC=$(RHIDE_LD_PASCAL) $(RHIDE_LIBDIRS) $(C_EXTRA_FLAGS)\\$/;"	kind:m	language:Make
+RHIDE_COMPILE_LINK_GPC_AUTOMAKE	libtest.mak	/^RHIDE_COMPILE_LINK_GPC_AUTOMAKE=$(RHIDE_LD_PASCAL) $(RHIDE_LIBDIRS)  -o\\$/;"	kind:m	language:Make
+RHIDE_COMPILE_LINK_PASCAL	libtest.mak	/^RHIDE_COMPILE_LINK_PASCAL=$(RHIDE_COMPILE_LINK_$(PASCAL_TYPE))$/;"	kind:m	language:Make
+RHIDE_COMPILE_LINK_PASCAL_AUTOMAKE	libtest.mak	/^RHIDE_COMPILE_LINK_PASCAL_AUTOMAKE=$(RHIDE_COMPILE_LINK_$(PASCAL_TYPE)_AUTOMAKE)$/;"	kind:m	language:Make
+RHIDE_COMPILE_NASM	libtest.mak	/^RHIDE_COMPILE_NASM=$(RHIDE_NASM) -f $(RHIDE_NASM_TARGET) $(LOCAL_OPT) -o\\$/;"	kind:m	language:Make
+RHIDE_COMPILE_PASCAL	libtest.mak	/^RHIDE_COMPILE_PASCAL=$(RHIDE_COMPILE_$(PASCAL_TYPE))$/;"	kind:m	language:Make
+RHIDE_COMPILE_PASCAL_FORCE	libtest.mak	/^RHIDE_COMPILE_PASCAL_FORCE=$(RHIDE_COMPILE_$(PASCAL_TYPE)_FORCE)$/;"	kind:m	language:Make
+RHIDE_CONFIG_DIRS	libtest.mak	/^RHIDE_CONFIG_DIRS=. $(RHIDE_SHARE) $(GET_HOME)   $(RHIDE_CONFIG_DIRS_COMMON)\\$/;"	kind:m	language:Make
+RHIDE_CONFIG_DIRS_COMMON	libtest.mak	/^RHIDE_CONFIG_DIRS_COMMON=$(RHIDE_CONFIG_DIRS_$(RHIDE_OS))\\$/;"	kind:m	language:Make
+RHIDE_CONFIG_DIRS_DJGPP	libtest.mak	/^RHIDE_CONFIG_DIRS_DJGPP=$(DJDIR)\/share\/rhide$/;"	kind:m	language:Make
+RHIDE_CONFIG_DIRS_Linux	libtest.mak	/^RHIDE_CONFIG_DIRS_Linux=\/usr\/local\/share\/rhide \/usr\/share\/rhide \\$/;"	kind:m	language:Make
+RHIDE_EMPTY	libtest.mak	/^RHIDE_EMPTY=$/;"	kind:m	language:Make
+RHIDE_FPC	libtest.mak	/^RHIDE_FPC=ppc386$/;"	kind:m	language:Make
+RHIDE_FPC_FLAGS	libtest.mak	/^RHIDE_FPC_FLAGS=$(C_FPC_LANG_FLAGS) $(LOCAL_OPT) $(addprefix\\$/;"	kind:m	language:Make
+RHIDE_FPC_LIBDIRS	libtest.mak	/^RHIDE_FPC_LIBDIRS=$(RHIDE_FPC_LIBDIRS_$(RHIDE_OS))$/;"	kind:m	language:Make
+RHIDE_FPC_LIBDIRS_DJGPP	libtest.mak	/^RHIDE_FPC_LIBDIRS_DJGPP=$(DJDIR)\/lib$/;"	kind:m	language:Make
+RHIDE_FPC_LIBDIRS_Linux	libtest.mak	/^RHIDE_FPC_LIBDIRS_Linux=\/usr\/local\/lib \/usr\/lib \/lib$/;"	kind:m	language:Make
+RHIDE_FPC_LINK_FLAGS	libtest.mak	/^RHIDE_FPC_LINK_FLAGS=$(RHIDE_FPC_LINK_FLAGS_$(RHIDE_OS))$/;"	kind:m	language:Make
+RHIDE_FPC_LINK_FLAGS_DJGPP	libtest.mak	/^RHIDE_FPC_LINK_FLAGS_DJGPP=-O coff-go32-exe $(RHIDE_LIBDIRS) $(addprefix\\$/;"	kind:m	language:Make
+RHIDE_FPC_LINK_FLAGS_Linux	libtest.mak	/^RHIDE_FPC_LINK_FLAGS_Linux=$(RHIDE_LIBDIRS) $(addprefix\\$/;"	kind:m	language:Make
+RHIDE_FSDB	libtest.mak	/^RHIDE_FSDB=fsdb $(OUTFILE) $(addprefix -p ,$(SRC_DIRS)) $(PROG_ARGS)$/;"	kind:m	language:Make
+RHIDE_G77	libtest.mak	/^RHIDE_G77=g77$/;"	kind:m	language:Make
+RHIDE_GCC	libtest.mak	/^RHIDE_GCC=gcc$/;"	kind:m	language:Make
+RHIDE_GDB	libtest.mak	/^RHIDE_GDB=gdb $(OUTFILE) $(addprefix -d ,$(SRC_DIRS))$/;"	kind:m	language:Make
+RHIDE_GNATBIND	libtest.mak	/^RHIDE_GNATBIND=gnatbind$/;"	kind:m	language:Make
+RHIDE_GPC	libtest.mak	/^RHIDE_GPC=gpc$/;"	kind:m	language:Make
+RHIDE_GPC_FLAGS	libtest.mak	/^RHIDE_GPC_FLAGS=$(RHIDE_INCLUDES) $(C_DEBUG_FLAGS) $(C_OPT_FLAGS)\\$/;"	kind:m	language:Make
+RHIDE_GPROF	libtest.mak	/^RHIDE_GPROF=gprof $(OUTFILE)$/;"	kind:m	language:Make
+RHIDE_GREP	libtest.mak	/^RHIDE_GREP=grep -n $(prompt arguments for GREP,$(WUC) $(DEFAULT_GREP_MASK))$/;"	kind:m	language:Make
+RHIDE_GXX	libtest.mak	/^RHIDE_GXX=g++$/;"	kind:m	language:Make
+RHIDE_INCLUDES	libtest.mak	/^RHIDE_INCLUDES=$(SPECIAL_CFLAGS) $(addprefix -I,$(INCLUDE_DIRS))$/;"	kind:m	language:Make
+RHIDE_LD	libtest.mak	/^RHIDE_LD=g++$/;"	kind:m	language:Make
+RHIDE_LDFLAGS	libtest.mak	/^RHIDE_LDFLAGS=-shared -Wl,-soname,librhtv.so.2.0.3 -L\/usr\/X11R6\/lib -lX11 -lXmu -lgpm -lncurses -lstdc++ -lm -lc$/;"	kind:m	language:Make
+RHIDE_LD_FPC	libtest.mak	/^RHIDE_LD_FPC=$(RHIDE_FPC) -E+$/;"	kind:m	language:Make
+RHIDE_LD_PASCAL	libtest.mak	/^RHIDE_LD_PASCAL=gpc$/;"	kind:m	language:Make
+RHIDE_LIBDIRS	libtest.mak	/^RHIDE_LIBDIRS=$(addprefix -L,$(LIB_DIRS))$/;"	kind:m	language:Make
+RHIDE_LIBS	libtest.mak	/^RHIDE_LIBS=$(addprefix -l,$(LIBS) $(RHIDE_TYPED_LIBS) $(RHIDE_OS_LIBS))$/;"	kind:m	language:Make
+RHIDE_NASM	libtest.mak	/^RHIDE_NASM=nasm$/;"	kind:m	language:Make
+RHIDE_NASM_TARGET	libtest.mak	/^RHIDE_NASM_TARGET=$(RHIDE_NASM_TARGET_$(RHIDE_OS))$/;"	kind:m	language:Make
+RHIDE_NASM_TARGET_DJGPP	libtest.mak	/^RHIDE_NASM_TARGET_DJGPP=coff$/;"	kind:m	language:Make
+RHIDE_NASM_TARGET_Linux	libtest.mak	/^RHIDE_NASM_TARGET_Linux=elf$/;"	kind:m	language:Make
+RHIDE_OS	libtest.mak	/^RHIDE_OS=$(RHIDE_OS_)$/;"	kind:m	language:Make
+RHIDE_OS_	libtest.mak	/^FLAGS_FOR_SUBPROJECTS=RHIDE_OS_="$(RHIDE_OS_)" CFLAGS="$(CFLAGS)"\\$/;"	kind:m	language:Make
+RHIDE_OS_	libtest.mak	/^RHIDE_OS_:=$(patsubst CYGWIN%,CYGWIN,$(shell uname))$/;"	kind:m	language:Make
+RHIDE_OS_	libtest.mak	/^RHIDE_OS_:=DJGPP$/;"	kind:m	language:Make
+RHIDE_PATH_SEPARATOR	libtest.mak	/^RHIDE_PATH_SEPARATOR=$(RHIDE_PATH_SEPARATOR_$(RHIDE_OS))$/;"	kind:m	language:Make
+RHIDE_PATH_SEPARATOR_DJGPP	libtest.mak	/^RHIDE_PATH_SEPARATOR_DJGPP=;$/;"	kind:m	language:Make
+RHIDE_PATH_SEPARATOR_Linux	libtest.mak	/^RHIDE_PATH_SEPARATOR_Linux=:$/;"	kind:m	language:Make
+RHIDE_RLOG	libtest.mak	/^RHIDE_RLOG=$(shell rlog -R $(rlog_arg))$/;"	kind:m	language:Make
+RHIDE_RM	libtest.mak	/^RHIDE_RM=rm$/;"	kind:m	language:Make
+RHIDE_SHARED_LDFLAGS	libtest.mak	/^RHIDE_SHARED_LDFLAGS=$(RHIDE_SHARED_LDFLAGS_$(RHIDE_OS))$/;"	kind:m	language:Make
+RHIDE_SHARED_LDFLAGS_Linux	libtest.mak	/^RHIDE_SHARED_LDFLAGS_Linux=$/;"	kind:m	language:Make
+RHIDE_SHARED_LDFLAGS_Linux	libtest.mak	/^RHIDE_SHARED_LDFLAGS_Linux=-shared$/;"	kind:m	language:Make
+RHIDE_SPACE	libtest.mak	/^RHIDE_SPACE=$(RHIDE_EMPTY) $(RHIDE_EMPTY)$/;"	kind:m	language:Make
+RHIDE_STANDARD_INCLUDES	libtest.mak	/^RHIDE_STANDARD_INCLUDES=$(RHIDE_STANDARD_INCLUDES_$(RHIDE_OS))$/;"	kind:m	language:Make
+RHIDE_STANDARD_INCLUDES_DJGPP	libtest.mak	/^RHIDE_STANDARD_INCLUDES_DJGPP=$(addprefix $(DJDIR)\/,include include\/sys\\$/;"	kind:m	language:Make
+RHIDE_STANDARD_INCLUDES_Linux	libtest.mak	/^RHIDE_STANDARD_INCLUDES_Linux=$(addprefix \/usr\/,include include\/sys\\$/;"	kind:m	language:Make
+RHIDE_TYPED_LIBS	libtest.mak	/^RHIDE_TYPED_LIBS=$(foreach\\$/;"	kind:m	language:Make
+RHIDE_TYPED_LIBS_FPC	libtest.mak	/^RHIDE_TYPED_LIBS_FPC=fpc$/;"	kind:m	language:Make
+RHIDE_TYPED_LIBS_GPC	libtest.mak	/^RHIDE_TYPED_LIBS_GPC=gpc m$/;"	kind:m	language:Make
+RHIDE_TYPED_LIBS_SUFFIXES	libtest.mak	/^RHIDE_TYPED_LIBS_SUFFIXES=$(sort $(foreach item,$(PROJECT_ITEMS),$(suffix\\$/;"	kind:m	language:Make
+RadioCount	dsgobjs.cc	/^static int RadioCount   = 0;$/;"	kind:v	language:C++	file:
+ReadOnly	consted.cc	/^   bool ReadOnly;$/;"	kind:m	language:C++	struct:TConstData	file:
+SOURCE_NAME	libtest.mak	/^SOURCE_NAME=$<$/;"	kind:m	language:Make
+SPECIAL_CFLAGS	libtest.mak	/^SPECIAL_CFLAGS=$/;"	kind:m	language:Make
+SPECIAL_LDFLAGS	libtest.mak	/^SPECIAL_LDFLAGS=$/;"	kind:m	language:Make
+SRC_DIRS	libtest.mak	/^SRC_DIRS=$/;"	kind:m	language:Make
+Save	dsgobjs.cc	/^Boolean TDDialog::Save(int aCommand)$/;"	kind:f	language:C++	class:TDDialog
+SaveObject	dsgobjs.cc	/^void SaveObject( ofpstream& s, TDsgObj * obj )$/;"	kind:f	language:C++
+ScrollEditor	propdlgs.cc	/^TDialog * ScrollEditor()$/;"	kind:f	language:C++
+ScrollList	propedit.cc	/^static TStringCollection * ScrollList = 0;$/;"	kind:v	language:C++	file:
+SelDialog	propdlgs.cc	/^TDialog * SelDialog(const char * Title, TView * c)$/;"	kind:f	language:C++
+SetGrid	dsgobjs.cc	/^void SetGrid(bool enable)$/;"	kind:f	language:C++
+SortRB	consted.h	/^   TRadioButtons * SortRB;$/;"	kind:m	language:C++	class:TConstEdit
+StateEditor	propdlgs.cc	/^TDialog * StateEditor()$/;"	kind:f	language:C++
+StateStr	propdlgs.cc	/^char * StateStr(ushort aState)$/;"	kind:f	language:C++
+StaticCount	dsgobjs.cc	/^static int StaticCount  = 0;$/;"	kind:v	language:C++	file:
+StatusDefEditor	freedsgn.cc	/^    TWindow * StatusDefEditor;$/;"	kind:m	language:C++	class:TFreeDsgnApp	file:
+StringEditor	propedit.cc	/^bool StringEditor(char * string, TPoint place, TGroup * host, ushort aMaxLen)$/;"	kind:f	language:C++
+TAppWindow	dsgobjs.h	/^class TAppWindow: public TWindow$/;"	kind:c	language:C++	inherits:TWindow
+TAppWindow	tappwnd.cc	/^TAppWindow::TAppWindow(): $/;"	kind:f	language:C++	class:TAppWindow
+TButtonMap	propedit.cc	/^static const TStructMap * TButtonMap = &($/;"	kind:v	language:C++	file:
+TClusterMap	propedit.cc	/^static const TStructMap * TClusterMap = &($/;"	kind:v	language:C++	file:
+TConstCollection	consted.cc	/^TConstCollection::TConstCollection(const char * aListName):$/;"	kind:f	language:C++	class:TConstCollection
+TConstCollection	consted.h	/^class TConstCollection: public TCollection$/;"	kind:c	language:C++	inherits:TCollection
+TConstData	consted.cc	/^typedef struct TConstData$/;"	kind:s	language:C++	file:
+TConstEdit	consted.cc	/^TConstEdit::TConstEdit():$/;"	kind:f	language:C++	class:TConstEdit
+TConstEdit	consted.h	/^class TConstEdit: public TDialog$/;"	kind:c	language:C++	inherits:TDialog
+TDButton	dsgobjs.cc	/^TDButton::TDButton(const TRect& bounds):$/;"	kind:f	language:C++	class:TDButton
+TDButton	dsgobjs.h	/^class TDButton: public TButton, public TDsgObj$/;"	kind:c	language:C++	inherits:TButton,TDsgObj
+TDButtonData	dsgdata.h	/^typedef struct TDButtonData$/;"	kind:s	language:C++
+TDCheckBoxes	dsgobjs.cc	/^TDCheckBoxes::TDCheckBoxes(const TRect& bounds, TSItem * aStrings):$/;"	kind:f	language:C++	class:TDCheckBoxes
+TDCheckBoxes	dsgobjs.h	/^class TDCheckBoxes: public TCheckBoxes, public TDsgObj$/;"	kind:c	language:C++	inherits:TCheckBoxes,TDsgObj
+TDCheckData	dsgdata.h	129;"	kind:d	language:C++
+TDClusterData	dsgdata.h	/^typedef struct TDClusterData$/;"	kind:s	language:C++
+TDDialog	dsgobjs.cc	/^TDDialog::TDDialog(): $/;"	kind:f	language:C++	class:TDDialog
+TDDialog	dsgobjs.h	/^class TDDialog: public TDialog, public TDsgObj$/;"	kind:c	language:C++	inherits:TDialog,TDsgObj
+TDDialogData	dsgdata.h	/^typedef struct TDDialogData$/;"	kind:s	language:C++
+TDFrame	dsgobjs.cc	/^TDFrame::TDFrame(const TRect& bounds): TFrame(bounds) { }$/;"	kind:f	language:C++	class:TDFrame
+TDFrame	dsgobjs.h	/^class TDFrame: public TFrame$/;"	kind:c	language:C++	inherits:TFrame
+TDHScrollData	dsgdata.h	132;"	kind:d	language:C++
+TDInputData	dsgdata.h	/^typedef struct TDInputData$/;"	kind:s	language:C++
+TDInputLine	dsgobjs.cc	/^TDInputLine::TDInputLine(const TRect& bounds):$/;"	kind:f	language:C++	class:TDInputLine
+TDInputLine	dsgobjs.h	/^class TDInputLine: public TInputLine, public TDsgObj$/;"	kind:c	language:C++	inherits:TInputLine,TDsgObj
+TDLabel	dsgobjs.cc	/^TDLabel::TDLabel(const TRect& bounds):$/;"	kind:f	language:C++	class:TDLabel
+TDLabel	dsgobjs.h	/^class TDLabel: public TLabel, public TDsgObj$/;"	kind:c	language:C++	inherits:TLabel,TDsgObj
+TDLabelData	dsgdata.h	/^typedef struct TDLabelData$/;"	kind:s	language:C++
+TDListBox	dsgobjs.cc	/^TDListBox::TDListBox(const TRect& bounds):$/;"	kind:f	language:C++	class:TDListBox
+TDListBox	dsgobjs.h	/^class TDListBox: public TListBox, public TDsgObj$/;"	kind:c	language:C++	inherits:TListBox,TDsgObj
+TDListBoxData	dsgdata.h	/^typedef struct TDListBoxData$/;"	kind:s	language:C++
+TDMemo	dsgobjs.cc	/^TDMemo::TDMemo(const TRect& bounds):$/;"	kind:f	language:C++	class:TDMemo
+TDMemo	dsgobjs.h	/^class TDMemo: public TMemo, public TDsgObj$/;"	kind:c	language:C++	inherits:TMemo,TDsgObj
+TDMemoData	dsgdata.h	/^typedef struct TDMemoData$/;"	kind:s	language:C++
+TDRadioButtons	dsgobjs.cc	/^TDRadioButtons::TDRadioButtons(const TRect& bounds, TSItem * aStrings):$/;"	kind:f	language:C++	class:TDRadioButtons
+TDRadioButtons	dsgobjs.h	/^class TDRadioButtons: public TRadioButtons, public TDsgObj$/;"	kind:c	language:C++	inherits:TRadioButtons,TDsgObj
+TDRadioData	dsgdata.h	130;"	kind:d	language:C++
+TDStaticData	dsgdata.h	/^typedef struct TDStaticData$/;"	kind:s	language:C++
+TDStaticText	dsgobjs.cc	/^TDStaticText::TDStaticText(const TRect& bounds):$/;"	kind:f	language:C++	class:TDStaticText
+TDStaticText	dsgobjs.h	/^class TDStaticText: public TStaticText, public TDsgObj$/;"	kind:c	language:C++	inherits:TStaticText,TDsgObj
+TDVScrollData	dsgdata.h	131;"	kind:d	language:C++
+TDataEditorType	propedit.cc	/^enum TDataEditorType$/;"	kind:g	language:C++	file:
+TDefaultData	dsgdata.h	/^typedef struct TDefaultData$/;"	kind:s	language:C++
+TDialogMap	propedit.cc	/^static const TStructMap * TDialogMap = &($/;"	kind:v	language:C++	file:
+TDsgLink	propedit.h	/^typedef struct TDsgLink$/;"	kind:s	language:C++
+TDsgObj	dsgobjs.cc	/^TDsgObj::TDsgObj(TViewType ViewType)$/;"	kind:f	language:C++	class:TDsgObj
+TDsgObj	dsgobjs.h	/^class TDsgObj$/;"	kind:c	language:C++
+TDsgObjData	dsgdata.h	/^typedef struct TDsgObjData$/;"	kind:s	language:C++
+TEditCollection	dsgobjs.h	/^   TEditCollection(): TCollection(0, 1) { };$/;"	kind:f	language:C++	class:TEditCollection
+TEditCollection	dsgobjs.h	/^class TEditCollection: public TCollection$/;"	kind:c	language:C++	inherits:TCollection
+TFreeDsgnApp	freedsgn.cc	/^TFreeDsgnApp::TFreeDsgnApp():$/;"	kind:f	language:C++	class:TFreeDsgnApp
+TFreeDsgnApp	freedsgn.cc	/^class TFreeDsgnApp: public TApplication$/;"	kind:c	language:C++	file:	inherits:TApplication
+THScrollBar	dsgobjs.cc	/^THScrollBar::THScrollBar(const TRect& bounds):$/;"	kind:f	language:C++	class:THScrollBar
+THScrollBar	dsgobjs.h	/^class THScrollBar: public TScrollBar, public TDsgObj$/;"	kind:c	language:C++	inherits:TScrollBar,TDsgObj
+TInPlaceEdit	propedit.cc	/^TInPlaceEdit::TInPlaceEdit(const TRect& bounds, ushort aMaxLen,$/;"	kind:f	language:C++	class:TInPlaceEdit
+TInPlaceEdit	propedit.h	/^class TInPlaceEdit: public TInputLine$/;"	kind:c	language:C++	inherits:TInputLine
+TInputMap	propedit.cc	/^static const TStructMap * TInputMap = &($/;"	kind:v	language:C++	file:
+TIntConstListBox	consted.h	/^   TIntConstListBox(const TRect& bounds,$/;"	kind:f	language:C++	class:TIntConstListBox
+TIntConstListBox	consted.h	/^class TIntConstListBox: public TListBox$/;"	kind:c	language:C++	inherits:TListBox
+TItemsEditor	propdlgs.cc	/^TItemsEditor::TItemsEditor():$/;"	kind:f	language:C++	class:TItemsEditor
+TItemsEditor	propdlgs.cc	/^class TItemsEditor: public TDialog$/;"	kind:c	language:C++	file:	inherits:TDialog
+TLDrawBuffer	propedit.cc	/^class TLDrawBuffer: public TDrawBuffer$/;"	kind:c	language:C++	file:	inherits:TDrawBuffer
+TLabelMap	propedit.cc	/^static const TStructMap * TLabelMap = &($/;"	kind:v	language:C++	file:
+TLinkList	propedit.h	/^   TLinkList(): TCollection(0, 1) { };$/;"	kind:f	language:C++	class:TLinkList
+TLinkList	propedit.h	/^class TLinkList: public TCollection$/;"	kind:c	language:C++	inherits:TCollection
+TListBoxMap	propedit.cc	/^static const TStructMap * TListBoxMap = &($/;"	kind:v	language:C++	file:
+TMemoMap	propedit.cc	/^static const TStructMap * TMemoMap = &($/;"	kind:v	language:C++	file:
+TNameStr	dsgdata.h	/^typedef char TNameStr[MAX_LABEL_LENGTH];$/;"	kind:t	language:C++
+TObjEdit	propedit.cc	/^TObjEdit::TObjEdit(TDsgObj * Obj):$/;"	kind:f	language:C++	class:TObjEdit
+TObjEdit	propedit.h	/^class TObjEdit: public TWindow$/;"	kind:c	language:C++	inherits:TWindow
+TObjEditView	propedit.cc	/^TObjEditView::TObjEditView(const TRect& bounds, TScrollBar * v):$/;"	kind:f	language:C++	class:TObjEditView
+TObjEditView	propedit.h	/^class TObjEditView: public TView$/;"	kind:c	language:C++	inherits:TView
+TSafeListBox	propdlgs.cc	/^   TSafeListBox(const TRect& bounds, ushort aNumCols, TScrollBar * sb):$/;"	kind:f	language:C++	class:TSafeListBox
+TSafeListBox	propdlgs.cc	/^class TSafeListBox: public TListBox$/;"	kind:c	language:C++	file:	inherits:TListBox
+TStaticMap	propedit.cc	/^static const TStructMap * TStaticMap = &($/;"	kind:v	language:C++	file:
+TStructMap	propedit.cc	/^TStructMap::TStructMap(const char * Label,$/;"	kind:f	language:C++	class:TStructMap
+TStructMap	propedit.cc	/^class TStructMap$/;"	kind:c	language:C++	file:
+TTitleStr	dsgdata.h	/^typedef char TTitleStr[MAX_TITLE_LENGTH];$/;"	kind:t	language:C++
+TVScrollBar	dsgobjs.cc	/^TVScrollBar::TVScrollBar(const TRect& bounds):$/;"	kind:f	language:C++	class:TVScrollBar
+TVScrollBar	dsgobjs.h	/^class TVScrollBar: public TScrollBar, public TDsgObj$/;"	kind:c	language:C++	inherits:TScrollBar,TDsgObj
+TViewData	dsgdata.h	/^typedef struct TViewData \/\/ Wrapper struct$/;"	kind:s	language:C++
+TViewMap	propedit.cc	/^static const TStructMap * TViewMap = &(_viewmap_());$/;"	kind:v	language:C++	file:
+TViewType	dsgobjs.h	/^enum TViewType { vtNone = -1, vtOther, vtLabel, vtInput, vtMemo, vtStatic,$/;"	kind:g	language:C++
+TabOrder	dsgobjs.cc	/^static int TabOrder     = 0;$/;"	kind:v	language:C++	file:
+TextViewer	freedsgn.cc	/^    TWindow * TextViewer;$/;"	kind:m	language:C++	class:TFreeDsgnApp	file:
+TheClassName	dsgobjs.cc	/^static char * TheClassName[vtDialog + 1] = { "TUser",$/;"	kind:v	language:C++	file:
+ToolDialog	dsgobjs.cc	/^TDialog * ToolDialog() { return ToolDlg; }$/;"	kind:f	language:C++
+ToolDlg	dsgobjs.cc	/^static TDialog * ToolDlg;$/;"	kind:v	language:C++	file:
+ToolDlg	freedsgn.cc	/^    TDialog * ToolDlg;$/;"	kind:m	language:C++	class:TFreeDsgnApp	file:
+UserCount	dsgobjs.cc	/^static int UserCount    = 0;$/;"	kind:v	language:C++	file:
+Uses_MsgBox	consted.cc	46;"	kind:d	language:C++	file:
+Uses_MsgBox	dsgobjs.cc	35;"	kind:d	language:C++	file:
+Uses_MsgBox	freedsgn.cc	30;"	kind:d	language:C++	file:
+Uses_MsgBox	propdlgs.cc	36;"	kind:d	language:C++	file:
+Uses_MsgBox	propedit.cc	36;"	kind:d	language:C++	file:
+Uses_MsgBox	strmoper.cc	28;"	kind:d	language:C++	file:
+Uses_TApplication	dsgobjs.cc	30;"	kind:d	language:C++	file:
+Uses_TApplication	freedsgn.cc	25;"	kind:d	language:C++	file:
+Uses_TApplication	strmoper.cc	31;"	kind:d	language:C++	file:
+Uses_TButton	consted.cc	33;"	kind:d	language:C++	file:
+Uses_TButton	consted.h	25;"	kind:d	language:C++
+Uses_TButton	dsgobjs.h	32;"	kind:d	language:C++
+Uses_TButton	propdlgs.cc	29;"	kind:d	language:C++	file:
+Uses_TChDirDialog	freedsgn.cc	44;"	kind:d	language:C++	file:
+Uses_TCheckBoxes	dsgobjs.h	33;"	kind:d	language:C++
+Uses_TCheckBoxes	freedsgn.cc	40;"	kind:d	language:C++	file:
+Uses_TCheckBoxes	propdlgs.cc	28;"	kind:d	language:C++	file:
+Uses_TCluster	propdlgs.cc	33;"	kind:d	language:C++	file:
+Uses_TCollection	consted.cc	39;"	kind:d	language:C++	file:
+Uses_TCollection	dsgobjs.h	44;"	kind:d	language:C++
+Uses_TCollection	propedit.cc	39;"	kind:d	language:C++	file:
+Uses_TCollection	propedit.h	31;"	kind:d	language:C++
+Uses_TCommands	consted.cc	41;"	kind:d	language:C++	file:
+Uses_TDeskTop	consted.cc	45;"	kind:d	language:C++	file:
+Uses_TDeskTop	dsgobjs.cc	31;"	kind:d	language:C++	file:
+Uses_TDeskTop	dsgobjs.h	47;"	kind:d	language:C++
+Uses_TDeskTop	propedit.cc	29;"	kind:d	language:C++	file:
+Uses_TDeskTop	strmoper.cc	32;"	kind:d	language:C++	file:
+Uses_TDesktop	freedsgn.cc	27;"	kind:d	language:C++	file:
+Uses_TDialog	consted.cc	32;"	kind:d	language:C++	file:
+Uses_TDialog	consted.h	22;"	kind:d	language:C++
+Uses_TDialog	dsgobjs.h	28;"	kind:d	language:C++
+Uses_TDialog	freedsgn.cc	39;"	kind:d	language:C++	file:
+Uses_TDialog	propdlgs.cc	26;"	kind:d	language:C++	file:
+Uses_TDialog	propedit.cc	34;"	kind:d	language:C++	file:
+Uses_TDialog	propedit.h	26;"	kind:d	language:C++
+Uses_TDrawBuffer	propedit.cc	33;"	kind:d	language:C++	file:
+Uses_TEditor	freedsgn.cc	38;"	kind:d	language:C++	file:
+Uses_TEvent	consted.cc	40;"	kind:d	language:C++	file:
+Uses_TEvent	consted.h	24;"	kind:d	language:C++
+Uses_TEvent	dsgobjs.h	37;"	kind:d	language:C++
+Uses_TEvent	propedit.cc	27;"	kind:d	language:C++	file:
+Uses_TEvent	propedit.h	27;"	kind:d	language:C++
+Uses_TEventQueue	dsgobjs.cc	34;"	kind:d	language:C++	file:
+Uses_TEventQueue	propedit.cc	35;"	kind:d	language:C++	file:
+Uses_TFileDialog	freedsgn.cc	43;"	kind:d	language:C++	file:
+Uses_TFileDialog	strmoper.cc	29;"	kind:d	language:C++	file:
+Uses_TFilterValidator	consted.cc	42;"	kind:d	language:C++	file:
+Uses_TFrame	dsgobjs.h	29;"	kind:d	language:C++
+Uses_TInputLine	consted.cc	43;"	kind:d	language:C++	file:
+Uses_TInputLine	dsgobjs.h	31;"	kind:d	language:C++
+Uses_TInputLine	propedit.cc	40;"	kind:d	language:C++	file:
+Uses_TInputLine	propedit.h	32;"	kind:d	language:C++
+Uses_TKeys	dsgobjs.cc	32;"	kind:d	language:C++	file:
+Uses_TKeys	freedsgn.cc	37;"	kind:d	language:C++	file:
+Uses_TKeys	propedit.cc	32;"	kind:d	language:C++	file:
+Uses_TLabel	consted.cc	36;"	kind:d	language:C++	file:
+Uses_TLabel	dsgobjs.h	42;"	kind:d	language:C++
+Uses_TLabel	propdlgs.cc	31;"	kind:d	language:C++	file:
+Uses_TListBox	consted.cc	37;"	kind:d	language:C++	file:
+Uses_TListBox	consted.h	26;"	kind:d	language:C++
+Uses_TListBox	dsgobjs.h	39;"	kind:d	language:C++
+Uses_TListBox	propedit.cc	37;"	kind:d	language:C++	file:
+Uses_TListBox	propedit.h	28;"	kind:d	language:C++
+Uses_TMemo	dsgobjs.h	41;"	kind:d	language:C++
+Uses_TMemo	propdlgs.cc	38;"	kind:d	language:C++	file:
+Uses_TMenuBar	dsgobjs.h	45;"	kind:d	language:C++
+Uses_TMenuBar	freedsgn.cc	31;"	kind:d	language:C++	file:
+Uses_TMenuItem	freedsgn.cc	33;"	kind:d	language:C++	file:
+Uses_TPalette	dsgobjs.h	30;"	kind:d	language:C++
+Uses_TPalette	propedit.cc	41;"	kind:d	language:C++	file:
+Uses_TParamText	consted.cc	47;"	kind:d	language:C++	file:
+Uses_TParamText	consted.h	28;"	kind:d	language:C++
+Uses_TProgram	consted.cc	44;"	kind:d	language:C++	file:
+Uses_TProgram	dsgobjs.cc	29;"	kind:d	language:C++	file:
+Uses_TProgram	dsgobjs.h	40;"	kind:d	language:C++
+Uses_TProgram	freedsgn.cc	26;"	kind:d	language:C++	file:
+Uses_TProgram	propedit.cc	28;"	kind:d	language:C++	file:
+Uses_TProgram	strmoper.cc	30;"	kind:d	language:C++	file:
+Uses_TRadioButtons	consted.cc	34;"	kind:d	language:C++	file:
+Uses_TRadioButtons	consted.h	27;"	kind:d	language:C++
+Uses_TRadioButtons	dsgobjs.h	34;"	kind:d	language:C++
+Uses_TRadioButtons	freedsgn.cc	41;"	kind:d	language:C++	file:
+Uses_TRadioButtons	propdlgs.cc	34;"	kind:d	language:C++	file:
+Uses_TRect	dsgobjs.h	36;"	kind:d	language:C++
+Uses_TRect	freedsgn.cc	28;"	kind:d	language:C++	file:
+Uses_TRect	propdlgs.cc	27;"	kind:d	language:C++	file:
+Uses_TSItem	consted.cc	35;"	kind:d	language:C++	file:
+Uses_TSItem	dsgobjs.cc	33;"	kind:d	language:C++	file:
+Uses_TSItem	dsgobjs.h	43;"	kind:d	language:C++
+Uses_TSItem	freedsgn.cc	42;"	kind:d	language:C++	file:
+Uses_TSItem	propdlgs.cc	32;"	kind:d	language:C++	file:
+Uses_TScrollBar	consted.cc	38;"	kind:d	language:C++	file:
+Uses_TScrollBar	dsgobjs.h	35;"	kind:d	language:C++
+Uses_TScrollBar	propdlgs.cc	35;"	kind:d	language:C++	file:
+Uses_TScrollBar	propedit.cc	31;"	kind:d	language:C++	file:
+Uses_TScrollBar	propedit.h	29;"	kind:d	language:C++
+Uses_TStaticText	dsgobjs.h	38;"	kind:d	language:C++
+Uses_TStatusDef	freedsgn.cc	36;"	kind:d	language:C++	file:
+Uses_TStatusItem	freedsgn.cc	35;"	kind:d	language:C++	file:
+Uses_TStatusLine	dsgobjs.h	46;"	kind:d	language:C++
+Uses_TStatusLine	freedsgn.cc	34;"	kind:d	language:C++	file:
+Uses_TStringCollection	consted.h	23;"	kind:d	language:C++
+Uses_TStringCollection	dsgobjs.cc	36;"	kind:d	language:C++	file:
+Uses_TStringCollection	propdlgs.cc	37;"	kind:d	language:C++	file:
+Uses_TStringCollection	propedit.cc	38;"	kind:d	language:C++	file:
+Uses_TStringCollection	propedit.h	30;"	kind:d	language:C++
+Uses_TSubMenu	freedsgn.cc	32;"	kind:d	language:C++	file:
+Uses_TValidator	propedit.cc	42;"	kind:d	language:C++	file:
+Uses_TValidator	propedit.h	33;"	kind:d	language:C++
+Uses_TView	freedsgn.cc	29;"	kind:d	language:C++	file:
+Uses_TView	propdlgs.cc	30;"	kind:d	language:C++	file:
+Uses_TView	propedit.cc	30;"	kind:d	language:C++	file:
+Uses_TWindow	dsgobjs.h	48;"	kind:d	language:C++
+Uses_TWindow	propedit.h	25;"	kind:d	language:C++
+Uses_ifpstream	dsgobjs.cc	38;"	kind:d	language:C++	file:
+Uses_ifpstream	freedsgn.cc	46;"	kind:d	language:C++	file:
+Uses_ifpstream	strmoper.cc	34;"	kind:d	language:C++	file:
+Uses_iostream	dsgobjs.cc	27;"	kind:d	language:C++	file:
+Uses_iostream	strmoper.cc	26;"	kind:d	language:C++	file:
+Uses_ipstream	propedit.h	35;"	kind:d	language:C++
+Uses_ofpstream	dsgobjs.cc	37;"	kind:d	language:C++	file:
+Uses_ofpstream	freedsgn.cc	45;"	kind:d	language:C++	file:
+Uses_ofpstream	strmoper.cc	33;"	kind:d	language:C++	file:
+Uses_opstream	propedit.h	34;"	kind:d	language:C++
+Uses_stdio	dsgobjs.cc	25;"	kind:d	language:C++	file:
+Uses_stdio	strmoper.cc	23;"	kind:d	language:C++	file:
+Uses_stdlib	dsgobjs.cc	26;"	kind:d	language:C++	file:
+Uses_string	dsgobjs.cc	24;"	kind:d	language:C++	file:
+Uses_string	strmoper.cc	24;"	kind:d	language:C++	file:
+VScrollCount	dsgobjs.cc	/^static int VScrollCount = 0;$/;"	kind:v	language:C++	file:
+ValidatorEditor	propdlgs.cc	/^TDialog * ValidatorEditor()$/;"	kind:f	language:C++
+ValidatorStr	propdlgs.cc	/^char * ValidatorStr(ushort aValidator)$/;"	kind:f	language:C++
+Value	consted.cc	/^   int Value;$/;"	kind:m	language:C++	struct:TConstData	file:
+WUC	libtest.mak	/^WUC=$/;"	kind:m	language:Make
+WindowFlagEditor	propdlgs.cc	/^TDialog * WindowFlagEditor()$/;"	kind:f	language:C++
+WindowFlagStr	propdlgs.cc	/^char * WindowFlagStr(ushort aWindowFlag)$/;"	kind:f	language:C++
+_DSGDATA_HPP_	dsgdata.h	21;"	kind:d	language:C++
+_DSGOBJS_HPP_	dsgobjs.h	24;"	kind:d	language:C++
+_FDCONSTS_HPP_	fdconsts.h	21;"	kind:d	language:C++
+_PROPDLGS_HPP_	propdlgs.h	21;"	kind:d	language:C++
+_PROPEDIT_HPP_	propedit.h	23;"	kind:d	language:C++
+_RHIDE_COMPILE_LINK_ADA	libtest.mak	/^_RHIDE_COMPILE_LINK_ADA=$(RHIDE_COMPILE_LINK_ADA_BIND);\\$/;"	kind:m	language:Make
+_allocattr_	dsgobjs.cc	708;"	kind:d	language:C++	file:
+_allocattr_	dsgobjs.cc	732;"	kind:d	language:C++	file:
+_appendstr_	propdlgs.cc	203;"	kind:d	language:C++	file:
+_appendstr_	propdlgs.cc	49;"	kind:d	language:C++	file:
+_buildscroll_	codebldr.cc	508;"	kind:d	language:C++	file:
+_chgbnds_	dsgobjs.cc	1502;"	kind:d	language:C++	file:
+_chgbnds_	dsgobjs.cc	151;"	kind:d	language:C++	file:
+_commomget_	codebldr.cc	32;"	kind:d	language:C++	file:
+_commomget_	codebldr.cc	509;"	kind:d	language:C++	file:
+_constsel_	propedit.cc	755;"	kind:d	language:C++	file:
+_createcluster_	dsgobjs.cc	334;"	kind:d	language:C++	file:
+_createcluster_	dsgobjs.cc	355;"	kind:d	language:C++	file:
+_createobj_	dsgobjs.cc	332;"	kind:d	language:C++	file:
+_createobj_	dsgobjs.cc	354;"	kind:d	language:C++	file:
+_do_	propedit.cc	754;"	kind:d	language:C++	file:
+_do_	propedit.cc	880;"	kind:d	language:C++	file:
+_editlink_	propedit.cc	745;"	kind:d	language:C++	file:
+_editlink_	propedit.cc	879;"	kind:d	language:C++	file:
+_endcase_	propedit.cc	1028;"	kind:d	language:C++	file:
+_endcase_	propedit.cc	1126;"	kind:d	language:C++	file:
+_h_	dsgobjs.cc	132;"	kind:d	language:C++	file:
+_h_	dsgobjs.cc	1500;"	kind:d	language:C++	file:
+_item_move_	propedit.cc	321;"	kind:d	language:C++	file:
+_item_move_	propedit.cc	353;"	kind:d	language:C++	file:
+_lo_	propedit.cc	1013;"	kind:d	language:C++	file:
+_lo_	propedit.cc	947;"	kind:d	language:C++	file:
+_p_	dsgobjs.cc	142;"	kind:d	language:C++	file:
+_p_	dsgobjs.cc	1501;"	kind:d	language:C++	file:
+_separator_	propedit.cc	595;"	kind:d	language:C++	file:
+_setstate_	dsgobjs.cc	1503;"	kind:d	language:C++	file:
+_setstate_	dsgobjs.cc	156;"	kind:d	language:C++	file:
+_shutdown_	dsgobjs.cc	166;"	kind:d	language:C++	file:
+_viewdata_	dsgdata.h	134;"	kind:d	language:C++
+_viewdata_	dsgdata.h	31;"	kind:d	language:C++
+_viewmap_	propedit.cc	597;"	kind:d	language:C++	file:
+_viewmap_	propedit.cc	680;"	kind:d	language:C++	file:
+adb	libtest.mak	/^RHIDE_TYPED_LIBS.adb=gnat$/;"	kind:m	language:Make
+add	consted.cc	/^void TConstCollection::add(const char * Ident, int Value, bool IsReadOnly)$/;"	kind:f	language:C++	class:TConstCollection
+add	propedit.cc	/^void TLinkList::add(TView * aView, TDsgObj * aDsgObj)$/;"	kind:f	language:C++	class:TLinkList
+attrSize	dsgobjs.h	/^   int attrSize;$/;"	kind:m	language:C++	class:TDsgObj
+attributes	dsgobjs.h	/^   void * attributes;$/;"	kind:m	language:C++	class:TDsgObj
+blank	codebldr.cc	/^static char * blank = "";$/;"	kind:v	language:C++	file:
+blank	propedit.cc	/^static char * blank = "";$/;"	kind:v	language:C++	file:
+bufSize	dsgdata.h	/^   uint32 bufSize;$/;"	kind:m	language:C++	struct:TDMemoData
+buildCode	codebldr.cc	/^const char * buildCode(TDsgObj * aObj, char * buffer)$/;"	kind:f	language:C++
+buildName	dsgobjs.cc	/^void TDsgObj::buildName(TNameStr * name, int mode)$/;"	kind:f	language:C++	class:TDsgObj
+buildScroll	codebldr.cc	/^const char * buildScroll(TDsgLink * Link)$/;"	kind:f	language:C++
+buildStr	codebldr.cc	/^const char * buildStr(const char * ctrlname,$/;"	kind:f	language:C++
+byTabOrder	propedit.cc	/^static int byTabOrder(const void * key1, const void * key2)$/;"	kind:f	language:C++	file:
+cList	consted.h	/^   TConstCollection * cList;$/;"	kind:m	language:C++	class:TConstEdit
+cList	propdlgs.cc	/^   TStringCollection * cList;$/;"	kind:m	language:C++	class:TItemsEditor	file:
+calcPlace	propedit.cc	/^void calcPlace(TPoint& p, short column, short line, const TStructMap * map)$/;"	kind:f	language:C++
+cc	libtest.mak	/^RHIDE_TYPED_LIBS.cc=$(RHIDE_TYPED_LIBS_$(RHIDE_OS).cc)$/;"	kind:m	language:Make
+cc	libtest.mak	/^RHIDE_TYPED_LIBS_DJGPP.cc=stdcxx m$/;"	kind:m	language:Make
+cc	libtest.mak	/^RHIDE_TYPED_LIBS_Linux.cc=stdc++ m$/;"	kind:m	language:Make
+ccGetString	codebldr.cc	/^typedef char * (*ccGetString)(ushort);$/;"	kind:t	language:C++	file:
+ccSortFunc	propedit.h	/^typedef int (* ccSortFunc)(const void *, const void *);$/;"	kind:t	language:C++
+change	consted.cc	/^void TConstCollection::change(int index, const char * Ident, int Value)$/;"	kind:f	language:C++	class:TConstCollection
+changeBounds	dsgobjs.cc	/^void TDButton::changeBounds(const TRect& bounds) {_chgbnds_(TButton); }$/;"	kind:f	language:C++	class:TDButton
+changeBounds	dsgobjs.cc	/^void TDCheckBoxes::changeBounds(const TRect& bounds) {_chgbnds_(TCheckBoxes); }$/;"	kind:f	language:C++	class:TDCheckBoxes
+changeBounds	dsgobjs.cc	/^void TDDialog::changeBounds(const TRect& bounds) {_chgbnds_(TDialog); }$/;"	kind:f	language:C++	class:TDDialog
+changeBounds	dsgobjs.cc	/^void TDInputLine::changeBounds(const TRect& bounds) {_chgbnds_(TInputLine); }$/;"	kind:f	language:C++	class:TDInputLine
+changeBounds	dsgobjs.cc	/^void TDLabel::changeBounds(const TRect& bounds) {_chgbnds_(TLabel); }$/;"	kind:f	language:C++	class:TDLabel
+changeBounds	dsgobjs.cc	/^void TDListBox::changeBounds(const TRect& bounds) {_chgbnds_(TListBox); }$/;"	kind:f	language:C++	class:TDListBox
+changeBounds	dsgobjs.cc	/^void TDMemo::changeBounds(const TRect& bounds) {_chgbnds_(TMemo); }$/;"	kind:f	language:C++	class:TDMemo
+changeBounds	dsgobjs.cc	/^void TDRadioButtons::changeBounds(const TRect& bounds)$/;"	kind:f	language:C++	class:TDRadioButtons
+changeBounds	dsgobjs.cc	/^void TDStaticText::changeBounds(const TRect& bounds) {_chgbnds_(TStaticText); }$/;"	kind:f	language:C++	class:TDStaticText
+changeBounds	dsgobjs.cc	/^void THScrollBar::changeBounds(const TRect& bounds) {_chgbnds_(TScrollBar); }$/;"	kind:f	language:C++	class:THScrollBar
+changeBounds	dsgobjs.cc	/^void TVScrollBar::changeBounds(const TRect& bounds) {_chgbnds_(TScrollBar); }$/;"	kind:f	language:C++	class:TVScrollBar
+changeBounds	tappwnd.cc	/^void TAppWindow::changeBounds(const TRect& bounds)$/;"	kind:f	language:C++	class:TAppWindow
+cmAdd	consted.cc	/^  cmAdd    = 201,$/;"	kind:v	language:C++
+cmAdd	propdlgs.cc	/^  cmAdd    = 201,$/;"	kind:v	language:C++
+cmAppOptions	fdconsts.h	/^   cmAppOptions    = cmFirst + 16,$/;"	kind:v	language:C++
+cmBuildApp	fdconsts.h	/^   cmBuildApp      = cmFirst + 17,$/;"	kind:v	language:C++
+cmCClear	consted.cc	/^  cmCClear = 203;$/;"	kind:v	language:C++
+cmCClear	propdlgs.cc	/^  cmCClear = 203;$/;"	kind:v	language:C++
+cmCommandEdit	fdconsts.h	/^   cmCommandEdit   = cmFirst + 14,$/;"	kind:v	language:C++
+cmDel	consted.cc	/^  cmDel    = 202,$/;"	kind:v	language:C++
+cmDel	propdlgs.cc	/^  cmDel    = 202,$/;"	kind:v	language:C++
+cmDialogEditor	fdconsts.h	/^   cmDialogEditor  = cmFirst + 19,$/;"	kind:v	language:C++
+cmDlgRun	fdconsts.h	/^   cmDlgRun        = cmEditEvents + 4,$/;"	kind:v	language:C++
+cmEdit	consted.cc	/^  cmEdit   = 200,$/;"	kind:v	language:C++
+cmEdit	propdlgs.cc	/^  cmEdit   = 200,$/;"	kind:v	language:C++
+cmEditEvents	fdconsts.h	/^   cmEditEvents    = cmFirst + 0xff,$/;"	kind:v	language:C++
+cmFirst	fdconsts.h	/^   cmFirst         = 100,$/;"	kind:v	language:C++
+cmHelpCtxEdit	fdconsts.h	/^   cmHelpCtxEdit   = cmFirst + 15,$/;"	kind:v	language:C++
+cmHintsEditor	fdconsts.h	/^   cmHintsEditor   = cmFirst + 13,$/;"	kind:v	language:C++
+cmItemDropped	fdconsts.h	/^   cmItemDropped   = cmEditEvents + 1,$/;"	kind:v	language:C++
+cmMenuEditor	fdconsts.h	/^   cmMenuEditor    = cmFirst + 11,$/;"	kind:v	language:C++
+cmNewProject	fdconsts.h	/^   cmNewProject    = cmFirst + 22,$/;"	kind:v	language:C++
+cmObjEditor	fdconsts.h	/^   cmObjEditor     = cmFirst + 21,$/;"	kind:v	language:C++
+cmObjects	fdconsts.h	/^   cmObjects       = cmFirst + 20,$/;"	kind:v	language:C++
+cmOpenObj	fdconsts.h	/^   cmOpenObj       = cmFirst + 4,$/;"	kind:v	language:C++
+cmOpenProject	fdconsts.h	/^   cmOpenProject   = cmFirst + 1,$/;"	kind:v	language:C++
+cmResizeObj	fdconsts.h	/^   cmResizeObj     = cmEditEvents + 2,$/;"	kind:v	language:C++
+cmSaveObj	fdconsts.h	/^   cmSaveObj       = cmFirst + 5,$/;"	kind:v	language:C++
+cmSaveObjAs	fdconsts.h	/^   cmSaveObjAs     = cmFirst + 6,$/;"	kind:v	language:C++
+cmSaveProject	fdconsts.h	/^   cmSaveProject   = cmFirst + 2,$/;"	kind:v	language:C++
+cmSaveProjectAs	fdconsts.h	/^   cmSaveProjectAs = cmFirst + 3,$/;"	kind:v	language:C++
+cmShowGrid	fdconsts.h	/^   cmShowGrid      = cmFirst + 9,$/;"	kind:v	language:C++
+cmStatusEditor	fdconsts.h	/^   cmStatusEditor  = cmFirst + 12,$/;"	kind:v	language:C++
+cmValueChanged	fdconsts.h	/^   cmValueChanged  = cmEditEvents + 3,$/;"	kind:v	language:C++
+cmViewAppWindow	fdconsts.h	/^   cmViewAppWindow = cmFirst + 18,$/;"	kind:v	language:C++
+cmViewProject	fdconsts.h	/^   cmViewProject   = cmFirst + 10,$/;"	kind:v	language:C++
+cmWriteObjFunc	fdconsts.h	/^   cmWriteObjFunc  = cmFirst + 7,$/;"	kind:v	language:C++
+cmWriteObjUnit	fdconsts.h	/^   cmWriteObjUnit  = cmFirst + 8,$/;"	kind:v	language:C++
+columns	dsgdata.h	/^   short columns;$/;"	kind:m	language:C++	struct:TDListBoxData
+command	dsgdata.h	/^   ushort command;$/;"	kind:m	language:C++	struct:TDButtonData
+compareId	consted.cc	/^static int compareId(const void * key1, const void * key2)$/;"	kind:f	language:C++	file:
+compareOrder	consted.cc	/^static int compareOrder(const void * key1, const void * key2)$/;"	kind:f	language:C++	file:
+compareValue	consted.cc	/^static int compareValue(const void * key1, const void * key2)$/;"	kind:f	language:C++	file:
+constanstFileSig	strmoper.h	25;"	kind:d	language:C++
+cpAppWnd	tappwnd.cc	24;"	kind:d	language:C++	file:
+cpDragBtn	dsgobjs.cc	106;"	kind:d	language:C++	file:
+cpDragCluster	dsgobjs.cc	108;"	kind:d	language:C++	file:
+cpDragInput	dsgobjs.cc	103;"	kind:d	language:C++	file:
+cpDragLB	dsgobjs.cc	107;"	kind:d	language:C++	file:
+cpDragLabel	dsgobjs.cc	102;"	kind:d	language:C++	file:
+cpDragMemo	dsgobjs.cc	104;"	kind:d	language:C++	file:
+cpDragScroll	dsgobjs.cc	109;"	kind:d	language:C++	file:
+cpDragStatic	dsgobjs.cc	105;"	kind:d	language:C++	file:
+cpInplaceEdit	propedit.cc	431;"	kind:d	language:C++	file:
+cpSelBtn	dsgobjs.cc	117;"	kind:d	language:C++	file:
+cpSelCluster	dsgobjs.cc	119;"	kind:d	language:C++	file:
+cpSelInput	dsgobjs.cc	114;"	kind:d	language:C++	file:
+cpSelLB	dsgobjs.cc	118;"	kind:d	language:C++	file:
+cpSelLabel	dsgobjs.cc	113;"	kind:d	language:C++	file:
+cpSelMemo	dsgobjs.cc	115;"	kind:d	language:C++	file:
+cpSelScroll	dsgobjs.cc	120;"	kind:d	language:C++	file:
+cpSelStatic	dsgobjs.cc	116;"	kind:d	language:C++	file:
+cpp	libtest.mak	/^RHIDE_TYPED_LIBS.cpp=$(RHIDE_TYPED_LIBS.cc)$/;"	kind:m	language:Make
+createView	dsgobjs.cc	/^TView * TDButton::createView(TView * aOwner)$/;"	kind:f	language:C++	class:TDButton
+createView	dsgobjs.cc	/^TView * TDCheckBoxes::createView(TView * aOwner)$/;"	kind:f	language:C++	class:TDCheckBoxes
+createView	dsgobjs.cc	/^TView * TDInputLine::createView(TView * aOwner)$/;"	kind:f	language:C++	class:TDInputLine
+createView	dsgobjs.cc	/^TView * TDLabel::createView(TView * aLink)$/;"	kind:f	language:C++	class:TDLabel
+createView	dsgobjs.cc	/^TView * TDListBox::createView(TView * aOwner)$/;"	kind:f	language:C++	class:TDListBox
+createView	dsgobjs.cc	/^TView * TDMemo::createView(TView * aOwner)$/;"	kind:f	language:C++	class:TDMemo
+createView	dsgobjs.cc	/^TView * TDRadioButtons::createView(TView * aOwner)$/;"	kind:f	language:C++	class:TDRadioButtons
+createView	dsgobjs.cc	/^TView * TDStaticText::createView(TView * aOwner)$/;"	kind:f	language:C++	class:TDStaticText
+createView	dsgobjs.cc	/^TView * THScrollBar::createView(TView * aOwner)$/;"	kind:f	language:C++	class:THScrollBar
+createView	dsgobjs.cc	/^TView * TVScrollBar::createView(TView * aOwner)$/;"	kind:f	language:C++	class:TVScrollBar
+createView	dsgobjs.h	/^   virtual TView * createView(TView *) { return 0; };$/;"	kind:f	language:C++	class:TDsgObj	implementation:virtual
+currentMap	propedit.h	/^   const TStructMap * currentMap;$/;"	kind:m	language:C++	class:TObjEditView
+cxx	libtest.mak	/^RHIDE_TYPED_LIBS.cxx=$(RHIDE_TYPED_LIBS.cc)$/;"	kind:m	language:Make
+d	propedit.h	/^  TDsgObj * d;$/;"	kind:m	language:C++	struct:TDsgLink
+data	propedit.h	/^   void * data;$/;"	kind:m	language:C++	class:TObjEditView
+dataMap	propedit.h	/^   const TStructMap * dataMap;$/;"	kind:m	language:C++	class:TObjEditView
+dataSize	propedit.cc	/^   int dataSize;$/;"	kind:m	language:C++	class:TStructMap	file:
+dataView	propedit.h	/^   TObjEditView * dataView;$/;"	kind:m	language:C++	class:TObjEdit
+defaultData	dsgobjs.h	/^   TDefaultData defaultData;$/;"	kind:m	language:C++	class:TDsgObj
+deskTop	dsgobjs.h	/^   TDeskTop * deskTop;$/;"	kind:m	language:C++	class:TAppWindow
+dialogFileSig	strmoper.h	22;"	kind:d	language:C++
+dialogs	dsgobjs.h	/^   TEditCollection * dialogs;$/;"	kind:m	language:C++	class:TAppWindow
+dinsert	dsgobjs.cc	/^void TDDialog::dinsert(TView * aView)$/;"	kind:f	language:C++	class:TDDialog
+dlgRun	dsgobjs.cc	/^void TDDialog::dlgRun()$/;"	kind:f	language:C++	class:TDDialog
+doCloneView	dsgobjs.cc	/^void doCloneView(void * v, void * d)$/;"	kind:f	language:C++
+doReOrder	propedit.cc	/^void TLinkList::doReOrder()$/;"	kind:f	language:C++	class:TLinkList
+dragMode	dsgdata.h	/^   ushort dragMode;$/;"	kind:m	language:C++	struct:TDefaultData
+draw	dsgobjs.cc	/^void TDDialog::draw() { TDialog::draw(); }$/;"	kind:f	language:C++	class:TDDialog
+draw	dsgobjs.cc	/^void TDFrame::draw()$/;"	kind:f	language:C++	class:TDFrame
+draw	propedit.cc	/^void TObjEditView::draw()$/;"	kind:f	language:C++	class:TObjEditView
+dsgGetData	dsgobjs.cc	/^void * TDButton::dsgGetData() { return (void *)title; }$/;"	kind:f	language:C++	class:TDButton
+dsgGetData	dsgobjs.cc	/^void * TDCheckBoxes::dsgGetData() { return strings; }$/;"	kind:f	language:C++	class:TDCheckBoxes
+dsgGetData	dsgobjs.cc	/^void * TDDialog::dsgGetData() { return (void *)title; }$/;"	kind:f	language:C++	class:TDDialog
+dsgGetData	dsgobjs.cc	/^void * TDLabel::dsgGetData() { return (void *)text; }$/;"	kind:f	language:C++	class:TDLabel
+dsgGetData	dsgobjs.cc	/^void * TDListBox::dsgGetData() { return items; }$/;"	kind:f	language:C++	class:TDListBox
+dsgGetData	dsgobjs.cc	/^void * TDRadioButtons::dsgGetData() { return strings; }$/;"	kind:f	language:C++	class:TDRadioButtons
+dsgGetData	dsgobjs.cc	/^void * TDStaticText::dsgGetData() { return (void *)text; }$/;"	kind:f	language:C++	class:TDStaticText
+dsgGetData	dsgobjs.h	/^   virtual void * dsgGetData() { return 0; };$/;"	kind:f	language:C++	class:TDsgObj	implementation:virtual
+dsgMenuBar	dsgobjs.h	/^   TEditCollection * dsgMenuBar;$/;"	kind:m	language:C++	class:TAppWindow
+dsgObj	dsgobjs.h	/^   TDsgObj * dsgObj;$/;"	kind:m	language:C++	class:TDsgObj
+dsgObjFind	propedit.cc	/^TDsgLink * TLinkList::dsgObjFind(void * aDsgObj) \/\/ by DsgObj$/;"	kind:f	language:C++	class:TLinkList
+dsgSatusLine	dsgobjs.h	/^   TEditCollection * dsgSatusLine;$/;"	kind:m	language:C++	class:TAppWindow
+dsgUpdate	dsgobjs.cc	/^void TDButton::dsgUpdate()$/;"	kind:f	language:C++	class:TDButton
+dsgUpdate	dsgobjs.cc	/^void TDDialog::dsgUpdate()$/;"	kind:f	language:C++	class:TDDialog
+dsgUpdate	dsgobjs.cc	/^void TDLabel::dsgUpdate()$/;"	kind:f	language:C++	class:TDLabel
+dsgUpdate	dsgobjs.cc	/^void TDListBox::dsgUpdate()$/;"	kind:f	language:C++	class:TDListBox
+dsgUpdate	dsgobjs.cc	/^void TDStaticText::dsgUpdate()$/;"	kind:f	language:C++	class:TDStaticText
+dsgUpdate	dsgobjs.cc	/^void TDsgObj::dsgUpdate()$/;"	kind:f	language:C++	class:TDsgObj
+editItem	propedit.cc	/^void TObjEditView::editItem(const TStructMap * map)$/;"	kind:f	language:C++	class:TObjEditView
+editorType	propedit.cc	/^   int editorType;$/;"	kind:m	language:C++	class:TStructMap	file:
+endState	propedit.h	/^   ushort endState;$/;"	kind:m	language:C++	class:TInPlaceEdit
+etButtonFlagEditor	propedit.cc	/^     etButtonFlagEditor,     \/\/ Button flag value$/;"	kind:e	language:C++	enum:TDataEditorType	file:
+etCharPtrEditor	propedit.cc	/^     etCharPtrEditor,        \/\/ Null terminated string value$/;"	kind:e	language:C++	enum:TDataEditorType	file:
+etCommandEditor	propedit.cc	/^     etCommandEditor,        \/\/ cm## value$/;"	kind:e	language:C++	enum:TDataEditorType	file:
+etDragModeEditor	propedit.cc	/^     etDragModeEditor,       \/\/ View dragMode value$/;"	kind:e	language:C++	enum:TDataEditorType	file:
+etEventMaskEditor	propedit.cc	/^     etEventMaskEditor,      \/\/ View eventMask value$/;"	kind:e	language:C++	enum:TDataEditorType	file:
+etGrowModeEditor	propedit.cc	/^     etGrowModeEditor,       \/\/ View growMode value$/;"	kind:e	language:C++	enum:TDataEditorType	file:
+etHelpCtxEditor	propedit.cc	/^     etHelpCtxEditor,        \/\/ hc## value$/;"	kind:e	language:C++	enum:TDataEditorType	file:
+etIntegerEditor	propedit.cc	/^     etIntegerEditor,        \/\/ Integer value$/;"	kind:e	language:C++	enum:TDataEditorType	file:
+etLinkEditor	propedit.cc	/^     etLinkEditor,           \/\/ Links for TDLabel$/;"	kind:e	language:C++	enum:TDataEditorType	file:
+etNone	propedit.cc	/^     etNone,$/;"	kind:e	language:C++	enum:TDataEditorType	file:
+etOptionsEditor	propedit.cc	/^     etOptionsEditor,        \/\/ View options value$/;"	kind:e	language:C++	enum:TDataEditorType	file:
+etScrollBarEditor	propedit.cc	/^     etScrollBarEditor,      \/\/ ScrollBars$/;"	kind:e	language:C++	enum:TDataEditorType	file:
+etStateEditor	propedit.cc	/^     etStateEditor,          \/\/ View initial state value ( some of them )$/;"	kind:e	language:C++	enum:TDataEditorType	file:
+etStrCollectionEditor	propedit.cc	/^     etStrCollectionEditor,  \/\/ Generic string lists$/;"	kind:e	language:C++	enum:TDataEditorType	file:
+etStringEditor	propedit.cc	/^     etStringEditor,         \/\/ Short string value up to 60 bytes$/;"	kind:e	language:C++	enum:TDataEditorType	file:
+etValidatorDataEditor	propedit.cc	/^     etValidatorDataEditor,  \/\/ TValidator data value (Filter | range)$/;"	kind:e	language:C++	enum:TDataEditorType	file:
+etValidatorEditor	propedit.cc	/^     etValidatorEditor,      \/\/ TValidator type value$/;"	kind:e	language:C++	enum:TDataEditorType	file:
+etWindowFlagEditor	propedit.cc	/^     etWindowFlagEditor,     \/\/ Window flag value$/;"	kind:e	language:C++	enum:TDataEditorType	file:
+eventMask	dsgdata.h	/^   ushort eventMask;$/;"	kind:m	language:C++	struct:TDefaultData
+execDialog	propedit.cc	/^int execDialog(TDialog * dialog, void *data)$/;"	kind:f	language:C++
+execDialog_NoFree	propedit.cc	/^int execDialog_NoFree(TDialog * dialog, void *data)$/;"	kind:f	language:C++
+execute	propedit.cc	/^ushort TInPlaceEdit::execute()$/;"	kind:f	language:C++	class:TInPlaceEdit
+f	libtest.mak	/^RHIDE_TYPED_LIBS.f=g2c m$/;"	kind:m	language:Make
+fileExists	strmoper.cc	/^bool fileExists(const char * FileName)$/;"	kind:f	language:C++
+fileName	dsgobjs.h	/^   char * fileName;$/;"	kind:m	language:C++	class:TDDialog
+findStr	propedit.cc	/^int findStr(TCollection * col, const char * cmp)$/;"	kind:f	language:C++
+flags	dsgdata.h	/^   ushort flags;$/;"	kind:m	language:C++	struct:TDButtonData
+flags	dsgdata.h	/^   ushort flags;$/;"	kind:m	language:C++	struct:TDefaultData
+flags	dsgdata.h	/^  ushort flags;$/;"	kind:m	language:C++	struct:TDDialogData
+for	libtest.mak	/^RHIDE_TYPED_LIBS.for=$(RHIDE_TYPED_LIBS.f)$/;"	kind:m	language:Make
+fpp	libtest.mak	/^RHIDE_TYPED_LIBS.fpp=$(RHIDE_TYPED_LIBS.f)$/;"	kind:m	language:Make
+freeItem	consted.cc	/^void TConstCollection::freeItem(void * item)$/;"	kind:f	language:C++	class:TConstCollection
+freeItem	propedit.cc	/^void TLinkList::freeItem(void * item)$/;"	kind:f	language:C++	class:TLinkList
+getAttrSize	dsgobjs.h	/^   int getAttrSize() { return attrSize; };$/;"	kind:f	language:C++	class:TDsgObj
+getCommand	codebldr.cc	/^const char * getCommand(TDsgObj * aObj)$/;"	kind:f	language:C++
+getCommand	dsgobjs.cc	/^ushort TDButton::getCommand() { return command; }$/;"	kind:f	language:C++	class:TDButton
+getData	consted.cc	/^void TIntConstListBox::getData(void * data)$/;"	kind:f	language:C++	class:TIntConstListBox
+getData	propdlgs.cc	/^   virtual void getData(void *) { };$/;"	kind:f	language:C++	class:TItemsEditor	implementation:virtual
+getData	propedit.cc	/^   ushort getData(ushort i) { return data[i]; }$/;"	kind:f	language:C++	class:TLDrawBuffer
+getDlgRectStr	codebldr.cc	/^const char * getDlgRectStr(TDsgObj * aObj, TView * v)$/;"	kind:f	language:C++
+getDlgVariables	codebldr.cc	/^const char * getDlgVariables(TDsgObj * aObj)$/;"	kind:f	language:C++
+getDlgViews	codebldr.cc	/^const char * getDlgViews(TDsgObj * aObj)$/;"	kind:f	language:C++
+getDragMode	codebldr.cc	/^const char * getDragMode(TDsgObj * aObj, char * ctrlName)$/;"	kind:f	language:C++
+getEventMask	codebldr.cc	/^const char * getEventMask(TDsgObj * aObj, char * ctrlName)$/;"	kind:f	language:C++
+getFileName	strmoper.cc	/^const char * getFileName(const char * aTitle, const char * ext, int Mode)$/;"	kind:f	language:C++
+getFlags	codebldr.cc	/^const char * getFlags(TDsgObj * aObj, char * ctrlName)$/;"	kind:f	language:C++
+getFlags	dsgobjs.cc	/^ushort TDButton::getFlags() { return flags; }$/;"	kind:f	language:C++	class:TDButton
+getGrowMode	codebldr.cc	/^const char * getGrowMode(TDsgObj * aObj, char * ctrlName)$/;"	kind:f	language:C++
+getHelpCtx	codebldr.cc	/^const char * getHelpCtx(TDsgObj * aObj, char * ctrlName)$/;"	kind:f	language:C++
+getId	consted.cc	/^char * TConstCollection::getId(int Value)$/;"	kind:f	language:C++	class:TConstCollection
+getIndex	consted.cc	/^int TConstCollection::getIndex(char * Ident)$/;"	kind:f	language:C++	class:TConstCollection
+getIndex	consted.cc	/^int TConstCollection::getIndex(int Value)$/;"	kind:f	language:C++	class:TConstCollection
+getOptions	codebldr.cc	/^const char * getOptions(TDsgObj * aObj, char * ctrlName)$/;"	kind:f	language:C++
+getPalette	dsgobjs.cc	/^TPalette& TDButton::getPalette() const$/;"	kind:f	language:C++	class:TDButton
+getPalette	dsgobjs.cc	/^TPalette& TDCheckBoxes::getPalette() const$/;"	kind:f	language:C++	class:TDCheckBoxes
+getPalette	dsgobjs.cc	/^TPalette& TDInputLine::getPalette() const$/;"	kind:f	language:C++	class:TDInputLine
+getPalette	dsgobjs.cc	/^TPalette& TDLabel::getPalette() const$/;"	kind:f	language:C++	class:TDLabel
+getPalette	dsgobjs.cc	/^TPalette& TDListBox::getPalette() const$/;"	kind:f	language:C++	class:TDListBox
+getPalette	dsgobjs.cc	/^TPalette& TDMemo::getPalette() const {_p_(cpDragMemo, cpSelMemo, TMemo); }$/;"	kind:f	language:C++	class:TDMemo
+getPalette	dsgobjs.cc	/^TPalette& TDRadioButtons::getPalette() const$/;"	kind:f	language:C++	class:TDRadioButtons
+getPalette	dsgobjs.cc	/^TPalette& TDStaticText::getPalette() const$/;"	kind:f	language:C++	class:TDStaticText
+getPalette	dsgobjs.cc	/^TPalette& THScrollBar::getPalette() const$/;"	kind:f	language:C++	class:THScrollBar
+getPalette	dsgobjs.cc	/^TPalette& TVScrollBar::getPalette() const$/;"	kind:f	language:C++	class:TVScrollBar
+getPalette	propedit.cc	/^TPalette& TInPlaceEdit::getPalette() const$/;"	kind:f	language:C++	class:TInPlaceEdit
+getPalette	tappwnd.cc	/^TPalette& TAppWindow::getPalette() const$/;"	kind:f	language:C++	class:TAppWindow
+getPointerName	codebldr.cc	/^const char * getPointerName(TDsgObj * aObj)$/;"	kind:f	language:C++
+getRectStr	codebldr.cc	/^const char * getRectStr(const TRect& r)$/;"	kind:f	language:C++
+getScript	dsgobjs.cc	/^char * TDsgObj::getScript(ushort ScriptType)$/;"	kind:f	language:C++	class:TDsgObj
+getState	codebldr.cc	/^const char * getState(TDsgObj * aObj, char * ctrlName)$/;"	kind:f	language:C++
+getText	consted.cc	/^void TIntConstListBox::getText(char *dest, ccIndex item, short maxChars)$/;"	kind:f	language:C++	class:TIntConstListBox
+getText	propdlgs.cc	/^   void getText(char *dest, ccIndex item, short maxLen)$/;"	kind:f	language:C++	class:TSafeListBox
+getTextParam	codebldr.cc	/^const char * getTextParam(TDsgObj * aObj)$/;"	kind:f	language:C++
+getValidator	codebldr.cc	/^const char * getValidator(TDsgObj * aObj, char * ctrlName)$/;"	kind:f	language:C++
+getValue	consted.cc	/^int TConstCollection::getValue(char * Ident)$/;"	kind:f	language:C++	class:TConstCollection
+getValueFor	propedit.cc	/^const char * TObjEditView::getValueFor(const TStructMap * map)$/;"	kind:f	language:C++	class:TObjEditView
+growMode	dsgdata.h	/^   ushort growMode;$/;"	kind:m	language:C++	struct:TDefaultData
+hScroll	dsgdata.h	/^   TNameStr hScroll;$/;"	kind:m	language:C++	struct:TDMemoData
+handleEvent	consted.cc	/^void TConstEdit::handleEvent(TEvent& event)$/;"	kind:f	language:C++	class:TConstEdit
+handleEvent	dsgobjs.cc	/^void TDButton::handleEvent(TEvent& event) {_h_(TButton); }$/;"	kind:f	language:C++	class:TDButton
+handleEvent	dsgobjs.cc	/^void TDCheckBoxes::handleEvent(TEvent& event) {_h_(TCheckBoxes); }$/;"	kind:f	language:C++	class:TDCheckBoxes
+handleEvent	dsgobjs.cc	/^void TDDialog::handleEvent(TEvent& event)$/;"	kind:f	language:C++	class:TDDialog
+handleEvent	dsgobjs.cc	/^void TDInputLine::handleEvent(TEvent& event) {_h_(TInputLine); }$/;"	kind:f	language:C++	class:TDInputLine
+handleEvent	dsgobjs.cc	/^void TDLabel::handleEvent(TEvent& event) {_h_(TLabel); }$/;"	kind:f	language:C++	class:TDLabel
+handleEvent	dsgobjs.cc	/^void TDListBox::handleEvent(TEvent& event) {_h_(TListBox); }$/;"	kind:f	language:C++	class:TDListBox
+handleEvent	dsgobjs.cc	/^void TDMemo::handleEvent(TEvent& event) {_h_(TMemo); }$/;"	kind:f	language:C++	class:TDMemo
+handleEvent	dsgobjs.cc	/^void TDRadioButtons::handleEvent(TEvent& event) {_h_(TRadioButtons); }$/;"	kind:f	language:C++	class:TDRadioButtons
+handleEvent	dsgobjs.cc	/^void TDStaticText::handleEvent(TEvent& event) {_h_(TStaticText); }$/;"	kind:f	language:C++	class:TDStaticText
+handleEvent	dsgobjs.cc	/^void THScrollBar::handleEvent(TEvent& event) {_h_(TScrollBar); }$/;"	kind:f	language:C++	class:THScrollBar
+handleEvent	dsgobjs.cc	/^void TVScrollBar::handleEvent(TEvent& event) {_h_(TScrollBar); }$/;"	kind:f	language:C++	class:TVScrollBar
+handleEvent	freedsgn.cc	/^void TFreeDsgnApp::handleEvent(TEvent& event)$/;"	kind:f	language:C++	class:TFreeDsgnApp
+handleEvent	propdlgs.cc	/^void TItemsEditor::handleEvent(TEvent& event)$/;"	kind:f	language:C++	class:TItemsEditor
+handleEvent	propedit.cc	/^void TInPlaceEdit::handleEvent(TEvent& event)$/;"	kind:f	language:C++	class:TInPlaceEdit
+handleEvent	propedit.cc	/^void TObjEdit::handleEvent(TEvent& event)$/;"	kind:f	language:C++	class:TObjEdit
+handleEvent	propedit.cc	/^void TObjEditView::handleEvent(TEvent& event)$/;"	kind:f	language:C++	class:TObjEditView
+handleEvent	tappwnd.cc	/^void TAppWindow::handleEvent(TEvent& event)$/;"	kind:f	language:C++	class:TAppWindow
+hcAppBuild	fdconsts.h	/^   hcAppBuild      = hcFirst + 24,$/;"	kind:v	language:C++
+hcAppOptions	fdconsts.h	/^   hcAppOptions    = hcFirst + 23,$/;"	kind:v	language:C++
+hcChangeDir	fdconsts.h	/^   hcChangeDir     = hcFirst + 4,$/;"	kind:v	language:C++
+hcCommandEdit	fdconsts.h	/^   hcCommandEdit   = hcFirst + 21,$/;"	kind:v	language:C++
+hcCommandEditor	fdconsts.h	/^   hcCommandEditor = hcDefs + 1,$/;"	kind:v	language:C++
+hcCopy	fdconsts.h	/^   hcCopy          = hcFirst + 10,$/;"	kind:v	language:C++
+hcCut	fdconsts.h	/^   hcCut           = hcFirst + 11,$/;"	kind:v	language:C++
+hcDefs	fdconsts.h	/^   hcDefs          = hcFirst + 1000,$/;"	kind:v	language:C++
+hcDlgEditor	fdconsts.h	/^   hcDlgEditor     = hcDefs + 6,$/;"	kind:v	language:C++
+hcDlgTring	fdconsts.h	/^   hcDlgTring      = hcDefs + 3,$/;"	kind:v	language:C++
+hcFirst	fdconsts.h	/^   hcFirst         = 1000,$/;"	kind:v	language:C++
+hcHelpCtxEdit	fdconsts.h	/^   hcHelpCtxEdit   = hcFirst + 22,$/;"	kind:v	language:C++
+hcHelpCtxEditor	fdconsts.h	/^   hcHelpCtxEditor = hcDefs + 2,$/;"	kind:v	language:C++
+hcHideShowGrid	fdconsts.h	/^   hcHideShowGrid  = hcFirst + 16,$/;"	kind:v	language:C++
+hcHindEdit	fdconsts.h	/^   hcHindEdit      = hcFirst + 20,$/;"	kind:v	language:C++
+hcMenuEdit	fdconsts.h	/^   hcMenuEdit      = hcFirst + 18,$/;"	kind:v	language:C++
+hcMenuEditor	fdconsts.h	/^   hcMenuEditor    = hcDefs + 4,$/;"	kind:v	language:C++
+hcNewProject	fdconsts.h	/^   hcNewProject    = hcFirst + 26,$/;"	kind:v	language:C++
+hcObjEditor	fdconsts.h	/^   hcObjEditor     = hcDefs + 8;$/;"	kind:v	language:C++
+hcObjWindow	fdconsts.h	/^   hcObjWindow     = hcDefs + 7,$/;"	kind:v	language:C++
+hcOpenObj	fdconsts.h	/^   hcOpenObj       = hcFirst + 5,$/;"	kind:v	language:C++
+hcOpenProject	fdconsts.h	/^   hcOpenProject   = hcFirst + 1,$/;"	kind:v	language:C++
+hcPaste	fdconsts.h	/^   hcPaste         = hcFirst + 12,$/;"	kind:v	language:C++
+hcQuit	fdconsts.h	/^   hcQuit          = hcFirst + 8,$/;"	kind:v	language:C++
+hcSaveObj	fdconsts.h	/^   hcSaveObj       = hcFirst + 6,$/;"	kind:v	language:C++
+hcSaveObjAs	fdconsts.h	/^   hcSaveObjAs     = hcFirst + 7,$/;"	kind:v	language:C++
+hcSavePrjAs	fdconsts.h	/^   hcSavePrjAs     = hcFirst + 3,$/;"	kind:v	language:C++
+hcSaveProject	fdconsts.h	/^   hcSaveProject   = hcFirst + 2,$/;"	kind:v	language:C++
+hcStatusEdit	fdconsts.h	/^   hcStatusEdit    = hcFirst + 19,$/;"	kind:v	language:C++
+hcStatusEditor	fdconsts.h	/^   hcStatusEditor  = hcDefs + 5,$/;"	kind:v	language:C++
+hcUndo	fdconsts.h	/^   hcUndo          = hcFirst + 9,$/;"	kind:v	language:C++
+hcViewAppWindow	fdconsts.h	/^   hcViewAppWindow = hcFirst + 25,$/;"	kind:v	language:C++
+hcViewProject	fdconsts.h	/^   hcViewProject   = hcFirst + 17,$/;"	kind:v	language:C++
+hcWriteCode	fdconsts.h	/^   hcWriteCode     = hcFirst + 13,$/;"	kind:v	language:C++
+hcWriteFunc	fdconsts.h	/^   hcWriteFunc     = hcFirst + 14,$/;"	kind:v	language:C++
+hcWriteUnit	fdconsts.h	/^   hcWriteUnit     = hcFirst + 15,$/;"	kind:v	language:C++
+helpCtx	dsgdata.h	/^   ushort helpCtx;$/;"	kind:m	language:C++	struct:TDefaultData
+helpCtxFileSig	strmoper.h	26;"	kind:d	language:C++
+hintsDataFileSig	strmoper.h	28;"	kind:d	language:C++
+i	libtest.mak	/^RHIDE_COMPILE.c.i=$(subst -c $(SOURCE_NAME),-E\\$/;"	kind:m	language:Make
+identMatch	consted.cc	/^static Boolean identMatch(void * item, void * ident)$/;"	kind:f	language:C++	file:
+ifLabel	codebldr.cc	/^const char * ifLabel(TDsgObj * aObj)$/;"	kind:f	language:C++
+ifScroll	codebldr.cc	/^const char * ifScroll(TDsgObj * aObj)$/;"	kind:f	language:C++
+ii	libtest.mak	/^RHIDE_COMPILE.C.ii=$(RHIDE_COMPILE.cc.ii)$/;"	kind:m	language:Make
+ii	libtest.mak	/^RHIDE_COMPILE.cc.ii=$(subst -c $(SOURCE_NAME),-E\\$/;"	kind:m	language:Make
+ii	libtest.mak	/^RHIDE_COMPILE.cpp.ii=$(RHIDE_COMPILE.cc.ii)$/;"	kind:m	language:Make
+ii	libtest.mak	/^RHIDE_COMPILE.cxx.ii=$(RHIDE_COMPILE.cc.ii)$/;"	kind:m	language:Make
+ii	libtest.mak	/^RHIDE_TYPED_LIBS.ii=$(RHIDE_TYPED_LIBS.cc)$/;"	kind:m	language:Make
+index	propedit.cc	/^   int index;$/;"	kind:m	language:C++	class:TStructMap	file:
+initFile	strmoper.cc	/^ofpstream * initFile(const char * FileName, char * current, char * Signature)$/;"	kind:f	language:C++
+initFrame	dsgobjs.cc	/^TFrame * TDDialog::initFrame( TRect r ) { return new TDFrame(r); }$/;"	kind:f	language:C++	class:TDDialog
+initFrame	tappwnd.cc	/^TFrame * TAppWindow::initFrame(TRect r)$/;"	kind:f	language:C++	class:TAppWindow
+initMenuBar	freedsgn.cc	/^TMenuBar * TFreeDsgnApp::initMenuBar( TRect r )$/;"	kind:f	language:C++	class:TFreeDsgnApp
+initStatusLine	freedsgn.cc	/^TStatusLine * TFreeDsgnApp::initStatusLine( TRect r )$/;"	kind:f	language:C++	class:TFreeDsgnApp
+itemForLine	propedit.cc	/^const TStructMap * itemForLine(int line, const TStructMap * Map)$/;"	kind:f	language:C++
+items	consted.h	/^   TConstCollection * items;$/;"	kind:m	language:C++	class:TIntConstListBox
+items	dsgdata.h	/^   void * items;$/;"	kind:m	language:C++	struct:TDClusterData
+keyPut	dsgobjs.cc	/^static bool keyPut = false;$/;"	kind:v	language:C++	file:
+l	libtest.mak	/^RHIDE_TYPED_LIBS.l=fl$/;"	kind:m	language:Make
+label	propedit.cc	/^   char * label;$/;"	kind:m	language:C++	class:TStructMap	file:
+link	dsgdata.h	/^   TNameStr link;$/;"	kind:m	language:C++	struct:TDLabelData
+linkChangedName	propedit.cc	/^void TLinkList::linkChangedName(char * oldName, char * newName)$/;"	kind:f	language:C++	class:TLinkList
+linkFind	propedit.cc	/^TDsgLink * TLinkList::linkFind(char * aName) \/\/ Look for a label$/;"	kind:f	language:C++	class:TLinkList
+listName	consted.h	/^   char * listName;$/;"	kind:m	language:C++	class:TConstCollection
+lmessageBox	tappwnd.cc	/^int lmessageBox(const char * msg, TGroup * aOwner)$/;"	kind:f	language:C++
+loadFromFile	dsgobjs.cc	/^Boolean TDDialog::loadFromFile(const char * FileName)$/;"	kind:f	language:C++	class:TDDialog
+m	libtest.mak	/^RHIDE_TYPED_LIBS.m=objc$/;"	kind:m	language:Make
+main	freedsgn.cc	/^int main()$/;"	kind:f	language:C++
+matchDsgObj	propedit.cc	/^static Boolean matchDsgObj(void * link, void * dsgObj)$/;"	kind:f	language:C++	file:
+matchLabel	propedit.cc	/^static Boolean matchLabel(void * link, void * aLink)$/;"	kind:f	language:C++	file:
+matchScroll	propedit.cc	/^static Boolean matchScroll(void * link, void * aName)$/;"	kind:f	language:C++	file:
+matchView	propedit.cc	/^static Boolean matchView(void * link, void * view)$/;"	kind:f	language:C++	file:
+maxLen	dsgdata.h	/^   int maxLen;$/;"	kind:m	language:C++	struct:TDInputData
+menuBar	dsgobjs.h	/^   TMenuBar * menuBar;$/;"	kind:m	language:C++	class:TAppWindow
+menuFileSig	strmoper.h	23;"	kind:d	language:C++
+modified	dsgobjs.h	/^   Boolean modified;$/;"	kind:m	language:C++	class:TDDialog
+nameIndex	dsgobjs.h	/^   int nameIndex;$/;"	kind:m	language:C++	class:TDsgObj
+next	propedit.cc	/^   TStructMap * next;$/;"	kind:m	language:C++	class:TStructMap	file:
+o	libtest.mak	/^RHIDE_COMPILE.C.o=$(RHIDE_COMPILE.cc.o)$/;"	kind:m	language:Make
+o	libtest.mak	/^RHIDE_COMPILE.F.o=$(RHIDE_COMPILE.f.o)$/;"	kind:m	language:Make
+o	libtest.mak	/^RHIDE_COMPILE.adb.o=$(RHIDE_COMPILE_ADA)$/;"	kind:m	language:Make
+o	libtest.mak	/^RHIDE_COMPILE.asm.o=$(RHIDE_COMPILE.nsm.o)$/;"	kind:m	language:Make
+o	libtest.mak	/^RHIDE_COMPILE.c.o=$(RHIDE_COMPILE_C)$/;"	kind:m	language:Make
+o	libtest.mak	/^RHIDE_COMPILE.cc.o=$(RHIDE_COMPILE_CC)$/;"	kind:m	language:Make
+o	libtest.mak	/^RHIDE_COMPILE.cpp.o=$(RHIDE_COMPILE.cc.o)$/;"	kind:m	language:Make
+o	libtest.mak	/^RHIDE_COMPILE.cxx.o=$(RHIDE_COMPILE.cc.o)$/;"	kind:m	language:Make
+o	libtest.mak	/^RHIDE_COMPILE.f.o=$(RHIDE_COMPILE_FORTRAN)$/;"	kind:m	language:Make
+o	libtest.mak	/^RHIDE_COMPILE.for.o=$(RHIDE_COMPILE.f.o)$/;"	kind:m	language:Make
+o	libtest.mak	/^RHIDE_COMPILE.fpp.o=$(RHIDE_COMPILE.f.o)$/;"	kind:m	language:Make
+o	libtest.mak	/^RHIDE_COMPILE.nsm.o=$(RHIDE_COMPILE_NASM)$/;"	kind:m	language:Make
+o	libtest.mak	/^RHIDE_COMPILE.p.o=$(RHIDE_COMPILE_PASCAL)$/;"	kind:m	language:Make
+o	libtest.mak	/^RHIDE_COMPILE.pas.o=$(RHIDE_COMPILE.p.o)$/;"	kind:m	language:Make
+o	libtest.mak	/^RHIDE_COMPILE.pp.o=$(RHIDE_COMPILE_FPC)$/;"	kind:m	language:Make
+o	libtest.mak	/^RHIDE_COMPILE.s.o=$(RHIDE_COMPILE_ASM)$/;"	kind:m	language:Make
+object	propedit.h	/^   TDsgObj * object;$/;"	kind:m	language:C++	class:TObjEdit
+offset	propedit.cc	/^   int offset;$/;"	kind:m	language:C++	class:TStructMap	file:
+openFile	strmoper.cc	/^ifpstream * openFile(const char * FileName, char * Signature)$/;"	kind:f	language:C++
+operator +	propedit.cc	/^TStructMap& operator + ( TStructMap& map1, TStructMap& map2 )$/;"	kind:f	language:C++
+options	dsgdata.h	/^   ushort options;$/;"	kind:m	language:C++	struct:TDefaultData
+outOfMemory	freedsgn.cc	/^void TFreeDsgnApp::outOfMemory()$/;"	kind:f	language:C++	class:TFreeDsgnApp
+p	libtest.mak	/^RHIDE_TYPED_LIBS.p=$(RHIDE_TYPED_LIBS_$(PASCAL_TYPE))$/;"	kind:m	language:Make
+pas	libtest.mak	/^RHIDE_TYPED_LIBS.pas=$(RHIDE_TYPED_LIBS.p)$/;"	kind:m	language:Make
+pp	libtest.mak	/^RHIDE_TYPED_LIBS.pp=$(RHIDE_TYPED_LIBS_FPC)$/;"	kind:m	language:Make
+prev	propedit.cc	/^   TStructMap * prev;$/;"	kind:m	language:C++	class:TStructMap	file:
+readDsgInfo	dsgobjs.cc	/^void * readDsgInfo( ipstream& s, TViewType vt )$/;"	kind:f	language:C++
+readItem	consted.h	/^   virtual void * readItem(ipstream&) {return 0;};$/;"	kind:f	language:C++	class:TConstCollection	implementation:virtual
+readItem	dsgobjs.h	/^   virtual void * readItem(ipstream &) { return 0; };$/;"	kind:f	language:C++	class:TEditCollection	implementation:virtual
+readItem	propedit.h	/^   virtual void * readItem(ipstream &) { return 0; };    \/\/ It not need be loaded or...$/;"	kind:f	language:C++	class:TLinkList	implementation:virtual
+readOnly	propedit.cc	/^   bool readOnly;$/;"	kind:m	language:C++	class:TStructMap	file:
+readStrings	dsgobjs.cc	/^void readStrings( ipstream& s, TCollection * c, int limit )$/;"	kind:f	language:C++
+removeMe	propedit.cc	/^void TLinkList::removeMe(TDsgObj * aDsgObj)$/;"	kind:f	language:C++	class:TLinkList
+removeMenuBar	tappwnd.cc	/^void TAppWindow::removeMenuBar()$/;"	kind:f	language:C++	class:TAppWindow
+removeNotify	propedit.cc	/^void TLinkList::removeNotify(TCollection * aCollection, int Index)$/;"	kind:f	language:C++	class:TLinkList
+removeStatusLine	tappwnd.cc	/^void TAppWindow::removeStatusLine()$/;"	kind:f	language:C++	class:TAppWindow
+s	libtest.mak	/^RHIDE_COMPILE.C.s=$(RHIDE_COMPILE.cc.s)$/;"	kind:m	language:Make
+s	libtest.mak	/^RHIDE_COMPILE.c.s=$(subst -c $(SOURCE_NAME),-S\\$/;"	kind:m	language:Make
+s	libtest.mak	/^RHIDE_COMPILE.cc.s=$(subst -c $(SOURCE_NAME),-S\\$/;"	kind:m	language:Make
+s	libtest.mak	/^RHIDE_COMPILE.cpp.s=$(RHIDE_COMPILE.cc.s)$/;"	kind:m	language:Make
+s	libtest.mak	/^RHIDE_COMPILE.cxx.s=$(RHIDE_COMPILE.cc.s)$/;"	kind:m	language:Make
+s	libtest.mak	/^RHIDE_COMPILE.i.s=$(RHIDE_COMPILE.c.s)$/;"	kind:m	language:Make
+s	libtest.mak	/^RHIDE_COMPILE.ii.s=$(RHIDE_COMPILE.cc.s)$/;"	kind:m	language:Make
+s	libtest.mak	/^RHIDE_COMPILE.pas.s=$(RHIDE_COMPILE.pas.s.$(PASCAL_TYPE))$/;"	kind:m	language:Make
+saveObject	dsgobjs.cc	/^static void saveObject(void * v, void * d)$/;"	kind:f	language:C++	file:
+saveToFile	dsgobjs.cc	/^Boolean TDDialog::saveToFile(const char * FileName)$/;"	kind:f	language:C++	class:TDDialog
+sb	propedit.h	/^   TScrollBar * sb;$/;"	kind:m	language:C++	class:TObjEditView
+scrollBar	dsgdata.h	/^   TNameStr scrollBar;$/;"	kind:m	language:C++	struct:TDListBoxData
+scrollCount	codebldr.cc	/^static int scrollCount = 0;$/;"	kind:v	language:C++	file:
+scrollFind	propedit.cc	/^TDsgLink * TLinkList::scrollFind(char * aScroll) \/\/ Look for a ScrollBar$/;"	kind:f	language:C++	class:TLinkList
+separator	propedit.h	/^   int separator;$/;"	kind:m	language:C++	class:TObjEditView
+setData	consted.cc	/^void TIntConstListBox::setData(void * data)$/;"	kind:f	language:C++	class:TIntConstListBox
+setData	propdlgs.cc	/^void TItemsEditor::setData(void * data)$/;"	kind:f	language:C++	class:TItemsEditor
+setMap	propedit.cc	/^void TObjEditView::setMap(const TStructMap * aMap, void * Data)$/;"	kind:f	language:C++	class:TObjEditView
+setMenuBar	tappwnd.cc	/^void TAppWindow::setMenuBar(TEditCollection * aItems)$/;"	kind:f	language:C++	class:TAppWindow
+setMenuBar	tappwnd.cc	/^void TAppWindow::setMenuBar(TMenuBar * aMenuBar)$/;"	kind:f	language:C++	class:TAppWindow
+setModified	dsgobjs.cc	/^void TDDialog::setModified(Boolean aState)$/;"	kind:f	language:C++	class:TDDialog
+setObjData	propedit.cc	/^void TObjEdit::setObjData(TDsgObj * Obj)$/;"	kind:f	language:C++	class:TObjEdit
+setPos	dsgobjs.cc	/^void TDsgObj::setPos(TPoint neworigin, TPoint newsize)$/;"	kind:f	language:C++	class:TDsgObj
+setState	dsgobjs.cc	/^void TDButton::setState(ushort aState, Boolean enable) {_setstate_(TButton); }$/;"	kind:f	language:C++	class:TDButton
+setState	dsgobjs.cc	/^void TDCheckBoxes::setState(ushort aState, Boolean enable)$/;"	kind:f	language:C++	class:TDCheckBoxes
+setState	dsgobjs.cc	/^void TDDialog::setState(ushort aState, Boolean enable)$/;"	kind:f	language:C++	class:TDDialog
+setState	dsgobjs.cc	/^void TDInputLine::setState(ushort aState, Boolean enable)$/;"	kind:f	language:C++	class:TDInputLine
+setState	dsgobjs.cc	/^void TDLabel::setState(ushort aState, Boolean enable) {_setstate_(TLabel); }$/;"	kind:f	language:C++	class:TDLabel
+setState	dsgobjs.cc	/^void TDListBox::setState(ushort aState, Boolean enable) {_setstate_(TListBox); }$/;"	kind:f	language:C++	class:TDListBox
+setState	dsgobjs.cc	/^void TDMemo::setState(ushort aState, Boolean enable) {_setstate_(TMemo); }$/;"	kind:f	language:C++	class:TDMemo
+setState	dsgobjs.cc	/^void TDRadioButtons::setState(ushort aState, Boolean enable)$/;"	kind:f	language:C++	class:TDRadioButtons
+setState	dsgobjs.cc	/^void TDStaticText::setState(ushort aState, Boolean enable)$/;"	kind:f	language:C++	class:TDStaticText
+setState	dsgobjs.cc	/^void THScrollBar::setState(ushort aState, Boolean enable)$/;"	kind:f	language:C++	class:THScrollBar
+setState	dsgobjs.cc	/^void TVScrollBar::setState(ushort aState, Boolean enable)$/;"	kind:f	language:C++	class:TVScrollBar
+setStatusLine	tappwnd.cc	/^void TAppWindow::setStatusLine(TEditCollection * aItems)$/;"	kind:f	language:C++	class:TAppWindow
+setStatusLine	tappwnd.cc	/^void TAppWindow::setStatusLine(TStatusLine * aStatusLine)$/;"	kind:f	language:C++	class:TAppWindow
+setViewData	dsgobjs.cc	/^void TDsgObj::setViewData(TDsgObjData& data)$/;"	kind:f	language:C++	class:TDsgObj
+setupView	dsgobjs.cc	/^void TDsgObj::setupView(TView * View)$/;"	kind:f	language:C++	class:TDsgObj
+sfEditing	dsgobjs.cc	128;"	kind:d	language:C++	file:
+sfLoading	dsgobjs.cc	129;"	kind:d	language:C++	file:
+shutDown	dsgobjs.cc	/^void TDButton::shutDown() { _shutdown_(TButton); }$/;"	kind:f	language:C++	class:TDButton
+shutDown	dsgobjs.cc	/^void TDCheckBoxes::shutDown() { _shutdown_(TCheckBoxes); }$/;"	kind:f	language:C++	class:TDCheckBoxes
+shutDown	dsgobjs.cc	/^void TDDialog::shutDown()$/;"	kind:f	language:C++	class:TDDialog
+shutDown	dsgobjs.cc	/^void TDInputLine::shutDown() { _shutdown_(TInputLine); }$/;"	kind:f	language:C++	class:TDInputLine
+shutDown	dsgobjs.cc	/^void TDLabel::shutDown() { _shutdown_(TLabel); }$/;"	kind:f	language:C++	class:TDLabel
+shutDown	dsgobjs.cc	/^void TDListBox::shutDown() { _shutdown_(TListBox); }$/;"	kind:f	language:C++	class:TDListBox
+shutDown	dsgobjs.cc	/^void TDMemo::shutDown() { _shutdown_(TMemo); }$/;"	kind:f	language:C++	class:TDMemo
+shutDown	dsgobjs.cc	/^void TDRadioButtons::shutDown() { _shutdown_(TRadioButtons); }$/;"	kind:f	language:C++	class:TDRadioButtons
+shutDown	dsgobjs.cc	/^void TDStaticText::shutDown() { _shutdown_(TStaticText); }$/;"	kind:f	language:C++	class:TDStaticText
+shutDown	dsgobjs.cc	/^void THScrollBar::shutDown() { _shutdown_(TScrollBar); }$/;"	kind:f	language:C++	class:THScrollBar
+shutDown	dsgobjs.cc	/^void TVScrollBar::shutDown() { _shutdown_(TScrollBar); }$/;"	kind:f	language:C++	class:TVScrollBar
+sizeLimits	dsgobjs.cc	/^void TDButton::sizeLimits(TPoint& min, TPoint& max)$/;"	kind:f	language:C++	class:TDButton
+sizeLimits	dsgobjs.cc	/^void TDCheckBoxes::sizeLimits(TPoint& min, TPoint& max)$/;"	kind:f	language:C++	class:TDCheckBoxes
+sizeLimits	dsgobjs.cc	/^void TDInputLine::sizeLimits(TPoint& min, TPoint& max)$/;"	kind:f	language:C++	class:TDInputLine
+sizeLimits	dsgobjs.cc	/^void TDLabel::sizeLimits(TPoint& min, TPoint& max)$/;"	kind:f	language:C++	class:TDLabel
+sizeLimits	dsgobjs.cc	/^void TDListBox::sizeLimits(TPoint& min, TPoint& max)$/;"	kind:f	language:C++	class:TDListBox
+sizeLimits	dsgobjs.cc	/^void TDMemo::sizeLimits(TPoint& min, TPoint& max)$/;"	kind:f	language:C++	class:TDMemo
+sizeLimits	dsgobjs.cc	/^void TDRadioButtons::sizeLimits(TPoint& min, TPoint& max)$/;"	kind:f	language:C++	class:TDRadioButtons
+sizeLimits	dsgobjs.cc	/^void TDStaticText::sizeLimits(TPoint& min, TPoint& max)$/;"	kind:f	language:C++	class:TDStaticText
+sizeLimits	dsgobjs.cc	/^void THScrollBar::sizeLimits(TPoint& min, TPoint& max)$/;"	kind:f	language:C++	class:THScrollBar
+sizeLimits	dsgobjs.cc	/^void TVScrollBar::sizeLimits(TPoint& min, TPoint& max)$/;"	kind:f	language:C++	class:TVScrollBar
+sort	consted.cc	/^void TConstCollection::sort(int mode)$/;"	kind:f	language:C++	class:TConstCollection
+sort	propedit.cc	/^void TLinkList::sort(ccSortFunc Compare)$/;"	kind:f	language:C++	class:TLinkList
+sortForBuild	propedit.cc	/^void TLinkList::sortForBuild()$/;"	kind:f	language:C++	class:TLinkList
+sortmode	consted.h	/^   int sortmode;$/;"	kind:m	language:C++	class:TConstCollection
+srcBuffer	freedsgn.cc	/^    TEditor * srcBuffer;$/;"	kind:m	language:C++	class:TFreeDsgnApp	file:
+srcWindow	freedsgn.cc	/^    TWindow * srcWindow;$/;"	kind:m	language:C++	class:TFreeDsgnApp	file:
+state	dsgdata.h	/^   ushort state;$/;"	kind:m	language:C++	struct:TDefaultData
+statusLine	dsgobjs.h	/^   TStatusLine * statusLine;$/;"	kind:m	language:C++	class:TAppWindow
+statusLineFileSig	strmoper.h	24;"	kind:d	language:C++
+strCollToItems	dsgobjs.cc	/^TSItem * strCollToItems(TStringCollection * strs)$/;"	kind:f	language:C++
+strbuf	propdlgs.cc	/^static char strbuf[1024];$/;"	kind:v	language:C++	file:
+tabOrder	dsgdata.h	/^   int tabOrder;$/;"	kind:m	language:C++	struct:TDButtonData
+tabOrder	dsgdata.h	/^   int tabOrder;$/;"	kind:m	language:C++	struct:TDClusterData
+tabOrder	dsgdata.h	/^   int tabOrder;$/;"	kind:m	language:C++	struct:TDInputData
+tabOrder	dsgdata.h	/^   int tabOrder;$/;"	kind:m	language:C++	struct:TDListBoxData
+tabOrder	dsgdata.h	/^   int tabOrder;$/;"	kind:m	language:C++	struct:TDMemoData
+tabOrder	dsgdata.h	/^  int tabOrder;$/;"	kind:m	language:C++	struct:TDsgObjData
+tabStop	dsgobjs.cc	/^bool TDsgObj::tabStop()$/;"	kind:f	language:C++	class:TDsgObj
+text	dsgdata.h	/^   TNameStr text;$/;"	kind:m	language:C++	struct:TDLabelData
+text	dsgdata.h	/^   char * text;$/;"	kind:m	language:C++	struct:TDStaticData
+title	dsgdata.h	/^   TNameStr title;$/;"	kind:m	language:C++	struct:TDButtonData
+title	dsgdata.h	/^  TTitleStr title;$/;"	kind:m	language:C++	struct:TDDialogData
+v	propedit.h	/^  TView * v;$/;"	kind:m	language:C++	struct:TDsgLink
+vScroll	dsgdata.h	/^   TNameStr vScroll;$/;"	kind:m	language:C++	struct:TDMemoData
+validatorData	dsgdata.h	/^   TNameStr validatorData;$/;"	kind:m	language:C++	struct:TDInputData
+validatorType	dsgdata.h	/^   ushort validatorType;$/;"	kind:m	language:C++	struct:TDInputData
+valueMatch	consted.cc	/^static Boolean valueMatch(void * item, void *value)$/;"	kind:f	language:C++	file:
+viewBuffer	freedsgn.cc	/^void TFreeDsgnApp::viewBuffer(TMemoData& rec)$/;"	kind:f	language:C++	class:TFreeDsgnApp
+viewCreate	codebldr.cc	/^void viewCreate(TDsgObj * aObj, const char * aConstructor, char * to)$/;"	kind:f	language:C++
+viewFind	propedit.cc	/^TDsgLink * TLinkList::viewFind(void * aView) \/\/ by View$/;"	kind:f	language:C++	class:TLinkList
+viewType	dsgobjs.h	/^   TViewType viewType;$/;"	kind:m	language:C++	class:TDsgObj
+vpath_header	libtest.mak	/^vpath_header=$(TVSRC)$/;"	kind:m	language:Make
+vtAttrSize	dsgobjs.cc	/^static int vtAttrSize[vtDialog + 1] = { sizeof(TDsgObjData),$/;"	kind:v	language:C++	file:
+vtButton	dsgobjs.h	/^   vtButton, vtListBox, vtRadioButton, vtCheckBox, vtVScroll, vtHScroll,$/;"	kind:e	language:C++	enum:TViewType
+vtCheckBox	dsgobjs.h	/^   vtButton, vtListBox, vtRadioButton, vtCheckBox, vtVScroll, vtHScroll,$/;"	kind:e	language:C++	enum:TViewType
+vtCurrent	propedit.h	/^   int vtCurrent;$/;"	kind:m	language:C++	class:TObjEditView
+vtDialog	dsgobjs.h	/^   vtDialog };$/;"	kind:e	language:C++	enum:TViewType
+vtHScroll	dsgobjs.h	/^   vtButton, vtListBox, vtRadioButton, vtCheckBox, vtVScroll, vtHScroll,$/;"	kind:e	language:C++	enum:TViewType
+vtInput	dsgobjs.h	/^enum TViewType { vtNone = -1, vtOther, vtLabel, vtInput, vtMemo, vtStatic,$/;"	kind:e	language:C++	enum:TViewType
+vtLabel	dsgobjs.h	/^enum TViewType { vtNone = -1, vtOther, vtLabel, vtInput, vtMemo, vtStatic,$/;"	kind:e	language:C++	enum:TViewType
+vtListBox	dsgobjs.h	/^   vtButton, vtListBox, vtRadioButton, vtCheckBox, vtVScroll, vtHScroll,$/;"	kind:e	language:C++	enum:TViewType
+vtMemo	dsgobjs.h	/^enum TViewType { vtNone = -1, vtOther, vtLabel, vtInput, vtMemo, vtStatic,$/;"	kind:e	language:C++	enum:TViewType
+vtNone	dsgobjs.h	/^enum TViewType { vtNone = -1, vtOther, vtLabel, vtInput, vtMemo, vtStatic,$/;"	kind:e	language:C++	enum:TViewType
+vtOther	dsgobjs.h	/^enum TViewType { vtNone = -1, vtOther, vtLabel, vtInput, vtMemo, vtStatic,$/;"	kind:e	language:C++	enum:TViewType
+vtRadioButton	dsgobjs.h	/^   vtButton, vtListBox, vtRadioButton, vtCheckBox, vtVScroll, vtHScroll,$/;"	kind:e	language:C++	enum:TViewType
+vtStatic	dsgobjs.h	/^enum TViewType { vtNone = -1, vtOther, vtLabel, vtInput, vtMemo, vtStatic,$/;"	kind:e	language:C++	enum:TViewType
+vtVScroll	dsgobjs.h	/^   vtButton, vtListBox, vtRadioButton, vtCheckBox, vtVScroll, vtHScroll,$/;"	kind:e	language:C++	enum:TViewType
+writeItem	consted.h	/^   virtual void writeItem(void *, opstream&) { };$/;"	kind:f	language:C++	class:TConstCollection	implementation:virtual
+writeItem	dsgobjs.h	/^   virtual void writeItem(void *, opstream &) { };$/;"	kind:f	language:C++	class:TEditCollection	implementation:virtual
+writeItem	propedit.h	/^   virtual void writeItem(void *, opstream &) { }; \/\/ saved$/;"	kind:f	language:C++	class:TLinkList	implementation:virtual
+~TAppWindow	tappwnd.cc	/^TAppWindow::~TAppWindow()$/;"	kind:f	language:C++	class:TAppWindow
+~TConstCollection	consted.cc	/^TConstCollection::~TConstCollection()$/;"	kind:f	language:C++	class:TConstCollection
+~TDsgObj	dsgobjs.cc	/^TDsgObj::~TDsgObj()$/;"	kind:f	language:C++	class:TDsgObj
+~TStructMap	propedit.cc	/^TStructMap::~TStructMap()$/;"	kind:f	language:C++	class:TStructMap

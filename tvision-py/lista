@@ -1,6 +1,11 @@
 borland.txt
 change.log
 change1.log
+classes/alcon/alcon.cc
+classes/alcon/alcondis.cc
+classes/alcon/alconkey.cc
+classes/alcon/alconmouse.cc
+classes/alcon/alconscr.cc
 classes/calcdisp.cc
 classes/calculat.cc
 classes/codepage.cc
@@ -74,6 +79,7 @@ classes/tinputli.cc
 classes/tlabel.cc
 classes/tlistbox.cc
 classes/tlistvie.cc
+classes/tlookupv.cc
 classes/tmemo.cc
 classes/tmenubar.cc
 classes/tmenubox.cc
@@ -89,6 +95,7 @@ classes/parttree.cc
 classes/tpoint.cc
 classes/tprogini.cc
 classes/tprogram.cc
+classes/tpxvalid.cc
 classes/tpwobj.cc
 classes/tpwreado.cc
 classes/tpwritte.cc
@@ -124,6 +131,10 @@ classes/linux/linuxdis.cc
 classes/linux/linuxkey.cc
 classes/linux/linuxmouse.cc
 classes/linux/linuxscr.cc
+classes/qnx4/qnx4dis.cc
+classes/qnx4/qnx4key.cc
+classes/qnx4/qnx4mouse.cc
+classes/qnx4/qnx4scr.cc
 classes/qnxrtp/qnxdis.cc
 classes/qnxrtp/qnxkey.cc
 classes/qnxrtp/qnxmouse.cc
@@ -206,6 +217,7 @@ copying
 copying.rh
 debian/.cvsignore
 debian/README
+debian/README
 debian/README.debian
 +debian/buildpackage
 debian/changelog
@@ -226,6 +238,7 @@ debian/watch.ex
 djgpp/compress.pl
 +djgpp/distlist
 djgpp/tmp/delete.me
+doc/Alcon.txt
 doc/ConfigFile.txt
 doc/CodePages.txt
 doc/DOS.txt
@@ -240,6 +253,7 @@ doc/install/mingwin.txt
 doc/install/msvc.txt
 doc/install/tools.txt
 doc/install/unix.txt
+doc/install/watcom.txt
 -doc/libdocs.epr
 doc/Linux.txt
 doc/QNX.txt
@@ -350,6 +364,7 @@ examples/fonts/genraw.cc
 examples/fonts/rhide.env
 examples/fonts/test.cc
 -examples/fonts/test.gpr
+examples/gen_mkf.pl
 examples/helpdemo/helpdemo.cc
 -examples/helpdemo/helpdemo.gpr
 examples/helpdemo/rhide.env
@@ -498,6 +513,10 @@ include/cl/glob.h
 include/cl/utime.h
 include/cl/utsname.h
 include/compatlayer.h
+include/tv/alcon/alcon.h
+include/tv/alcon/key.h
+include/tv/alcon/mouse.h
+include/tv/alcon/screen.h
 include/tv/calc.h
 include/tv/codepage.h
 include/tv/configtv.h
@@ -606,6 +625,9 @@ include/tv/preadobj.h
 include/tv/program.h
 include/tv/pstream.h
 include/tv/pwritobj.h
+include/tv/qnx4/key.h
+include/tv/qnx4/mouse.h
+include/tv/qnx4/screen.h
 include/tv/qnxrtp/key.h
 include/tv/qnxrtp/mouse.h
 include/tv/qnxrtp/screen.h
@@ -669,6 +691,7 @@ intl/es.po
 intl/gnumake.in
 intl/Makefile
 intl/tvision.po
+intl/pl.po
 intl/ru.po
 +linux/compress
 linux/inclubin.txt
@@ -676,10 +699,16 @@ linux/includbi.txt
 +linux/sacadeb
 Makefile.bcc
 Makefile.in
+Makefile.nmk
+Makefile.wat
 makes/blink.c
 makes/common.bmk
 makes/common.imk
+makes/common.nmk
+makes/common.wat
 makes/config.bcc
+makes/config.nmk
+makes/config.wat
 makes/extrimk.cc
 makes/genimk.cc
 makes/includer.bmk
@@ -690,6 +719,8 @@ makes/librhtv.imk
 makes/librhtv.mkf
 makes/librhtv.umk
 makes/maintain.mak
+makes/mlink.c
+makes/rhide.env
 makes/obj/delete.me                                                             
 misc.cc
 miscperl.pl
@@ -729,12 +760,14 @@ names/ninputli.cc
 names/nlabel.cc
 names/nlistbox.cc
 names/nlistvie.cc
+names/nlookupv.cc
 names/nmemo.cc
 names/nmenubar.cc
 names/nmenubox.cc
 names/nmenuvie.cc
 names/nmonosel.cc
 names/nparamte.cc
+names/npxvalid.cc
 names/nradiobu.cc
 names/nrangeva.cc
 names/nresourc.cc
@@ -751,6 +784,7 @@ names/nview.cc
 names/nwindow.cc
 newstr.cc
 qnxrtp/tvision.qpg
+qnxrtp/tvision.qpg.in
 readme.in
 readme.txt
 redhat/config-rpm.sh
@@ -795,12 +829,14 @@ stream/sinputli.cc
 stream/slabel.cc
 stream/slistbox.cc
 stream/slistvie.cc
+stream/slookupv.cc
 stream/smemo.cc
 stream/smenubar.cc
 stream/smenubox.cc
 stream/smenuvie.cc
 stream/smonosel.cc
 stream/sparamte.cc
+stream/spxvalid.cc
 stream/sradiobu.cc
 stream/srangeva.cc
 stream/sresourc.cc

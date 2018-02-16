@@ -1,0 +1,60 @@
+/TODO/1.3/Thu Sep 12 18:10:35 2002//Tr2_0_1u
+/borland.txt/1.1.1.1/Mon Dec 14 22:03:08 1998//Tr2_0_1u
+/change1.log/1.1/Sat Nov 24 23:10:37 2001//Tr2_0_1u
+/configure.bat/1.3/Sun Sep 12 19:47:55 1999//Tr2_0_1u
+/copying/1.1.1.1/Mon Dec 14 22:03:08 1998//Tr2_0_1u
+/copying.rh/1.2/Sat Aug  7 21:30:11 1999//Tr2_0_1u
+/drivers2.cc/1.4/Sat Aug 14 02:13:32 1999//Tr2_0_1u
+/dual.cc/1.5/Tue Jul  2 19:06:16 2002//Tr2_0_1u
+/fromdos.pl/1.2/Mon Dec 14 23:36:31 1998/-kb/Tr2_0_1u
+/fromunix.pl/1.2/Mon Dec 14 23:36:31 1998//Tr2_0_1u
+/miscperl.pl/1.3/Thu Sep 20 01:12:33 2001//Tr2_0_1u
+/searchstrs.sh/1.1/Mon Oct  7 15:22:35 2002//Tr2_0_1u
+/snapshot.pl/1.2/Tue Sep  7 01:12:28 1999//Tr2_0_1u
+/.cvsignore/1.4.4.1/Fri May 23 13:12:44 2003//Tr2_0_1u
+/configset.bat/1.4.2.2/Mon Jun  2 13:56:34 2003//Tr2_0_1u
+/readme.in/1.17.2.3/Thu Jun 26 19:01:55 2003//Tr2_0_1u
+/lista.dos/1.7.2.1/Mon Jun 30 13:02:14 2003//Tr2_0_1u
+/update.bat/1.1.2.1/Sat Jun 28 13:42:54 2003//Tr2_0_1u
+/configure/1.6.2.2/Mon Jul 28 16:11:48 2003//Tr2_0_1u
+/THANKS/2.5.2.1/Mon Dec  1 18:55:14 2003//Tr2_0_1u
+D/classes////
+D/compat////
+D/debian////
+D/djgpp////
+D/doc////
+D/examples////
+D/extra////
+D/include////
+D/intl////
+D/linux////
+D/linuxso////
+D/makes////
+D/names////
+D/qnxrtp////
+D/redhat////
+D/stream////
+D/win32////
+D/winnt////
+D/www-site////
+/update/1.1.2.2/Mon Jun 14 16:32:21 2004//Tr2_0_1u
+/Makefile.in/1.7.2.8/Tue Oct 12 18:07:44 2004//Tr2_0_1u
+/Makefile.nmk/1.1.2.2/Tue Nov  2 13:55:19 2004//Tr2_0_1u
+/configset/1.5.2.9/Fri Jul  8 20:12:27 2005//Tr2_0_1u
+/histlist.cc/1.8.4.4/Tue Aug  2 14:19:46 2005//Tr2_0_1u
+/misc.cc/1.2.8.1/Mon Aug  1 21:07:51 2005//Tr2_0_1u
+/msgbox.cc/1.5.2.7/Mon Aug  1 21:08:56 2005//Tr2_0_1u
+/INSTALL.txt/1.1.2.3/Tue Sep 20 14:41:41 2005//Tr2_0_1u
+/Makefile.wat/1.1.2.4/Fri Sep 23 15:06:04 2005//Tr2_0_1u
+/Makefile.bcc/1.1.2.9/Fri Sep 23 15:06:04 2005//Tr2_0_1u
+/fileview.cc/1.12.2.8/Tue Mar 21 18:47:08 2006//Tr2_0_1u
+/rhtv-config.c/1.1.2.6/Tue Feb 26 13:59:19 2008//Tr2_0_1u
+/newstr.cc/1.3.4.1/Wed Feb 25 13:04:21 2009//Tr2_0_1u
+/lista/1.109.2.36/Tue Jun 23 17:17:38 2009//Tr2_0_1u
+/readme.txt/1.44.2.7/Wed Jul 14 13:11:09 2010//Tr2_0_1u
+/version.txt/1.9.2.6/Wed Jul 14 12:58:52 2010//Tr2_0_1u
+/rhide.env/1.1.8.1/Mon Mar 19 14:19:51 2012//Tr2_0_1u
+/conflib.pl/1.35.2.25/Mon Feb 25 12:28:27 2013//Tr2_0_1u
+/confignt.pl/1.4.2.1/Wed May 27 14:09:18 2015//Tr2_0_1u
+/config.pl/1.86.2.52/Wed May 27 13:41:57 2015//Tr2_0_1u
+/change.log/2.399.2.392/Thu Nov 17 18:47:21 2016//Tr2_0_1u

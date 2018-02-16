@@ -6,6 +6,7 @@
  *
 
 Modified by Robert H”hne to be used for RHIDE.
+Modified by Salvador E. Tropea.
 
  *
  *
@@ -19,6 +20,12 @@ Modified by Robert H”hne to be used for RHIDE.
 // Avoid replacing new by MSS's macro
 #include <tv/no_mss.h>
 
+// SET: MSVC 7.1 is even more stupid than previous versions and we must
+// disable this misleading warning.
+#ifdef TVComp_MSC
+ #pragma warning( disable : 4291 )
+#endif
+
 class HistRec
 {
     
@@ -28,6 +35,12 @@ public:
 
     void *operator new( size_t );
     void *operator new( size_t, HistRec * );
+    // SET: This class can't be "deleted", is just some kind of "cast" to
+    // interpret a buffer as a list of elements, some kind of "heap helper".
+    // MSVC compiler worries about the fact that it oveloads new but
+    // doesn't overload delete. So we just make clear that delete isn't
+    // valid.
+    void  operator delete( void * ) { abort(); };
 
     uchar id;
     uchar len;
@@ -98,7 +111,7 @@ void deleteString()
     // This insures that if n = lastRec, no bytes are copied and
     // a GPF is prevented.
     HistRec *n = next(curRec);
-    memcpy(curRec, n, size_t((char *)lastRec - (char *)n));
+    CLY_memcpy(curRec, n, size_t((char *)lastRec - (char *)n));
 
     lastRec = backup( lastRec, len );
 }

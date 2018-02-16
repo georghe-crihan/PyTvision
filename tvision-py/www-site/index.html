@@ -6,7 +6,7 @@
    <meta name="keywords" content="Turbo Vision, TVision, tvision, rhtvision, turbo, vision, TUI, tui, linux, djgpp, library, download, rhide, setedit, SET">
    <meta name="resource-type" content="document">
    <meta name="distribution" content="global">
-   <meta name="Author" content="Salvador E. Tropea, set@users.sourceforge.net">
+   <meta name="Author" content="Salvador E. Tropea, set at host users.sourceforge.net">
    <meta http-equiv="Content-Style-Type" content="text/css">
    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
    <link rel=stylesheet type="text/css" href="sf.css">
@@ -21,9 +21,11 @@
  <div class=s3>port to the GNU compiler and more</div>
 </td>
 <td align=right>
- <A class=invis href="http://sourceforge.net">
- <IMG src="http://sourceforge.net/sflogo.php?group_id=49571"
-  width="88" height="31" alt="SourceForge Logo"></A>
+ <a class=invis href="http://sourceforge.net/projects/tvision">
+  <img src="http://sflogo.sourceforge.net/sflogo.php?group_id=49571&amp;type=11"
+  width="120" height="30"
+  alt="Get Turbo Vision at SourceForge.net. Fast, secure and Free Open Source software downloads">
+ </a>
 </td>
 </tr>
 </table>
@@ -58,6 +60,11 @@
 </ul>
 
 <p><hr><p>
+<b>Version 2.0.3 release candidate 1 is available.</b>
+<b>Mike and Frank are working on the QNX 4 port, here is an snapshot of TV
+running on pterm (qnx terminal emulator) with TV running in it under
+Photon 1.14</b>
+<a href="tvQNX-pterm-photon.jpg">tvQNX-pterm-photon.jpg (134 KB)</a><p>
 <b>Snapshot of the r2_0_1u CVS branch using Unicode:</b>
 <a href="snapUni.jpg">snapUni.jpg (344 KB)</a><p>
 <b>Another snapshot this time including some japanese text:</b>
@@ -83,8 +90,7 @@ for your TurboC and TurboPascal compilers. Around 1997 the masive use of the
 Window GUI make the product relative obsolete for commercialization and
 Borland put the sources in your ftp site, only the C++ version was released.
 Later they even authorized to the FPC group to use the Pascal sources.<br>
-<a href="mailto:robert.hoehne@gmx.net">Robert H&ouml;hne</a> ported it to
-the <a href="http://www.delorie.com">djgpp</a>
+Robert H&ouml;hne ported it to the <a href="http://www.delorie.com">djgpp</a>
 toolkit to develope an IDE (Integrated Development Environment) similar to
 the Borland's BC++ 3.1 but for djgpp. DJGPP is based on the GNU compiler gcc.<br>
 I contributed some classes (the editor and help system) to the RHIDE project
@@ -98,7 +104,7 @@ because we want a library better than the original and not with the limititation
 imposed by the original 16 bits version and the huge security holes that are
 unacceptable.<br>
 For Win32 you can use BC++ 5.5, Cygwin, MinGW or MSVC.<br>
-<a href="mailto:ssigala@globalnet.it">Sergio Sigala</a> made a port to Linux and
+<a href="mailto:ssigala at host globalnet.it">Sergio Sigala</a> made a port to Linux and
 FreeBSD with "100% of compatibility with the old version" as goal. The v0.8
 of this port can be found in <a href="ftp://sunsite.unc.edu/pub/Linux/devel/lang/c++/tvision-0.8.tar.gz">Sunsite</a>.<br>
 <a href="tv2-QNX-tvscreen.jpg">Screenshot</a> of Turbo Vision running on QNX (+Photon). It was
@@ -122,9 +128,9 @@ technical support in the net) said me the FAQ was right.
 <a name="doc"></a><h3>Documentation</h3>
 <p>Borland never released the docs so I don't know if I can distribute the original
 documentation.<br>
-Sergio Sigala have some
-<a href="http://web.tiscali.it/ssigala/sergio/tvision/html/index.html">documentation</a> in
-your port.<br>
+Sergio Sigala has some
+<a href="http://www.sigala.it/sergio/tvision/">documentation</a> in
+his port.<br>
 Additionally you'll find a <i>doc</i> directory in the sources containing documentation
 about most of the new classes.
 <p>
@@ -133,22 +139,36 @@ about most of the new classes.
 <p><hr><p>
 <a name="down"></a><h2>Download</h2>
 
+<p>
+<a name="ddjgpp"></a><h3>DJGPP, BC++ and MinGW TVision</h3>
+
 <p><b>Important!</b> I'm not providing pre-compiled versions because that's
 usually a source of problems. Libraries compiled with one version of the
 compiler fails to link with others, etc. If you think I should provide
 binaries and have a really good reason just tell me.<p>
 
-<a name="ddjgpp"></a><h3>DJGPP, BC++ and MinGW TVision</h3>
-<p>The 2.0.1 release can be downloaded from here:
-<p>Sources distribution: <a href="http://prdownloads.sourceforge.net/tvision/tv201s.zip">tv201s.zip</a> (Source Forge network)<br>
-or in the Simtelnet network: <a href="http://www.simtel.net/pub/djgpp/v2tk/">http://www.simtel.net/pub/djgpp/v2tk/</a>
+<p>The 2.0.3 release can be downloaded from here:
+<p>Sources distribution: <a href="http://prdownloads.sourceforge.net/tvision/tv203s.zip">tv203s.zip</a> (Source Forge network)<br>
+
+<p>The 2.0.2 release can be downloaded from here:
+<p>Sources distribution: <a href="http://prdownloads.sourceforge.net/tvision/tv202s.zip">tv202s.zip</a> (Source Forge network)<br>
+<!-- or in the Simtelnet network: <a href="http://www.simtel.net/pub/djgpp/v2tk/">http://www.simtel.net/pub/djgpp/v2tk/</a> -->
+<p>BC++ and "pure DOS" (not emulated by Windows) users please try the following fix: <a href="http://prdownloads.sourceforge.net/tvision/tv202-1s.zip">tv202-1s.zip</a> (Source Forge network)<br>
 <p>
 
 <a name="dlinux"></a><h3>Linux, FreeBSD, Solaris, Cygwin, etc. TVision</h3>
 
-<p>The 2.0.1 release can be downloaded from here</p>
+<p>The 2.0.3 release can be downloaded from here</p>
 <p>
-Sources distribution: 1.1 Mb <a href="http://prdownloads.sourceforge.net/tvision/rhtvision-2.0.1.src.tar.gz">rhtvision-2.0.1.src.tar.gz</a><br>
+Sources distribution: 1.02 Mb <a href="http://prdownloads.sourceforge.net/tvision/rhtvision-2.0.3.src.tar.gz">rhtvision-2.0.3.src.tar.gz</a><br>
+
+<p>The 2.1.0 CVS20070425 pre-release can be downloaded from here</p>
+<p>
+Sources distribution: 1.1 Mb <a href="http://prdownloads.sourceforge.net/tvision/rhtvision-2.1.0-3.src.tar.gz">rhtvision-2.1.0-3.src.tar.gz</a><br>
+
+<p>The 2.0.2 release can be downloaded from here</p>
+<p>
+Sources distribution: 1 Mb <a href="http://prdownloads.sourceforge.net/tvision/rhtvision-2.0.2.src.tar.gz">rhtvision-2.0.2.src.tar.gz</a><br>
 
 <!-- Linux Software Map entry: <a href="rhtvision.txt">rhtvision.txt</a><br> -->
 <p>
@@ -156,6 +176,121 @@ Sources distribution: 1.1 Mb <a href="http://prdownloads.sourceforge.net/tvision
 <A href="http://sourceforge.net/projects/tvision/">
 http://sourceforge.net/projects/tvision/
 </a>
+<br>
+Here are some packages:<p>
+
+<p>Debian GNU/Linux</p>
+<ul>
+<li><a href="http://prdownloads.sourceforge.net/tvision/rhtvision2.1.0_2.1.0-3etch_i386.deb">2.1.0 CVS20070425 for Etch 4.0 (i386)</a> -
+<a href="http://prdownloads.sourceforge.net/tvision/rhtvision2.1.0-dev_2.1.0-3etch_i386.deb">Development</a><br>
+
+<li><a href="http://prdownloads.sourceforge.net/tvision/rhtvision2.1.0_2.1.0-2_amd64.deb">2.1.0 CVS20070425 for Etch 4.0 (AMD64)</a> -
+<a href="http://prdownloads.sourceforge.net/tvision/rhtvision2.1.0-dev_2.1.0-2_amd64.deb">Development</a><br>
+
+<li><a href="http://prdownloads.sourceforge.net/tvision/rhtvision2.1.0_2.1.0-3etch_sparc.deb">2.1.0 CVS20070425 for Etch 4.0 (SPARC)</a> -
+<a href="http://prdownloads.sourceforge.net/tvision/rhtvision2.1.0-dev_2.1.0-3etch_sparc.deb">Development</a><br>
+
+<li><a href="http://prdownloads.sourceforge.net/tvision/rhtvision2.1.0_2.1.0-2_i386.deb">2.1.0 CVS20061117 for Sarge 3.1 (i386)</a> -
+<a href="http://prdownloads.sourceforge.net/tvision/rhtvision2.1.0-dev_2.1.0-2_i386.deb">Development</a><br>
+
+<li><a href="http://prdownloads.sourceforge.net/tvision/rhtvision2.1.0_2.1.0-2_sparc.deb">2.1.0 CVS20061117 for Sarge 3.1 (SPARC)</a> -
+<a href="http://prdownloads.sourceforge.net/tvision/rhtvision2.1.0-dev_2.1.0-2_sparc.deb">Development</a><br>
+
+<li><a href="http://prdownloads.sourceforge.net/tvision/rhtvision2.0.3_2.0.3-3_i386.deb">2.0.3 for Woody 3.0 (i386)</a> -
+<a href="http://prdownloads.sourceforge.net/tvision/rhtvision2.0.3-dev_2.0.3-3_i386.deb">Development</a><br>
+
+<li><a href="http://prdownloads.sourceforge.net/tvision/rhtvision2.0.3_2.0.3-2_alpha.deb">2.0.3 CVS20041008 for Woody 3.0 (Alpha)</a> -
+<a href="http://prdownloads.sourceforge.net/tvision/rhtvision2.0.3-dev_2.0.3-2_alpha.deb">Development</a><br>
+
+<li><a href="http://prdownloads.sourceforge.net/tvision/rhtvision2.0.3_2.0.2-1_powerpc.deb">2.0.3 CVS20040604 for Woody 3.0 (PowerPC)</a> -
+<a href="http://prdownloads.sourceforge.net/tvision/rhtvision2.0.3-dev_2.0.2-1_powerpc.deb">Development</a><br>
+
+<li><a href="http://prdownloads.sourceforge.net/tvision/rhtvision2.0.3_2.0.3-1_sparc.deb">2.0.3 CVS20040331 for Woody 3.0 (SPARC)</a> -
+<a href="http://prdownloads.sourceforge.net/tvision/rhtvision2.0.3-dev_2.0.3-1_sparc.deb">Development</a><br>
+
+<li><a href="http://prdownloads.sourceforge.net/tvision/rhtvision2.0.2_2.0.2-1_i386.deb">2.0.2 for Woody 3.0 (i386)</a> -
+<a href="http://prdownloads.sourceforge.net/tvision/rhtvision2.0.2-dev_2.0.2-1_i386.deb">Development</a><br>
+
+<li><a href="http://setedit.sf.net/debian/dists/woody/main/binary-i386/rhtvision2.0.1_2.0.1-1_i386.deb">2.0.1 for Woody 3.0 (i386)</a> -
+<a href="http://setedit.sf.net/debian/dists/woody/main/binary-i386/rhtvision2.0.1-dev_2.0.1-1_i386.deb">Development</a><br>
+
+<li><a href="http://setedit.sf.net/debian/dists/potato/main/binary-i386/rhtvision2.0.1_2.0.1-1_i386.deb">2.0.1 for Potato 2.2 (i386)</a> -
+<a href="http://setedit.sf.net/debian/dists/potato/main/binary-i386/rhtvision2.0.1-dev_2.0.1-1_i386.deb">Development</a><br>
+
+<li><a href="http://prdownloads.sourceforge.net/setedit/rhtvision1.1.4_1.1.4-0.1_alpha.deb">1.1.4 for Potato 2.2 (Alpha)</a><br>
+
+<li><a href="http://prdownloads.sourceforge.net/setedit/rhtvision1.1.4_1.1.4-0.1_powerpc.deb">1.1.4 for Potato 2.2 (PowerPC)</a><br>
+
+<li><a href="http://prdownloads.sourceforge.net/setedit/rhtvision1.1.4_1.1.4-0.1_sparc.deb">1.1.4 for Potato 2.2 (SPARC)</a><br>
+</ul>
+
+<p>Fedora</p>
+<ul>
+<li><a href="http://prdownloads.sourceforge.net/tvision/librhtv-2.0.3-6.bbcat.fc3.i586.rpm">2.0.3 for Fedora Core 3 (i586)</a> -
+<a href="http://prdownloads.sourceforge.net/tvision/librhtv-2.0.3-6.bbcat.fc3.src.rpm">Source</a> -
+<a href="http://prdownloads.sourceforge.net/tvision/librhtv-devel-2.0.3-6.bbcat.fc3.i586.rpm">Development</a>
+
+<li><a href="http://prdownloads.sourceforge.net/tvision/librhtv-2.0.3-1.fc2.bbcat.i686.rpm">2.0.3 CVS 20040113 Fedora Core 2 (i686)</a> -
+<a href="http://prdownloads.sourceforge.net/tvision/librhtv-2.0.3-1.fc2.bbcat.src.rpm">Source</a> -
+<a href="http://prdownloads.sourceforge.net/tvision/librhtv-devel-2.0.3-1.fc2.bbcat.i686.rpm">Development</a>
+</ul>
+
+<p>Mandrake/Mandriva</p>
+<ul>
+<li><a href="http://prdownloads.sourceforge.net/tvision/librhtv-2.0.3-3mk10.i586.rpm">2.0.3 CVS 20041005 for Mandrake 10.0 (i586)</a> -
+<a href="http://prdownloads.sourceforge.net/tvision/librhtv-devel-2.0.3-3mk10.i586.rpm">Development</a><br>
+
+<li><a href="http://prdownloads.sourceforge.net/tvision/librhtv-2.0.2-3mk91.i386.rpm">2.0.2 for Mandrake 9.1 (i386)</a> -
+<a href="http://prdownloads.sourceforge.net/tvision/librhtv-devel-2.0.2-3mk91.i386.rpm">Development</a><br>
+</ul>
+
+<p>Red Hat</p>
+<ul>
+<li><a href="http://prdownloads.sourceforge.net/tvision/librhtv-2.0.3-3rh9.i386.rpm">2.0.3 CVS 20041006 for Red Hat 9.0 (i386)</a> -
+<a href="http://prdownloads.sourceforge.net/tvision/librhtv-debuginfo-2.0.3-3rh9.i386.rpm">Debug</a> -
+<a href="http://prdownloads.sourceforge.net/tvision/librhtv-devel-2.0.3-3rh9.i386.rpm">Development</a><br>
+
+<li><a href="http://prdownloads.sourceforge.net/tvision/librhtv-2.0.3-3rh8.i386.rpm">2.0.3 CVS 20041005 for Red Hat 8.0 (i386)</a> -
+<a href="http://prdownloads.sourceforge.net/tvision/librhtv-devel-2.0.3-3rh8.i386.rpm">Development</a><br>
+
+<li><a href="http://prdownloads.sourceforge.net/tvision/librhtv-2.0.1-3rh8.i386.rpm">2.0.1 for Red Hat 8.0 (i386)</a> -
+<a href="http://prdownloads.sourceforge.net/tvision/librhtv-devel-2.0.1-3rh8.i386.rpm">Development</a><br>
+
+<li><a href="http://prdownloads.sourceforge.net/tvision/librhtv-2.0.2-3rh73.i386.rpm">2.0.2 for Red Hat 7.3 (i386)</a> -
+<a href="http://prdownloads.sourceforge.net/tvision/librhtv-devel-2.0.2-3rh73.i386.rpm">Development</a><br>
+
+<li><a href="http://prdownloads.sourceforge.net/tvision/librhtv-2.0.1-3.i386.rpm">2.0.1 for Red Hat 7.3 (i386)</a> -
+<a href="http://prdownloads.sourceforge.net/tvision/librhtv-devel-2.0.1-3.i386.rpm">Development</a><br>
+</ul>
+
+<p>SuSE</p>
+<ul>
+<li><a href="http://prdownloads.sourceforge.net/tvision/librhtv-2.0.3-2.SuSE9.1.bbcat.i586.rpm">2.0.3 CVS 20040113 SuSE 9.1 (i586)</a> -
+<a href="http://prdownloads.sourceforge.net/tvision/librhtv-2.0.3-2.SuSE9.1.bbcat.src.rpm">Source</a> -
+<a href="http://prdownloads.sourceforge.net/tvision/librhtv-devel-2.0.3-2.SuSE9.1.bbcat.i586.rpm">Development</a>
+
+<li><a href="http://prdownloads.sourceforge.net/tvision/librhtv-2.0.3-1.i586.rpm">2.0.3 CVS20040125 for SuSE 9.0 (i586)</a> -
+<a href="http://prdownloads.sourceforge.net/tvision/librhtv-2.0.3-1.src.rpm">Source</a> -
+<a href="http://prdownloads.sourceforge.net/tvision/librhtv-devel-2.0.3-1.i586.rpm">Development</a><br>
+
+<li><a href="http://prdownloads.sourceforge.net/tvision/librhtv-2.0.2-3.i686.rpm">2.0.2 for SuSE 8.2 (i686)</a> -
+<a href="http://prdownloads.sourceforge.net/tvision/librhtv-2.0.2-3.src.rpm">Source</a> -
+<a href="http://prdownloads.sourceforge.net/tvision/librhtv-devel-2.0.2-3.i686.rpm">Development</a><br>
+
+<li><a href="http://prdownloads.sourceforge.net/tvision/librhtv-2.0.1-3.i686.rpm">2.0.1 for SuSE 8.1 (i686)</a> -
+<a href="http://prdownloads.sourceforge.net/tvision/librhtv-2.0.1-3.src.rpm">Source</a> -
+<a href="http://prdownloads.sourceforge.net/tvision/librhtv-devel-2.0.1-3.i686.rpm">Development</a><br>
+
+<li><a href="http://prdownloads.sourceforge.net/tvision/librhtv-2.0.1-1.i686.rpm">2.0.1 for SuSE 8.0 (i686)</a> -
+<a href="http://prdownloads.sourceforge.net/tvision/librhtv-2.0.1-1.src.rpm">Source</a> -
+<a href="http://prdownloads.sourceforge.net/tvision/librhtv-devel-2.0.1-1.i686.rpm">Development</a><br>
+</ul>
+
+<p>Ubuntu</p>
+<ul>
+<li><a href="http://prdownloads.sourceforge.net/tvision/rhtvision2.1.0_2.1.0-2_i386.ubu61.deb">2.1.0 CVS20061117 for Edgy 6.10 (i386)</a> -
+<a href="http://prdownloads.sourceforge.net/tvision/rhtvision2.1.0-dev_2.1.0-2_i386.ubu61.deb">Development</a><br>
+</ul>
 
 <p>
 <b>Previous version (1.1.4)</b>: Needed for Setedit 0.4.54 and RHIDE 1.4.9.<br>
@@ -174,7 +309,7 @@ DOS <a href="http://prdownloads.sourceforge.net/tvision/tv1010s.zip">sources</a>
 
 <p><hr><p>
 <a name="mail"></a><h2>E-mail contact</h2>
-<p><img src="envelp.gif" width=14 height=15 alt=mail>You can contact me by e-mail <a href="mailto:set@users.sourceforge.net">set@users.sourceforge.net</a>
+<p><img src="envelp.gif" width=14 height=15 alt=mail>You can contact me by e-mail <a href="mailto:set at host users.sourceforge.net">set[at host]users.sourceforge.net</a>
 <p>
 
 <div class=cent>
@@ -187,5 +322,5 @@ DOS <a href="http://prdownloads.sourceforge.net/tvision/tv1010s.zip">sources</a>
 </div>
 
 <p><hr><p>
-<div class=sm1>Last update: Mon Nov 25 18:13:00 ART 2002</div>
+<div class=sm1>Last update: Tue Mar 17 10:08:24 ART 2009</div>
 </BODY></HTML>

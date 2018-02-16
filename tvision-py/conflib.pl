@@ -1,5 +1,5 @@
 #!/usr/bin/perl
-# Copyright (C) 1999-2003 by Salvador E. Tropea (SET),
+# Copyright (C) 1999-2004 by Salvador E. Tropea (SET),
 # see copyrigh file for details
 #
 # Common configuration routines.
@@ -10,7 +10,7 @@ $MakeDefsRHIDE={};
 $ExtraModifyMakefiles={};
 # DOS, UNIX, Win32
 $OS='';
-# Linux, FreeBSD, Solaris, QNXRtP
+# Linux, FreeBSD, NetBSD, Solaris, QNXRtP, QNX4
 $OSf='';
 # x86, Alpha, SPARC64, SPARC, PPC, HPPA, MIPS, Itanium, Unknown
 $CPU='';
@@ -18,6 +18,8 @@ $CPU='';
 $Comp='';
 # djgpp, MinGW, Cygwin
 $Compf='';
+# gcc's -pipe option
+$UsePipe=0;
 
 sub GetCache
 {
@@ -100,6 +102,15 @@ sub LookForFile
  '';
 }
 
+sub LookForFileInPath
+{
+ my ($file)=@_;
+ my @list;
+
+ @list=(($OS eq 'UNIX') || ($Compf eq 'Cygwin')) ? split(/:/,@ENV{'PATH'}) : split(/;/,@ENV{'PATH'});
+ return LookForFile($file,@list);
+}
+
 ###[txh]####################################################################
 #
 # Prototype: RunRedirect($command,$ErrorLog)
@@ -131,6 +142,17 @@ sub RunRedirect
  $ret;
 }
 
+sub AddIncludes
+{
+ my (@dirs)=split(' ',$conf{'EXTRA_INCLUDE_DIRS'});
+ my ($res)='';
+ for (@dirs)
+    {
+     $res.=" -I$_";
+    }
+ return $res;
+}
+
 ###[txh]####################################################################
 #
 # Prototype: RunGCCTest($gcc,$extension,$prog,$flags)
@@ -158,6 +180,7 @@ sub RunGCCTest
  replace($file,$test."\n");
  $flags=$CFLAGS if ($ext eq 'c');
  $flags=$CXXFLAGS if ($ext eq 'cc');
+ $flags.=AddIncludes();
  $command="$cc -o test.exe $flags $file $switchs";
  #print "Running: $command\n";
  $label=$command.":\n";
@@ -238,7 +261,7 @@ sub LookForPrefix
    {
     if ($Compf eq 'MinGW')
       {
-       @lista=split(/;/,@ENV{'PATH'});
+       @lista=(split(/;/,@ENV{'PATH'}),split(/:/,@ENV{'PATH'}));
        $found=0;
        foreach $i (@lista)
          {
@@ -334,7 +357,8 @@ int main(void)
 }
 ';
  $test=RunGCCTest($cc,'c',$test,'');
- if ($test ne "OK\n")
+ $test=~s/\W//g;
+ if ($test ne "OK")
    {
     CreateCache();
     die 'Not working gcc found';
@@ -374,7 +398,8 @@ int main(void)
  return 0;
 }';
  $test=RunGCCTest($cc,'cc',$test,$stdcxx);
- if ($test eq "OK\n")
+ $test=~s/\W//g;
+ if ($test eq "OK")
    {
     print "yes\n";
     $ret=1;
@@ -410,15 +435,9 @@ sub CheckGXX
     print "C++ compiler: @conf{'GXX'} (cached) OK\n";
     return @conf{'GXX'};
    }
- if (CheckGCCcanXX($GCC))
-   {
-    $GXX=$GCC;
-   }
- else
-   {
-    # Test for a working g++
-    $GXX=CheckGXXReal();
-   }
+ # Test for a working g++
+ $GXX=CheckGXXReal();
+
  $conf{'GXX'}=$GXX;
 }
 
@@ -435,7 +454,7 @@ sub CheckGXX
 
 sub CheckGXXReal
 {
- my ($test,$res,@list,$i);
+ my ($test,$res,@list,$i,$cxx);
 
  print 'Looking for the C++ compiler: ';
  $test='
@@ -452,15 +471,22 @@ int main(void)
  return 0;
 }';
  @list=split(/:/,$defaultCXX);
+ $cxx=$ENV{'CXX'};
+ if (length($cxx))
+   {
+    unshift @list,$cxx;
+   }
  foreach $i (@list)
    {
     $res=RunGCCTest($i,'cc',$test,$stdcxx);
-    if ($res eq "OK\n")
+    $res=~s/\W//g;
+    if ($res eq "OK")
       {
        print "$i\n";
        return $i;
       }
    }
+ return $GCC if (CheckGCCcanXX($GCC));
  CreateCache();
  die('can not find it');
 }
@@ -527,7 +553,7 @@ int main(void)
 
 sub FindCFLAGS
 {
- my $ret;
+ my ($ret,$ver);
 
  print 'C flags: ';
  $ret=@conf{'CFLAGS'};
@@ -542,12 +568,17 @@ sub FindCFLAGS
     $ret='-O2'; # -gstabs+3';
     # In UNIX pipes are in memory and allows multithreading so they are
     # usually faster. In Linux that's faster.
-    $ret.=' -pipe' if ($OS eq 'UNIX');
+    $ret.=' -pipe' if $UsePipe;
     # Looks like that's common and some sysadmins doesn't configure gcc to
     # look there:
-    $ret.=' -I/usr/local/include' if ($OSf eq 'FreeBSD');
+    $conf{'EXTRA_INCLUDE_DIRS'}.=' /usr/local/include' if ($OSf eq 'FreeBSD');
     # Darwin is using a temporal size
 #    $ret.=' -Wno-long-double' if ($OSf eq 'Darwin');
+    # QNX4 X11 is in /usr/X11R6
+    # This should be automatic now. (EXTRA_INCLUDE_DIRS).
+    #$ret.=' -I/usr/X11R6/include' if ($OSf eq 'QNX4');
+    $ver=RunRedirect("$GCC -dumpversion",$ErrorLog);
+    $ret.=' -Wno-packed' if $ver>=4;
    }
  print "$ret\n";
  $conf{'CFLAGS'}=$ret;
@@ -576,6 +607,7 @@ sub FindLDExtraDirs()
    }
  $ret='';
  $ret.='/usr/local/lib' if ($OSf eq 'FreeBSD');
+ $ret.='/usr/pkg/lib'   if ($OSf eq 'NetBSD');
  $conf{'LDExtraDirs'}=$ret;
  $ret;
 }
@@ -614,9 +646,13 @@ sub FindCXXFLAGS
  if (!$ret)
    {
     $ret='-O2'; # -gstabs+3';
-    $ret.=' -pipe' if ($OS eq 'UNIX');
-    $ret.=' -I/usr/local/include -L/usr/local/include' if ($OSf eq 'FreeBSD');
+    $ret.=' -pipe' if $UsePipe;
+    $ret.=' -L/usr/local/include' if ($OSf eq 'FreeBSD');
+    $conf{'EXTRA_INCLUDE_DIRS'}.=' /usr/local/include' if ($OSf eq 'FreeBSD');
 #    $ret.=' -Wno-long-double' if ($OSf eq 'Darwin');
+    # QNX4 X11 is in /usr/X11R6
+    # This should be automatic now. (EXTRA_INCLUDE_DIRS).
+    #$ret.=' -I/usr/X11R6/include' if ($OSf eq 'QNX4');
    }
  print "$ret\n";
  $conf{'CXXFLAGS'}=$ret;
@@ -651,7 +687,7 @@ sub FindXCFLAGS
  if (!$ret)
    {
     $ret='-O3 -fomit-frame-pointer -ffast-math';
-    $ret.=' -pipe' if ($OS eq 'UNIX');
+    $ret.=' -pipe' if $UsePipe;
 #    $ret.=' -Wno-long-double' if ($OSf eq 'Darwin');
    }
  print "$ret\n";
@@ -687,7 +723,7 @@ sub FindXCXXFLAGS
  if (!$ret)
    {
     $ret='-O3 -fomit-frame-pointer -ffast-math';
-    $ret.=' -pipe' if ($OS eq 'UNIX');
+    $ret.=' -pipe' if $UsePipe;
 #    $ret.=' -Wno-long-double' if ($OSf eq 'Darwin');
    }
  print "$ret\n";
@@ -718,7 +754,7 @@ sub FindXCXXFLAGS
 
 sub DetectOS
 {
- my ($os,$OS);
+ my ($os,$release,$OS);
  $os=`uname`;
  if (!$os)
    {
@@ -796,11 +832,33 @@ sub DetectOS
    }
  elsif ($os=~/QNX/)
    {
+    $release=`uname -r`;
+    if ($release =~ /^6/)
+      {
+       $OS='UNIX';
+       $OSf='QNXRtP';
+       $Compf='';
+       $stdcxx='-lstdc++';
+       $defaultCXX='qcc -Y_gpp';
+       $supportDir='linux';
+      }
+      else
+      {
+       $OS='UNIX';
+       $OSf='QNX4';
+       $Compf='';
+       $stdcxx='-lstdc++';
+       $defaultCXX='g++';
+       $supportDir='linux';
+      }
+   }
+ elsif ($os=~/HP-UX/)
+   {
     $OS='UNIX';
-    $OSf='QNXRtP';
+    $OSf='HP-UX';
     $Compf='';
     $stdcxx='-lstdc++';
-    $defaultCXX='qcc -Y_gpp';
+    $defaultCXX='g++';
     $supportDir='linux';
    }
  elsif ($os=~/Darwin/)
@@ -811,12 +869,42 @@ sub DetectOS
     $stdcxx='-lstdc++';
     $defaultCXX='c++';
     $supportDir='linux';
-    $conf{'GCC'}='cc';
+    $conf{'GCC'}='g++';
+   }
+ elsif ($os=~/NetBSD/)
+   {
+    $OS='UNIX';
+    $OSf='NetBSD';
+    $Compf='';
+    $stdcxx='-lstdc++';
+    $defaultCXX='g++';
+    $supportDir='linux';
+   }
+ elsif ($os=~/OpenBSD/)
+   {
+    $OS='UNIX';
+    $OSf='OpenBSD';
+    $Compf='';
+    $stdcxx='-lstdc++';
+    $defaultCXX='g++';
+    $supportDir='linux';
+   }
+ elsif ($os=~/OSF1/)
+   {
+    $OS='UNIX';
+    $OSf='Tru64';
+    $Compf='';
+    $stdcxx='-lstdc++';
+    $defaultCXX='g++';
+    $supportDir='linux';
    }
  else
    {
     die('Unknown OS, you must do things by yourself');
    }
+ # The gcc I found in an HP DS20E machine comes in a package called TWWfsw and
+ # doesn't support -pipe. (Dual EV67 667 MHz machine running OSF1 v5.1).
+ $UsePipe=($OS eq 'UNIX') && ($OSf ne 'Tru64');
  print "$OS";
  print " [$OSf]" if $OSf;
  print " [$Compf]" if $Compf;
@@ -1251,6 +1339,8 @@ int main(void)
  printf("MIPS\n");
  #elif defined(__ia64__)
  printf("Itanium\n");
+ #elif defined(__amd64__)
+ printf("AMD64\n");
  #else
  printf("Unknown\n");
  #endif
@@ -1258,7 +1348,7 @@ int main(void)
 }
 ';
  $test=RunGCCTest($GCC,'c',$test,'');
- chop($test);
+ $test=~s/\W//g;
  $CPU=$conf{'TV_CPU'}=$test;
  print "$test\n";
 }
@@ -1305,7 +1395,7 @@ sub LookForGNUar
    }
  $conf{'UseRanLib'}=0;
  $test=RunRedirect('ar --version',$ErrorLog);
- if ($test=~/GNU ar/)
+ if (($test=~/GNU ar/) || ($test=~/BSD ar/))
    {
     $conf{'GNU_AR'}='ar';
     print "ar\n";
@@ -1318,17 +1408,117 @@ sub LookForGNUar
     print "gar\n";
     return 'gar';
    }
- if ($OSf eq 'Darwin')
+ if (!LookForFileInPath('ar'))
+   {
+    print "Unable to find GNU ar on this system.\n";
+    print "Please install it and be sure it's in your path.\n";
+    print "Also use `ar' or `gar' name for the binary.\n";
+    die;
+   }
+ # I think all ar tools are usable but ...
+ if (($OSf eq 'Darwin') || ($OSf eq 'HP-UX') || ($OSf eq 'Tru64') ||
+     ($OSf eq 'Solaris'))
    {
     $conf{'GNU_AR'}='ar';
     $conf{'UseRanLib'}=1;
     print "ar (not GNU but usable!)\n";
     return 'ar';
    }
+ if ($OSf eq 'QNX4')
+   {
+    $conf{'GNU_AR'}='ar';
+    $conf{'UseRanLib'}=1;
+    print "ar (WATCOM)\n";
+    return 'ar';
+   }
  print "Unable to find GNU ar on this system.\n";
  print "Please install it and be sure it's in your path.\n";
  print "Also use `ar' or `gar' name for the binary.\n";
  die;
+}
+
+sub LookForGNUinstall
+{
+ my ($test,$test2,$res,$testErr);
+
+ print 'Looking for install tool: ';
+
+ if ($conf{'GNU_INSTALL'})
+   {
+    print "$conf{'GNU_INSTALL'} (cached)\n";
+    return $conf{'GNU_INSTALL'};
+   }
+ $conf{'SOLARIS_INSTALL'}=0;
+ $test=RunRedirect('install --version',$ErrorLog);
+ if ($test=~/Free Software Foundation/)
+   {
+    $conf{'GNU_INSTALL'}='install';
+    print "install\n";
+    return 'install';
+   }
+ $test2=RunRedirect('ginstall --version',$ErrorLog);
+ if ($test2=~/Free Software Foundation/)
+   {
+    $conf{'GNU_INSTALL'}='ginstall';
+    print "ginstall\n";
+    return 'ginstall';
+   }
+ if (!LookForFileInPath('install'.$ExeExt))
+   {
+    print "Unable to find 'install' on this system.\n";
+    print "Please install it and be sure it's in your path.\n";
+    print "Also use `install' or `ginstall' name for the binary.\n";
+    die;
+   }
+ $res='install';
+ # Solaris install is bizarre.
+ if ($OSf eq 'Solaris')
+   {
+    $conf{'SOLARIS_INSTALL'}=1;
+   }
+ # NetBSD install moves by default!!
+ elsif ($OSf eq 'NetBSD')
+   {
+    $res='install -c';
+   }
+ $conf{'GNU_INSTALL'}=$res;
+ print "$res\n";
+ return $res;
+}
+
+sub GenInstallDir()
+{
+ my ($mode,$dir)=@_;
+
+ return "\$(INSTALL) -d -m $mode $dir\n";
+}
+
+sub GenInstallFiles()
+{
+ my ($mode,$files,$dir)=@_;
+ my (@f,$fl,$ret,$first);
+
+ if ($conf{'SOLARIS_INSTALL'})
+   {# Silly, crappy one ;-)
+    @f=glob($files);
+    return "\$(INSTALL) -m $mode -f $dir $files\n" if scalar(@f)==1;
+    $ret='';
+    $first=1;
+    foreach $fl (@f)
+      {
+       if ($first)
+         {
+          $first=0;
+         }
+       else
+         {
+          $ret.="\t";
+         }
+       $ret.="\$(INSTALL) -m $mode -f $dir $fl\n";
+      }
+    return $ret;
+   }
+ return "\$(INSTALL) -m $mode $files $dir\n";
 }
 
 1;

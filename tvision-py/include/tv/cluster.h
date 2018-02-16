@@ -29,8 +29,9 @@ class TSItem;
 struct TEvent;
 class TPoint;
 class TStringCollection;
+class TStringCollectionCIntl;
 
-class TCluster : public TView
+class CLY_EXPORT TCluster : public TView
 {
 
 public:
@@ -61,7 +62,7 @@ protected:
     uint32 value;
     int sel;
     // SET: i18n cache
-    TStringCollection *intlStrings;
+    TStringCollectionCIntl *intlStrings;
     TStringCollection *strings;
 
 private:

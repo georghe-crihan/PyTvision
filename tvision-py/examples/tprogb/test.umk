@@ -1,7 +1,12 @@
 #!/usr/bin/make
 # Automatically generated from RHIDE projects, don't edit
-# 2003-06-20 13:50
 #
+
+OBJFILES=\
+	./calc$(ExOBJ) \
+	./tprogbar$(ExOBJ) 
+
+LIBRARIES=
 
 test$(ExEXE):: \
 	./calc$(ExOBJ) \
@@ -14,10 +19,4 @@ test$(ExEXE):: \
 
 ./tprogbar$(ExOBJ):: tprogbar.cpp  
 	$(RHIDE_COMPILE_CC)
-
-OBJFILES=\
-	./calc$(ExOBJ) \
-	./tprogbar$(ExOBJ) 
-
-LIBRARIES=
 

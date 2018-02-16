@@ -1,3 +1,5 @@
+#ifndef SNPRINTF_INCLUDED
+#define SNPRINTF_INCLUDED
 /*
    Unix snprintf implementation.
    Version 1.1
@@ -159,6 +161,13 @@ struct DATA {
             if ((p)->counter < (p)->length) \
               *(p)->holder++ = (c); \
             (p)->counter++; /* SET: Moved outside if */ \
+            }
+
+/* SET: put a char, no increment */
+#define PUT_EOS(p) \
+            { \
+            if ((p)->counter <= (p)->length) \
+              *(p)->holder = 0; \
             }
 
 #define PUT_PLUS(d, p) \
@@ -561,7 +570,7 @@ conv_flag(char * s, struct DATA * p)
   }
 }
 
-PUBLIC int
+inline int
 CLY_vsnprintf(char *string, size_t length, const char * format, va_list args)
 {
   struct DATA data;
@@ -588,7 +597,7 @@ CLY_vsnprintf(char *string, size_t length, const char * format, va_list args)
       for (state = 1; *data.pf && state;) {
         switch (*(++data.pf)) {
           case '\0': /* a NULL here ? ? bail out */
-            *data.holder = '\0';
+            PUT_EOS(&data);
             return data.counter;
             break;
           case 'f':  /* float, double */
@@ -652,7 +661,7 @@ CLY_vsnprintf(char *string, size_t length, const char * format, va_list args)
             break;
           case 'c': /* character */
             d = va_arg(args, int);
-            PUT_CHAR(d, &data);
+            PUT_CHAR((char)d, &data);
             state = 0;
             break;
           case 's':  /* string */
@@ -696,14 +705,14 @@ CLY_vsnprintf(char *string, size_t length, const char * format, va_list args)
     }
   }
 
-  *data.holder = '\0'; /* the end ye ! */
+  PUT_EOS(&data); /* the end ye ! */
 
   return data.counter;
 }
 
 #ifndef HAVE_SNPRINTF
 
-PUBLIC int
+inline int
 CLY_snprintf(char *string, size_t length, const char * format, ...)
 {
   int rval;
@@ -882,4 +891,4 @@ int main()
 #endif
 
 #endif /* NEEDS_SNPRINTF */
-
+#endif

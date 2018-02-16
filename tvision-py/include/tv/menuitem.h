@@ -17,7 +17,7 @@ Modified by Salvador E. Tropea. More operators and append. Also i18n support.
 
 class TMenu;
 
-class TMenuItem
+class CLY_EXPORT TMenuItem
 {
 
 public:
@@ -26,7 +26,7 @@ public:
                ushort aCommand,
                ushort aKeyCode,
                ushort aHelpCtx = hcNoContext,
-               char *p = 0,
+               const char *p = 0,
                TMenuItem *aNext = 0
              );
     TMenuItem( const char *aName,

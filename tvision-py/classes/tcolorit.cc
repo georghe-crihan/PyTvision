@@ -35,7 +35,7 @@ TColorItem::TColorItem( const char *nm, uchar idx, TColorItem *nxt )
 
 TColorItem::~TColorItem()
 {
-    DeleteArray(name);
+    DeleteArray((char *)name);
     TVIntl::freeSt(cacheName);
 }
 
@@ -72,7 +72,7 @@ void TColorItemList::focusItem( ccIndex item )
     TColorItem *curItem = items;
     while( item-- > 0 )
         curItem = curItem->next;
-    message( owner, evBroadcast, cmNewColorIndex, (void *)(long)(curItem->index));
+    message( owner, evBroadcast, cmNewColorIndex, (void *)(uipointer)(curItem->index));
 }
 
 void TColorItemList::getText( char *dest, ccIndex item, short maxChars )

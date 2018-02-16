@@ -44,6 +44,10 @@ uchar TView::ospecialChars[] =
     175, 174, 26, 27, ' ', ' ', 0
 };
 
+uchar TView::noMoireUnFill=' ';  // Just space
+uchar TView::noMoireFill=0xDB;   // Full block
+uchar TView::onoMoireFill=0xDB;  // Full block
+
 char TRadioButtons::button[] = " ( ) ";
 char TRadioButtons::obutton[] = " ( ) ";
 char TRadioButtons::check = 7; // 
@@ -70,6 +74,10 @@ char TFrame::zoomIcon[] = "[~\x18~]";
 char TFrame::ozoomIcon[] = "[~\x18~]";
 char TFrame::unZoomIcon[] = "[~\x12~]";
 char TFrame::ounZoomIcon[] = "[~\x12~]";
+// Note: Eddie proposed 0xF (WHITE SUN WITH RAYS) but this reduces to * and
+// is the same as 0xFE (BLACK SQUARE) (also reduced to *).
+char TFrame::animIcon[] = "[~+~]";
+char TFrame::oanimIcon[] = "[~+~]";
 char TFrame::dragIcon[] = "~ÄÙ~";
 char TFrame::odragIcon[] = "~ÄÙ~";
 
@@ -102,10 +110,10 @@ char TStatusLine::ohintSeparator[] = "\xB3 "; // ³
 char TCheckBoxes::button[] = " [ ] ";
 char TCheckBoxes::obutton[] = " [ ] ";
 
-TScrollChars TScrollBar::vChars = {30, 31, 177, 254, 178}; // ±þ²
-TScrollChars TScrollBar::ovChars = {30, 31, 177, 254, 178}; // ±þ²
-TScrollChars TScrollBar::hChars = {17, 16, 177, 254, 178}; // ±þ²
-TScrollChars TScrollBar::ohChars = {17, 16, 177, 254, 178}; // ±þ²
+TScrollChars TScrollBar::vChars  = {30, 31, char(177), char(254), char(178)}; // ±þ²
+TScrollChars TScrollBar::ovChars = {30, 31, char(177), char(254), char(178)}; // ±þ²
+TScrollChars TScrollBar::hChars  = {17, 16, char(177), char(254), char(178)}; // ±þ²
+TScrollChars TScrollBar::ohChars = {17, 16, char(177), char(254), char(178)}; // ±þ²
 
 char TButton::shadows[] = "\xDC\xDB\xDF"; // ÜÛß
 char TButton::oshadows[] = "\xDC\xDB\xDF"; // ÜÛß

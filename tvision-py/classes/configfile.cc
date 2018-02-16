@@ -1,6 +1,6 @@
 /**[txh]********************************************************************
 
-  Copyright 2002 by Salvador Eduardo Tropea (SET)
+  Copyright 2002-2009 by Salvador Eduardo Tropea (SET)
   This file is covered by the GPL license.
 
   Module: Config File
@@ -151,7 +151,7 @@ char *TVConfigFile::GetString()
     return 0;
  s++;
  char *ret=new char[len+1], *ori, *dest;
- for (ori=start, dest=ret; *ori; ori++, dest++)
+ for (ori=start, dest=ret; *ori && *ori!='"'; ori++, dest++)
      if (*ori=='\\')
        {
         ori++;
@@ -173,7 +173,7 @@ char *TVConfigFile::GetString()
      else
        *dest=*ori;
  *dest=0;
- return newStrL(start,s-start-1);
+ return ret;//newStrL(start,s-start-1);
 }
 
 long TVConfigFile::GetInteger()
@@ -302,7 +302,8 @@ int TVConfigFile::ReadBranch(TVConfigFileTreeNode *&base)
                 aux->integer=integer;
                 aux->type=tInteger;
                }
-             aux->name=newStrL(start,end-start);
+             if (newOne)
+                aux->name=newStrL(start,end-start);
              aux->next=NULL;
              aux->priority=fromFile;
              /*if (aux->type==tString)
@@ -498,6 +499,7 @@ int TVConfigFile::Add(const char *key, TVConfigFileTreeNode *node)
     if (p->priority>node->priority) return 0;
     if (p->type==tString)
        delete[] p->string;
+    node->next=p->next;
     memcpy(p,node,sizeof(TVConfigFileTreeNode));
    }
  else
@@ -597,6 +599,7 @@ void TVConfigFile::FreeList(TVConfigFileTreeNode *p)
     aux=p->next;
     if (p->type==tString)
        delete[] p->string;
+    delete[] p->name;
     delete p;
     p=aux;
    }
@@ -630,7 +633,7 @@ void TVConfigFile::PrintBranch(TVConfigFileTreeNode *base, int indent, FILE *f)
             break;
        case tString:
             PrintIndent(indent,f);
-            fprintf(f,"%s=%s\n",base->name,base->string);
+            fprintf(f,"%s=\"%s\"\n",base->name,base->string);
             break;
        case tInteger:
             PrintIndent(indent,f);

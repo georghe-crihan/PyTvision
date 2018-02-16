@@ -1,7 +1,7 @@
 Driver: DOS
 Author: Salvador E. Tropea, Robert Hoehne
 Status: Not complete
-Revision: $Revision: 1.1.2.1 $
+Revision: $Revision: 1.1.2.2 $
 
   This is the driver used for the djgpp compiled binaries. The driver works
 on DOS systems and any compatible variants. It can be used for any Windows
@@ -104,7 +104,10 @@ VGABIOSState  Integer  This is related to the SaveVGAState variable. When
                        VGA compatible at registers level (also the Windows
                        driver if you are using Windows). This uses very low
                        level stuff.
-
+FixKbdBuffer  Integer  When enabled we assume the start of the keyboard
+                       buffer is at offset 0x1E and the end at offset 0x3D.
+                       When disabled (default) the size is monitored all
+                       the time.
 
 
 4. NOTES ABOUT WINDOWS

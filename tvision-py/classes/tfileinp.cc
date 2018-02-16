@@ -11,19 +11,15 @@ Modified by Robert H”hne to be used for RHIDE.
  *
  */
 #define Uses_string
-
+#define Uses_dir
 #define Uses_TFileInputLine
 #define Uses_TEvent
 #define Uses_TSearchRec
 #define Uses_TFileDialog
 #include <tv.h>
 
-#if defined(TVCompf_djgpp)
-#include <dir.h>
-#endif
 #if defined(TVComp_BCPP)
-#include <dir.h>
-#include <dos.h>
+ #include <dos.h>
 #endif
 
 TFileInputLine::TFileInputLine( const TRect& bounds, short aMaxLen ) :
@@ -43,7 +39,7 @@ NULL.@p
 ***************************************************************************/
 
 static
-int strCat(char *d, char *s1, char *s2, char *s3, int max)
+int strCat(char *d, const char *s1, const char *s2, const char *s3, int max)
 {
  char *dest=d;
  char *end=dest+max;

@@ -19,6 +19,7 @@ exlude some particular files by configuration.
 #define Uses_stdio
 #ifdef TVComp_MSC
  #include <io.h>
+ #define Uses_glob
 #else
  #define Uses_unistd
 #endif
@@ -37,17 +38,18 @@ exlude some particular files by configuration.
 #define Uses_TEvent
 #define Uses_TGroup
 #define Uses_TStreamableClass
+#define Uses_TKeys
+#define Uses_TKeys_Extended
 #define Uses_sys_stat
 
 #if defined(TVCompf_djgpp)
  // DJGPP
  #define Uses_fnmatch
  #include <dir.h>
-#elif defined(TVComp_BCPP) || defined(TVCompf_Cygwin) || defined(TVOS_UNIX)
+#elif defined(TVComp_BCPP) || defined(TVCompf_Cygwin) || defined(TVOS_UNIX) && !defined(TVOSf_QNX4)
  // UNIX, Win32/BC++, Win32/Cygwin
  #define Uses_glob
 #endif
-
 
 #include <tv.h>
 
@@ -118,19 +120,32 @@ void TFileList::getText( char *dest, ccIndex item, short maxChars )
   strcat( dest, DIRSEPARATOR_ );
 }
 
-/* SET: Moved (TV 2.0)
 void TFileList::handleEvent( TEvent & event )
 {
-  if ( event.what == evMouseDown && event.mouse.doubleClick )
-  {
-    event.what = evCommand;
-    event.message.command = cmOK;
-    putEvent( event );
-    clearEvent( event );
-  }
-  else
-    TSortedListBox::handleEvent( event );
-}*/
+  TSearchRec trec, *tp;
+
+  TSortedListBox::handleEvent( event );
+  if( event.what == evKeyDown )
+      {
+      if( event.keyDown.keyCode == kbLeft )
+          {
+          clearEvent( event );
+          /* Move to .. */
+          trec.attr = FA_DIREC;
+          strcpy( trec.name, ".." );
+          message( owner, evBroadcast, cmFileFocused, &trec );
+          message( owner, evBroadcast, cmFileDoubleClicked, &trec );
+          }
+      else if( event.keyDown.keyCode == kbRight )
+          {
+          clearEvent( event );
+          /* Enter dir */
+          tp = list()->at(focused);
+          if( tp->attr & FA_DIREC )
+              message( owner, evBroadcast, cmFileDoubleClicked, tp );
+          }
+      }
+}
 
 void TFileList::readDirectory( const char *dir, const char *wildCard )
 {
@@ -140,6 +155,14 @@ void TFileList::readDirectory( const char *dir, const char *wildCard )
   readDirectory( path );
 }
 
+void TFileList::setState( ushort aState, Boolean enable )
+{
+  TSortedListBox::setState( aState, enable );
+  if ( aState == sfFocused && enable )
+     {
+     message( owner, evBroadcast, cmFileFocused, list()->at(focused) );
+     }
+}
 
 /******** struct DirSearchRec ********/
 #ifdef TVCompf_djgpp
@@ -179,7 +202,7 @@ struct DirSearchRec : public TSearchRec
 struct DirSearchRec : public TSearchRec
 {
   /* SS: changed */
-  void readFf_blk(char *filename, struct stat &s)
+  void readFf_blk(const char *filename, struct stat &s)
   {
     attr = FA_ARCH;
     if (S_ISDIR(s.st_mode)) attr |= FA_DIREC;
@@ -376,6 +399,107 @@ void TFileList::readDirectory( const char *aWildCard )
     }
 }
 #else
+
+#if defined(TVOSf_QNX4)
+void TFileList::readDirectory( const char *aWildCard )
+{
+   DIR *dp;
+   DirSearchRec *p;
+   char dir[PATH_MAX];
+   char file[PATH_MAX];
+   char path[PATH_MAX];
+   dirent *de;
+   struct stat s;
+
+   strcpy( path, aWildCard );
+   if (!CLY_IsWild(path))
+      strcat(path, "*");
+   CLY_fexpand( path );
+   CLY_ExpandPath(path, dir, file);
+   TFileCollection *fileList = new TFileCollection( 5, 5 );
+
+   /* read regular archive files */
+
+   sprintf(path, "%s.", dir);
+   if ((dp = opendir(path)) != NULL)
+   {
+      while ((de = readdir(dp)) != NULL)
+      {
+         /* is it a regular file (not a directory) ? */
+         sprintf(path, "%s%s", dir, de->d_name);
+         if (stat(path, &s) == 0 && S_ISREG(s.st_mode))
+         {
+            if (ExcludeSpecialName(de->d_name))
+               continue;
+            if (fnmatch(file, de->d_name, 0)==0)
+            {
+               if ((p = new DirSearchRec) == NULL)
+                  break;
+               p->readFf_blk(de->d_name, s);
+               fileList->insert( p );
+            }
+         }
+      }
+      closedir(dp);
+   }
+
+   /* read directories */
+
+   sprintf(path, "%s.", dir);
+   if ((dp = opendir(path)) != NULL)
+   {
+      while ((de = readdir(dp)) != NULL)
+      {
+         /* we don't want these directories */
+
+         if (strcmp(de->d_name, ".") == 0 || strcmp(de->d_name, "..") == 0)
+            continue;
+
+         /* is it a directory ? */
+         sprintf(path, "%s%s", dir, de->d_name);
+         if (stat(path, &s) == 0 && S_ISDIR(s.st_mode))
+         {
+            if ((p = new DirSearchRec) == NULL)
+               break;
+            p->readFf_blk(de->d_name, s);
+            fileList->insert( p );
+         }
+      }
+      closedir(dp);
+   }
+
+   if( strlen( dir ) > 1 )
+   {
+      p = new DirSearchRec;
+      if( p != 0 )
+      {
+         sprintf(path, "%s..", dir);
+         if (stat(path, &s) == 0)
+            p->readFf_blk("..", s);
+         else
+         {
+            strcpy( p->name, ".." );
+            p->size = 0;
+            p->time = 0x210000uL;
+            p->attr = FA_DIREC;
+         }
+         fileList->insert( p );
+      }
+   }
+
+   newList(fileList);
+
+   if( list()->getCount() > 0 )
+      message( owner, evBroadcast, cmFileFocused, list()->at(0) );
+   else
+   {
+      static DirSearchRec noFile;
+      message( owner, evBroadcast, cmFileFocused, &noFile );
+   }
+}
+
+#else
+
 // Linux, BC++/Win32 and CygWin
 void TFileList::readDirectory( const char *aWildCard )
 {
@@ -485,6 +609,7 @@ void TFileList::readDirectory( const char *aWildCard )
      message( owner, evBroadcast, cmFileFocused, &noFile );
     }
 }
+#endif // TVOSf_QNX4
 #endif // Linux, BC++/Win32 and CygWin
 #endif // !DOS+DJGPP
 /******** end of void readDirectory ********/

@@ -1,8 +1,185 @@
+rhtvision (2.2.1-4) stable; urgency=low
+
+  * Fixed: Wheeze compilation issues (unused variables and some casts)
+  * Fixed: Jessie compilation issues
+
+ -- Salvador Eduardo Tropea <salvador@inti.gov.ar>  Tue, 02 Jun 2015 12:58:30 -0300
+
+rhtvision (2.2.1-3) unstable; urgency=low
+
+  * Fixed: gqview issues.
+
+ -- Salvador Eduardo Tropea <salvador@inti.gov.ar>  Fri, 22 Jun 2012 13:04:49 -0300
+
+rhtvision (2.2.1-2) unstable; urgency=low
+
+  * Fixed: Squeeze compilation issues (strict aliasing violated)
+
+ -- Salvador E. Tropea <set@ieee.org>  Mon, 06 Jun 2011 09:46:02 -0300
+
+rhtvision (2.2.1-1) unstable; urgency=low
+
+  * Fixed: TVConfigFile::GetString not removing trailing "
+  * Added: TScreen::windowClass to help X11 window managers.
+
+ -- Salvador E. Tropea <set@ieee.org>  Wed, 14 Jul 2010 09:59:58 -0300
+
+rhtvision (2.2.0-1) unstable; urgency=low
+
+  * Added AlCon (Alegro conio emulation) driver.
+
+ -- Salvador E. Tropea <set@ieee.org>  Tue, 23 Jun 2009 14:12:45 -0300
+
+rhtvision (2.1.0-5) unstable; urgency=low
+
+  * Modified to compile with Lenny (now stable)
+
+ -- Salvador E. Tropea <set@ieee.org>  Thu, 26 Feb 2009 16:15:23 -0200
+
+rhtvision (2.1.0-4) unstable; urgency=low
+
+  * Accept Salvador changes in his 2.1.0-4 but fixed to depend first in the
+    current non-transitional-dummy package of the GPM library.
+  * Also put those changes in the control file in addition to the control.in
+    one.
+
+ -- Ivan Baldo <ibaldo@adinet.com.uy>  Wed, 27 Aug 2008 00:34:14 -0300
+
+rhtvision (2.1.0-3) unstable; urgency=low
+
+  * Added XBS-Bugs: mailto:ibaldo@adinet.com.uy fields to the control file
+    so that reportbug sends bug reports to me instead of the Debian Bug
+    Tracking System.
+  * Bumped Standards-Version to 3.7.2.2, no changes.
+
+ -- Ivan Baldo <ibaldo@adinet.com.uy>  Tue, 08 May 2007 16:13:42 -0300
+
+rhtvision (2.1.0-3etch) unstable; urgency=low
+
+  * Adapted to compile with etch.
+
+ -- Salvador E. Tropea <set@ieee.org>  Wed, 18 Apr 2007 16:52:33 -0300
+
+rhtvision (2.1.0-2) unstable; urgency=low
+
+  * No longer delete these files because they no longer exist or are deleted
+    by the upstream now: linuxso/gkeyli.cc, linuxso/instlib,
+    linuxso/rhide.env, linux/rhide.env, linuxso/Makefile, linuxso/compat.mak,
+    intl/es_iso.mo, intl/es_iso.po, intl/es.mo, intl/ru.mo, intl/pl.mo.
+  * If you want to compile with GCC 4.0.3 comment out #undef  _LIBINTL_H and
+    #define _LIBINTL_H 1 in include/compatlayer.h.
+
+ -- Ivan Baldo <ibaldo@adinet.com.uy>  Wed, 25 Jan 2006 20:21:46 -0200
+
+rhtvision (2.1.0-1) unstable; urgency=low
+
+  * New upstream version, still unstable so we cannot guarantee that nothing
+    bad happens to your dog if you use this stuff!
+  * Updated Build-Depends: added "file" (but I am not sure it is used or
+    needed, dpkg-depcheck reported it though), instead
+    of xlibs-dev | xlib6g-dev now it has libxmu-dev | xlibs-dev | xlib6g-dev
+    and libx11-dev | xlibs-dev | xlib6g-dev, this should give backwards
+    compatibility for various old Debian versions.
+  * Changed Depends of rhtvision*-dev package: removed libc6-dev and
+    libstdc++-dev since they are build-essential and also if someone is going
+    to compile something like a hello world in C++ they should have them,
+    instead of xlibs-dev | xlib6g-dev now it has libxmu-dev | xlibs-dev |
+    xlib6g-dev and libx11-dev | xlibs-dev | xlib6g-dev.
+  * Remove on clean the generated intl/pl.mo file (doh! come on Salvador!
+    provide a complete clean target! distribution packagers shouldn't be doing
+    this stuff).
+  * Bumped Standards-Version to 3.6.2.0, we should rename this package
+    librhtv but I don't like it too much.
+
+ -- Ivan Baldo <ibaldo@adinet.com.uy>  Thu, 18 Aug 2005 22:50:33 -0300
+
+rhtvision (2.0.4-1) unstable; urgency=low
+
+  * New upstream version, this is unstable yet, beware!
+
+ -- Ivan Baldo <ibaldo@adinet.com.uy>  Thu, 23 Dec 2004 19:17:59 -0200
+
+rhtvision (2.0.3-3) unstable; urgency=low
+
+  * Salvador says this is it!, this is the version that will be officially
+    released! CVS release 2.599 2004/11/02 20:06:39.
+    Greetings to all my fans!!! (do I have one?) Anyway, I dedicate this
+    release to Enyunari!!!
+
+ -- Ivan Baldo <ibaldo@adinet.com.uy>  Sun, 21 Nov 2004 16:29:07 -0200
+
+rhtvision (2.0.3-2) unstable; urgency=low
+
+  * With a new version of lintian it complained that we should not
+    build-depend on make and gzip because the first is a build-essential
+    package and the second is an essential package. 
+
+ -- Ivan Baldo <ibaldo@adinet.com.uy>  Tue,  5 Oct 2004 20:24:34 -0200
+
+rhtvision (2.0.3-1) unstable; urgency=low
+
+  * New upstream version! CVS release 2.573 2004/09/22 21:26:40.
+  * Its been so long... I don't remember almost anything about Debian
+    packaging; I was very quiet all this time, without doing testing releases
+    and without testing developer versions. I am extremely lazy since then,
+    not only for this but for many other things of life in general, my home
+    computer isn't very well maintained neither and I am not very aware about
+    Debian as I was before. Anyway, lets try to be a bit useful and at the
+    same time thankful of this superb software.
+  * Bumped Standards-Version to 3.6.1.0 (and I hope it complies!).
+
+ -- Ivan Baldo <ibaldo@adinet.com.uy>  Sun, 26 Sep 2004 21:12:11 -0200
+
+rhtvision (2.0.3-0.1) unstable; urgency=low
+
+  * New version automatically modified by version update scripts
+
+ -- Salvador E. Tropea (SET) <salvador@inti.gov.ar>  Fri, 24 Sep 2004 10:36:01 -0300
+
+rhtvision (2.0.2-1) unstable; urgency=low
+
+  * Upstream released a new fixed version! CVS release 2.493 2003/07/30
+    19:43:18 with sticky tag r2_0_2-1.
+  * Upstream fixed the show-stoper bug regarding the not versioned tvision.mo
+    files.
+
+ -- Ivan Baldo <ibaldo@adinet.com.uy>  Sun, 10 Aug 2003 15:10:43 -0300
+
 rhtvision (2.0.2-0.1) unstable; urgency=low
 
-  * New upstream version.
+  * New upstream version! CVS release 2.487 2003/07/16 14:00:57.
+  * Sorry for the lateness, but I am very busy now, too much work, though I
+    don't regret! I finally got a good job!!!
+  * Salvador did changes to the Debian packaging:
+    - Don't build-depend on recode (not required anymore).
+    - Added README file, it is similar to maintainer.notes.
+    - Added --no-libs-here --real-prefix=/usr to ./configure.
+    - If tar fails when doing the backup of files modified doing the build it
+    doesn't stop the package generation, because some tar failings are due to
+    files not existing or silly errors.
+    - Added usr/bin directory to the -dev package, since it will contain the
+    rhtv-config program.
+  * Added doc/I18n.txt and doc/Streams.txt to the -dev package.
+  * Now sets the flags for the compiler in the environment instead of in the
+    make invocation.
+  * Specify explicitly -g and -Wall compiling options.
+  * Supports DEB_BUILD_OPTIONS as per Policy 3.5.7.
+  * Bumped Standards-Version to 3.5.8.0 (and I hope it complies!).
+  * Removed a lot of obsolete files in files_to_backup.
+  * Remove on clean makes/rhide.env, redhat/librhtv-*.spec and
+    makes/libtvfintl.a.
+  * The debian/copyright file references the GPL license text in the
+    /usr/share/common-licenses/ directory, thanks Lintian!!!
+  * Remove final dots in the single line description of the packages, thanks
+    Lintian!!!
+  * There is a pending bug with this library which forces this to not be an
+    official final release: the .mo files are called tvision.mo, thus if the
+    user wants to install 2 different versions of the library, one will
+    overwrite the other and dpkg will complain, and if we force dpkg to
+    continue anyway, the translations will be messed up for one version of
+    the library. This is not Debian specific though.
 
- -- Salvador Eduardo Tropea <set@users.sf.net>  Fri, 30 May 2003 13:32:35 -0300
+ -- Ivan Baldo <ibaldo@adinet.com.uy>  Sun, 27 Jul 2003 19:00:47 -0300
 
 rhtvision (2.0.1-1) unstable; urgency=low
 

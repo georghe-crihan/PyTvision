@@ -23,6 +23,7 @@ Added support for Unicode buffers Copyright (c) 2003 by by Salvador E.
 #define Uses_string
 #define Uses_stdio
 #define Uses_AllocLocal
+#define Uses_alloca
 #define Uses_TKeys
 #define Uses_TKeys_Extended
 #define Uses_TView
@@ -491,7 +492,9 @@ void TView::handleEvent(TEvent& event)
         if(!(state & (sfSelected | sfDisabled)) && (options & ofSelectable) )
             {
             select();
-            if( !(options & ofFirstClick) )
+            if( !(state & sfSelected) || // SET: If we failed to get the focus forget
+                                         // about this mouse click.
+                !(options & ofFirstClick) )
                 clearEvent(event);
             }
         }
@@ -625,6 +628,24 @@ void TView::putEvent( TEvent& event )
         owner->putEvent(event);
 }
 
+/**[txh]********************************************************************
+
+  Description:
+  Helper function to fill a TEvent structure and call putEvent.
+@x{::PutEvent}.
+  
+***************************************************************************/
+
+void TView::putEvent( ushort what, ushort command, void *infoPtr )
+{
+    TEvent event;
+
+    event.what = what;
+    event.message.command = command;
+    event.message.infoPtr = infoPtr;
+    putEvent( event );
+}
+
 void TView::putInFrontOf( TView *Target )
 {
     TView *p, *lastView;
@@ -632,6 +653,7 @@ void TView::putInFrontOf( TView *Target )
     if( owner != 0 && Target != this && Target != nextView() &&
          ( Target == 0 || Target->owner == owner)
       )
+        {
         if( (state & sfVisible) == 0 )
             {
             owner->removeView(this);
@@ -656,6 +678,7 @@ void TView::putInFrontOf( TView *Target )
             if( (options & ofSelectable) != 0 )
                 owner->resetCurrent();
             }
+        }
 }
 
 void TView::select()
@@ -1380,10 +1403,11 @@ void TView::writeChar(int x, int y, char c, uchar color, int count)
     return;
    }
  // Native mode
- uint8 cell[2];
- cell[0]=c;
- cell[1]=mapColor(color);
- uint16 cell16=*((uint16 *)cell);
+ //uint8 cell[2];
+ //cell[0]=c;
+ //cell[1]=mapColor(color);
+ //uint16 cell16=*((uint16 *)cell);
+ uint16 cell16=c|((mapColor(color))<<8);
 
  int i=0;
  AllocLocalUShort(temp,count*2);
@@ -1392,6 +1416,12 @@ void TView::writeChar(int x, int y, char c, uchar color, int count)
 
  writeView(x,y,count,temp);
 }
+
+#if defined(TV_BIG_ENDIAN)
+ #define endianCol(letra,color) ((((uint32)letra)<<16) | ((uint32)color))
+#else
+ #define endianCol(letra,color) ((((uint32)color)<<16) | ((uint32)letra))
+#endif
 
 void TView::writeCharU16(int x, int y, unsigned c, unsigned color, int count)
 {
@@ -1403,18 +1433,13 @@ void TView::writeCharU16(int x, int y, unsigned c, unsigned color, int count)
     return;
    }
  // Native mode
- uint16 cell[2];
- cell[0]=c;
- cell[1]=mapColor(color);
- uint32 cell32=*((uint32 *)cell);
-
+ uint32 cell32=endianCol(c,mapColor(color));
  int i=0;
- AllocLocalUShort(t,count*2*2);
- uint32 *temp=(uint32 *)t;
+ uint32 *temp=(uint32 *)alloca(count*4);
  for (i=0; i<count; i++)
      temp[i]=cell32;
 
- writeView(x,y,count,t);
+ writeView(x,y,count,temp);
 }
 
 void TView::writeStr(int x, int y, const char *str, uchar color)

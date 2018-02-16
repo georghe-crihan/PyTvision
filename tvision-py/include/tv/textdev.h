@@ -19,7 +19,7 @@ Andris Pavenis.
 class TRect;
 class TScrollBar;
 
-class TTextDevice : public TScroller
+class CLY_EXPORT TTextDevice : public CLY_streambuf, public TScroller
 /* I have changed the order of the baseclasses, because there is a bug in
    the iostream library. The functions in this library call the functions
    if of a streambuf object with a this pointer to the streambuf object,
@@ -33,7 +33,7 @@ public:
             );
 
  virtual int do_sputn( const char *s, int count ) = 0;
- // virtual int overflow( int = EOF );
+ virtual int overflow( int = EOF );
 };
 
 #endif  // Uses_TTextDevice

@@ -15,10 +15,9 @@
  */
  
 // SET: moved the standard headers before tv.h 
-#include <stdlib.h>
-#include <signal.h>
-#include <stdlib.h>
 
+#define Uses_stdlib
+#define Uses_signal
 #define Uses_TDialog
 #define Uses_TRect
 #define Uses_TStaticText
@@ -38,10 +37,13 @@
 #define Uses_TVCodePage
 // Needed for the inputBoxTest
 #define Uses_MsgBox
+#define Uses_TPXPictureValidator
 
+#define Uses_TEditor     // JASC 2006, cmOpen
 #include <tv.h>
 
 #include "tvdemo.h"
+#include "fileview.h"
 #include "tvcmds.h"
 #include "demohelp.h"
 #include "ascii.h"
@@ -65,8 +67,30 @@ void TVDemo::testInputBox()
 {
     char buffer[20];
     strcpy(buffer,"Initial value");
-    inputBox("Test for the inputBox","Enter a number",buffer,20);
-    messageBox(mfInformation | mfOKButton,"Value entered: %s",buffer);
+    if (inputBox("Test for the inputBox","Enter a number",buffer,20)!=cmCancel)
+    {
+        messageBox(mfInformation | mfOKButton,"Value entered: %s",buffer);
+    }
+    else
+    {
+        messageBox("\x3""Input canceled", mfInformation | mfOKButton);
+    }
+}
+
+void TVDemo::testPictureVal()
+{
+    char buffer[20];
+    strcpy(buffer,"11-6789");
+    if (inputBox("Test for the inputBox","Enter ##-####",buffer,20,
+        // You can add a picture validator like this
+        new TPXPictureValidator("##-####",True))!=cmCancel)
+    {
+        messageBox(mfInformation | mfOKButton,"Value entered: %s",buffer);
+    }
+    else
+    {
+        messageBox("\x3""Input canceled", mfInformation | mfOKButton);
+    }
 }
 
 //
@@ -104,7 +128,15 @@ void TVDemo::handleEvent(TEvent &event)
 
             case cmOpenCmd:             //  View a file
                 // SET: Even DOS port needs it.
-                openFile("*");
+                if ( event.message.infoPtr )  // JASC, drag 'n' drop
+                { TView *w= validView( new TFileWindow( (char *)event.message.infoPtr ) );
+                  if( w != 0 )
+                  { deskTop->insert(w);
+                  }
+                }
+                else
+                { openFile("*");
+                }
                 break;
 
             case cmChDirCmd:            //  Change directory
@@ -143,6 +175,10 @@ void TVDemo::handleEvent(TEvent &event)
                 testInputBox();
                 break;
 
+        case cmTestPicture:
+                testPictureVal();
+                break;
+
             default:                    //  Unknown command
                 return;
 
@@ -163,7 +199,7 @@ ushort executeDialog( TDialog* pD, void* data=0 )
         c = TProgram::deskTop->execView(pD);
         if ((c != cmCancel) && (data))
             pD->getData(data);
-        destroy(pD);
+        CLY_destroy(pD);
         }
 
     return c;
@@ -266,7 +302,7 @@ void TVDemo::changeDir()
         {
         d->helpCtx = hcFCChDirDBox;
         deskTop->execView( d );
-        destroy( d );
+        CLY_destroy(d);
     }
 }
 
@@ -388,7 +424,7 @@ void TVDemo::colors()
             getPalette() = *(c->pal);
             setScreenMode(TScreen::screenMode);
             }
-        destroy( c );
+        CLY_destroy(c);
     }
     delete temp_pal;
 }

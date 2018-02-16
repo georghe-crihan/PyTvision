@@ -1,7 +1,12 @@
 #!/usr/bin/make
 # Automatically generated from RHIDE projects, don't edit
-# 2003-06-20 13:50
 #
+
+OBJFILES=\
+	./bhelp$(ExOBJ) \
+	./thelp$(ExOBJ) 
+
+LIBRARIES=
 
 thelp$(ExEXE):: \
 	./bhelp$(ExOBJ) \
@@ -18,10 +23,4 @@ thelp$(ExEXE):: \
 	bhelp.h \
 	$(MAKEFILE_DEPS) 
 	$(RHIDE_COMPILE_CC)
-
-OBJFILES=\
-	./bhelp$(ExOBJ) \
-	./thelp$(ExOBJ) 
-
-LIBRARIES=
 

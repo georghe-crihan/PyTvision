@@ -9,7 +9,7 @@ Modified by Robert H”hne to be used for RHIDE.
 Modified by Salvador E. Tropea (added insertChar, middle button paste and
 other stuff).
 This class was reworked to support Unicode 16 by Salvador E. Tropea
-Copyright (c) 2003
+Copyright (c) 2003-2006
 I basically created a new class TInputLineBase that's pure virtual and
 contains code that can be used for any cell size.
 Then I moved the cell size dependent code to TInputLine and created another
@@ -27,6 +27,7 @@ A lot of internal details changed.
 #define Uses_ctype
 #define Uses_string
 #define Uses_TKeys
+#define Uses_TKeys_Extended
 #define Uses_TInputLine
 #define Uses_TDrawBuffer
 #define Uses_TEvent
@@ -37,20 +38,12 @@ A lot of internal details changed.
 #define Uses_TPalette
 #define Uses_TVOSClipboard
 #define Uses_TGKey
+#define Uses_TGroup
 #include <tv.h>
 
-// TODO: Not used here should be moved away
-char hotKey( const char *s )
-{
-    const char *p;
+unsigned TInputLineBase::defaultModeOptions=0;
 
-    if( (p = strchr( s, '~' )) != 0 )
-        return uctoupper(p[1]);
-    else
-        return 0;
-}
-
-// TODO: Also this
+// Helpers to find the length of the data, overloaded for each data size
 inline
 unsigned StrLen(const char *s)
 {
@@ -67,34 +60,42 @@ unsigned StrLen(const uint16 *s)
 
 #define cpInputLine "\x13\x13\x14\x15"
 
-TInputLineBase::TInputLineBase(const TRect& bounds, int aMaxLen) :
+TInputLineBase::TInputLineBase(const TRect& bounds, int aMaxLen, TValidator *aValid) :
     TView(bounds),
     curPos(0),
     firstPos(0),
     selStart(0),
     selEnd(0),
-    validator(NULL),
+    validator(aValid),
     maxLen(aMaxLen-1),
     dataLen(0)
 {
  state|=sfCursorVis;
  options|=ofSelectable | ofFirstClick;
+ modeOptions=defaultModeOptions;
 }
 
-template class TInputLineBaseT<char,TDrawBuffer>;
-template class TInputLineBaseT<uint16,TDrawBufferU16>;
+template <typename T, typename D>
+TInputLineBaseT<T,D>::TInputLineBaseT(const TRect& bounds, int aMaxLen, TValidator *aValid) :
+  TInputLineBase(bounds,aMaxLen,aValid)
+{
+ data=(char *)new T[aMaxLen];
+ *((T *)data)=EOS;
+ oldData=(char *)new T[aMaxLen];
+ cellSize=sizeof(T);
+ hideContent=False;
+}
 
-void TInputLineBase::SetValidator(TValidator * aValidator)
+void TInputLineBase::setValidator(TValidator *aValidator)
 {
  CLY_destroy(validator);
  validator=aValidator;
- if (validator)
-    validator->SetOwner(this);
 }
 
 TInputLineBase::~TInputLineBase()
 {
  delete[] data;
+ delete[] oldData;
  CLY_destroy(validator);
 }
 
@@ -111,9 +112,15 @@ Boolean TInputLineBase::canScroll( int delta )
 
 // Optimized for size, it could be 2 specialized members avoiding a generic
 // multiply.
-uint32 TInputLineBase::dataSize()
+unsigned TInputLineBase::dataSize()
 {
- return (maxLen+1)*cellSize;
+ unsigned dSize=0;
+
+ if (validator)
+    dSize=validator->transfer(data,NULL,vtDataSize);
+ if (dSize==0)
+    dSize=maxLen+1;
+ return dSize*cellSize;
 }
 
 // TODO: avoid hardcoded arrows
@@ -126,7 +133,14 @@ void TInputLineBaseT<T,D>::draw()
  uchar color=(state & sfFocused) ? getColor(2) : getColor(1);
  
  b.moveChar(0,' ',color,size.x);
- b.moveStr(1,((T *)data)+firstPos,color,size.x-2);
+ if (hideContent)
+   {
+    int rest=dataLen-firstPos;
+    if (rest>0)
+       b.moveChar(1,'*',color,min(size.x-2,rest));
+   }
+ else
+    b.moveStr(1,((T *)data)+firstPos,color,size.x-2);
  
  if (canScroll(1))
     b.moveChar(size.x-1,sizeof(T)==1 ? rightArrow : 0x25b6,(uchar)getColor(4),1);
@@ -147,7 +161,8 @@ void TInputLineBaseT<T,D>::draw()
 
 void TInputLineBase::getData(void *rec)
 {
- memcpy(rec,data,dataSize());
+ if (!validator || !validator->transfer(data,rec,vtGetData))
+    memcpy(rec,data,dataSize());
 }
 
 TPalette& TInputLineBase::getPalette() const
@@ -184,7 +199,7 @@ void  TInputLineBase::deleteSelect()
 {
  if (selStart<selEnd)
    {
-    memcpy(data+selStart*cellSize,data+selEnd*cellSize,(dataLen-selEnd+1)*cellSize);
+    CLY_memcpy(data+selStart*cellSize,data+selEnd*cellSize,(dataLen-selEnd+1)*cellSize);
     dataLen-=selEnd-selStart;
     curPos=selStart;
    }
@@ -195,6 +210,61 @@ void TInputLineBaseT<T,D>::assignPos(int index, unsigned val)
 {
  ((T *)data)[index]=val;
 }
+
+void TInputLineBase::saveState()
+{
+ if (validator)
+   {// Save data to unroll
+    oldDataLen=dataLen;
+    oldCurPos=curPos;
+    oldFirstPos=firstPos;
+    oldSelStart=selStart;
+    oldSelEnd=selEnd;
+    memcpy(oldData,data,dataLen*cellSize);
+   }
+}
+
+void TInputLineBase::restoreState()
+{
+ if (validator)
+   {// Unroll the changes
+    dataLen=oldDataLen;
+    memcpy(data,oldData,dataLen*cellSize);
+    assignPos(dataLen,0);
+    curPos=oldCurPos;
+    firstPos=oldFirstPos;
+    selStart=oldSelStart;
+    selEnd=oldSelEnd;
+   }
+}
+
+template <typename T, typename D>
+unsigned TInputLineBaseT<T,D>::recomputeDataLen()
+{
+ return StrLen((T *)data);
+}
+
+Boolean TInputLineBase::checkValid(Boolean noAutoFill)
+{
+ if (validator)
+   {// IMPORTANT!!! The validator can write more than maxLen chars.
+    if (!validator->isValidInput(data,noAutoFill))
+      {
+       restoreState();
+       return False;
+      }
+    else
+      {
+       int newLen=recomputeDataLen();
+       if (curPos>=dataLen && newLen>dataLen)
+          curPos=newLen;
+       dataLen=newLen;
+       return True;
+      }
+   }
+ return True;
+}
+
 
 /**[txh]********************************************************************
 
@@ -211,29 +281,26 @@ emulating it's behavior.
   
 ***************************************************************************/
 // TODO: The validator can't be 8 bits for an Unicode class.
-//       I think IsValidInput should support one char.
 Boolean TInputLineBase::insertChar(unsigned value)
 {
- if (validator)
-   {
-    char tmp[2];
-    tmp[0]=value;
-    tmp[1]=0;
-    if (validator->IsValidInput(tmp,False)==False)
-       return False;
-   }
+ saveState();
+ // Operate
  if (insertModeOn())
     deleteSelect();
  if (( insertModeOn() && lineIsFull()) ||
      (!insertModeOn() && posIsEnd()))
     resizeData();
+
  if (insertModeOn())
    {
-    if (dataLen<maxLen)
+    if (!lineIsFull())
       {
        memmove(data+(curPos+1)*cellSize,data+curPos*cellSize,
                ((dataLen-curPos)+1)*cellSize);
        dataLen++;
+       if (firstPos>curPos)
+          firstPos=curPos;
+       assignPos(curPos++,value);
       }
    }
  else if (dataLen==curPos)
@@ -241,8 +308,7 @@ Boolean TInputLineBase::insertChar(unsigned value)
     assignPos(curPos+1,0);
     data[curPos+1]=0;
    }
- if (( insertModeOn() && !lineIsFull()) ||
-     (!insertModeOn() && !posIsEnd()))
+ else
    {
     if (firstPos>curPos)
        firstPos=curPos;
@@ -250,27 +316,28 @@ Boolean TInputLineBase::insertChar(unsigned value)
        dataLen++;
     assignPos(curPos++,value);
    }
- return True;
+
+ return checkValid(False);
 }
 
-Boolean TInputLine::insertChar(TEvent &event)
+Boolean TInputLine::insertCharEv(TEvent &event)
 {
  if (event.keyDown.charScan.charCode>=' ')
    {
-    if (!TInputLineBase::insertChar(event.keyDown.charScan.charCode))
+    if (!insertChar(event.keyDown.charScan.charCode))
        clearEvent(event);
     return True;
    }
  return False;
 }
 
-Boolean TInputLineU16::insertChar(TEvent &event)
+Boolean TInputLineU16::insertCharEv(TEvent &event)
 {
  TGKey::fillCharCode(event);
  //printf("insertChar de Unicode: U+%04X\n",event.keyDown.charCode);
  if (event.keyDown.charCode>=' ' && event.keyDown.charCode<0xFF00)
    {
-    if (!TInputLineBase::insertChar(event.keyDown.charCode))
+    if (!insertChar(event.keyDown.charCode))
        clearEvent(event);
     return True;
    }
@@ -287,8 +354,6 @@ the text and force a draw.
 
 void TInputLineBase::makeVisible()
 {
- selStart=0;
- selEnd  =0;
  if (firstPos>curPos)
     firstPos=curPos;
  int i=curPos-size.x+2;
@@ -308,7 +373,7 @@ Boolean TInputLineBaseT<T,D>::pasteFromOSClipboard()
    {
     for (i=0; i<size; i++)
        {
-        TInputLineBase::insertChar(p[i]);
+        insertChar(p[i]);
         selStart=selEnd=0; // Reset the selection or we will delete the last insertion
        }
     DeleteArray(p);
@@ -327,11 +392,25 @@ void TInputLineBaseT<T,D>::copyToOSClipboard()
  // TODO: Put to the clipboard in unicode format
 }
 
+#define adjustSelectBlock() \
+          if( curPos < anchor )  \
+              {                  \
+              selStart = curPos; \
+              selEnd = anchor;   \
+              }                  \
+          else                   \
+              {                  \
+              selStart = anchor; \
+              selEnd = curPos;   \
+              }
+
 void TInputLineBase::handleEvent(TEvent& event)
 {
+ ushort key;
+ Boolean extendBlock;
  TView::handleEvent(event);
 
- int delta, anchor;
+ int delta, anchor=0;
  if ((state & sfSelected)!=0)
     switch (event.what)
       {
@@ -366,16 +445,7 @@ void TInputLineBase::handleEvent(TEvent& event)
                       canScroll(delta=mouseDelta(event)))
                      firstPos+=delta;
                   curPos=mousePos(event);
-                  if (curPos<anchor)
-                    {
-                     selStart=curPos;
-                     selEnd=anchor;
-                    }
-                  else
-                    {
-                     selStart=anchor;
-                     selEnd=curPos;
-                    }
+                  adjustSelectBlock()
                   drawView();
                  }
                while (mouseEvent(event,evMouseMove | evMouseAuto));
@@ -386,7 +456,23 @@ void TInputLineBase::handleEvent(TEvent& event)
             break;
 
        case evKeyDown:
-            switch (ctrlToArrow(event.keyDown.keyCode))
+            key=ctrlToArrow(event.keyDown.keyCode);
+            extendBlock=False;
+            if (key & kbShiftCode)
+              {
+               ushort keyS=key & (~kbShiftCode);
+               if (keyS==kbHome || keyS==kbLeft || keyS==kbRight || keyS==kbEnd)
+                 {
+                  if (curPos==selEnd)
+                     anchor=selStart;
+                  else
+                     anchor=selEnd;
+                  key=keyS;
+                  extendBlock=True;
+                 }
+              }
+                        
+            switch (key)
               {
                case kbLeft:
                     if (curPos>0)
@@ -402,17 +488,20 @@ void TInputLineBase::handleEvent(TEvent& event)
                case kbEnd:
                     curPos=dataLen;
                     break;
-               case kbBack:
+               case kbBackSpace:
                     if (curPos>0)
                       {
+                       saveState();
                        selStart=curPos-1;
                        selEnd  =curPos;
                        deleteSelect();
                        if (firstPos>0)
                           firstPos--;
+                       checkValid(True);
                       }
                     break;
-               case kbDel:
+               case kbDelete:
+                    saveState();
                     if (selStart==selEnd)
                        if (!posIsEnd())
                          {
@@ -420,21 +509,32 @@ void TInputLineBase::handleEvent(TEvent& event)
                           selEnd  =curPos+1;
                          }
                     deleteSelect();
+                    checkValid(True);
                     break;
-               case kbIns:
+               case kbInsert:
                     setState(sfCursorIns,Boolean(!(state & sfCursorIns)));
                     break;
-               case kbCtrlY:
+               case kbCtY:
                     assignPos(0,EOS);
                     curPos=0;
+                    dataLen=0;
                     break;
                // Let them pass even if these contains a strange ASCII (SET)
                case kbEnter:
                case kbTab:
                     return;
                default:
-                    if (!insertChar(event))
+                    if (!insertCharEv(event))
                        return;
+              }
+            if (extendBlock)
+              {
+               adjustSelectBlock()
+              }
+            else
+              {
+               selStart=0;
+               selEnd=0;
               }
             makeVisible();
             clearEvent(event);
@@ -458,10 +558,23 @@ void TInputLineBase::selectAll( Boolean enable )
 template <typename T, typename D>
 void TInputLineBaseT<T,D>::setData(void *rec)
 {
- uint32 ds=dataSize()-sizeof(T);
- memcpy(data,rec,ds);
- *((T *)(data+ds))=EOS;
- dataLen=StrLen((T *)data);
+ if (!validator || !validator->transfer(data,rec,vtSetData))
+   {
+    #if 1
+    dataLen=StrLen((T *)rec);
+    unsigned ds=dataSize()-sizeof(T);
+    unsigned dataLenBytes=dataLen*sizeof(T);
+    if (dataLenBytes>ds)
+       dataLenBytes=ds;
+    memcpy(data,rec,dataLenBytes);
+    memset(data+dataLenBytes,EOS,ds-dataLenBytes+1);
+    #else // Old code, can read out of bounds.
+    unsigned ds=dataSize()-sizeof(T);
+    memcpy(data,rec,ds);
+    *((T *)(data+ds))=EOS;
+    dataLen=StrLen((T *)data);
+    #endif
+   }
  selectAll(True);
 }
 
@@ -479,6 +592,18 @@ void TInputLineBaseT<T,D>::setDataFromStr(void *str)
 
 void TInputLineBase::setState(ushort aState, Boolean enable)
 {
+ if (validator &&                           // We have a validator
+     (modeOptions & ilValidatorBlocks)  &&  // We want to block if invalid
+     owner && (owner->state & sfActive) &&  // The owner is visible
+     aState==sfFocused && enable==False)    // We are losing the focus
+   {
+    TValidator *v=validator;
+    validator=NULL;             // Avoid nested tests
+    Boolean ret=v->validate(data); // Check if we have valid data
+    validator=v;
+    if (!ret)                   // If not refuse the focus change
+       return;
+   }
  TView::setState(aState,enable);
  if (aState==sfSelected ||
      (aState==sfActive && (state & sfSelected)))
@@ -517,6 +642,7 @@ void *TInputLineBaseT<T,D>::readData(ipstream& is)
 {
  cellSize=sizeof(T);
  data=(char *)new T[maxLen+1];
+ oldData=(char *)new T[maxLen+1];
  is.readString((T *)data,maxLen+1);
  return data;
 }
@@ -539,18 +665,27 @@ TInputLineBase::TInputLineBase(StreamableInit) :
 
 #endif // NO_STREAM
 
-Boolean TInputLineBase::valid(ushort )
+Boolean TInputLineBase::valid(ushort cmd)
 {
- Boolean ret=True;
  if (validator)
    {
-    ret=validator->Valid(data);
-    if (ret==True)
-      {
-       validator->Format(data);
-       drawView();
-      }
+    if (cmd==cmValid)
+       return Boolean(validator->status==vsOk);
+    else
+       if (cmd!=cmCancel)
+          if (!validator->validate(data))
+            {
+             owner->current = 0;
+             select();
+             return False;
+            }
    }
- return ret;
+ return True;
 }
+
+// Moved after all the declarations. gcc 4.0.3 seems to have a bug that
+// produces link errors when this instantiation is done before all the
+// members are defined. Pointed out by Donald R. Ziesig.
+template class TInputLineBaseT<char,TDrawBuffer>;
+template class TInputLineBaseT<uint16,TDrawBufferU16>;
 

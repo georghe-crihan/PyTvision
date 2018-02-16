@@ -86,7 +86,11 @@ TScreenWin32::TScreenWin32()
  if (optSearch("ScreenHeight",aux))
     maxY=aux;
  if (maxX!=saveScreenWidth || maxY!=saveScreenHeight)
+   {
     setCrtModeRes(maxX,maxY);
+    // Update cached values
+    GetConsoleScreenBufferInfo(hOut,&ConsoleInfo);
+   }
 
  cursorLines=getCursorType();
  screenWidth =GetCols();
@@ -102,6 +106,10 @@ TScreenWin32::TScreenWin32()
 
 int TScreenWin32::InitConsole()
 {
+ DWORD flags;
+ // Check if we are running in a console
+ if (!GetConsoleMode(GetStdHandle(STD_INPUT_HANDLE),&flags))
+    return 0;
  // Get handles to access Standard Input and Output
  hIn    =GetStdHandle(STD_INPUT_HANDLE);
  hStdOut=GetStdHandle(STD_OUTPUT_HANDLE);
@@ -134,11 +142,13 @@ int TScreenWin32::InitConsole()
  TScreen::clearScreen=clearScreen;
  TScreen::setCharacter=setCharacter;
  TScreen::setCharacters=setCharacters;
- TScreen::System=System;
+ TScreen::System_p=System;
  TScreen::Resume=Resume;
  TScreen::Suspend=Suspend;
- TScreen::setCrtModeRes=SetCrtModeRes;
- TScreen::setVideoModeRes=SetVideoModeRes;
+ TScreen::setCrtModeRes_p=SetCrtModeRes;
+ TScreen::setVideoModeRes_p=SetVideoModeRes;
+ TScreen::setVideoMode=SetVideoMode;
+ TScreen::setVideoModeExt=SetVideoModeExt;
 
  TVWin32Clipboard::Init();
  TGKeyWin32::Init();
@@ -274,9 +284,9 @@ void TScreenWin32::clearScreen()
  FillConsoleOutputCharacterA(hOut,' ',size,coord,&read);
 }
 
-void TScreenWin32::setCharacter(unsigned offset, ushort value)
+void TScreenWin32::setCharacter(unsigned offset, unsigned int value)
 {
- setCharacters(offset,&value,1);
+ setCharacters(offset,reinterpret_cast<ushort*>(&value),1);
 }
 
 void TScreenWin32::setCharacters(unsigned dst, ushort *src, unsigned len)
@@ -480,6 +490,39 @@ int TScreenWin32::SetCrtModeRes(unsigned w, unsigned h, int fW, int fH)
  SetConsoleScreenBufferSize(hOut,newSize);
  // Ok! we did it.
  return fW!=-1 || fH!=-1 || newSize.X!=(int)w || newSize.Y!=(int)h ? 2 : 1;
+}
+
+void TScreenWin32::CheckSizeBuffer(int oldWidth, int oldHeight)
+{
+ // allocating a zeroed screenBuffer, because this function
+ // is called in most cases (in RHIDE) after a SIGWINCH
+ if (screenWidth!=oldWidth || screenHeight!=oldHeight || !screenBuffer)
+   {
+    // Realloc screen buffer only if actually needed (it doesn't exist
+    // or screen size is changed)
+    if (screenBuffer)
+       DeleteArray(screenBuffer);
+    screenBuffer=new ushort[screenWidth*screenHeight];
+   }
+ memset(screenBuffer,0,screenWidth*screenHeight*sizeof(ushort));
+}
+
+void TScreenWin32::SetVideoMode(ushort mode)
+{
+ int oldWidth=screenWidth;
+ int oldHeight=screenHeight;
+
+ defaultSetVideoMode(mode);
+ CheckSizeBuffer(oldWidth,oldHeight);
+}
+
+void TScreenWin32::SetVideoModeExt(char *mode)
+{
+ int oldWidth=screenWidth;
+ int oldHeight=screenHeight;
+
+ defaultSetVideoModeExt(mode);
+ CheckSizeBuffer(oldWidth,oldHeight);
 }
 
 int TScreenWin32::SetVideoModeRes(unsigned w, unsigned h, int fW, int fH)

@@ -28,10 +28,10 @@ Modified by Salvador E. Tropea to compile for 64 bits architectures.
 const P_id_type P_id_notFound = UINT_MAX;
 
 typedef TStreamable *(*BUILDER)();
-//#define __DELTA( d ) (FP_OFF((TStreamable *)(d *)1)-1)
-#define __DELTA( d ) ((long)((TStreamable *)(d *)1)-1)
 
-class TStreamableClass
+#define __DELTA( d ) ((uipointer)((TStreamable *)(d *)1)-1)
+
+class CLY_EXPORT TStreamableClass
 {
 
     friend class TStreamableTypes;

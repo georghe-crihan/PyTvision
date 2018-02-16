@@ -23,22 +23,45 @@
 
    <QPG:Values>
       <QPG:Files>
-         <QPG:Add permissions="0755" component="dev" type="file" filetype="so" file="../linuxso/librhtv.so.2.0.2" install="/opt/lib/"/>
-         <QPG:Add filetype="symlink" component="dev" file="librhtv.so" install="/usr/lib/" linkto="librhtv.so.2.0.2"/>
-         <QPG:Add filetype="symlink" component="dev" file="librhtv.so.2" install="/usr/lib/" linkto="librhtv.so.2.0.2"/>
-         <QPG:Add permissions="0644" component="dev" type="file" filetype="default" file="../linux/librhtv.a" install="/opt/lib/"/>
-         <QPG:Add permissions="0644" component="dev" type="tree" file="../include/" install="/opt/include/rhtvision/">
+         <QPG:Add file="../copying" install="LicenseUrl/" handling="repdata"/>
+         <QPG:Add permissions="0755" file="../makes/librhtv.so.2.2.1" install="/opt/lib/"/>
+         <QPG:Add filetype="symlink" file="librhtv.so" install="/opt/lib/" linkto="librhtv.so.2.2.1"/>
+         <QPG:Add filetype="symlink" file="librhtv.so.2" install="/opt/lib/" linkto="librhtv.so.2.2.1"/>
+         <QPG:Add permissions="0644" file="../makes/librhtv.a" install="/opt/lib/"/>
+         <QPG:Add permissions="0644" file="../makes/libtvfintl.a" install="/opt/lib/"/>
+         <QPG:Add permissions="0755" file="../rhtv-config" install="/opt/bin/"/>
+         <QPG:Add permissions="0644" type="tree" file="../include/" install="/opt/include/rhtvision/">
             <QPG:Rule argument="*/CVS/*" match="exclude"/>
+            <QPG:Rule argument="*/.cvsignore" match="exclude"/>
          </QPG:Add>
-         <QPG:Add permissions="0644" file="../copying" install="/usr/doc/tvision/"/>
+         <QPG:Add permissions="0644" file="../THANKS" install="/usr/doc/tvision/"/>
+         <QPG:Add permissions="0644" file="../TODO" install="/usr/doc/tvision/"/>
+         <QPG:Add permissions="0644" file="../INSTALL.txt" install="/usr/doc/tvision/install.txt"/>
+         <QPG:Add permissions="0644" file="../doc/install/unix.txt" install="/usr/doc/tvision/install_unix.txt"/>
+         <QPG:Add permissions="0644" file="../doc/install/tools.txt" install="/usr/doc/tvision/install_tools.txt"/>
+         <QPG:Add permissions="0644" file="../borland.txt" install="/usr/doc/tvision/"/>
          <QPG:Add permissions="0644" file="../change.log" install="/usr/doc/tvision/"/>
          <QPG:Add permissions="0644" file="../change1.log" install="/usr/doc/tvision/"/>
-         <QPG:Add permissions="0644" file="../borland.txt" install="/usr/doc/tvision/"/>
-         <QPG:Add permissions="0644" file="../TODO" install="/usr/doc/tvision/"/>
-         <QPG:Add permissions="0644" file="../THANKS" install="/usr/doc/tvision/"/>
-         <QPG:Add permissions="0644" file="../version.txt" install="/usr/doc/tvision/"/>
+         <QPG:Add permissions="0644" file="../copying" install="/usr/doc/tvision/"/>
          <QPG:Add permissions="0644" file="../readme.txt" install="/usr/doc/tvision/"/>
+         <QPG:Add permissions="0644" file="../version.txt" install="/usr/doc/tvision/"/>
          <QPG:Add permissions="0644" file="../examples/porting.txt" install="/usr/doc/tvision/"/>
+         <QPG:Add permissions="0644" file="../doc/CodePages.txt" install="/usr/doc/tvision/"/>
+         <QPG:Add permissions="0644" file="../doc/ConfigFile.txt" install="/usr/doc/tvision/"/>
+         <QPG:Add permissions="0644" file="../doc/I18n.txt" install="/usr/doc/tvision/"/>
+         <QPG:Add permissions="0644" file="../doc/QNX.txt" install="/usr/doc/tvision/"/>
+         <QPG:Add permissions="0644" file="../doc/Streams.txt" install="/usr/doc/tvision/"/>
+         <QPG:Add permissions="0644" file="../doc/TVReference.html" install="/usr/doc/tvision/"/>
+         <QPG:Add permissions="0644" file="../makes/common.imk" install="/opt/src/tv-examples/"/>
+         <QPG:Add permissions="0644" file="../examples/readme.txt" install="/opt/src/tv-examples/"/>
+         <QPG:Add permissions="0644" file="../examples/rhide.env" install="/opt/src/tv-examples/"/>
+         <QPG:Add permissions="0644" file="../examples/Makefile" install="/opt/src/tv-examples/"/>
+         <QPG:Add permissions="0644" file="../examples/demo/*.cc" install="/opt/src/tv-examples/demo/"/>
+         <QPG:Add permissions="0644" file="../examples/demo/*.h" install="/opt/src/tv-examples/demo/"/>
+         <QPG:Add permissions="0644" file="../examples/demo/demohelp.h32" install="/opt/src/tv-examples/demo/"/>
+         <QPG:Add permissions="0644" file="../examples/demo/demo.gpr" install="/opt/src/tv-examples/demo/"/>
+         <QPG:Add permissions="0644" file="../examples/demo/demo.mkf" install="/opt/src/tv-examples/demo/"/>
+         <QPG:Add permissions="0644" file="../examples/demo/demo.umk" install="/opt/src/tv-examples/demo/"/>
       </QPG:Files>
 
       <QPG:PackageFilter>
@@ -48,7 +71,7 @@
                <QPM:PackageName>tvision</QPM:PackageName>
                <QPM:PackageReleaseNumber>1</QPM:PackageReleaseNumber>
                <QPM:PackageRepository>http://qnx.org.ru/repository</QPM:PackageRepository>
-               <QPM:FileVersion>1.01</QPM:FileVersion>
+               <QPM:FileVersion>2.0</QPM:FileVersion>
             </QPM:PackageDescription>
             <QPM:ProductDescription>
                <QPM:ProductName>Turbo Vision</QPM:ProductName>
@@ -71,28 +94,59 @@
                <QPM:ProductDescriptionEmbedURL/>
             </QPM:ProductDescription>
             <QPM:ReleaseDescription>
-               <QPM:ReleaseVersion>2.0.2</QPM:ReleaseVersion>
-               <QPM:ReleaseUrgency>Medium</QPM:ReleaseUrgency>
+               <QPM:ReleaseVersion>2.2.1</QPM:ReleaseVersion>
+               <QPM:ReleaseUrgency>High</QPM:ReleaseUrgency>
                <QPM:ReleaseStability>Stable</QPM:ReleaseStability>
                <QPM:ReleaseNoteMinor/>
                <QPM:ReleaseNoteMajor/>
                <QPM:ReleaseBuild>1</QPM:ReleaseBuild>
                <QPM:CountryExclude/>
-               <QPM:ReleaseCopyright>Custom License</QPM:ReleaseCopyright>
+               <QPM:ReleaseCopyright>GNU General Public License</QPM:ReleaseCopyright>
             </QPM:ReleaseDescription>
             <QPM:ContentDescription>
                <QPM:ContentTopic>Software Development/Libraries and Extensions/C++ Libraries</QPM:ContentTopic>
                <QPM:ContentKeyword>TUI, Turbo Vision, console</QPM:ContentKeyword>
-               <QPM:Processor/>
-               <QPM:TargetProcessor/>
+               <QPM:TargetOS>qnx6</QPM:TargetOS>
+               <QPM:HostOS>none</QPM:HostOS>
                <QPM:DisplayEnvironment>Console</QPM:DisplayEnvironment>
                <QPM:TargetAudience>Developer</QPM:TargetAudience>
                <QPM:TargetAudience>User</QPM:TargetAudience>
             </QPM:ContentDescription>
+            <QPM:LicenseUrl>repdata://LicenseUrl/copying</QPM:LicenseUrl>
+         </QPM:PackageManifest>
+      </QPG:PackageFilter>
+
+      <QPG:PackageFilter proc="none" target="none">
+         <QPM:PackageManifest>
             <QPM:ProductInstallationDependencies>
-               <QPM:ProductRequirements/>
+               <QPM:ProductRequirements></QPM:ProductRequirements>
             </QPM:ProductInstallationDependencies>
          </QPM:PackageManifest>
       </QPG:PackageFilter>
+
+      <QPG:PackageFilter proc="x86" target="none">
+         <QPM:PackageManifest>
+            <QPM:ProductInstallationDependencies>
+               <QPM:ProductRequirements></QPM:ProductRequirements>
+            </QPM:ProductInstallationDependencies>
+         </QPM:PackageManifest>
+      </QPG:PackageFilter>
+
+      <QPG:PackageFilter proc="none" target="x86">
+         <QPM:PackageManifest>
+            <QPM:ProductInstallationDependencies>
+               <QPM:ProductRequirements></QPM:ProductRequirements>
+            </QPM:ProductInstallationDependencies>
+         </QPM:PackageManifest>
+      </QPG:PackageFilter>
+
+      <QPG:PackageFilter proc="x86" target="x86">
+         <QPM:PackageManifest>
+            <QPM:ProductInstallationDependencies>
+               <QPM:ProductRequirements></QPM:ProductRequirements>
+            </QPM:ProductInstallationDependencies>
+         </QPM:PackageManifest>
+      </QPG:PackageFilter>
+
    </QPG:Values>
 </QPG:Generation>

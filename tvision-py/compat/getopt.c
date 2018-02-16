@@ -24,6 +24,8 @@
 
 
 #include <cl/needs.h>
+#include <string.h>
+#include <stdlib.h>
 
 #ifdef NEEDS_GETOPT
 
@@ -38,24 +40,28 @@
 #endif
 
 #ifdef TVComp_GCC
-#define alloca __builtin_alloca
+ #define alloca __builtin_alloca
 #else /* not TVComp_GCC */
-#if defined (HAVE_ALLOCA_H) || (defined(sparc) && (defined(sun) || (!defined(USG) && !defined(SVR4) && !defined(__svr4__))))
-#include <alloca.h>
-#else
-#ifdef TVComp_BCPP
-#include <malloc.h>
-#else
-#ifdef TVComp_MSC
-#include <malloc.h>
-#define alloca _alloca
-#else
-#ifndef _AIX
-char *alloca ();
-#endif
-#endif /* MSVC */
-#endif /* TURBOC */
-#endif /* alloca.h */
+ #if defined (HAVE_ALLOCA_H) || (defined(sparc) && (defined(sun) || (!defined(USG) && !defined(SVR4) && !defined(__svr4__))))
+  #include <alloca.h>
+ #else
+  #ifdef TVComp_BCPP
+   #include <malloc.h>
+  #else
+   #ifdef TVComp_MSC
+    #include <malloc.h>
+    #define alloca _alloca
+   #else
+    #ifdef TVComp_Watcom
+     void *alloca ();
+    #else
+     #ifndef _AIX
+      char *alloca ();
+     #endif
+    #endif /* TVComp_Watcom */
+   #endif /* MSVC */
+  #endif /* TURBOC */
+ #endif /* alloca.h */
 #endif /* not TVComp_GCC */
 
 #if !__STDC__ && !defined(const) && IN_GCC
@@ -83,21 +89,23 @@ char *alloca ();
 /* This needs to come after some library #include
    to get __GNU_LIBRARY__ defined.  */
 #ifdef __GNU_LIBRARY__
-#undef	alloca
-/* Don't include stdlib.h for non-GNU C libraries because some of them
-   contain conflicting prototypes for getopt.  */
-#include <stdlib.h>
+ #undef	alloca
+ /* Don't include stdlib.h for non-GNU C libraries because some of them
+    contain conflicting prototypes for getopt.  */
+ #include <stdlib.h>
 #else	/* Not GNU C library.  */
-#define	__alloca	alloca
+ #ifndef TVComp_Watcom
+  #define	__alloca	alloca
+ #endif
 #endif	/* GNU C library.  */
 
 /* SET: more headers needed, __alloca isn't valid */
-#if defined(TVCompf_djgpp) || defined(TVOS_Win32) || defined(TVOSf_Solaris)
-#include <stdlib.h>
+#if defined(TVCompf_djgpp) || defined(TVOS_Win32) || defined(TVOSf_Solaris) || defined(TVOSf_QNX4)
+ #include <stdlib.h>
 #endif
 
-#ifdef TVComp_BCPP
-#include <malloc.h> /* alloca */
+#if defined(TVComp_BCPP) || defined(TVComp_Watcom)
+ #include <malloc.h> /* alloca */
 #endif
 
 /* If GETOPT_COMPAT is defined, `+' as well as `--' can introduce a
@@ -199,7 +207,7 @@ static enum
 } ordering;
 
 /* SET: I don't understand why hello.c doesn't make it */
-#if defined(__GNU_LIBRARY__) || defined(TVCompf_djgpp) || defined(TVOS_Win32) || defined(TVOSf_Solaris)
+#if defined(__GNU_LIBRARY__) || defined(TVCompf_djgpp) || defined(TVOS_Win32) || defined(TVOSf_Solaris) || defined(TVOSf_QNX4)
 /* We want to avoid inclusion of string.h with non-GNU libraries
    because there are many ways it can cause trouble.
    On some systems, it contains special magic macros that don't work
@@ -212,12 +220,10 @@ static enum
 /* Avoid depending on library functions or files
    whose names are inconsistent.  */
 
-char *getenv ();
+char *getenv (const char *);
 
 static char *
-my_index (str, chr)
-     const char *str;
-     int chr;
+my_index (const char *str, int chr)
 {
   while (*str)
     {
@@ -229,10 +235,7 @@ my_index (str, chr)
 }
 
 static void
-my_bcopy (from, to, size)
-     const char *from;
-     char *to;
-     int size;
+my_bcopy (const char *from, char *to, int size)
 {
   int i;
   for (i = 0; i < size; i++)

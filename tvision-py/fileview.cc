@@ -100,7 +100,7 @@ TFileViewer::~TFileViewer()
      if (buffer) free(buffer);
      delete[] fileName;
      fileLines->removeAll();
-     destroy (fileLines);
+     CLY_destroy(fileLines);
 }
 
 void TFileViewer::draw()
@@ -142,7 +142,7 @@ void TFileViewer::readFile( const char *fName )
 
   limit.x = 0;
   fileName = newStr( fName );
-  int fileToView = open(fName, O_RDONLY | O_TEXT);
+  int fileToView = open(fName, O_RDONLY | O_TEXT, 0);
   if (fileToView <= 0)
   {
     messageBox(mfError | mfOKButton ,
@@ -151,7 +151,7 @@ void TFileViewer::readFile( const char *fName )
   }
   else
   {
-    int bufsize = filelength(fileToView) + 1;
+    size_t bufsize = filelength(fileToView) + 1;
     buffer = (char *)malloc(bufsize);
     real_bufsize = ::read(fileToView,buffer,bufsize);
     char *start,*end,*bufend = buffer + real_bufsize;
@@ -218,7 +218,7 @@ void TFileViewer::handleEvent(TEvent &event)
             dialog->getData(fname);
             saveFile(fname);
           }
-          destroy(dialog);
+          CLY_destroy(dialog);
           break;
         }
         default:
@@ -232,14 +232,14 @@ void TFileViewer::handleEvent(TEvent &event)
 
 void TFileViewer::insertLine(const char *line)
 {
-  int len = strlen(line)+1;
+  size_t len = strlen(line)+1;
   buffer = (char *)realloc(buffer,real_bufsize+len);
   memcpy(buffer+real_bufsize,line,len);
-  fileLines->insert((void*)(long)real_bufsize);
+  fileLines->insert((void*)(uipointer)real_bufsize);
   real_bufsize += len;
   count++;
   len--;
-  width = width < len ? len : width;
+  width = width < (int)len ? (int)len : width;
   setLimit(size.x + width, size.y + count);
 }
 
@@ -258,7 +258,7 @@ Boolean TFileViewer::valid( ushort )
 const char * const TFileViewer::operator [](int index)
 {
   if (index >= count) return NULL;
-  return (const char *)(buffer + (long)fileLines->at(index));
+  return (const char *)(buffer + (uipointer)fileLines->at(index));
 }
 
 

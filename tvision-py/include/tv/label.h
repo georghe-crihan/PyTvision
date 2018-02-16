@@ -30,7 +30,7 @@ class TRect;
 struct TEvent;
 class TView;
 
-class TLabel : public TStaticText
+class CLY_EXPORT TLabel : public TStaticText
 {
 
 public:
@@ -44,6 +44,9 @@ public:
     virtual void shutDown();
 
     TView *link;
+
+    // SET: Now labels propagate the disabled state.
+    virtual void setState( ushort aState, Boolean enable );
 
 protected:
 

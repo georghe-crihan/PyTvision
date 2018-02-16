@@ -1,5 +1,5 @@
 #!/usr/bin/perl
-# Copyright (C) 1999-2003 by Salvador E. Tropea (SET),
+# Copyright (C) 1999-2012 by Salvador E. Tropea (SET),
 # see copyrigh file for details
 #
 # To specify the compilation flags define the CFLAGS environment variable.
@@ -7,6 +7,10 @@
 
 require "miscperl.pl";
 require "conflib.pl";
+
+# This optimization is giving problems and current PCs are quite fast to
+# make a real difference.
+$conf{'HAVE_UNSAFE_MEMCPY'}='yes';
 
 # If the script is newer discard the cache.
 #GetCache() unless (-M 'config.pl' < -M 'configure.cache');
@@ -19,6 +23,7 @@ $GPMVersionNeeded='1.10';
 # That's a test to see if that works:
 $NCursesVersionNeeded='1.8.6';
 $DJGPPVersionNeeded='2.0.2';
+$AllegroVersionNeeded='4';
 unlink $ErrorLog;
 $UseDummyIntl=0;
 
@@ -33,22 +38,20 @@ if ($JustSpec)
 print "Configuring Turbo Vision v$Version library\n\n";
 # Determine the OS
 $OS=DetectOS();
+# Test for a working gcc
+$GCC=CheckGCC();
 # Determine C flags
 $CFLAGS=FindCFLAGS();
 # Determine C++ flags
 $CXXFLAGS=FindCXXFLAGS();
-
-$CFLAGS .= " -DNO_STREAM";
-$CXXFLAGS .= " -DNO_STREAM";
-
 # Extra lib directories
 $LDExtraDirs=FindLDExtraDirs();
-# Test for a working gcc
-$GCC=CheckGCC();
 # Check if gcc can compile C++
 $GXX=CheckGXX();
 # Which architecture are we using?
 DetectCPU();
+# 32 or 64 bits pointers?
+DetectPointersSize();
 # Some platforms aren't easy to detect until we can compile.
 DetectOS2();
 # The prefix can be better determined if we know all the rest
@@ -58,6 +61,8 @@ LookForPrefix();
 LookForGNUMake();
 # Same for ar, it could be `gar'
 $GAR=LookForGNUar();
+# Similar for install tool.
+LookForGNUinstall();
 # Look for xgettext
 LookForGettextTools();
 # Is the right djgpp?
@@ -72,14 +77,21 @@ if ($OS eq 'UNIX')
    LookForNCurses($NCursesVersionNeeded);
    LookForKeysyms();
    LookForXlib();
-   #LookForOutB();
+   # Used for X11 driver. Linux implementation of POSIX threads is very bad
+   # and needs a lot of workarounds. Some of them could be just bugs in the
+   # glibc I use but the fact is that the needed tricks make it very Linux
+   # dependent.
+   LookForPThread() if $OSf eq 'Linux';
+   LookForOutB();
   }
 if ($Compf eq 'Cygwin')
   {# Cygwin incorporates a XFree86 port
    LookForXlib();
   }
 LookForIntlSupport();
+LookForAllegro($AllegroVersionNeeded);
 LookForEndianess();
+LookForMaintainerTools() if $conf{'MAINTAINER_MODE'} eq 'yes';
 
 print "\n";
 GenerateMakefile();
@@ -99,15 +111,24 @@ if ($Compf eq 'MinGW')
   }
 $realPrefix=@conf{'real-prefix'};
 $realPrefix=@conf{'prefix'} unless $realPrefix;
-# Path for the includes
-$MakeDefsRHIDE[1]='TVSRC=../../include '.$here.'/include '.$realPrefix.'/include/rhtvision';
+# Path for the includes, used for examples
+$MakeDefsRHIDE[1]='TVSRC=../../include ';
+$MakeDefsRHIDE[1].=$here.'/include ' unless $conf{'libs-here'} eq 'no';
+$MakeDefsRHIDE[1].=$realPrefix.'/include/rhtvision';
 $MakeDefsRHIDE[1].=' '.$conf{'X11IncludePath'} if (@conf{'HAVE_X11'} eq 'yes');
+# Path reported by rhtv-config --include
+$MakeDefsRHIDE[11]='INCLUDE='.$realPrefix.'/include/rhtvision';
+$MakeDefsRHIDE[11].=' '.$conf{'X11IncludePath'} if (@conf{'HAVE_X11'} eq 'yes');
+# Extra path for the includes, used for the library
+$MakeDefsRHIDE[9]='EXTRA_INCLUDE_DIRS='.$conf{'EXTRA_INCLUDE_DIRS'};
+$MakeDefsRHIDE[7]='RHIDE_LIBS=';
 # Libraries needed
 $MakeDefsRHIDE[2]='RHIDE_OS_LIBS=';
 # RHIDE doesn't know about anything different than DJGPP and Linux so -lstdc++ must
 # be added for things like FreeBSD or SunOS. But not for QNX.
 $MakeDefsRHIDE[2].=substr($stdcxx,2); # unless (($OS eq 'DOS') || ($OSf eq 'Linux') || ($OSf eq 'QNXRtP'));
-$OSUSesIntl=($OS eq 'DOS') || ($OS eq 'Win32') || ($OSf eq 'Darwin');
+# Linux, Solaris and FreeBSD have gettext in its C library.
+$OSUSesIntl=!(($OSf eq 'Linux') || ($OSf eq 'Solaris') || ($OSf eq 'FreeBSD'));
 if ($OSUSesIntl)
   {
    if ((@conf{'intl-force-dummy'} ne 'yes') && (@conf{'intl'} eq 'yes'))
@@ -130,30 +151,66 @@ $MakeDefsRHIDE[2].=' gpm' if @conf{'HAVE_GPM'} eq 'yes';
 $MakeDefsRHIDE[2].=' '.$conf{'X11Lib'} if ($conf{'HAVE_X11'} eq 'yes');
 $MakeDefsRHIDE[2].=' mss' if @conf{'mss'} eq 'yes';
 $MakeDefsRHIDE[2].=' intl' if ((($OSf eq 'FreeBSD') || ($OSf eq 'QNXRtP')) && ($conf{'intl'} eq 'yes'));
+$MakeDefsRHIDE[2].=' pthread' if $conf{'HAVE_LINUX_PTHREAD'} eq 'yes';
+$MakeDefsRHIDE[2].=' termlib unix' if ($OSf eq 'QNX4');
+if ($conf{'HAVE_ALLEGRO'} eq 'yes')
+  {
+   $aux=`allegro-config --libs`;
+   $a1=$aux;
+   $aux=~s/\-L(\S+)//g;
+   $AllegroLibs=$aux;
+   $aux=~s/\-l//g;
+   $MakeDefsRHIDE[2].=" $aux";
+   $aux=$a1;
+   $aux=~s/ \-l(\S+)//g;
+   $aux=~s/\-L//g;
+   $AllegroPath=$aux;
+  }
 if ($OS eq 'UNIX')
   {
    $MakeDefsRHIDE[0]='RHIDE_STDINC=/usr/include /usr/local/include /usr/include/g++ /usr/local/include/g++ /usr/lib/gcc-lib /usr/local/lib/gcc-lib';
    if (@conf{'HAVE_X11'} eq 'yes')
      {
-      $MakeDefsRHIDE[0].=$conf{'X11IncludePath'} ? ' '.$conf{'X11IncludePath'} : ' /usr/X11R6/include';
+      $aux=$conf{'X11IncludePath'} ? ' '.$conf{'X11IncludePath'} : ' /usr/X11R6/include';
+      $MakeDefsRHIDE[0].=$aux;
+      $MakeDefsRHIDE[9].=$aux;
      }
    $MakeDefsRHIDE[3]='TVOBJ='.$LDExtraDirs.' ';
    # QNX 6.2 beta 3 workaround
    $MakeDefsRHIDE[3].='/lib ' if ($OSf eq 'QNXRtP');
    # Link with installed libraries
-   $MakeDefsRHIDE[3].=$realPrefix.'/lib ';
-   $MakeDefsRHIDE[3].='../../makes ';
+   $MakeDefsRHIDE[3].=$realPrefix.'/lib';
+   $MakeDefsRHIDE[3].='/'.$conf{'libs-subdir'} if $conf{'libs-subdir'};
+   $MakeDefsRHIDE[3].=' ';
+   $MakeDefsRHIDE[3].='../../makes ' unless $conf{'libs-here'} eq 'no';
    $MakeDefsRHIDE[3].=$here.'/makes ' unless $conf{'libs-here'} eq 'no';
    $MakeDefsRHIDE[3].='../../intl/dummy ' if $UseDummyIntl;
    $MakeDefsRHIDE[3].=$conf{'X11LibPath'}.' ' if ($conf{'HAVE_X11'} eq 'yes');
+   $MakeDefsRHIDE[3].=$AllegroPath.' ' if $conf{'HAVE_ALLEGRO'} eq 'yes';
   }
 elsif ($OS eq 'DOS')
   {
    $MakeDefsRHIDE[0]='RHIDE_STDINC=$(DJDIR)/include $(DJDIR)/lang/cxx $(DJDIR)/lib/gcc-lib';
-   $MakeDefsRHIDE[3]='TVOBJ=../../makes ';
+   # DJGPP's gcc includes djgpp.ver from the same directory where specs
+   $a=`redir -eo $GCC -v`;
+   if ($a=~/(\w:)(.*)\/specs/i)
+     {
+      $here=RunRedirect('pwd',$ErrorLog);
+      chop($here);
+      chdir("$1$2");
+      $a=RunRedirect('pwd',$ErrorLog);
+      chop($a);
+      chdir($here);
+      $MakeDefsRHIDE[0].=" $a"
+     }
+   $MakeDefsRHIDE[3]='TVOBJ=';
+   $MakeDefsRHIDE[3].='../../makes ' unless $conf{'libs-here'} eq 'no';
    $MakeDefsRHIDE[3].=$here.'/makes ' unless $conf{'libs-here'} eq 'no';
-   $MakeDefsRHIDE[3].=$realPrefix.'/lib '.$LDExtraDirs;
+   $MakeDefsRHIDE[3].=$realPrefix.'/lib';
+   $MakeDefsRHIDE[3].='/'.$conf{'libs-subdir'} if $conf{'libs-subdir'};
+   $MakeDefsRHIDE[3].=' '.$LDExtraDirs;
    $MakeDefsRHIDE[3].=' ../../intl/dummy' if $UseDummyIntl;
+   $MakeDefsRHIDE[3].=$AllegroPath.' ' if $conf{'HAVE_ALLEGRO'} eq 'yes';
   }
 elsif ($OS eq 'Win32')
   {
@@ -161,29 +218,70 @@ elsif ($OS eq 'Win32')
    $MakeDefsRHIDE[2].=' gdi32'; # Needed for WinGr driver
    $MakeDefsRHIDE[3]='TVOBJ=../../makes ';
    $MakeDefsRHIDE[3].=$here.'/makes ' unless $conf{'libs-here'} eq 'no';
-   $MakeDefsRHIDE[3].=$realPrefix.'/lib '.$LDExtraDirs;
+   $MakeDefsRHIDE[3].=$realPrefix.'/lib';
+   $MakeDefsRHIDE[3].='/'.$conf{'libs-subdir'} if $conf{'libs-subdir'};
+   $MakeDefsRHIDE[3].=' '.$LDExtraDirs;
    $MakeDefsRHIDE[3].=' ../../intl/dummy' if $UseDummyIntl;
    $MakeDefsRHIDE[3].=' '.$conf{'X11LibPath'} if ($conf{'HAVE_X11'} eq 'yes');
+   $MakeDefsRHIDE[3].=$AllegroPath.' ' if $conf{'HAVE_ALLEGRO'} eq 'yes';
   }
 $MakeDefsRHIDE[4]='STDCPP_LIB='.$stdcxx;
 # C options for dynamic lib
-$MakeDefsRHIDE[5]='SHARED_CODE_OPTION=-fPIC';
-$MakeDefsRHIDE[5].=' -shared' if ($OSf eq 'QNXRtP');
+if ($OSf ne 'Darwin')
+  {
+   $MakeDefsRHIDE[5]='SHARED_CODE_OPTION=-fPIC';
+   $MakeDefsRHIDE[5].=' -shared' if ($OSf eq 'QNXRtP');
+  }
+else
+  {# PPC code is always position independent
+   # However, the linker doesn't allow "common" symbols in shared libraries.
+   $MakeDefsRHIDE[5]='SHARED_CODE_OPTION=-fno-common';
+  }
 # Flags to link as a dynamic lib
-$MakeDefsRHIDE[6]='RHIDE_LDFLAGS=';
-$MakeDefsRHIDE[6].='-L/lib' if ($OSf eq 'QNXRtP');
-$MakeDefsRHIDE[6].=' -shared -Wl,-o,librhtv.'.$Version.'.dylib';
-$libs=$conf{'X11Lib'};
-$libs=~s/(\S+)/-l$1/g;
-$MakeDefsRHIDE[6].=" -L".$conf{'X11LibPath'}." $libs" if @conf{'HAVE_X11'} eq 'yes';
-$MakeDefsRHIDE[6].=' -lgpm' if @conf{'HAVE_GPM'} eq 'yes';
-$MakeDefsRHIDE[6].=(($OSf eq 'QNXRtP') ? ' -lncursesS' : ' -lncurses') unless $conf{'ncurses'} eq 'no';
-$MakeDefsRHIDE[6].=" $stdcxx -lm -lc";
-$MakeDefsRHIDE[7]="LIB_VER=$Version";
-$MakeDefsRHIDE[8]="LIB_VER_MAJOR=$VersionMajor";
+$ldflags1='RHIDE_LDFLAGS=';
+$ldflags2=$ldflags1;
+if ($OS eq 'UNIX')
+  {
+   if ($OSf ne 'Darwin')
+     {
+      $soname='-soname';
+      if ($OSf eq 'Solaris')
+        {
+         system("$GCC -v 2> test.ld");
+         $test=cat('test.ld');
+         unlink 'test.ld';
+         # Why?! I think gcc should translate it when using the native ld.
+         $soname='-h' if $test=~'ccs/bin/ld';
+        }
+      $ldflags1.='-L/lib' if ($OSf eq 'QNXRtP');
+      $ldflags1.=' -shared -Wl,'.$soname.',librhtv.so.'.$Version;
+     }
+   else
+     {# Darwin semantic for dynamic libs is quite different
+      $ldflags1.='-dynamiclib -install_name '.$realPrefix.'/lib/librhtv.'.$Version.'.dylib';
+      $ldflags1.=' -compatibility_version '.$Version.' -current_version '.$Version;
+     }
+   $libs=$conf{'X11Lib'};
+   $libs=~s/(\S+)/-l$1/g;
+   $aux='';
+   $aux.=" -L".$conf{'X11LibPath'}." $libs" if @conf{'HAVE_X11'} eq 'yes';
+   $aux.=' -lgpm' if @conf{'HAVE_GPM'} eq 'yes';
+   $aux.=(($OSf eq 'QNXRtP') ? ' -lncursesS' : ' -lncurses') unless $conf{'ncurses'} eq 'no';
+   $aux.=" $stdcxx -lm -lc";
+   $aux.=' -lpthread' if $conf{'HAVE_LINUX_PTHREAD'} eq 'yes';
+   $aux.=' '.$AllegroLibs if ($conf{'HAVE_ALLEGRO'} eq 'yes');
+   $aux.=' libtvfintl.a' if ($OSf eq 'Darwin') && $UseDummyIntl;
+   $MakeDefsRHIDE[7].=$aux;
+  }
+
+$MakeDefsRHIDE[8]="LIB_VER=$Version";
+$MakeDefsRHIDE[10]="LIB_VER_MAJOR=$VersionMajor";
 
 ModifyMakefiles('intl/dummy/Makefile');
-CreateRHIDEenvs('examples/rhide.env','makes/rhide.env','compat/rhide.env');
+$MakeDefsRHIDE[6]=$ldflags1;
+CreateRHIDEenvs('makes/rhide.env','compat/rhide.env');
+$MakeDefsRHIDE[6]=$ldflags2;
+CreateRHIDEenvs('examples/rhide.env');
 
 # Repeated later for other targets
 CreateConfigH();
@@ -214,6 +312,7 @@ sub UpdateSpec()
 {
  $ReplaceTags{'version'}=$Version;
  ReplaceText('redhat/librhtv.spec.in',"redhat/librhtv-$Version.spec");
+ ReplaceText('qnxrtp/tvision.qpg.in',"qnxrtp/tvision.qpg");
 }
 
 sub SeeCommandLine
@@ -231,7 +330,7 @@ sub SeeCommandLine
       {
        $conf{'prefix'}=$1;
       }
-elsif ($i=~'--real-prefix=(.*)')
+    elsif ($i=~'--real-prefix=(.*)')
       {
        $conf{'real-prefix'}=$1;
       }
@@ -299,6 +398,10 @@ elsif ($i=~'--real-prefix=(.*)')
       {
        $conf{'libs-here'}='no';
       }
+    elsif ($i=~'--libs-subdir=(.*)')
+      {
+       $conf{'libs-subdir'}=$1;
+      }
     elsif ($i eq '--enable-maintainer-mode')
       {
        $conf{'MAINTAINER_MODE'}='yes';
@@ -306,6 +409,44 @@ elsif ($i=~'--real-prefix=(.*)')
     elsif ($i eq '--just-spec')
       {
        $JustSpec=1;
+      }
+    elsif ($i eq '--with-pthread')
+      {
+       $conf{'try-pthread'}='yes';
+      }
+    elsif ($i eq '--without-pthread')
+      {
+       $conf{'try-pthread'}='no';
+      }
+    elsif ($i eq '--without-static')
+      {
+       $conf{'no-static'}='yes';
+      }
+    elsif ($i eq '--without-dynamic')
+      {
+       $conf{'no-dynamic'}='yes';
+      }
+#    elsif ($i eq '--unsafe-memcpy')
+#      {
+#       $conf{'HAVE_UNSAFE_MEMCPY'}='yes';
+#      }
+    elsif ($i eq '--safe-memcpy')
+      {
+       $conf{'HAVE_UNSAFE_MEMCPY'}='no';
+      }
+    elsif ($i=~'--include=(.*)')
+      {
+       $conf{'EXTRA_INCLUDE_DIRS'}.=" $1";
+      }
+    elsif ($i eq '--debug')
+      {
+       $conf{'CFLAGS'}=
+       $conf{'CXXFLAGS'}='-O2 -Wall -Werror -ggdb3';
+      }
+   # For compatibility with autoconf:
+    # LinCS/tiger - ignore some autoconf generated params
+    elsif (($i=~'--cache-file=(.*)') || ($i=~'--srcdir=(.*)') || ($i=~'--enable-ltdl-convenience'))
+      {
       }
     else
       {
@@ -321,11 +462,13 @@ sub ShowHelp
  print "Flags:\n";
  print "--cflags=val    : normal C flags [default is env. CFLAGS].\n";
  print "--cxxflags=val  : normal C++ flags [default is env. CXXFLAGS].\n";
+ print "--debug         : selects C/C++ switches for debugging\n";
  
  print "\nPaths and library names:\n";
  print "--x-include=path: X11 include path [/usr/X11R6/lib].\n";
  print "--x-lib=path    : X11 library path [/usr/X11R6/include].\n";
  print "--X11lib=val    : Name of X11 libraries [default is X11 Xmu].\n";
+ print "--include=path  : Add this path for includes. Repeat for each dir.\n";
  print "--no-libs-here  : Don't use the sources path for libs.\n";
  
  print "\nIntallation:\n";
@@ -337,18 +480,24 @@ sub ShowHelp
  print "--real-prefix=pa: real prefix, for Debian package\n";
  
  print "\nLibraries:\n";
- print "--force-dummy   : use the dummy intl library even when gettext is detected.\n";
- print "--no-intl       : don't use international support.\n";
- print "--with-mss      : compiles with MSS memory debugger.\n";
- print "--without-mss   : compiles without MSS [default].\n";
- print "--with-ssc      : compiles using Simple Streams Compatibility.\n";
- print "--without-ssc   : compiles without SSC [default].\n";
+ print "--force-dummy    : use the dummy intl library even when gettext is detected.\n";
+ print "--no-intl        : don't use international support.\n";
+ print "--without-static : don't create the static library.\n";
+ print "--without-dynamic: don't create the dynamic library.\n";
+ print "--with-mss       : compiles with MSS memory debugger.\n";
+ print "--without-mss    : compiles without MSS [default].\n";
+ print "--with-ssc       : compiles using Simple Streams Compatibility.\n";
+ print "--without-ssc    : compiles without SSC [default].\n";
+ print "--with-pthread   : uses pthread for X11 driver.\n";
+ print "--without-pthread: avoids pthread for X11 driver [default].\n";
  
  print "\nOthers:\n";
  print "--enable-maintainer-mode:\n";
  print "                : enables header dependencies and other stuff needed\n";
  print "                  for developement, not just use the editor.\n";
  print "--just-spec     : update RPMs spec file and exit.\n";
+# print "--unsafe-memcpy : disable the use of memcpy when memory overlaps\n";
+ print "--safe-memcpy   : enable the use of memcpy when memory overlaps\n";
  print "--help          : displays this text.\n";
 }
 
@@ -400,7 +549,7 @@ sub GiveAdvice
    {
     print "\n";
     print "* No X11 support detected. If X11 is installed make sure you have the\n";
-    print "  development package installed (i.e. xlibs-dev). Also check the options\n";
+    print "  development packages installed (i.e. libxmu-dev). Also check the options\n";
     print "  to specify the paths for X11 libs and headers\n";
    }
 }
@@ -433,7 +582,7 @@ int main(void)
 }
 ';
  $test=RunGCCTest($GCC,'c',$test,'');
- chop($test);
+ $test=~s/\W//g;
  $conf{'TV_BIG_ENDIAN'}=($test eq "big") ? 'yes' : 'no';
  print "$test endian\n";
 }
@@ -493,12 +642,14 @@ int main(void)
  $libdir=$LDExtraDirs;
  $libdir=~s/(\S+)/-L$1/g;
  $test=RunGCCTest($GCC,'c',$intltest,'-Iinclude/ '.$libdir.' '.$intllib);
- if ($test ne "OK\n")
+ $test=~s/\W//g;
+ if ($test ne "OK")
    {
     print "no, additional check required.\n";
     print "Checking for extra libs for international support: ";
     $test=RunGCCTest($GCC,'c',$intltest,'-Iinclude/ '.$intllib.' -liconv');
-    if ($test ne "OK\n")
+    $test=~s/\W//g;
+    if ($test ne "OK")
       {
        print "none found\n";
        print "International support absent or non-working\n";
@@ -541,7 +692,8 @@ int main(void)
 }
 ';
  $test=RunGCCTest($GCC,'c',$test,'');
- if ($test eq "OK\n")
+ $test=~s/\W//g;
+ if ($test eq "OK")
    {
     $conf{'HAVE_KEYSYMS'}='yes';
     print " yes OK\n";
@@ -579,6 +731,8 @@ int main(void)
  $conf{'X11LibPath'}='/usr/X11R6/lib' unless $conf{'X11LibPath'};
  # Looks like Cygwin does all static!
  $libs=($Compf eq 'Cygwin') ? 'Xmu Xt SM ICE X11' : 'X11 Xmu';
+ # QNX4 does all static!
+ $libs='Xmu Xt SM ICE X11 socket' if ($OSf eq 'QNX4');
  $conf{'X11Lib'}=$libs unless $conf{'X11Lib'};
  $libs=$conf{'X11Lib'};
  $libs=~s/(\S+)/-l$1/g;
@@ -628,7 +782,7 @@ sub LookForOutB
 #include <stdio.h>
 #include <sys/io.h>
 #ifdef __i386__
-static volatile void Test(void) { outb(10,0x300); }
+void Test(void) { outb(10,0x300); }
 #endif
 int main(void)
 {
@@ -637,7 +791,8 @@ int main(void)
 }
 ';
  $test=RunGCCTest($GCC,'c',$test,'');
- $conf{'HAVE_OUTB_IN_SYS'}=($test eq "OK\n") ? 'yes' : 'no';
+ $test=~s/\W//g;
+ $conf{'HAVE_OUTB_IN_SYS'}=($test eq "OK") ? 'yes' : 'no';
  print "@conf{'HAVE_OUTB_IN_SYS'}\n";
  #print ">$test<\n";
 }
@@ -689,6 +844,34 @@ int main(void)
  print "$test OK\n";
 }
 
+sub LookForAllegro
+{
+ my $vNeed=$_[0],$test;
+
+ print 'Looking for allegro library: ';
+ if (@conf{'HAVE_ALLEGRO'})
+   {
+    print "@conf{'HAVE_ALLEGRO'} (cached)\n";
+    return;
+   }
+ $test=`allegro-config --version`;
+ chomp $test;
+ if (!length($test))
+   {
+    $conf{'HAVE_ALLEGRO'}='no';
+    print " no, disabling AlCon\n";
+    return;
+   }
+ if (!CompareVersion($test,$vNeed))
+   {
+    $conf{'HAVE_ALLEGRO'}='no';
+    print " too old, disabling AlCon\n";
+    return;
+   }
+ $conf{'HAVE_ALLEGRO'}='yes';
+ print "$test OK\n";
+}
+
 sub LookForNCurses
 {
  my ($vNeed)=@_;
@@ -701,10 +884,21 @@ sub LookForNCurses
     return;
    }
  # Assume it is -lncurses
- $conf{'NameCurses'}='ncurses';
+ if ($OSf ne 'QNXRtP')
+ {
+  $conf{'NameCurses'}='ncurses'
+ }
+ else
+ {
+  $conf{'NameCurses'}='ncursesS'
+ }
  $test='
 #include <stdio.h>
-#include <ncurses.h>
+#if defined(__QNX__) && !defined(__QNXNTO__)
+ #include <curses.h>
+#else
+ #include <ncurses.h>
+#endif
 void dummy() {initscr();}
 int main(void)
 {
@@ -712,7 +906,8 @@ int main(void)
  return 0;
 }
 ';
- $result=RunGCCTest($GCC,'c',$test,'-lncurses');
+ $result=RunGCCTest($GCC,'c',$test,'-lncurses') if ($OSf ne 'QNX4');
+ $result=RunGCCTest($GCC,'c',$test,'-lncurses -lunix') if ($OSf eq 'QNX4');
  if (!length($result))
    {# Try again with -lcurses, In Solaris ncurses is installed this way
     $result=RunGCCTest($GCC,'c',$test,'-lcurses');
@@ -745,7 +940,7 @@ int main(void)
 }
 ';
  $result=RunGCCTest($GCC,'c',$test,'-l'.$conf{'NameCurses'});
- chop($result);
+ $result=~s/\W//g;
  if ($result eq 'Ok')
    {
     print "yes\n";
@@ -814,9 +1009,104 @@ sub LookForRecode
    }
 }
 
+sub LookForPThread
+{
+ my $test;
+
+ if ($conf{'try-pthread'} ne 'yes')
+   {
+    $conf{'HAVE_LINUX_PTHREAD'}='no';
+    return;
+   }
+
+ print 'Looking for pthread (LinuxThreads) library: ';
+ if (@conf{'HAVE_LINUX_PTHREAD'})
+   {
+    print "@conf{'HAVE_LINUX_PTHREAD'} (cached)\n";
+    return;
+   }
+ $test='
+// We need it for recursive mutex
+#define _GNU_SOURCE
+#include <stdio.h>
+#include <pthread.h>
+
+static pthread_t th;
+static pthread_mutex_t mutex;
+
+void *Test(void *unused)
+{// The OK will be printed only if the thread worked
+ printf("OK\n");
+ return NULL;
+}
+
+int main(int argc, char *argv[])
+{// Test the attribute for recursive mutex.
+ pthread_mutexattr_t mt_attr;
+ pthread_mutexattr_init(&mt_attr);
+ pthread_mutexattr_settype(&mt_attr,PTHREAD_MUTEX_RECURSIVE);
+ pthread_mutex_init(&mutex,&mt_attr);
+ // Create a thread
+ pthread_create(&th,NULL,Test,NULL);
+ // Wait until it finishes
+ pthread_join(th,NULL);
+ return 0;
+}
+';
+ $test=RunGCCTest($GCC,'c',$test,'-lpthread');
+ if (!length($test))
+   {
+    $conf{'HAVE_LINUX_PTHREAD'}='no';
+    print " no, disabling X11 update thread option\n";
+    return;
+   }
+ $conf{'HAVE_LINUX_PTHREAD'}='yes';
+ print "OK\n";
+}
+
+sub DetectPointersSize()
+{
+ my $test;
+
+ print 'Looking for pointer size: ';
+ if ($conf{'HAVE_64BITS_POINTERS'})
+   {
+    print ($conf{'HAVE_64BITS_POINTERS'} eq 'yes' ? '64' : '32')."bits (cached)\n";
+    return;
+   }
+
+ $test='
+#include <stdio.h>
+
+int main(void)
+{
+ printf("%d\n",(int) sizeof(void *));
+ return 0;
+}
+';
+ $test=RunGCCTest($GCC,'c',$test,'');
+ $test=~s/\W//g;
+ if ($test eq '8')
+   {
+    $conf{'HAVE_64BITS_POINTERS'}='yes';
+    print " 64 bits\n";
+   }
+ elsif ($test eq '4')
+   {
+    $conf{'HAVE_64BITS_POINTERS'}='no';
+    print " 32 bits\n";
+   }
+ else
+   {
+    CreateCache();
+    die "Unknown pointer size!!\n";
+   }
+}
+
 sub GenerateMakefile
 {
  my ($text,$rep,$makeDir,$ver,$internac,$maintain);
+ my ($dosta,$dodyn,$nameSO,$nameSOM,$nameSOV,$stripDebug);
 
  print "Generating Makefile\n";
  $text=cat('Makefile.in');
@@ -828,11 +1118,19 @@ sub GenerateMakefile
  $internac=@conf{'xgettext'} ne 'no';
  $maintain=@conf{'MAINTAINER_MODE'} eq 'yes';
 
+ $dosta=@conf{'no-static'} ne 'yes';
+ $dodyn=($OS eq 'UNIX') && ($OSf ne 'QNX4') && (@conf{'no-dynamic'} ne 'yes');
+ if (!$dosta && !$dodyn)
+   {
+    CreateCache();
+    die "No static nor dynamic library created!!\n";
+   }
+
  $rep ='';
  $rep.=' maintainance' if $maintain;
- $rep.=' static-lib';
+ $rep.=' static-lib' if $dosta;
  $rep.=' rhtv-config$(EXE_EXT)';
- $rep.=' dynamic-lib' if ($OS eq 'UNIX');
+ $rep.=' dynamic-lib' if $dodyn;
  $rep.=' internac' if ($internac);
  $text=~s/\@targets\@/$rep/g;
  $text=~s/\@OS\@/$OS/g;
@@ -840,6 +1138,13 @@ sub GenerateMakefile
  $text=~s/\@exe_ext\@/$ExeExt/g;
  $text=~s/\@maintainer_mode\@/MAINTAINER_MODE=1/g if $maintain;
  $text=~s/\@maintainer_mode\@//g                  unless $maintain;
+ $text=~s/\@install\@/@conf{'GNU_INSTALL'}/;
+ $text=~s/\@darwin\@/DARWIN=1/g   if $OSf eq 'Darwin';
+ $text=~s/\@darwin\@//g           if $OSf ne 'Darwin';
+ my $libdir='$(prefix)/lib';
+ $libdir.='/'.$conf{'libs-subdir'} if $conf{'libs-subdir'};
+ $text=~s/\@libdir\@/$libdir/g;
+
 
  $makeDir='makes';
 
@@ -849,14 +1154,33 @@ sub GenerateMakefile
  $text=~s/\@maintainance_rule\@/$rep/g;
 
  # Write target rules:
- $rep ="static-lib:\n\t\$(MAKE) -C $makeDir -f librhtv.mkf";
- $rep.="\n\tranlib $makeDir/librhtv.a" if $conf{'UseRanLib'};
- $rep.="\n";
- if ($OS eq 'UNIX')
+ $rep='';
+ if ($dosta)
    {
-    $rep.="\ndynamic-lib:\n\t\$(MAKE) DYNAMIC_LIB=1 -C $makeDir -f librhtv.mkf\n";
-    $rep.="\tcd $makeDir; ln -sf librhtv.so.$Version librhtv.so\n";
-    $rep.="\tcd $makeDir; ln -sf librhtv.so.$Version librhtv.so.$VersionMajor\n";
+    $rep.="static-lib:\n\t\$(MAKE) -C $makeDir -f librhtv.mkf";
+    $rep.="\n\tranlib $makeDir/librhtv.a" if $conf{'UseRanLib'};
+    $rep.="\n";
+   }
+ if ($dodyn)
+   {
+    $rep.="\ndynamic-lib: intl-dummy\n\t\$(MAKE) DYNAMIC_LIB=1 -C $makeDir -f librhtv.mkf\n";
+
+    if ($OSf ne 'Darwin')
+      {
+       $nameSO='librhtv.so';
+       $nameSOM="librhtv.so.$VersionMajor";
+       $nameSOV="librhtv.so.$Version";
+      }
+    else
+      {# Darwin uses a different name
+       $nameSO='librhtv.dylib';
+       $nameSOM="librhtv.$VersionMajor.dylib";
+       $nameSOV="librhtv.$Version.dylib";
+      }
+    # Note: -sf should work for Solaris 9 but at least in the machines at S.F.
+    # it doesn't. So we just delete the file and do the link.
+    $rep.="\t-cd $makeDir; rm -f $nameSO; ln -s $nameSOV $nameSO\n";
+    $rep.="\t-cd $makeDir; rm -f $nameSOM; ln -s $nameSOV $nameSOM\n";
    }
  if ($internac)
    {
@@ -873,70 +1197,85 @@ sub GenerateMakefile
 
  # Write install stuff
  # What versions of the library we will install
- $rep= 'install-static ';
- $rep.='install-dynamic ' if ($OS eq 'UNIX');
+ $rep='';
+ $rep.='install-static ' if $dosta;
+ $rep.='install-dynamic ' if $dodyn;
  $rep.='install-internac ' if $internac;
  $text=~s/\@installers\@/$rep/g;
 
  # Headers
- $rep= "install -d -m 0755 \$(prefix)/include/rhtvision\n";
+
+ $rep= GenInstallDir('0755','$(prefix)/include/rhtvision');
  $rep.="\trm -f \$(prefix)/include/rhtvision/*.h\n";
- $rep.="\tinstall -m 0644 include/*.h \$(prefix)/include/rhtvision\n";
- $rep.="\tinstall -d -m 0755 \$(prefix)/include/rhtvision/tv\n";
- $rep.="\tinstall -m 0644 include/tv/*.h \$(prefix)/include/rhtvision/tv\n";
+ $rep.="\t".GenInstallFiles('0644','include/*.h','$(prefix)/include/rhtvision');
+ $rep.="\t".GenInstallDir('0755','$(prefix)/include/rhtvision/tv');
+ $rep.="\t".GenInstallFiles('0644','include/tv/*.h','$(prefix)/include/rhtvision/tv');
  if ($OS eq 'DOS')
    {
-    $rep.="\tinstall -d -m 0755 \$(prefix)/include/rhtvision/tv/dos\n";
-    $rep.="\tinstall -m 0644 include/tv/dos/*.h \$(prefix)/include/rhtvision/tv/dos\n";
+    $rep.="\t".GenInstallDir('0755','$(prefix)/include/rhtvision/tv/dos');
+    $rep.="\t".GenInstallFiles('0644','include/tv/dos/*.h','$(prefix)/include/rhtvision/tv/dos');
    }
  if ($OS eq 'UNIX')
    {
-    $rep.="\tinstall -d -m 0755 \$(prefix)/include/rhtvision/tv/linux\n";
-    $rep.="\tinstall -m 0644 include/tv/linux/*.h \$(prefix)/include/rhtvision/tv/linux\n";
+    $rep.="\t".GenInstallDir('0755','$(prefix)/include/rhtvision/tv/linux');
+    $rep.="\t".GenInstallFiles('0644','include/tv/linux/*.h','$(prefix)/include/rhtvision/tv/linux');
    }
  if ($OSf eq 'QNXRtP')
    {
-    $rep.="\tinstall -d -m 0755 \$(prefix)/include/rhtvision/tv/qnxrtp\n";
-    $rep.="\tinstall -m 0644 include/tv/qnxrtp/*.h \$(prefix)/include/rhtvision/tv/qnxrtp\n";
+    $rep.="\t".GenInstallDir('0755','$(prefix)/include/rhtvision/tv/qnxrtp');
+    $rep.="\t".GenInstallFiles('0644','include/tv/qnxrtp/*.h','$(prefix)/include/rhtvision/tv/qnxrtp');
    }
  if ($OS eq 'Win32')
    {
-    $rep.="\tinstall -d -m 0755 \$(prefix)/include/rhtvision/tv/win32\n";
-    $rep.="\tinstall -m 0644 include/tv/win32/*.h \$(prefix)/include/rhtvision/tv/win32\n";
+    $rep.="\t".GenInstallDir('0755','$(prefix)/include/rhtvision/tv/win32');
+    $rep.="\t".GenInstallFiles('0644','include/tv/win32/*.h','$(prefix)/include/rhtvision/tv/win32');
    }
  if (@conf{'HAVE_X11'} eq 'yes')
    {
-    $rep.="\tinstall -d -m 0755 \$(prefix)/include/rhtvision/tv/x11\n";
-    $rep.="\tinstall -m 0644 include/tv/x11/*.h \$(prefix)/include/rhtvision/tv/x11\n";
+    $rep.="\t".GenInstallDir('0755','$(prefix)/include/rhtvision/tv/x11');
+    $rep.="\t".GenInstallFiles('0644','include/tv/x11/*.h','$(prefix)/include/rhtvision/tv/x11');
    }
- $rep.="\tinstall -d -m 0755 \$(prefix)/include/rhtvision/cl\n";
- $rep.="\tinstall -m 0644 include/cl/*.h \$(prefix)/include/rhtvision/cl\n";
+ $rep.="\t".GenInstallDir('0755','$(prefix)/include/rhtvision/cl');
+ $rep.="\t".GenInstallFiles('0644','include/cl/*.h','$(prefix)/include/rhtvision/cl');
  $text=~s/\@install_headers\@/$rep/g;
  
  # Dummy replacement for i8n library
  $rep ="install-intl-dummy: intl-dummy\n";
- $rep.="\tinstall -d -m 0755 \$(libdir)\n";
- $rep.="\tinstall -m 0644 intl/dummy/libtvfintl.a \$(libdir)/libtvfintl.a\n";
+ $rep.="\t".GenInstallDir('0755','$(libdir)');
+ $rep.="\t".GenInstallFiles('0644','intl/dummy/libtvfintl.a','$(libdir)');
+ # In Darwin the linker checks the time stamp of the ranlib pass and the one of
+ # the file. It complains if we use ranlib and then copy the file.
+ $rep.="\tranlib \$(libdir)/libtvfintl.a\n" if $conf{'UseRanLib'};
  $text=~s/\@intl_dummy_install_rule\@/$rep/g;
 
  # Static library
- $rep ="install-static: static-lib\n";
- $rep.="\tinstall -d -m 0755 \$(libdir)\n";
- $rep.="\tinstall -m 0644 $makeDir/librhtv.a \$(libdir)\n";
+ $rep='';
+ if ($dosta)
+   {
+    $rep.="install-static: static-lib\n";
+    $rep.="\t".GenInstallDir('0755','$(libdir)');
+    $rep.="\t".GenInstallFiles('0644',"$makeDir/librhtv.a",'$(libdir)');
+   }
 
- if ($OS eq 'UNIX')
+ if ($dodyn)
    {# Dynamic library
-    $ver=($OSf eq 'FreeBSD') ? $VersionMajor : $Version;
+    $ver=($OSf eq 'FreeBSD') ? $nameSOM : $nameSOV;
     $rep.="\ninstall-dynamic: dynamic-lib\n";
-    $rep.="\trm -f \$(libdir)/librhtv.so\n";
-    $rep.="\trm -f \$(libdir)/librhtv.so.$VersionMajor\n";
-    $rep.="\trm -f \$(libdir)/librhtv.so.$ver\n";
-    $rep.="\tcd \$(libdir); ln -s librhtv.so.$ver librhtv.so\n";
-    # Not needed if the soname changes which each version (at least Ivan says that)
-    $rep.="\tinstall -m 0644 $makeDir/librhtv.so.$ver \$(libdir)\n";
-    $rep.="\tstrip --strip-debug \$(libdir)/librhtv.so.$ver\n" unless $conf{'debugInfo'} eq 'yes';
-    # FreeBSD: merge data from libdir
-    $rep.=($OSf eq 'FreeBSD') ? "\t-ldconfig -m \$(libdir)\n" : "\t-ldconfig\n";
+    $rep.="\t".GenInstallDir('0755','$(libdir)');
+    $rep.="\trm -f \$(libdir)/$nameSO\n";
+    $rep.="\trm -f \$(libdir)/$nameSOM\n";
+    $rep.="\trm -f \$(libdir)/$nameSOV\n";
+    $rep.="\tcd \$(libdir); ln -s $ver $nameSO\n";
+    $rep.="\tcd \$(libdir); ln -s $ver $nameSOV\n" if $OSf eq 'FreeBSD';
+    $rep.="\t".GenInstallFiles('0644',"$makeDir/$ver",'$(libdir)');
+    $stripDebug=($OSf eq 'Darwin') ? '-S' : '--strip-debug';
+    $rep.="\tstrip $stripDebug \$(libdir)/$ver\n" unless $conf{'debugInfo'} eq 'yes';
+    # FreeBSD: merge data from libdir.
+    # Darwin: doesn't have ldconfig.
+    if ($OSf ne 'Darwin')
+      {
+       $rep.=($OSf eq 'FreeBSD') ? "\t-ldconfig -m \$(libdir)\n" : "\t-ldconfig\n";
+      }
    }
  if ($internac)
    {
@@ -944,17 +1283,26 @@ sub GenerateMakefile
    }
  $text=~s/\@install_rules\@/$rep/g;
 
-# $rep= "clean:\n";
-# $rep.="\trm -f $makeDir/*.so* $makeDir/*.a\n";
-# $rep.="\trm -f $makeDir/obj/*.o $makeDir/obj/*.lo\n";
-# $rep.="\trm -f $makeDir/librhtv.a\n";
-# $rep.="\trm -f compat/obj/*.o\n";
-# $rep.="\trm -f intl/dummy/*.o\n";
-# $rep.="\trm -f intl/dummy/*.a\n";
-# $rep.="\t-\$(MAKE) -C examples clean\n";
-# $rep.="\trm -f configure.cache\n";
-# $rep.="\trm -f rhtv-config\$(EXE_EXT)\n";
-# $text=~s/\@clean\@/$rep/g;
+ # rhtv-config installation
+ $rep= GenInstallDir('0755','$(prefix)/bin');
+ $rep.="\t".GenInstallFiles('0755','rhtv-config$(EXE_EXT)','$(prefix)/bin');
+ $text=~s/\@install_config\@/$rep/g;
+
+ $rep= "clean:\n";
+ $rep.="\trm -f $makeDir/librhtv.so*\n";
+ $rep.="\trm -f $makeDir/obj/*.o\n";
+ $rep.="\trm -f $makeDir/obj/*.lo\n";
+ $rep.="\trm -f $makeDir/librhtv.a\n";
+ $rep.="\trm -f compat/obj/*.o\n";
+ $rep.="\trm -f compat/obj/*.lo\n";
+ $rep.="\trm -f intl/dummy/*.o\n";
+ $rep.="\trm -f intl/dummy/*.lo\n";
+ $rep.="\trm -f intl/dummy/*.a\n";
+ $rep.="\t-\$(MAKE) -C examples clean\n";
+ $rep.="\t-\$(MAKE) -C intl clean\n";
+ $rep.="\trm -f configure.cache\n";
+ $rep.="\trm -f rhtv-config\$(EXE_EXT)\n";
+ $text=~s/\@clean\@/$rep/g;
 
  replace('Makefile',$text);
 }
@@ -971,6 +1319,7 @@ sub CreateConfigH
  $text.=ConfigIncDef('HAVE_DEFINE_KEY','ncurses 4.2 or better have define_key (In Linux)');
  $text.=ConfigIncDefYes('HAVE_KEYSYMS','The X11 keysyms are there');
  $text.=ConfigIncDefYes('HAVE_X11','X11 library and headers');
+ $text.=ConfigIncDefYes('HAVE_ALLEGRO','Allegro library');
  # Disable i8n only if the user requested, otherwise use gettext or the dummy
  $conf{'HAVE_INTL_SUPPORT'}=@conf{'no-intl'} eq 'yes' ? 'no' : 'yes';
  $text.=ConfigIncDefYes('HAVE_INTL_SUPPORT','International support with gettext');
@@ -978,6 +1327,9 @@ sub CreateConfigH
  $text.=ConfigIncDefYes('HAVE_OUTB_IN_SYS','out/in functions defined by glibc');
  $text.=ConfigIncDefYes('HAVE_SSC','Use stream replacements');
  $text.=ConfigIncDefYes('TV_BIG_ENDIAN','Byte order for this machine');
+ $text.=ConfigIncDefYes('HAVE_LINUX_PTHREAD','Linux implementation of POSIX threads');
+ $text.=ConfigIncDefYes('HAVE_UNSAFE_MEMCPY','Memcpy doesn\'t support overlaps');
+ $text.=ConfigIncDefYes('HAVE_64BITS_POINTERS','64 bits pointers');
  $text.="\n\n";
  $text.="#define TVOS_$OS\n";
  $text.="#define TVOSf_$OSf\n";
@@ -1006,6 +1358,18 @@ sub CreateConfigH
    {
     print "created new header\n";
     replace('include/tv/configtv.h',$text);
+   }
+}
+
+sub LookForMaintainerTools
+{
+ my $file;
+
+ $file=LookForFileInPath('gpr2mak*');
+ if (!length($file))
+   {
+    die "\nRHIDE tools aren't installed. They are needed only for maintainer mode.\n".
+        "Install RHIDE or disable the maintaner mode.\n\n";
    }
 }
 

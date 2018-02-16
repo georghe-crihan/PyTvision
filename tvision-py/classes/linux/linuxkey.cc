@@ -32,6 +32,7 @@
 #define Uses_FullSingleKeySymbols
 #define Uses_TScreen
 #define Uses_TVCodePage
+#define Uses_signal
 #include <tv.h>
 
 // I delay the check to generate as much dependencies as possible
@@ -43,7 +44,6 @@
 // For the VT and key patch stuff
 #include <sys/kd.h>
 #include <sys/vt.h>
-#include <signal.h>
 
 #include <tv/linux/key.h>
 #include <tv/linux/screen.h>
@@ -306,7 +306,7 @@ unsigned char TGKeyLinux::kbExtraFlags[128] =
 };
 
 /************************** Escape sequences tree **************************/
-typedef struct node
+struct node
 {
  char value;
  unsigned char code;
@@ -619,7 +619,7 @@ void TGKeyLinux::FillTEvent(TEvent &e)
  GKey();
  e.keyDown.charScan.charCode=lastModifiers & kblAltL ? 0 : ascii;
  e.keyDown.charScan.scanCode=ascii;
- e.keyDown.charScan.charCode=ascii; // Needed for GetAltChar
+ e.keyDown.charCode=ascii; // Needed for GetAltChar
  e.keyDown.raw_scanCode=ascii;
  e.keyDown.keyCode=lastKeyCode;
  e.keyDown.shiftState=lastModifiers;

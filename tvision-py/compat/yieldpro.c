@@ -12,6 +12,25 @@ void CLY_YieldProcessor(int micros)
 }
 #endif
 
+#if defined(TVOSf_QNX4)
+   #include <time.h>
+   
+   static void usleep(unsigned long sleeptime)
+   {
+      struct timespec wait;
+      
+      wait.tv_sec=0;
+      wait.tv_nsec=sleeptime;
+      
+      do {
+         if (nanosleep(&wait, &wait)==0)
+         {
+            break;
+         }
+      } while(1);
+   }
+#endif // TVOSf_QNX4
+
 #ifdef TVOS_UNIX
 #include <unistd.h>
  // See if this system have the POSIX function
@@ -29,7 +48,7 @@ void CLY_YieldProcessor(int micros)
  void CLY_YieldProcessor(int micros)
  {
   if (micros<0)
-     micros=10;
+     micros=10000; // 10 ms
   usleep(micros);
  }
  #endif

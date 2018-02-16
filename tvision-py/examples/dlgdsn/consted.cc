@@ -74,7 +74,7 @@ TDialog * ConstInputDlg(TValidator * aValid)
    TDialog * d = new TDialog( TRect(0, 0, 50, 8), __("Values editor") );
    TInputLine * ip_id = new TInputLine(TRect (10, 2, 48, 3), 50);
    TInputLine * ip_vl = new TInputLine(TRect (10, 3, 17, 4), 5);
-   if (aValid) ip_vl->SetValidator(aValid);
+   if (aValid) ip_vl->setValidator(aValid);
    d->insert(new TLabel( TRect(1, 2, 10, 3), __("~I~dent:"), ip_id ) );
    d->insert(ip_id);
    d->insert(new TLabel( TRect(1, 3, 10, 4), __("~V~alue:"), ip_id ) );
@@ -155,7 +155,7 @@ static Boolean identMatch(void * item, void * ident)
 
 static Boolean valueMatch(void * item, void *value)
 {
-   return (((TConstData *)item)->Value == (long)value);
+   return (((TConstData *)item)->Value == (int)value);
 }
 
 int TConstCollection::getIndex(char * Ident)
@@ -325,7 +325,8 @@ void TConstEdit::handleEvent(TEvent& event)
          List->drawView();
          clearEvent(event);
          break;
-      case cmClusterMovedTo...cmClusterPress:
+      case cmClusterMovedTo:
+      case cmClusterPress:
          ((TRadioButtons *)event.message.infoPtr)->getData(&sort);
          cList->sort(sort);
          List->drawView();

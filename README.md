@@ -6,7 +6,7 @@ PyTVision taken from: http://pytvision.sourceforge.net
 
 Archive URL: https://sourceforge.net/projects/pytvision/files/pytvision/0.0.2/.
 
-TVision 2.0.2 by Salvador E. Tropea (SET) taken from: https://sourceforge.net/projects/tvision/files/DOS_Win32/2.0.2/
+TVision 2.2.1-4 by Salvador E. Tropea (SET) taken from: https://sourceforge.net/projects/tvision/files/UNIX/2.2.1%20CVS20161117/
 
 ### DONE:
 * Builds and runs under OSX Sierra with XCode CLANG and ncurses, although it does require macports for SWIG.

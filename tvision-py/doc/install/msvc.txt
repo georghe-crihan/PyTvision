@@ -2,12 +2,17 @@
 Microsoft Visual C compiler. Note that I don't have it and Microsoft doesn't
 offer reduced versions for free like Borland does. For this reason this
 target ever lags behind. I need volunteer to test this target periodically.
+  Note: Some time after writing it Microsoft released a reduced and free
+version of the compiler, but only for Windows 2000 and newer systems. I
+don't have access to such a version of Windows.
 
-$Id: msvc.txt,v 1.1.2.2 2003/06/26 19:08:39 set Exp $
+$Id: msvc.txt,v 1.1.2.6 2009/01/05 16:29:22 set Exp $
 
 1. INTRODUCTION
 2. HOW TO COMPILE
 3. INSTALLING
+4. MSVC TARGET CONTRIBUTORS
+5. USING VISUAL STUDIO AND NOT NMAKE
 
 
 
@@ -16,21 +21,85 @@ $Id: msvc.txt,v 1.1.2.2 2003/06/26 19:08:39 set Exp $
   This target is supported because users helped to make it possible. If you
 find any problem just do the same the other users did: help to fix them.
   You can also create Win32 versions of this package using BorlandC Builder,
-Cygwin or MinGW.
-  Versions 5.0, 6.0 and 7.0 compiled the code.
+Cygwin, Open Watcom or MinGW.
+  Versions 5.0, 6.0, 7.0 and 7.1 compiled the code.
+  Modern versions of Visual Studio doesn't seem to include nmake tool. A quick
+and incomplete, but useful, method to compile the code is in the section 5.
 
 
 2. HOW TO COMPILE
 
-  I'm trying to unify the compilation process but I need volunteers to help
-testing the new MSVC makefiles. For this reason you should use the old
-mechanism explained in winnt/readme.txt
-  The winnt/Makefile.nmk file contains the information needed to create the
-executable just use it with nmake.
+  You can use the unified make system:
+
+nmake -f Makefile.nmk
+
+  If it fails you can try using the old mechanism explained in
+winnt/readme.txt
 
 
 3. INSTALLATION
 
   Currently this target needs manual installation. You can also use the files
 without installing just providing the paths to the compiler.
+
+
+4. MSVC TARGET CONTRIBUTORS
+
+Chronologically sorted:
+
+Drivers: [Shared with other Win32 targets]
+
+WinNT: Anatoli Soltan
+Win32: Vadim Beloborodov
+WinGr: José Ángel Sánchez Caso
+
+Compilation:
+
+WintiX <wintix/bk/ru>
+  Help to get it working with MSVC 5.0.
+Sergey Krivulja <skrivulja/erec/ru>
+  Compilation issue.
+Mike Gorchak <mike/malva/ua>
+  Adaptation to MSVC 7.0 and 7.1.
+Grzegorz Adam Hankiewicz <gradha/iname/com>
+  Debug options and help with unified mechanism.
+David Doubrava (ddoubrava/volny/cz)
+  Compilation issue.
+Arnold Wiegert <awiegert/telus/net>
+  Help with the free version of MSVC (7.1).
+  Adaptation to MSVC 6.0.
+  Hints about MSVC 4.0.
+Christian Kirches <christian/kirches/gmx/de>.
+  Compilation issues related to Visual Studio .NET 2005 Express Beta.
+Eddie (K.Blacha) <one_eddie/tenbit/pl>
+  Compilation issues related to MSVC 7.1.
+Harry Sack <tranzedude/gmail/com>
+  Compilation using Visual Studio 2008 without nmake.
+
+
+5. USING VISUAL STUDIO AND NOT NMAKE
+
+1) create a new project: 'Visual C++' -> 'General' -> 'Empty Project'
+
+2) add to 'Source Files' folder in your VS Project:
+
+\tvision => *.cc
+\tvision\classes => *.cc and *.cc of all its subdirs
+\tvision\compat => *.cc and *.c
+\tvision\names => *.cc
+\tvision\stream => *.cc
+
+3) go to 'Project' -> 'Properties'. Choose 'All Configurations'. Go to
+'C/C++' -> 'General' -> 'Additional Include Directories'. Add the following
+directories there:
+
+\tvision\include and all its subdirs
+\tvision\winnt\include\msvc
+
+4) copy the file \tvision\winnt\include\tv\configtv.h to \tvision\include\tv
+
+5) now you can build the library in Debug and Release mode
+
+6) now just add your source file with your main() function to your VS project
+and compile it.
 

@@ -1,3 +1,5 @@
+#ifndef GETLINE_INCLUDED
+#define GETLINE_INCLUDED
 /**[txh]********************************************************************
 
   Description:
@@ -36,7 +38,15 @@ General Public License for more details.  */
 /** Header **/
 #define GETLINE_NO_LIMIT -1
 
-#if defined(TVComp_BCPP) || defined(TVCompf_MinGW) || defined(TVComp_MSC)
+#if defined(TVCompf_MinGW)
+ #if defined(_SSIZE_T_) && !defined(_NO_OLDNAMES)
+  #define MinGW_SSIZE_T 0
+ #else
+  #define MinGW_SSIZE_T 1
+ #endif
+#endif
+
+#if defined(TVComp_BCPP) || MinGW_SSIZE_T || defined(TVComp_MSC) || defined(TVComp_Watcom)
 typedef long ssize_t;
 #endif
 
@@ -61,7 +71,7 @@ ssize_t CLY_getstr(char **_lineptr, size_t *_n, FILE *_stream,
    should check feof(), if not then errno has been set to indicate the
    error.  */
 
-ssize_t CLY_getstr(char **lineptr, size_t *n, FILE *stream, char terminator,
+inline ssize_t CLY_getstr(char **lineptr, size_t *n, FILE *stream, char terminator,
                    int offset, int limit)
 {
  int nchars_avail;             /* Allocated but unused chars in *LINEPTR.  */
@@ -168,14 +178,14 @@ ssize_t CLY_getstr(char **lineptr, size_t *n, FILE *stream, char terminator,
  return ret;
 }
 
-ssize_t CLY_getline(char **lineptr, size_t *n, FILE *stream)
+inline ssize_t CLY_getline(char **lineptr, size_t *n, FILE *stream)
 {
  return CLY_getstr(lineptr,n,stream,'\n',0,GETLINE_NO_LIMIT);
 }
 
-ssize_t CLY_getline_safe(char **lineptr, size_t *n, FILE *stream, int limit)
+inline ssize_t CLY_getline_safe(char **lineptr, size_t *n, FILE *stream, int limit)
 {
  return CLY_getstr(lineptr,n,stream,'\n',0,limit);
 }
 #endif // NEEDS_GETLINE
-
+#endif

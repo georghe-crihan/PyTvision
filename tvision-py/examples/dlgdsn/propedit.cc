@@ -40,6 +40,7 @@
 #define Uses_TInputLine
 #define Uses_TPalette
 #define Uses_TValidator
+#define Uses_TFilterValidator
 
 #include <tv.h>
 
@@ -117,7 +118,7 @@ int execDialog(TDialog * dialog, void *data)
       if (data) d->setData(data);
       rst = TProgram::deskTop->execView(d);
       if ((rst!=cmCancel) && (data)) d->getData(data);
-      TObject::destroy( d );
+      TObject::CLY_destroy( d );
       return rst;
    }
    else return cmCancel;
@@ -219,7 +220,8 @@ void TLinkList::removeMe(TDsgObj * aDsgObj)
       this->free(link);
       switch(aDsgObj->viewType)
       {
-         case vtVScroll...vtHScroll:
+         case vtVScroll:
+         case vtHScroll:
             if (ScrollList->search(&data->thisName, index))
             {
                removeNotify(ScrollList, index);
@@ -255,7 +257,8 @@ void TLinkList::add(TView * aView, TDsgObj * aDsgObj)
    TDsgObjData * data = (TDsgObjData *)aDsgObj->attributes;
    switch(aDsgObj->viewType)
    {
-      case vtVScroll...vtHScroll: ScrollList->insert(&data->thisName); break;
+      case vtVScroll:
+      case vtHScroll: ScrollList->insert(&data->thisName); break;
       case vtStatic: break;
       case vtButton: break;
       case vtLabel:
@@ -434,7 +437,7 @@ TLinkList * ObjectLinker() { return ObjLink; }
 TInPlaceEdit::TInPlaceEdit(const TRect& bounds, ushort aMaxLen,
                            TValidator * aValidator):
                            TInputLine(bounds, aMaxLen)
-                           { SetValidator(aValidator); }
+                           { setValidator(aValidator); }
                            
 void TInPlaceEdit::handleEvent(TEvent& event)
 {
@@ -502,7 +505,7 @@ bool IntegerEditor(int& value, TPoint place, TGroup * host)
       editor->getData(&strval);
       value = atoi(strval);
    }
-   TObject::destroy( editor );
+   TObject::CLY_destroy( editor );
    return rst;
 }
 
@@ -518,7 +521,7 @@ bool StringEditor(char * string, TPoint place, TGroup * host, ushort aMaxLen)
    editor->setData(string);
    rst = ( host->execView(editor) == cmOK );
    if (rst) editor->getData(string);
-   TObject::destroy( editor );
+   TObject::CLY_destroy( editor );
    return rst;
 }
 
@@ -984,9 +987,9 @@ void TObjEditView::draw()
             sprintf(lstr, lfmt, cur->label);
             sprintf(rfmt, "%%-%is", r);
             char *tmp=newStr(getValueFor(cur));
-            if (strlen(tmp)>=(size_t)r)
+            if (tmp && strlen(tmp)>=(size_t)r)
                tmp[r-1]=0;
-            sprintf(rstr, rfmt, getValueFor(cur));
+            sprintf(rstr, rfmt, tmp ? tmp : "ERROR");
             DeleteArray(tmp);
             if (cur == curMap)
               attr = 0x71; else attr = 0x1f;

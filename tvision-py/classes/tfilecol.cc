@@ -12,15 +12,13 @@ Added options to customize the file sorting by Salvador E. Tropea.
  *
  */
 #include <tv/configtv.h>
-// SET: Moved the standard headers here because according to DJ
-// they can inconditionally declare symbols like NULL
-#define Uses_string
-#if defined(TVCompf_djgpp) || defined(TVComp_BCPP)
-#include <dos.h>
-#include <dir.h>
-#endif
-#include <stdio.h>
 
+#if defined(TVCompf_djgpp) || defined(TVComp_BCPP)
+ #include <dos.h>
+#endif
+#define Uses_string
+#define Uses_stdio
+#define Uses_dir
 #define Uses_TFileCollection
 #define Uses_TSearchRec
 #include <tv.h>
@@ -104,15 +102,18 @@ TStreamable *TFileCollection::build()
 void TFileCollection::writeItem( void *obj, opstream& os )
 {
     TSearchRec *item = (TSearchRec *)obj;
-    os << item->attr << item->time << item->size;
+    os << item->attr << (unsigned long)item->time << (unsigned long)item->size;
     os.writeString( item->name );
 }
 
 void *TFileCollection::readItem( ipstream& is )
 {
     TSearchRec *item = new TSearchRec;
-    is >> item->attr >> item->time >> item->size;
+    unsigned long aux1, aux2;
+    is >> item->attr >> aux1 >> aux2;
     is.readString( item->name, sizeof(item->name) );
+    item->time = (time_t)aux1;
+    item->size = (size_t)aux2;
     return item;
 }
 #endif // NO_STREAM

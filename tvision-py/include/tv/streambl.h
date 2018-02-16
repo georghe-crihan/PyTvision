@@ -24,7 +24,7 @@ Modified by Robert H”hne to be used for RHIDE.
 #if defined( Uses_TStreamable ) && !defined( __TStreamable )
 #define __TStreamable
 
-class TStreamable
+class CLY_EXPORT TStreamable
 {
 
     friend class opstream;
@@ -39,6 +39,8 @@ protected:
     virtual void *read( ipstream& ) = 0;
     virtual void write( opstream& ) = 0;
 
+public:
+    virtual ~TStreamable () {}
 };
 
 #endif  // Uses_TStreamable

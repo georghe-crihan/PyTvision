@@ -1,0 +1,11 @@
+[TV]
+{
+ [X11]
+ {
+  UseUpdateThread=1
+ }
+ [XTerm]
+ {
+  Priority=120
+ }
+}

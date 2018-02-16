@@ -61,5 +61,4 @@ TStringCollection & TStringCollection::operator = (const TStringCollection & pl)
   }
   return *this;
 }
-
 #endif // NO_STREAM

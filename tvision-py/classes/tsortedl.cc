@@ -44,8 +44,9 @@ TSortedListBox::TSortedListBox( const TRect& bounds,
 TSortedListBox::TSortedListBox( const TRect& bounds,
                                 ushort aNumCols,
                                 TScrollBar *aHScrollBar,
-                                TScrollBar *aVScrollBar) :
-    TListBox(bounds, aNumCols, aHScrollBar, aVScrollBar),
+                                TScrollBar *aVScrollBar,
+                                Boolean aCenterOps) :
+    TListBox(bounds, aNumCols, aHScrollBar, aVScrollBar, aCenterOps),
     shiftState( 0 ),
     searchPos( USHRT_MAX )
 {
@@ -169,7 +170,7 @@ void TSortedListBox::newList( TSortedCollection *aList )
     searchPos = USHRT_MAX;
 }
 
-/*
+#ifndef NO_STREAM
 TStreamable *TSortedListBox::build()
 {
     return new TSortedListBox( streamableInit );
@@ -186,4 +187,4 @@ void *TSortedListBox::read( ipstream& is )
 
     return this;
 }
-*/
+#endif

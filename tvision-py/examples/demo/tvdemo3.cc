@@ -30,6 +30,7 @@
 #define Uses_TStaticText
 #define Uses_TDialog
 #define Uses_TEventQueue
+#define Uses_TEditor  // JASC 2006 cmOpen
 // Needed to remap the "system" menu character
 #define Uses_TVCodePage
 
@@ -62,7 +63,7 @@ void TVDemo::mouse()
         if (deskTop->execView(mouseCage) != cmCancel)
             mouseCage->getData(&(TEventQueue::mouseReverse));
         }
-    destroy( mouseCage );
+    CLY_destroy(mouseCage);
    
 }
 
@@ -85,7 +86,7 @@ void TVDemo::openFile( char *fileSpec )
         if( w != 0 )
             deskTop->insert(w);
     }
-    destroy( d );
+    CLY_destroy(d);
 }
 
 
@@ -251,7 +252,8 @@ TMenuBar *TVDemo::initMenuBar(TRect r)
         *new TMenuItem( "~C~olors...", cmColorCmd, kbNoKey, hcOColors ) +
         *new TMenuItem( "~S~ave desktop", cmSaveCmd, kbNoKey, hcOSaveDesktop ) +
         *new TMenuItem( "~R~etrieve desktop", cmRestoreCmd, kbNoKey, hcORestoreDesktop ) +
-        *new TMenuItem( "~T~est inputbox", cmTestInputBox, kbNoKey, hcORestoreDesktop );
+        *new TMenuItem( "~T~est inputbox", cmTestInputBox, kbNoKey, hcNoContext ) +
+        *new TMenuItem( "~T~est picture validator", cmTestPicture, kbNoKey, hcNoContext );
 
     r.b.y =  r.a.y + 1;
     return (new TMenuBar( r, sub1 + sub2 + sub3 + sub4 ) );

@@ -4,7 +4,7 @@
   This header defines which functions must be defined for each supported
 compiler.@p
 
-  Copyright (c) 2000-2001 by Salvador E. Tropea
+  Copyright (c) 2000-2005 by Salvador E. Tropea
   Covered by the GPL license.
 
 ***************************************************************************/
@@ -26,6 +26,8 @@ compiler.@p
   #define NEEDS_MKSTEMP
   #define NEEDS_NL_LANGINFO
   #define NEEDS_GETLINE
+  // Internal implementation is broken. Is the same provided by MSVC.
+  #define NEEDS_SNPRINTF
  #endif
  
  // Win32 Cygwin
@@ -67,6 +69,15 @@ compiler.@p
   #define NEEDS_ITOA
   #define NEEDS_NL_LANGINFO
   #define NEEDS_GETLINE
+  #define NEEDS_SNPRINTF
+ #endif
+
+ #ifdef TVOSf_QNX4
+  #define NEEDS_SNPRINTF
+ #endif // TVOSf_QNX4
+
+ #ifdef TVOSf_Darwin
+  #define NEEDS_SNPRINTF
  #endif
 
  // Generic UNIX system
@@ -79,7 +90,9 @@ compiler.@p
   #define NEEDS_ITOA
   #define NEEDS_NL_LANGINFO
   #define NEEDS_GETLINE
-  #if defined(TVOSf_FreeBSD) || defined(TVOSf_QNXRtP)
+  #if defined(TVOSf_FreeBSD) || defined(TVOSf_QNXRtP) || defined(TVOSf_QNX4) \
+      || defined(TVOSf_Darwin)
+   // Not for OpenBSD and NetBSD
    #define NEEDS_GETOPT
   #endif
  #endif
@@ -105,7 +118,7 @@ compiler.@p
 // MSVC will be supported if volunteers tests it or Microsoft decides to
 // give it for free ;-). After all Borland released BC++ 5.5.
 #if (defined(_MSVC) || defined(__MSC_VER)) && !defined(_MSC_VER)
-#define _MSC_VER
+ #define _MSC_VER 100
 #endif
 
 #ifdef TVComp_MSC
@@ -119,5 +132,22 @@ compiler.@p
  #define NEEDS_NL_LANGINFO
  #define NEEDS_GETLINE
  #define NEEDS_OPENDIR
+ // Internal implementation is broken.
+ #define NEEDS_SNPRINTF
+ #define NEEDS_UNC
+#endif
+
+// Open Watcom for Win32 is supported
+#ifdef TVComp_Watcom
+ #define NEEDS_FIXPATH
+ #define NEEDS_GLOB
+ #define NEEDS_FNMATCH
+ #define NEEDS_UNC
+ #define NEEDS_GETOPT
+ #define NEEDS_OPENDIR
+ #define NEEDS_NL_LANGINFO
+ #define NEEDS_IFSTREAMGETLINE
+ #define NEEDS_GETLINE
+ #define NEEDS_GETCURDIR
 #endif
 

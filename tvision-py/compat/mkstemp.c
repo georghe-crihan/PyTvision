@@ -1,4 +1,4 @@
-/* Copyright (C) 2000 Salvador E. Tropea */
+/* Copyright (C) 2000-2005 Salvador E. Tropea */
 /* Copyright (C) 1998 DJ Delorie, see COPYING.DJ for details */
 /* Copyright (C) 1995 DJ Delorie, see COPYING.DJ for details */
 #include <cl/needs.h>
@@ -9,6 +9,16 @@
 #include <errno.h>
 #include <io.h>
 #include <string.h>
+
+#ifdef TVComp_Watcom
+ #include <stdlib.h>
+ #define mktemp(a) _mktemp(a)
+#endif
+
+#if _MSC_VER >= 1400
+ #define mktemp(a) _mktemp(a)
+ #define open(a,b,c) _open(a,b,c)
+#endif
 
 int mkstemp (char *_template)
 {

@@ -25,15 +25,15 @@
 #define Uses_TVCodePage
 #define Uses_string
 #define Uses_ctype
+#define Uses_signal
+#define Uses_stdio
+#define Uses_stdlib
 #include <tv.h>
 
 // I delay the check to generate as much dependencies as possible
 #if defined(TVOS_UNIX) && !defined(TVOSf_QNXRtP)
 
 #include <fcntl.h>
-#include <signal.h>
-#include <stdio.h>
-#include <stdlib.h>
 #include <unistd.h>
 #include <stdarg.h>
 #include <termios.h>
@@ -80,7 +80,7 @@ void TScreenXTerm::Init()
  TScreen::setCrtData=defaultSetCrtData;
  TScreen::setVideoMode=SetVideoMode;
  TScreen::setVideoModeExt=SetVideoModeExt;
- TScreen::SystemP=System;
+ TScreen::System_p=System;
  TScreen::setCharacters=SetCharacters;
  TDisplay::checkForWindowSize=CheckForWindowSize;
 }
@@ -195,7 +195,7 @@ TScreenXTerm::TScreenXTerm()
     // Eterm 0.9.x supports palette setting
     TDisplay::setDisPaletteColors=SetDisPaletteColorsEt;
     ResetPaletteColors=ResetPaletteColorsEt;
-    setCrtModeResP=SetCrtModeEt;
+    setCrtModeRes_p=SetCrtModeEt;
     if (parseUserPalette())
        setPaletteColors(0,16,UserStartPalette);
    }
@@ -211,7 +211,7 @@ TScreenXTerm::TScreenXTerm()
        setPaletteColors(0,16,UserStartPalette);
     else
        SetDisPaletteColorsXT(0,16,ActualPalette);
-    setCrtModeResP=SetCrtModeXT;
+    setCrtModeRes_p=SetCrtModeXT;
    }
  // This is what GNU/Debian Woody uses by default
  fontW=6; fontH=13;
@@ -628,13 +628,16 @@ int TScreenXTerm::System(const char *command, pid_t *pidChild, int in,
     if (err!=-1)
        dup2(err,STDERR_FILENO);
 
-    argv[0]=getenv("SHELL");
+    argv[0]=newStr(getenv("SHELL"));
     if (!argv[0])
-       argv[0]="/bin/sh";
-    argv[1]="-c";
-    argv[2]=(char *)command;
-    argv[3]=0;
+       argv[0]=newStr("/bin/sh");
+    argv[1]=newStr("-c");
+    argv[2]=newStr(command);
+    argv[3]=NULL;
     execvp(argv[0],argv);
+    delete[] argv[0];
+    delete[] argv[1];
+    delete[] argv[2];
     // We get here only if exec failed
     _exit(127);
    }

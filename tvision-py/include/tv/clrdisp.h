@@ -39,9 +39,8 @@ private:
         { return name; }
 
 protected:
-
+#ifndef NO_STREAM
     TColorDisplay( StreamableInit );
-#if !defined( NO_STREAM )
     virtual void write( opstream& );
     virtual void *read( ipstream& );
 #endif

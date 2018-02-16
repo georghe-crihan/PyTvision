@@ -1,4 +1,4 @@
-;/**[txh]********************************************************************
+/**[txh]********************************************************************
 
   Copyright 1996-2003 by Salvador Eduardo Tropea (SET)
   This file is covered by the GPL license.
@@ -1651,12 +1651,19 @@ TVCodePage::~TVCodePage()
 {
  CLY_destroy(CodePages);
  CodePages=NULL;
+ if (unicodeToApp)
+    delete unicodeToApp;
 }
 
 /**[txh]********************************************************************
 
   Description:
-  Converts a code page id into an index in the code page collection.
+  Converts a code page id into an index in the code page collection.@*
+  Important note: We should always default to 437 because:@*
+1) That's the original encoding used by TV applications.@*
+2) Some asiatic encodings, like code page 936 (simplified chinese, maybe
+also 950 [traditional chinese], 932 [japanese Shift-JIS] and 949 [korean]),
+behaves like 437 when we write to the video buffer.@*
 
   Return: The index of the code page with this id. If error the index for
 PC 437 code page is returned.
@@ -1667,14 +1674,16 @@ ccIndex TVCodePage::IDToIndex(int id)
 {
  if (!CodePages) return 0;
  ccIndex c=CodePages->getCount();
- ccIndex i;
+ ccIndex i, i437=0;
  for (i=0; i<c; i++)
    {
     CodePage *p=(CodePage *)(CodePages->at(i));
     if (p->id==id)
        return i;
+    if (p->id==PC437)
+       i437=i;
    }
- return 0;
+ return i437;
 }
 
 /**[txh]********************************************************************
@@ -1947,6 +1956,7 @@ void TVCodePage::RemapTVStrings(ushort *map)
  C(TFrame,zoomIcon);
  C(TFrame,unZoomIcon);
  C(TFrame,dragIcon);
+ C(TFrame,animIcon);
  C(THistory,icon);
  C(TMonoSelector,button);
  C(TStatusLine,hintSeparator);
@@ -1972,6 +1982,7 @@ void TVCodePage::RemapTVStrings(ushort *map)
  C(TIndicator,modifiedStar);
  C(TListViewer,columnSeparator);
  C(TDeskTop,defaultBkgrnd);
+ C(TView,noMoireFill);
  #undef C
 
  #define C(cla,name,len) RemapNString((uchar *)cla::name,(uchar *)cla::o##name,map,len)
@@ -2537,6 +2548,7 @@ stIntCodePairs TVCodePage::InternalMap[]=
  { 0x2022,    7 },
  { 0x2024,    7 },
  { 0x2026,  430 },
+ { 0x2027,  249 },
  { 0x2030,  433 },
  { 0x203c,   19 },
  { 0x207f,  252 },
@@ -2654,8 +2666,10 @@ stIntCodePairs TVCodePage::InternalMap[]=
  { 0x266a,   13 },
  { 0x266b,   14 },
  { 0x2764,    3 },
+ { 0xf800,  451 }, // Approximation
  { 0xf801,  451 },
  { 0xf803,  456 },
+ { 0xf804,  456 }, // Approximation
  { 0xfffd,  439 }
 };
 

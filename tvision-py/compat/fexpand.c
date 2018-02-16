@@ -6,10 +6,11 @@
 */
 
 #include <cl/needs.h>
+#include "compat/fixpath.c"
 
 #if defined(TVCompf_djgpp) || defined(TVComp_BCPP) || defined(TVOS_UNIX) || \
     defined(TVCompf_Cygwin)
-#define Uses_fixpath
+//#define Uses_fixpath
 #define Uses_string
 #define Uses_limits
 #include <compatlayer.h>

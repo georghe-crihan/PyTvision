@@ -35,7 +35,7 @@ class TRadioButtons : public TCluster
 public:
 
     TRadioButtons( const TRect& bounds, TSItem *aStrings ) :
-      TCluster( bounds, aStrings ) {};
+      TCluster( bounds, aStrings ) { enableMasks=NULL; }
 
     virtual void draw();
     virtual Boolean mark( int item );
@@ -43,10 +43,26 @@ public:
     virtual void press( int item );
     virtual void setData( void *rec );
 
+    // SET: Used to enable/disable other TViews according to current state.
+    // Upto 32 can be controled.
+    void setEnableMask( uint32 *masks, TView **views, int cViews )
+    {
+     enableMasks = masks;
+     enableViews = views;
+     enableCViews = cViews;
+    }
+
     static char button[];
     static char obutton[];
     static char check;
     static char ocheck;
+
+protected:
+
+    uint32 *enableMasks;
+    TView  **enableViews;
+    int enableCViews;
+    void evaluateMasks();
 
 private:
 

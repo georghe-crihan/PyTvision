@@ -15,21 +15,13 @@ Modified by Salvador E. Tropea for Unicode Copyright (c) 2003.
 #if defined( Uses_TView ) && !defined( __TView )
 #define __TView
 
-struct write_args
-{
-    void *self;
-    void *target;
-    void *buf;
-    ushort offset;
-};
-
 class TRect;
 struct TEvent;
 class TGroup;
 class TPalette;
 class TCommandSet;
 
-class TView : public TObject
+class CLY_EXPORT TView : public TObject
 #if !defined ( NO_STREAM )
                              , public TStreamable
 #endif // NO_STREAM
@@ -92,6 +84,8 @@ public:
     virtual void getEvent( TEvent& event );
     virtual void handleEvent( TEvent& event );
     virtual void putEvent( TEvent& event );
+    // SET: helper to fill the event and call putEvent
+            void putEvent( ushort what, ushort command, void *infoPtr );
 
     static Boolean commandEnabled( ushort command );
     static void disableCommands( TCommandSet& commands );
@@ -167,6 +161,10 @@ public:
     // I moved it to a class because I think is better to enclose them.
     static uchar specialChars[];
     static uchar ospecialChars[];
+    // SET: Replacements to avoid moire artifacts
+    static uchar noMoireUnFill;
+    static uchar noMoireFill;
+    static uchar onoMoireFill;
 
 private:
 
@@ -178,7 +176,6 @@ private:
                    uchar mode
                  );
     void change( uchar, TPoint delta, TPoint& p, TPoint& s, int grow=0 );
-    static void writeView( write_args );
 
 #if !defined( NO_STREAM )
     virtual const char *streamableName() const

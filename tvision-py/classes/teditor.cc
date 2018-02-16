@@ -292,6 +292,7 @@ void TEditor::convertEvent( TEvent& event )
         key = scanKeyMap(keyMap[keyState], key);
         keyState = 0;
         if( key != 0 )
+            {
             if( (key & 0xFF00) == 0xFF00 )
                 {
                 keyState = (key & 0xFF);
@@ -302,6 +303,7 @@ void TEditor::convertEvent( TEvent& event )
                 event.what = evCommand;
                 event.message.command = key;
                 }
+            }
         }
 }
 
@@ -723,11 +725,13 @@ Boolean TEditor::insertBuffer( char *p,
 
     uint32 delLen = 0;
     if( allowUndo == True )
+        {
         if( curPtr == selStart )
             delLen = selLen;
         else
             if( selLen > insCount )
                 delLen = selLen - insCount;
+        }
 
     uint32 newSize = uint32(bufLen + delCount - selLen + delLen) + length;
 
@@ -1304,28 +1308,28 @@ lab4:
 
 uint32 TEditor::nextChar(uint32 p)
 {
-  uint32 gl=0;
-  if (p == bufLen) return p;
-  p++;
-  if (p == bufLen) return p;
-  if (p >= curPtr) gl = gapLen;
-  #ifdef CLY_UseCrLf
-  if (buffer[gl+p] == '\n' && buffer[gl+p-1] == '\r') return (p+1);
-  #endif
-  return p;
+ if (p==bufLen) return p;
+ p++;
+ if (p==bufLen) return p;
+ #ifdef CLY_UseCrLf
+ uint32 gl=0;
+ if (p>=curPtr) gl=gapLen;
+ if (buffer[gl+p]=='\n' && buffer[gl+p-1]=='\r') return (p+1);
+ #endif
+ return p;
 }
 
 uint32 TEditor::prevChar(uint32 p)
 {
-  uint32 gl=0;
-  if (!p) return p;
-  p--;
-  if (!p) return p;
-  if (p >= curPtr) gl = gapLen;
-  #ifdef CLY_UseCrLf
-  if (buffer[gl+p] == '\n' && buffer[gl+p-1] == '\r') return (p-1);
-  #endif
-  return p;
+ if (!p) return p;
+ p--;
+ if (!p) return p;
+ #ifdef CLY_UseCrLf
+ uint32 gl=0;
+ if (p>=curPtr) gl=gapLen;
+ if (buffer[gl+p]=='\n' && buffer[gl+p-1]=='\r') return (p-1);
+ #endif
+ return p;
 }
 
 // SET: Static members.

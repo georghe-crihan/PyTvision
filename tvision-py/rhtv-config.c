@@ -17,7 +17,7 @@
 
 #define VERSION "1.0.0"
 
-#if defined(TVOS_DOS) || defined(TVOS_Win32)
+#if defined(TVOS_DOS) || defined(TVOS_Win32) || defined(TVOSf_QNX4)
  // Currently only static linking is supported for DOS and Win32.
  #define ONLY_STATIC 1
 #else
@@ -48,7 +48,7 @@ char *FixRelative(const char *s)
 static
 void Include(void)
 {
- char *copy=strdup(TVCONFIG_TVSRC);
+ char *copy=strdup(TVCONFIG_INCLUDE);
  char *s=strtok(copy," ");
 
  while (s)
@@ -92,7 +92,11 @@ void DLibs(void)
     char *copy=strdup(TVCONFIG_RHIDE_OS_LIBS);
     char *s=strtok(copy," ");
 
+#if !defined(TVOSf_QNXRtP)
     printf("-lrhtv ");
+#else
+    printf("-lrhtv -lncursesS");
+#endif /* TVOSf_QNXRtP */
     if (strstr(TVCONFIG_RHIDE_OS_LIBS,"tvfintl"))
        printf("-ltvfintl");
    }

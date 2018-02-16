@@ -20,21 +20,21 @@ Mouse reporting not disabled at exit!!!
 #define Uses_TGKey
 #define Uses_string
 #define Uses_ctype
+#define Uses_ioctl
 #define Uses_TVCodePage
+#define Uses_signal
+#define Uses_stdio
+#define Uses_stdlib
 #include <tv.h>
 
 // I delay the check to generate as much dependencies as possible
 #if defined(HAVE_NCURSES) && defined(TVOS_UNIX) && !defined(TVOSf_QNXRtP)
 
 #include <fcntl.h>
-#include <signal.h>
-#include <stdio.h>
-#include <stdlib.h>
 #include <unistd.h>
 #include <stdarg.h>
 #include <termios.h>
 #include <sys/mman.h>
-#include <sys/ioctl.h>
 
 // I don't know why it's needed, but it seems to be only known to me way
 // to get rhgdb built so it doesn't mess up terminal settings.
@@ -46,7 +46,6 @@ Mouse reporting not disabled at exit!!!
 #include <tv/unix/mouse.h>
 #include <tv/linux/mouse.h>
 
-#define NCURSES_OPAQUE 0
 #ifdef TVOSf_FreeBSD
  #include <ncurses.h>
 #else
@@ -168,13 +167,16 @@ void TScreenUNIX::InitPCCharsMapping()
     {
      PC2curses[i]=pctoascii[i];
     }
- if (use_pc_chars)
+ if (use_pc_chars==1)
     return;
  for (i=128; i<256; i++)
      PC2curses[i]=i;
  // Special characters we can't print
  PC2curses[127]='?';
  PC2curses[128+27]='?';
+ // Terminals where the alternate charset fails (FreeBSD)
+ if (use_pc_chars==2)
+    return;
  // Patch the curses available values from terminfo
  PC2curses[0xDA]=ACS_ULCORNER; // Ú
  PC2curses[0xC9]=ACS_ULCORNER; // É We don't have doubles in curses
@@ -271,7 +273,7 @@ void TScreenUNIX::SpecialKeysRestore(int file)
 }
 
 // This routine was heavily modified, and I think it needs more work (SET)
-void TScreenUNIX::startcurses()
+void TScreenUNIX::startcurses(int &terminalCodePage)
 {
   int xterm=0;
 
@@ -354,6 +356,14 @@ void TScreenUNIX::startcurses()
      TScreenUNIX::screenMode = TScreenUNIX::smMono;
      use_pc_chars = 0;
      TerminalType=GENER_TERMINAL;
+    }
+  // SET: Not sure about it: FreeBSD terminals doesn't have frames in the "alternate
+  // characters map" or at leat needs more setup for using them.
+  if (strncmp(terminal,"cons25",6)==0)
+    {
+     use_pc_chars=2;
+     if (terminal[6]=='r' || terminal[6]=='u')
+        terminalCodePage=TVCodePage::KOI8r;
     }
 
   switch (TerminalType)
@@ -630,7 +640,7 @@ TScreenUNIX::TScreenUNIX()
   TScreen::getCharacters=getCharacters;
   TScreen::getCharacter=getCharacter;
   TScreen::setCharacters=setCharacters;
-  TScreen::SystemP=System;
+  TScreen::System_p=System;
 
   TGKeyUNIX::Init();
   if (terminal && (strncmp(terminal,"xterm",5)==0 || strncmp(terminal,"Eterm",5)==0))
@@ -660,20 +670,22 @@ TScreenUNIX::TScreenUNIX()
   for (i=0;i<len;i++)
       screenBuffer[i] = 0x0720;
 
+  int terminalCodePage=TVCodePage::ISOLatin1Linux;
+  startcurses(terminalCodePage);
+
   // Look for user settings
   optSearch("AppCP",forcedAppCP);
   optSearch("ScrCP",forcedScrCP);
   optSearch("InpCP",forcedInpCP);
   // User settings have more priority than detected settings
-  // That's the most common case and I don't know anout any reliable way to
+  // That's the most common case and I don't know about any reliable way to
   // find a better default.
   codePage=new TVCodePage(forcedAppCP!=-1 ? forcedAppCP : TVCodePage::ISOLatin1Linux,
-                          forcedScrCP!=-1 ? forcedScrCP : TVCodePage::ISOLatin1Linux,
+                          forcedScrCP!=-1 ? forcedScrCP : terminalCodePage,
                           forcedInpCP!=-1 ? forcedInpCP : TVCodePage::ISOLatin1Linux);
   SetDefaultCodePages(TVCodePage::ISOLatin1Linux,TVCodePage::ISOLatin1Linux,
                       TVCodePage::ISOLatin1Linux);
 
-  startcurses();
   setVideoMode(screenMode);
   suspended = 0;
 
@@ -976,13 +988,16 @@ int TScreenUNIX::System(const char *command, pid_t *pidChild, int in,
     if (err!=-1)
        dup2(err,STDERR_FILENO);
        
-    argv[0]=getenv("SHELL");
+    argv[0]=newStr(getenv("SHELL"));
     if (!argv[0])
-       argv[0]="/bin/sh";
-    argv[1]="-c";
-    argv[2]=(char *)command;
-    argv[3]=0;
+       argv[0]=newStr("/bin/sh");
+    argv[1]=newStr("-c");
+    argv[2]=newStr(command);
+    argv[3]=NULL;
     execvp(argv[0],argv);
+    delete[] argv[0];
+    delete[] argv[1];
+    delete[] argv[2];
     // We get here only if exec failed
     _exit(127);
    }

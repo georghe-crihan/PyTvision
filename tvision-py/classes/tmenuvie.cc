@@ -8,6 +8,7 @@
 Modified by Robert H”hne to be used for RHIDE.
 Modified by Salvador E. Tropea to support i18n.
 Added TMenuItem::append by Salvador E. Tropea.
+Modified the behavior of short-cuts when Alt is not/pressed by SET.
 
  *
  *
@@ -40,7 +41,7 @@ TMenuItem::TMenuItem(   const char *aName,
                         ushort aCommand,
                         ushort aKeyCode,
                         ushort aHelpCtx,
-                        char *p,
+                        const char *p,
                         TMenuItem *aNext
              )
 {
@@ -50,8 +51,8 @@ TMenuItem::TMenuItem(   const char *aName,
     disabled = Boolean(!TView::commandEnabled(command));
     keyCode = aKeyCode;
     helpCtx = aHelpCtx;
-    if( p == 0 )
-        param = 0;
+    if( p == NULL )
+        param = NULL;
     else
         param = newStr( p );
     next = aNext;
@@ -187,6 +188,7 @@ ushort TMenuView::execute()
     Boolean    autoSelect = False;
     menuAction action;
     char   ch;
+    int    withAlt;
     ushort result = 0;
     TMenuItem *itemShown = 0;
     TMenuItem *p;
@@ -268,22 +270,27 @@ ushort TMenuView::execute()
                         target = this;
                         ch = TGKey::GetAltChar(e.keyDown.keyCode,
                                                e.keyDown.charScan.charCode);
+                        withAlt = e.keyDown.keyCode & (kbAltRCode | kbAltLCode);
                         if( ch == 0 )
                             ch = e.keyDown.charScan.charCode;
-#if 0
+                        if( withAlt )
+                            {// SET: Original behavior
+                            if( ch )
+                                target = topMenu();
+                            p = target->findItem(ch);
+                            }
                         else
-                            target = topMenu();
-                        p = target->findItem(ch);
-#else
-                        // try the hotkey in the current menu
-                        p = target->findItem(ch);
-                        if (p == 0)
-                        {
-                          // and now in the main menu
-                          target = topMenu();
-                          p = target->findItem(ch);
-                        }
-#endif
+                            {// SET: without alt pressed, look here.
+                            // Robert did it unconditionaly, but using Alt state
+                            // is better.
+                            p = target->findItem(ch);
+                            if( p == 0 )
+                                {
+                                // and now in the main menu
+                                target = topMenu();
+                                p = target->findItem(ch);
+                                }
+                            }
                         if( p == 0 )
                             {
                             p = topMenu()->hotKey(e.keyDown.keyCode);
@@ -326,6 +333,7 @@ ushort TMenuView::execute()
         if( (action == doSelect || (action == doNothing && autoSelect)) &&
             current != 0 &&
             current->name != 0 )
+            {
                 if( current->command == 0 )
                     {
                     if( (e.what & (evMouseDown | evMouseMove)) != 0 )
@@ -342,6 +350,7 @@ ushort TMenuView::execute()
                     }
                 else if( action == doSelect )
                     result = current->command;
+            }
 
         if( result != 0 && commandEnabled(result) )
             {
@@ -417,6 +426,7 @@ Boolean TMenuView::updateMenu( TMenu *menu )
     for( TMenuItem *p = menu->items; p != 0; p = p->next )
         {
         if( p->name != 0 )
+            {
             if( p->command == 0 )
                 {
                 if (updateMenu(p->subMenu) == True)
@@ -431,6 +441,7 @@ Boolean TMenuView::updateMenu( TMenu *menu )
                     res = True;
                     }
                 }
+            }
         }
     return res;
 }
@@ -448,6 +459,50 @@ void TMenuView::do_a_select( TEvent& event )
     clearEvent(event);
 }
 
+/**[txh]********************************************************************
+
+  Description:
+  This is the code to look-up an item from a key. Used by handleEvent.
+  
+  Return: True if the item was found.
+  
+***************************************************************************/
+
+Boolean TMenuView::keyToItem(TEvent &event)
+{
+ if (findItem(TGKey::GetAltChar(event.keyDown.keyCode,
+     event.keyDown.charScan.charCode)))
+   {
+    putEvent(event);
+    do_a_select(event);
+    return True;
+   }
+ return False;
+}
+
+/**[txh]********************************************************************
+
+  Description:
+  This is the code to look-up a short cut from a key. Used by handleEvent.
+  
+  Return: True if the item was found.
+  
+***************************************************************************/
+
+Boolean TMenuView::keyToHotKey(TEvent &event)
+{
+ TMenuItem *p=hotKey(event.keyDown.keyCode);
+ if (p && commandEnabled(p->command))
+   {
+    event.what=evCommand;
+    event.message.command=p->command;
+    event.message.infoPtr=0;
+    putEvent(event);
+    clearEvent(event);
+   }
+ return p ? True : False;
+}
+
 void TMenuView::handleEvent( TEvent& event )
 {
     if( menu != 0 )
@@ -457,24 +512,8 @@ void TMenuView::handleEvent( TEvent& event )
                 do_a_select(event);
                 break;
             case  evKeyDown:
-                if( findItem(TGKey::GetAltChar(event.keyDown.keyCode,
-                    event.keyDown.charScan.charCode)) != 0 )
-                {
-                    putEvent(event);
-                    do_a_select(event);
-                }
-                else
-                    {
-                    TMenuItem *p = hotKey(event.keyDown.keyCode);
-                    if( p != 0 && commandEnabled(p->command))
-                        {
-                        event.what = evCommand;
-                        event.message.command = p->command;
-                        event.message.infoPtr = 0;
-                        putEvent(event);
-                        clearEvent(event);
-                        }
-                    }
+                if(! keyToItem(event) )
+                    keyToHotKey(event);
                 break;
             case  evCommand:
                 if( event.message.command == cmMenu )
@@ -497,6 +536,7 @@ TMenuItem *TMenuView::findHotKey( TMenuItem *p, ushort keyCode )
     while( p != 0 )
         {
         if( p->name != 0 )
+            {
             if( p->command == 0 )
                 {
                 TMenuItem *T;
@@ -508,6 +548,7 @@ TMenuItem *TMenuView::findHotKey( TMenuItem *p, ushort keyCode )
                      p->keyCode == keyCode
                    )
                 return p;
+            }
         p =  p->next;
         }
     return 0;

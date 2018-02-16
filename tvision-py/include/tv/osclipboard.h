@@ -13,7 +13,7 @@ class TVDOSClipboard;
 class TVWin32Clipboard;
 class TVX11Clipboard;
 
-class TVOSClipboard
+class CLY_EXPORT TVOSClipboard
 {
 public:
  TVOSClipboard() {};
@@ -27,9 +27,9 @@ public:
  static const
         char   *getError();
  static void    clearError() { error=0; };
+ static void  (*destroy)();
 
 protected:
- static void  (*destroy)();
  static const char *name;
  static int available;
  static int error;

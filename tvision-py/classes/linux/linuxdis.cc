@@ -19,6 +19,7 @@ colors and restore them.
 #define Uses_stdio
 #define Uses_stdlib
 #define Uses_unistd
+#define Uses_signal
 #define Uses_TDisplay
 #define Uses_TScreen
 #define Uses_string
@@ -30,11 +31,10 @@ colors and restore them.
 #ifdef TVOSf_Linux
 
 #include <termios.h>
-#include <term.h>
+//#include <term.h> Not needed anymore
 #include <sys/ioctl.h>
 // GIO_CMAP ioctl
 #include <linux/kd.h>
-#include <signal.h>
 
 #include <tv/linux/screen.h>
 #include <tv/linux/key.h>
@@ -210,36 +210,15 @@ const char *TDisplayLinux::GetWindowTitle(void)
 
 void TDisplayLinux::setUpEnviron()
 {
- if (!argv ||   // The application didn't provide argv or
-     newEnvir)  // we already initialized
-    return;
- // Linux argv is before the environment and in one chunck.
- // Do some check
- if (environment[0]==NULL || argv[0]>environment[0])
+ // Note: The old glibc provided the real environment/argv vector, now that's
+ // a copy :-(
+
+ if (!argv ||        // The application didn't provide argv or
+     newEnvir)       // we already initialized
     return;
 
- // Meassure the chunck
- int i;
  origEnvir=argv[0];
- for (i=0; environment[i]; i++); i--;
- maxLenTit=(environment[i]+strlen(environment[i]))-origEnvir+1;
-
- // Allocate a copy
- newEnvir=(char *)malloc(maxLenTit);
- memcpy(newEnvir,origEnvir,maxLenTit);
-
- // Adjust all the argv pointers
- long diff=newEnvir-origEnvir;
- for (i=0; i<argc; i++)
-     argv[i]+=diff;
-
- // Adjust the environment pointers
- for (i=0; environment[i]; i++)
-     environment[i]+=diff;
-
- // Clear the old environment, but let argv[0]
- int len0=strlen(argv[0]);
- memset(origEnvir+len0,0,maxLenTit-len0);
+ maxLenTit=strlen(argv[0]);
 }
 
 int TDisplayLinux::SetWindowTitle(const char *name)
@@ -297,7 +276,7 @@ void TDisplayLinux::GetDisPaletteColors(int from, int number, TScreenColor *colo
 
 void TDisplayLinux::SetCursorPosVCS(unsigned x, unsigned y)
 {
- unsigned char where[2]={x,y};
+ unsigned char where[2]={(unsigned char)x,(unsigned char)y};
 
  lseek(vcsWfd,2,SEEK_SET);
  write(vcsWfd,where,sizeof(where));
@@ -321,7 +300,11 @@ void TDisplayLinux::GetCursorPosVCS(unsigned &x, unsigned &y)
 *****************************************************************************/
 
 #ifdef h386LowLevel
-#include <asm/io.h>
+#if HAVE_OUTB_IN_SYS
+ #include <sys/io.h>
+#else
+ #include <asm/io.h>
+#endif
 
 static inline
 unsigned char I(unsigned char i)
@@ -390,10 +373,6 @@ void TDisplayLinux::GetCursorShapeMDA(unsigned &start, unsigned &end)
 #endif // h386LowLevel
 
 #else // TVOSf_Linux
-
-#if defined(TVOSf_Linux)
- #include <signal.h>
-#endif
 
 #include <tv/linux/screen.h>
 #include <tv/linux/key.h>

@@ -14,7 +14,7 @@ Modified by Robert H”hne to be used for RHIDE.
 #if defined( Uses_TGroup ) && !defined( __TGroup )
 #define __TGroup
 
-class TGroup : public TView
+class CLY_EXPORT TGroup : public TView
 {
 
 public:
@@ -60,7 +60,7 @@ public:
 
     virtual void draw();
     void redraw();
-    void Redraw();
+    void CLY_Redraw();
     void lock();
     void unlock();
     virtual void resetCursor();

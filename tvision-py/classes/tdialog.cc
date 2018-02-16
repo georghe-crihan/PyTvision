@@ -21,15 +21,12 @@ Modified by Robert H”hne to be used for RHIDE.
 #define cpDialog "\x20\x21\x22\x23\x24\x25\x26\x27\x28\x29\x2A\x2B\x2C\x2D\x2E\x2F"\
                  "\x30\x31\x32\x33\x34\x35\x36\x37\x38\x39\x3A\x3B\x3C\x3D\x3E\x3F"
 
-//#include <stdio.h>
-
 TDialog::TDialog( const TRect& bounds, const char *aTitle ) :
-    TWindowInit( &TDialog::initFrame ),
-    TWindow( bounds, aTitle, wnNoNumber )
+    TWindowInit( &TDialog::initFrame )
+    , TWindow( bounds, aTitle, wnNoNumber )
 {
      growMode = 0;
      flags = wfMove | wfClose;
-     //     printf("TDialog::TDialog\n");
 }
 
 TPalette& TDialog::getPalette() const
@@ -101,8 +98,6 @@ TStreamable *TDialog::build()
 {
     return new TDialog( streamableInit );
 }
-
-#include <stdio.h>
 
 TDialog::TDialog( StreamableInit ) :
     TWindowInit( 0 )

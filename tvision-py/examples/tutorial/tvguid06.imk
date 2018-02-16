@@ -1,7 +1,11 @@
 #!/usr/bin/make
 # Automatically generated from RHIDE projects, don't edit
-# 2003-06-20 13:50
 #
+
+OBJFILES=\
+	./tvguid06$(ExOBJ) 
+
+LIBRARIES=
 
 tvguid06$(ExEXE):: \
 	./tvguid06$(ExOBJ) \
@@ -11,9 +15,4 @@ tvguid06$(ExEXE):: \
 ./tvguid06$(ExOBJ):: tvguid06.cc \
 	$(MAKEFILE_DEPS) 
 	$(RHIDE_COMPILE_CC)
-
-OBJFILES=\
-	./tvguid06$(ExOBJ) 
-
-LIBRARIES=
 

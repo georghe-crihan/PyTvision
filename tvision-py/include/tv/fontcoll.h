@@ -28,7 +28,7 @@ struct TVBitmapFontDesc
  TStringCollection *sizes;
 };
 
-class TVBitmapFontDescCol : public TStringCollection
+class CLY_EXPORT TVBitmapFontDescCol : public TStringCollection
 {
 public:
  TVBitmapFontDescCol() : TStringCollection(8,4) {}
@@ -36,12 +36,13 @@ public:
  virtual void *keyOf(void *item);
 };
 
-class TVBitmapFontDescLBox : public TSortedListBox
+class CLY_EXPORT TVBitmapFontDescLBox : public TSortedListBox
 {
 public:
  TVBitmapFontDescLBox(const TRect& bounds, ushort aNumCols,
-                      TScrollBar *aHScrollBar, TScrollBar *aVScrollBar) :
-  TSortedListBox(bounds,aNumCols,aHScrollBar,aVScrollBar) {}
+                      TScrollBar *aHScrollBar, TScrollBar *aVScrollBar,
+                      Boolean aCenterOps=False) :
+  TSortedListBox(bounds,aNumCols,aHScrollBar,aVScrollBar,aCenterOps) {}
  virtual void getText(char *dest, ccIndex item, short maxChars);
 };
 
@@ -50,23 +51,26 @@ struct TVBitmapFontSize
  unsigned w,h;
 };
 
-class TVBitmapFontSizeCol : public TStringCollection
+class CLY_EXPORT TVBitmapFontSizeCol : public TStringCollection
 {
 public:
  TVBitmapFontSizeCol() : TStringCollection(3,3) {}
  virtual int compare(void *key1, void *key2);
+ // do not use the default delete[]
+ virtual void freeItem(void *item) { delete (TVBitmapFontSize *)item; }
 };
 
-class TVBitmapFontSizeLBox : public TSortedListBox
+class CLY_EXPORT TVBitmapFontSizeLBox : public TSortedListBox
 {
 public:
  TVBitmapFontSizeLBox(const TRect& bounds, ushort aNumCols,
-                      TScrollBar *aHScrollBar, TScrollBar *aVScrollBar) :
-  TSortedListBox(bounds,aNumCols,aHScrollBar,aVScrollBar) {}
+                      TScrollBar *aHScrollBar, TScrollBar *aVScrollBar,
+                      Boolean aCenterOps=False) :
+  TSortedListBox(bounds,aNumCols,aHScrollBar,aVScrollBar,aCenterOps) {}
  virtual void getText(char *dest, ccIndex item, short maxChars);
 };
 
-class TVFontCollection : public TNSCollection
+class CLY_EXPORT TVFontCollection : public TNSCollection
 {
 public:
  TVFontCollection(const char *file, int cp);

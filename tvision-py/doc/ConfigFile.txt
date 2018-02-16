@@ -1,7 +1,7 @@
 Topics: Configuration file, TVConfigFile, TVMainConfigFile
 Author: Salvador E. Tropea
 Status: Complete
-Revision: $Revision: 1.1 $
+Revision: $Revision: 1.1.2.3 $
 
 1. INTRODUCTION
 2. FROM THE POINT OF VIEW OF THE USER
@@ -61,6 +61,7 @@ configuration information related to TV must be inside this section.
   Each driver have a short name, please read the documentation about the
 drivers to know the names. Here is a the list of currently supported drivers:
 
+AlCon  For the Allegro Conio emulator.
 DOS    For DOS or compatible systems.
 Linux  For GNU/Linux systems.
 QNX    For QNXRtP systems.
@@ -112,6 +113,16 @@ ShowCursorEver        Integer If the value isn't 0 the text cursor is always
                               terminal will show you can enable it and
                               look for changes that can help Braille
                               terminals.
+AltKeysSetting        Integer Controls how Alt keys are interpreted. The
+                              default value is 0 and means that left and
+                              right keys are different. Using 1 the keys are
+                              interpreted in the reverse way: left as right
+                              and viceversa. Using 2 both Alt keys are
+                              reported as "Left Alt Key". This is important
+                              for the menues because the shortcuts uses the
+                              left Alt Key. When using 2 any of the Alt keys
+                              can be used to access de menues.
+
 
 2.4 VARIABLES COMMON TO ALL DRIVERS
 
@@ -152,6 +163,9 @@ VideoMode        Integer Indicates which video mode should be used for the
                          screen. This is useful for DOS, but other drivers can
                          translate the most common DOS modes into a size and
                          try using the size.
+AvoidMoire       Integer Indicates the display produces annoying moire effects
+                         when drawing "dotted blocks". When enabled the
+                         classes tries to avoid using these chars.
 
 
 

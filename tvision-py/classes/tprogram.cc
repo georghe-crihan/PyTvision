@@ -8,6 +8,7 @@
 Modified by Robert H”hne to be used for RHIDE.
 Modified by Salvador E. Tropea (release CPU and other stuff)
 Modified by Salvador E. Tropea to compile for 64 bits architectures.
+Modified by Salvador E. Tropea to disable Alt+N stuff.
 
  *
  *
@@ -28,6 +29,7 @@ Modified by Salvador E. Tropea to compile for 64 bits architectures.
 #define Uses_TStatusItem
 #define Uses_TPalette
 #define Uses_TGKey
+#define Uses_TVOSClipboard
 #include <tv.h>
 
 #include <compatlayer.h>
@@ -44,6 +46,7 @@ clock_t TProgram::lastIdleClock = 0;
 clock_t TProgram::inIdleTime = 0;
 Boolean TProgram::inIdle = False;
 char    TProgram::doNotReleaseCPU = 0;
+char    TProgram::doNotHandleAltNumber = 0;
 
 extern TPoint shadowSize;
 
@@ -54,13 +57,6 @@ TProgram::TProgram() :
                 ),
     TGroup( TRect( 0,0,TScreen::screenWidth,TScreen::screenHeight ) )
 {
-  if(!createStatusLine)
-    createStatusLine = initStatusLine;
-  if(!createMenuBar)
-    createMenuBar = initMenuBar;
-  if(!createDeskTop)
-    createDeskTop = initDeskTop;
-
     application = this;
     initScreen();
     state = sfVisible | sfSelected | sfFocused | sfModal | sfExposed;
@@ -90,6 +86,8 @@ TProgram::TProgram() :
 TProgram::~TProgram()
 {
     application = 0;
+    if (TVOSClipboard::destroy)
+       TVOSClipboard::destroy();
 }
 
 void TProgram::shutDown()
@@ -184,7 +182,7 @@ void TProgram::getEvent(TEvent& event)
                 if (TScreen::checkForWindowSize())
                   {
                    setScreenMode(0xFFFF);
-                   Redraw();
+                   CLY_Redraw();
                   }
                 idle();
                 }
@@ -222,7 +220,7 @@ TPalette& TProgram::getPalette() const
 
 void TProgram::handleEvent( TEvent& event )
 {
-    if( event.what == evKeyDown )
+    if( !doNotHandleAltNumber && event.what == evKeyDown )
         {
         char c = TGKey::GetAltChar( event.keyDown.keyCode, event.keyDown.charScan.charCode );
         if( c >= '1' && c <= '9' )
@@ -232,7 +230,7 @@ void TProgram::handleEvent( TEvent& event )
                    if( message( deskTop,
                             evBroadcast,
                             cmSelectWindowNum,
-                            (void *)(long)(c - '0')
+                            (void *)(uipointer)(c - '0')
                            ) != 0 )
                    clearEvent( event );
                }

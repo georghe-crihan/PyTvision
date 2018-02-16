@@ -32,7 +32,7 @@ protected:
  // Not available static int setWindowTitle(const char *name);
 
  // Functions and members specific for this driver
- inline static void safeput(char *&p, char *cap);
+ inline static void safeput(char *&p, const char *cap);
  inline static int  canWriteVCS();
  inline static int  canReadVCS();
  inline static int  canOnlyWriteVCS();
@@ -49,7 +49,7 @@ protected:
 };
 
 inline
-void TDisplayUNIX::safeput(char *&p, char *cap)
+void TDisplayUNIX::safeput(char *&p, const char *cap)
 {
  if (cap)
     while (*cap) *p++=*cap++;
@@ -74,7 +74,7 @@ protected:
  static void sigWindowSizeChanged(int sig);
  static void SpecialKeysDisable(int file);
  static void SpecialKeysRestore(int file);
- static void startcurses();
+ static void startcurses(int &terminalCodePage);
  static void mapColor(char *&p, int col);
  static void writeBlock(int dst, int len, ushort *old, ushort *src);
  static void RestoreScreen();

@@ -48,7 +48,7 @@ void        (*TDisplay::getDisPaletteColors)(int from, int number, TScreenColor 
                                                   =TDisplay::defaultGetDisPaletteColors;
 int         (*TDisplay::setDisPaletteColors)(int from, int number, TScreenColor *colors)
                                                   =TDisplay::defaultSetDisPaletteColors;
-int         (*TDisplay::setCrtModeResP)(unsigned w, unsigned h, int fW, int fH)
+int         (*TDisplay::setCrtModeRes_p)(unsigned w, unsigned h, int fW, int fH)
                                                   =TDisplay::defaultSetCrtModeRes;
 Boolean     (*TDisplay::showBusyState)(Boolean state)
                                                   =TDisplay::defaultShowBusyState;
@@ -59,6 +59,7 @@ char        **TDisplay::environment               =NULL;
 TScreenColor  TDisplay::OriginalPalette[16];
 TScreenColor  TDisplay::ActualPalette[16];
 char          TDisplay::paletteModified           =0;
+char          TDisplay::avoidMoire                =0;
 uint32        TDisplay::opts1                     =0;
 TVCodePage   *TDisplay::codePage                  =NULL;
 Boolean       TDisplay::busyState                 =False;
@@ -380,10 +381,10 @@ Boolean TDisplay::searchClosestRes(TScreenResolution *res, unsigned x,
  if (firstXMatch!=-1)
    {// Return the closest y that match x
     i=indexMin=firstXMatch;
-    minDif=abs( (long)(res[i].y-y) );
+    minDif=abs(res[i].y-y);
     while (++i<cant && res[i].x==x)
       {
-       dif=abs( (long)(res[i].y-y) );
+       dif=abs(res[i].y-y);
        if (dif<minDif)
          {
           minDif=dif;
@@ -395,11 +396,11 @@ Boolean TDisplay::searchClosestRes(TScreenResolution *res, unsigned x,
    }
  // No x match, looks the one with minimum differences
  indexMin=0;
- minDif=abs( (long)(res[0].y-y) )+abs( (long)(res[0].x-x) );
+ minDif=abs(res[0].y-y)+abs(res[0].x-x);
  i=1;
  while (i<cant)
    {
-    dif=abs( (long)(res[i].y-y) )+abs( (long)(res[i].x-x) );
+    dif=abs(res[i].y-y)+abs(res[i].x-x);
     if (dif<minDif)
       {
        minDif=dif;

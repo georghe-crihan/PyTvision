@@ -14,7 +14,7 @@ Modified by Robert H”hne to be used for RHIDE.
 #if defined( Uses_TNSSortedCollection ) && !defined( __TNSSortedCollection )
 #define __TNSSortedCollection
 
-class TNSSortedCollection: public virtual TNSCollection
+class CLY_EXPORT TNSSortedCollection: public virtual TNSCollection
 {
 
 public:
@@ -30,6 +30,8 @@ public:
 
     Boolean duplicates;
     virtual void *keyOf( void *item );
+
+    void reSort(); // SET: Sort it again
 
 protected:
 

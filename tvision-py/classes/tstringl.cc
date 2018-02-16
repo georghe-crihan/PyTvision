@@ -46,7 +46,6 @@ void TStringList::get( char *dest, ushort key )
         return;
     }
 
-#if !defined( NO_STREAM )
     ip->seekg( basePos + cur->offset );
     int count = key - cur->key;
     do  {
@@ -54,7 +53,6 @@ void TStringList::get( char *dest, ushort key )
         ip->readBytes( dest, sz );
         dest[sz] = EOS;
         } while( count-- > 0 );
-#endif
 }
 
 #if !defined( NO_STREAM )

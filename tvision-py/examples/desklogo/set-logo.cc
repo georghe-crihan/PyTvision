@@ -14,6 +14,9 @@
 //
 //========================================================================
 
+// To avoid pulling TScreen and signal.h for anything but UNIX
+#include <tv/configtv.h>
+
 #define Uses_string
 
 #define Uses_TApplication
@@ -32,14 +35,11 @@
 #define Uses_TStatusLine
 
 #ifdef TVOS_UNIX
-#define Uses_TScreen
+ #define Uses_TScreen
+ #define Uses_signal
 #endif
 
 #include <tv.h>
-
-#ifdef TVOS_UNIX
- #include <signal.h>
-#endif
 
 #define   PATTERN 177
 
@@ -219,7 +219,7 @@ void TApp::AboutDialog()
 				cmOK, bfDefault ) );
 	deskTop->execView( pd );
     }
-    destroy( pd );
+    CLY_destroy( pd );
 }
 
 //========================================================================

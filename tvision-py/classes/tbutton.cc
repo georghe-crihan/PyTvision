@@ -122,10 +122,12 @@ void TButton::drawState(Boolean down)
         {
         cButton = getColor(0x0501);
         if( (state & sfActive) != 0 )
+            {
             if( (state & sfSelected) != 0 )
                 cButton = getColor(0x0703);
             else if( amDefault )
                 cButton = getColor(0x0602);
+            }
         }
     cShadow = getColor(8);
     int s = size.x-1;
@@ -297,23 +299,26 @@ void TButton::setState( ushort aState, Boolean enable )
 
 void TButton::press()
 {
-    message( owner, evBroadcast, cmRecordHistory, 0 );
-    if( (flags & bfBroadcast) != 0 )
-        message( owner, evBroadcast, command, this );
-    else
-        {
-        TEvent e;
-        e.what = evCommand;
-        e.message.command = command;
-        e.message.infoPtr = this;
-        putEvent( e );
-        }
-    if (callBack) // SET: That's really useful
-      {
-       int ret=callBack(command);
+ message(owner,evBroadcast,cmRecordHistory,0);
+ if (flags & bfBroadcast)
+    message(owner,evBroadcast,command,this);
+ else
+   {
+    if (callBack)
+      {// SET: That's really useful
+       int ret=callBack(command,cbData);
        if (ret==btcbEndModal && owner)
           owner->endModal(command);
       }
+    else
+      {
+       TEvent e;
+       e.what=evCommand;
+       e.message.command=command;
+       e.message.infoPtr=this;
+       putEvent(e);
+      }
+   }
 }
 
 #if !defined( NO_STREAM )

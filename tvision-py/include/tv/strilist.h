@@ -32,11 +32,11 @@ public:
 
 private:
 
+    ipstream *ip;
     long basePos;
     short indexSize;
     TStrIndexRec *index;
 #if !defined( NO_STREAM )
-    ipstream *ip;
     virtual const char *streamableName() const
 	{ return name; }
 
