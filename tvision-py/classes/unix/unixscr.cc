@@ -46,6 +46,7 @@ Mouse reporting not disabled at exit!!!
 #include <tv/unix/mouse.h>
 #include <tv/linux/mouse.h>
 
+#define NCURSES_OPAQUE 0
 #ifdef TVOSf_FreeBSD
  #include <ncurses.h>
 #else
@@ -629,7 +630,7 @@ TScreenUNIX::TScreenUNIX()
   TScreen::getCharacters=getCharacters;
   TScreen::getCharacter=getCharacter;
   TScreen::setCharacters=setCharacters;
-  TScreen::System=System;
+  TScreen::SystemP=System;
 
   TGKeyUNIX::Init();
   if (terminal && (strncmp(terminal,"xterm",5)==0 || strncmp(terminal,"Eterm",5)==0))

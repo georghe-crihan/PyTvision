@@ -1,4 +1,4 @@
-RHIDE_GCC=gcc
+RHIDE_GCC=cc
 CC=$(RHIDE_GCC)
 
 libtvfintl.a: intldummy.o

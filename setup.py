@@ -58,8 +58,8 @@ setup(
   ext_modules = [
     Extension("_tv",       ["all_wrap.cxx", "inithelper.cpp"],
 #              extra_objects=[CWD + "/tvision-py/makes/librhtv.a"],
-              library_dirs=[CWD + "/tvision-py/makes"],
-              libraries=["rhtv", "stdc++"],
+              library_dirs=[CWD + "/tvision-py/makes", "/opt/X11/lib"],
+              libraries=["rhtv", "stdc++", "curses", "X11", "Xmu"],
               define_macros=[("NO_STREAM", 1)],
               ),
     ],

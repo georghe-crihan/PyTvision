@@ -121,7 +121,9 @@ public:
  // Returns 0 if the MSB of the background selects more colors.
  static int    (*getBlinkState)();
  // SET: A new and more rasonable way to choose a video mode
- static int    (*setCrtModeRes)(unsigned w, unsigned h, int fW=-1, int fH=-1);
+ static int    (*setCrtModeResP)(unsigned w, unsigned h, int fW, int fH);
+ static inline int    setCrtModeRes(unsigned w, unsigned h, int fW=-1, int fH=-1)
+{ return setCrtModeResP(w, h, fW, fH); }
  // SET: These are the real functions for *CursorType
  static void   (*setCursorShape)(unsigned start, unsigned end);
  static void   (*getCursorShape)(unsigned &start, unsigned &end);
@@ -312,10 +314,15 @@ public:
  // SET: Used to set the video mode using an external program
  static void   (*setVideoModeExt)(char *mode);
  // SET: Set the video mode using sizes.
- static int    (*setVideoModeRes)(unsigned w, unsigned h, int fW=-1, int fH=-1);
+ static int    (*setVideoModeResP)(unsigned w, unsigned h, int fW, int fH);
+ static inline int    setVideoModeRes(unsigned w, unsigned h, int fW=-1, int fH=-1)
+{ return setVideoModeResP(w, h, fW, fH); }
  // SET: executes the indicated command
- static int    (*System)(const char *command, pid_t *pidChild=0, int in=-1,
-                         int out=-1, int err=-1);
+ static int    (*SystemP)(const char *command, pid_t *pidChild, int in,
+                         int out, int err);
+ static inline int    System(const char *command, pid_t *pidChild=0, int in=-1,
+                         int out=-1, int err=-1)
+{ return SystemP(command, pidChild, in, out, err); }
  // Palette handling, they call the TDisplay members
  static void     getPaletteColors(int from, int number, TScreenColor *colors);
  static void     setPaletteColors(int from, int number, TScreenColor *colors);
@@ -333,10 +340,15 @@ public:
  static int      setSecondaryFont(TScreenFont256 *font)
                    { return setFont(0,NULL,1,font); };
  // That's the real function to set the fonts
- static int    (*setFont)(int changeP, TScreenFont256 *fontP,
+ static int    (*setFontP)(int changeP, TScreenFont256 *fontP,
                           int changeS, TScreenFont256 *fontS,
-                          int fontCP=-1, int appCP=-1);
+                          int fontCP, int appCP);
+ static inline int setFont(int changeP, TScreenFont256 *fontP,
+                          int changeS, TScreenFont256 *fontS,
+                          int fontCP=-1, int appCP=-1)
+{ return setFontP(changeP, fontP, changeS, fontS, fontCP, appCP); }
  static void   (*restoreFonts)();
+// static void   (*restoreFonts)();
  static TVScreenFontRequestCallBack
                  setFontRequestCallBack(TVScreenFontRequestCallBack cb);
  // Helpers:

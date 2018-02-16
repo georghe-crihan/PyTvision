@@ -148,7 +148,15 @@ template <typename T, typename D>
 class TInputLineBaseT: public TInputLineBase
 {
 public:
- TInputLineBaseT(const TRect& bounds, int aMaxLen);
+ TInputLineBaseT(TRect const& bounds, int aMaxLen) :
+  TInputLineBase(bounds,aMaxLen)
+{
+ data=(char *)new T[aMaxLen];
+ *((T *)data)=EOS;
+ cellSize=sizeof(T);
+};
+
+
 
  virtual void    setData(void *rec);
  virtual void    setDataFromStr(void *str);

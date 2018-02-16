@@ -73,7 +73,7 @@ void   (*TScreen::setCharacter)(unsigned offset, uint32 value)
                                                 =TScreen::defaultSetCharacter;
 void   (*TScreen::setCharacters)(unsigned offset, ushort *values, unsigned count)
                                                 =TScreen::defaultSetCharacters;
-int    (*TScreen::System)(const char *command, pid_t *pidChild, int in,
+int    (*TScreen::SystemP)(const char *command, pid_t *pidChild, int in,
                           int out, int err)
                                                 =TScreen::defaultSystem;
 int    (*TScreen::getFontGeometry)(unsigned &w, unsigned &h)
@@ -81,12 +81,12 @@ int    (*TScreen::getFontGeometry)(unsigned &w, unsigned &h)
 int    (*TScreen::getFontGeometryRange)(unsigned &wmin, unsigned &hmin,
                                        unsigned &umax, unsigned &hmax)
                                                 =TScreen::defaultGetFontGeometryRange;
-int    (*TScreen::setFont)(int changeP, TScreenFont256 *fontP,
+int    (*TScreen::setFontP)(int changeP, TScreenFont256 *fontP,
                            int changeS, TScreenFont256 *fontS,
                            int fontCP, int appCP)
                                                 =TScreen::defaultSetFont;
 void   (*TScreen::restoreFonts)()               =TScreen::defaultRestoreFonts;
-int    (*TScreen::setVideoModeRes)(unsigned w, unsigned h, int fW, int fH)
+int    (*TScreen::setVideoModeResP)(unsigned w, unsigned h, int fW, int fH)
                                                 =TScreen::defaultSetVideoModeRes;
 
 /*****************************************************************************

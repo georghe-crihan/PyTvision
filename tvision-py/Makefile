@@ -4,7 +4,7 @@
 # Covered by the GPL license.
 #
 ifeq ($(prefix),)
-  prefix=/usr
+  prefix=/usr/local
 endif
 EXE_EXT=
 libdir=$(prefix)/lib
@@ -21,6 +21,7 @@ all:  static-lib rhtv-config$(EXE_EXT) dynamic-lib internac intl-dummy
 
 static-lib:
 	$(MAKE) -C makes -f librhtv.mkf
+	ranlib makes/librhtv.a
 
 dynamic-lib:
 	$(MAKE) DYNAMIC_LIB=1 -C makes -f librhtv.mkf
@@ -34,13 +35,14 @@ internac:
 intl-dummy:
 	$(MAKE) -C intl/dummy
 	cp intl/dummy/libtvfintl.a makes
+	ranlib makes/libtvfintl.a
 
 
 examples:
 	$(MAKE) -C examples
 
 rhtv-config$(EXE_EXT): rhtv-config.c include/tv/configtv.h
-	gcc -o rhtv-config$(EXE_EXT) -Iinclude rhtv-config.c
+	cc -o rhtv-config$(EXE_EXT) -Iinclude rhtv-config.c
 
 install-headers:
 	install -d -m 0755 $(prefix)/include/rhtvision
@@ -50,8 +52,6 @@ install-headers:
 	install -m 0644 include/tv/*.h $(prefix)/include/rhtvision/tv
 	install -d -m 0755 $(prefix)/include/rhtvision/tv/linux
 	install -m 0644 include/tv/linux/*.h $(prefix)/include/rhtvision/tv/linux
-	install -d -m 0755 $(prefix)/include/rhtvision/tv/x11
-	install -m 0644 include/tv/x11/*.h $(prefix)/include/rhtvision/tv/x11
 	install -d -m 0755 $(prefix)/include/rhtvision/cl
 	install -m 0644 include/cl/*.h $(prefix)/include/rhtvision/cl
 

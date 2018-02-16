@@ -155,7 +155,7 @@ static Boolean identMatch(void * item, void * ident)
 
 static Boolean valueMatch(void * item, void *value)
 {
-   return (((TConstData *)item)->Value == (int)value);
+   return (((TConstData *)item)->Value == (long)value);
 }
 
 int TConstCollection::getIndex(char * Ident)

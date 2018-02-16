@@ -1342,7 +1342,7 @@ TScreenX11::TScreenX11()
     writeLine=writeLineCP;
     redrawBuf=redrawBufCP;
    }
- TScreen::System=System;
+ TScreen::SystemP=System;
  TScreen::setWindowTitle=setWindowTitle;
  TScreen::getWindowTitle=getWindowTitle;
  TScreen::setDisPaletteColors=SetDisPaletteColors;
@@ -1350,10 +1350,10 @@ TScreenX11::TScreenX11()
  TScreen::getFontGeometryRange=GetFontGeometryRange;
  if (drawingMode==codepage)
    {
-    TScreen::setFont=SetFont;
+    TScreen::setFontP=SetFont;
     TScreen::restoreFonts=RestoreFonts;
    }
- TScreen::setCrtModeRes=SetCrtModeRes;
+ TScreen::setCrtModeResP=SetCrtModeRes;
  TDisplay::beep=Beep;
 
  TVX11Clipboard::Init();
@@ -2334,8 +2334,8 @@ TScreenFont256 *TScreenX11::ChooseClosestFont(unsigned fW, unsigned fH)
  else
    {
     unsigned target=fW*fH;
-    int dif1=abs(8*16-target);
-    int dif2=abs(10*20-target);
+    int dif1=abs( (long)(8*16-target) );
+    int dif2=abs( (long)(10*20-target) );
     if (dif1<dif2)
        nFont=&font8x16;
     else

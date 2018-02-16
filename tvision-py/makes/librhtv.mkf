@@ -19,7 +19,7 @@ vpath_obj=obj
 #
 # Include directories
 #
-INCLUDE_DIR=../include
+INCLUDE_DIR=../include /opt/X11/include
 CLASSES_DIR=../classes
 EXTRA_SRC_DIR=..
 INCLUDE_DIRS=$(INCLUDE_DIR)

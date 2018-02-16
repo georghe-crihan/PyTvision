@@ -55,8 +55,8 @@ UNIX.
 #define Uses_TValidator
 #define Uses_TButton
 #define Uses_MsgBox
+#include <iostream>
 #include <tv.h>
-
 UsingNamespaceStd
 
 const int cmMyFileOpen = 200; // assign new command values
@@ -136,7 +136,7 @@ void readFile( const char *fileName )
  FILE *f=fopen( fileName, "rt" );
  if (!f)
    {
-    cout << "Invalid file name..." << endl;
+    std::cout << "Invalid file name..." << std::endl;
     exit(1);
    }
  else

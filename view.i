@@ -26,7 +26,7 @@ class TView : public TObject
 
 public:
 
-    friend void genRefs();
+//    friend void genRefs();
 
     enum phaseType { phFocused, phPreProcess, phPostProcess };
     enum selectMode{ normalSelect, enterSelect, leaveSelect };

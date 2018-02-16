@@ -172,7 +172,7 @@ $MakeDefsRHIDE[5].=' -shared' if ($OSf eq 'QNXRtP');
 # Flags to link as a dynamic lib
 $MakeDefsRHIDE[6]='RHIDE_LDFLAGS=';
 $MakeDefsRHIDE[6].='-L/lib' if ($OSf eq 'QNXRtP');
-$MakeDefsRHIDE[6].=' -shared -Wl,-soname,librhtv.so.'.$Version;
+$MakeDefsRHIDE[6].=' -shared -Wl,-o,librhtv.'.$Version.'.dylib';
 $libs=$conf{'X11Lib'};
 $libs=~s/(\S+)/-l$1/g;
 $MakeDefsRHIDE[6].=" -L".$conf{'X11LibPath'}." $libs" if @conf{'HAVE_X11'} eq 'yes';

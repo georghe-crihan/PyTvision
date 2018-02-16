@@ -74,6 +74,8 @@ and regex.
  #define CLY_CFunc extern
 #endif
 
+#define TVComp_GCC
+
 #if !defined(CLY_DoNotDefineSizedTypes) && !defined(CLY_SizedTypesDefined)
 #define CLY_SizedTypesDefined 1
 /* The following types should be platform independent */

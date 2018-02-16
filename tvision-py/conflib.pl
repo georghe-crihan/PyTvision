@@ -547,7 +547,7 @@ sub FindCFLAGS
     # look there:
     $ret.=' -I/usr/local/include' if ($OSf eq 'FreeBSD');
     # Darwin is using a temporal size
-    $ret.=' -Wno-long-double' if ($OSf eq 'Darwin');
+#    $ret.=' -Wno-long-double' if ($OSf eq 'Darwin');
    }
  print "$ret\n";
  $conf{'CFLAGS'}=$ret;
@@ -616,7 +616,7 @@ sub FindCXXFLAGS
     $ret='-O2'; # -gstabs+3';
     $ret.=' -pipe' if ($OS eq 'UNIX');
     $ret.=' -I/usr/local/include -L/usr/local/include' if ($OSf eq 'FreeBSD');
-    $ret.=' -Wno-long-double' if ($OSf eq 'Darwin');
+#    $ret.=' -Wno-long-double' if ($OSf eq 'Darwin');
    }
  print "$ret\n";
  $conf{'CXXFLAGS'}=$ret;
@@ -652,7 +652,7 @@ sub FindXCFLAGS
    {
     $ret='-O3 -fomit-frame-pointer -ffast-math';
     $ret.=' -pipe' if ($OS eq 'UNIX');
-    $ret.=' -Wno-long-double' if ($OSf eq 'Darwin');
+#    $ret.=' -Wno-long-double' if ($OSf eq 'Darwin');
    }
  print "$ret\n";
  $conf{'XCFLAGS'}=$ret;
@@ -688,7 +688,7 @@ sub FindXCXXFLAGS
    {
     $ret='-O3 -fomit-frame-pointer -ffast-math';
     $ret.=' -pipe' if ($OS eq 'UNIX');
-    $ret.=' -Wno-long-double' if ($OSf eq 'Darwin');
+#    $ret.=' -Wno-long-double' if ($OSf eq 'Darwin');
    }
  print "$ret\n";
  $conf{'XCXXFLAGS'}=$ret;

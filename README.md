@@ -2,9 +2,21 @@
 
 Initial SWIG bindings are Copyright (C) 2004 Alex Novgorodov (drdivano).
 
-Taken from: http://pytvision.sourceforge.net
+PyTVision taken from: http://pytvision.sourceforge.net
 
 Archive URL: https://sourceforge.net/projects/pytvision/files/pytvision/0.0.2/.
+
+TVision 2.0.2 by Salvador E. Tropea (SET) taken from: https://sourceforge.net/projects/tvision/files/DOS_Win32/2.0.2/
+
+### DONE:
+* Builds and runs under OSX Sierra with XCode CLANG and ncurses, although it does require macports for SWIG.
+* All the examples from TurboVision distribution, apart from those requiring libintl and TurboVision Streams, compile and work in console and XQuartz GUI.
+
+### TODO:
+* Fix core dump when run from Python under console and XQuartz.
+* Possibly support Java bindings to allow use with Jython.
+* Possibly enable libintl support.
+* Possibly add TurboVision Streams support.
 
 ## DESCRIPTION
 
@@ -25,7 +37,7 @@ is a non-trivial task).
 To build the module you will need swig 1.3.21.
 
 Use the following to build the module and run the example under Linux:
-
+```
 cd tvision-py
 sh configure --no-intl
 make
@@ -35,5 +47,5 @@ python setup.py build --build-lib .
 
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$PWD/tvision-py/makes
 python test.py
-
+```
 

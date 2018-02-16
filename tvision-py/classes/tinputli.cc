@@ -84,15 +84,6 @@ TInputLineBase::TInputLineBase(const TRect& bounds, int aMaxLen) :
 template class TInputLineBaseT<char,TDrawBuffer>;
 template class TInputLineBaseT<uint16,TDrawBufferU16>;
 
-template <typename T, typename D>
-TInputLineBaseT<T,D>::TInputLineBaseT(const TRect& bounds, int aMaxLen) :
-  TInputLineBase(bounds,aMaxLen)
-{
- data=(char *)new T[aMaxLen];
- *((T *)data)=EOS;
- cellSize=sizeof(T);
-}
-
 void TInputLineBase::SetValidator(TValidator * aValidator)
 {
  CLY_destroy(validator);

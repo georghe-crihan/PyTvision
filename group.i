@@ -9,7 +9,7 @@ class TGroup : public TView
 
 public:
 
-    friend void genRefs();
+//    friend void genRefs();
 
     TGroup( const TRect& bounds );
     ~TGroup();

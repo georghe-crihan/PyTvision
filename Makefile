@@ -1,5 +1,5 @@
 INCLUDE    = -I/home/drdivano/include/python2.2 -I/home/drdivano/lib/python2.2/config -Itvision-py/include
-LIB        = -Ltvision-py/makes -lrhtv
+LIB        = -Ltvision-py/makes -lrhtv -lX11 -lXmu
 
 CPPFLAGS   = $(INCLUDE)
 CFLAGS     = -pipe -O2
