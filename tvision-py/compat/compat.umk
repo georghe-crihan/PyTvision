@@ -1,0 +1,116 @@
+#!/usr/bin/make
+# Automatically generated from RHIDE projects, don't edit
+# 2003-06-20 13:50
+#
+
+../makes/obj/beep$(ExOBJ):: beep.c  
+	$(RHIDE_COMPILE_C)
+
+../makes/obj/drivevalid$(ExOBJ):: drivevalid.c  
+	$(RHIDE_COMPILE_C)
+
+../makes/obj/expandpath$(ExOBJ):: expandpath.c  
+	$(RHIDE_COMPILE_C)
+
+../makes/obj/fexpand$(ExOBJ):: fexpand.c  
+	$(RHIDE_COMPILE_C)
+
+../makes/obj/fileattrs$(ExOBJ):: fileattrs.c  
+	$(RHIDE_COMPILE_C)
+
+../makes/obj/fileexists$(ExOBJ):: fileexists.c  
+	$(RHIDE_COMPILE_C)
+
+../makes/obj/filelength$(ExOBJ):: filelength.c  
+	$(RHIDE_COMPILE_C)
+
+../makes/obj/fixpath$(ExOBJ):: fixpath.c  
+	$(RHIDE_COMPILE_C)
+
+../makes/obj/fnmatch$(ExOBJ):: fnmatch.c  
+	$(RHIDE_COMPILE_C)
+
+../makes/obj/getcurdir$(ExOBJ):: getcurdir.c  
+	$(RHIDE_COMPILE_C)
+
+../makes/obj/getline$(ExOBJ):: getline.c  
+	$(RHIDE_COMPILE_C)
+
+../makes/obj/getopt$(ExOBJ):: getopt.c  
+	$(RHIDE_COMPILE_C)
+
+../makes/obj/getopt1$(ExOBJ):: getopt1.c  
+	$(RHIDE_COMPILE_C)
+
+../makes/obj/getshell$(ExOBJ):: getshell.c  
+	$(RHIDE_COMPILE_C)
+
+../makes/obj/glob$(ExOBJ):: glob.c  
+	$(RHIDE_COMPILE_C)
+
+../makes/obj/globfree$(ExOBJ):: globfree.c  
+	$(RHIDE_COMPILE_C)
+
+../makes/obj/iffilelen$(ExOBJ):: iffilelen.cc  
+	$(RHIDE_COMPILE_CC)
+
+../makes/obj/isdir$(ExOBJ):: isdir.c  
+	$(RHIDE_COMPILE_C)
+
+../makes/obj/isrelpath$(ExOBJ):: isrelpath.c  
+	$(RHIDE_COMPILE_C)
+
+../makes/obj/iswild$(ExOBJ):: iswild.c  
+	$(RHIDE_COMPILE_C)
+
+../makes/obj/itoa$(ExOBJ):: itoa.c  
+	$(RHIDE_COMPILE_C)
+
+../makes/obj/mkstemp$(ExOBJ):: mkstemp.c  
+	$(RHIDE_COMPILE_C)
+
+../makes/obj/nl_langinfo$(ExOBJ):: nl_langinfo.c  
+	$(RHIDE_COMPILE_C)
+
+../makes/obj/ntdirent$(ExOBJ):: ntdirent.c  
+	$(RHIDE_COMPILE_C)
+
+../makes/obj/pathvalid$(ExOBJ):: pathvalid.c  
+	$(RHIDE_COMPILE_C)
+
+../makes/obj/regex$(ExOBJ):: regex.c  
+	$(RHIDE_COMPILE_C)
+
+../makes/obj/releasec$(ExOBJ):: releasec.c  
+	$(RHIDE_COMPILE_C)
+
+../makes/obj/snprintf$(ExOBJ):: snprintf.c  
+	$(RHIDE_COMPILE_C)
+
+../makes/obj/ssc_streams$(ExOBJ):: ssc_streams.cc  
+	$(RHIDE_COMPILE_CC)
+
+../makes/obj/strlwr$(ExOBJ):: strlwr.c  
+	$(RHIDE_COMPILE_C)
+
+../makes/obj/strupr$(ExOBJ):: strupr.c  
+	$(RHIDE_COMPILE_C)
+
+../makes/obj/ticks$(ExOBJ):: ticks.c  
+	$(RHIDE_COMPILE_C)
+
+../makes/obj/unc$(ExOBJ):: unc.c  
+	$(RHIDE_COMPILE_C)
+
+../makes/obj/unc_95$(ExOBJ):: unc_95.c  
+	$(RHIDE_COMPILE_C)
+
+../makes/obj/unc_nt$(ExOBJ):: unc_nt.c  
+	$(RHIDE_COMPILE_C)
+
+../makes/obj/validfilename$(ExOBJ):: validfilename.c  
+	$(RHIDE_COMPILE_C)
+
+../makes/obj/yieldpro$(ExOBJ):: yieldpro.c  
+	$(RHIDE_COMPILE_C)
+

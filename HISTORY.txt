@@ -1,0 +1,22 @@
+0.0.1
+   Initial release. Contains wrappers for most TVision classes;
+
+   Builds on Linux;
+
+
+0.0.2
+   Added freeze scripts to help building for DOS without LFN support
+
+   PyTVision can now be built for DOS/PythonD with DJGPP (requires
+   recompile of PythonD, so it can be statically linked to libpython)
+
+   Tweaked setup.py a little (still needs reworking)
+
+   Removed streams from compatlayer.i
+
+   Typemaps hack fixes a very serious memory leak (20 kb/sec on my machine).
+   This is probably due to a bug in SWIG directors code.
+       
+   cMakeMenu cleanup (debug version of python helped to discover a 
+   potential bug)
+

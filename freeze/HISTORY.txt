@@ -1,0 +1,60 @@
+Changes from 2.1 to 2.2
+ 1) Add option (--ext-list-file) to FreezePython to write the list of
+    extensions copied to the installation directory to a file. This option is
+    useful in cases where multiple builds are performed into the same
+    installation directory.
+ 2) Pass the arguments on the command line through to Win32 GUI applications.
+    Thanks to Michael Porter for pointing this out.
+ 3) Link directly against the python DLL when building the frozen bases on
+    Windows, thus eliminating the need for building an import library.
+ 4) Force sys.path to include the directory in which the script to be frozen
+    is found.
+ 5) Make sure that the installation directory exists before attempting to
+    copy the target binary into it.
+ 6) The Win32GUI base has been modified to display fatal errors in message
+    boxes, rather than printing errors to stderr, since on Windows the
+    standard file IO handles are all closed.
+
+Changes from 2.0 to 2.1
+ 1) Remove dependency on Python 2.2. Thanks to Paul Moore for not only
+    pointing it out but providing patches.
+ 2) Set up the list of frozen modules in advance, rather than doing it after
+    Python is initialized so that implicit imports done by Python can be
+    satisfied. The bug in Python 2.3 that demonstrated this issue has been
+    fixed in the first release candidate. Thanks to Thomas Heller for pointing
+    out the obvious in this instance!
+ 3) Added additional base executable (ConsoleSetLibPath) to support setting
+    the LD_LIBRARY_PATH variable on Unix platforms and restarting the
+    executable to put the new setting into effect. This is primarily of use
+    in distributing wxPython applications on Unix where the shared library
+    has an embedded RPATH value which can cause problems.
+ 4) Small improvements of documentation based on feedback from several people.
+ 5) Print information about the files written or copied during the freezing
+    process.
+ 6) Do not copy extensions when freezing if the path is being overridden since
+    it is expected that a full Python installation is available to the target
+    users of the frozen binary.
+ 7) Provide meaningful error message when the wxPython library cannot be
+    found during the freezing process.
+
+Changes from 1.1 to 2.0
+ 1) Added support for in process (DLL) COM servers using PythonCOM.
+ 2) Ensured that the frozen flag is set prior to determining the full path for
+    the program in order to avoid warnings about Python not being found on
+    some platforms.
+ 3) Added include file and resource file to the source tree to avoid the
+    dependency on the Wine message compiler for Win32 builds.
+ 4) Dropped the option --copy-extensions; this now happens automatically since
+    the resulting binary is useless without them.
+ 5) Added a sample for building a Win32 service.
+ 6) Make use of improved modules from Python 2.3 (which function under 2.2)
+
+Changes from 1.0 to 1.1
+ 1) Fixed import error with C extensions in packages; thanks to Thomas Heller
+    for pointing out the solution to this problem.
+ 2) Added options to FreezePython to allow for the inclusion of modules which
+    will not be found by the module finder (--include-modules) and the
+    exclusion of modules which will be found by the module finder but should
+    not be included (--exclude-modules).
+ 3) Fixed typo in README.txt.
+
