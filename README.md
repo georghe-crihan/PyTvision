@@ -1,4 +1,12 @@
-DESCRIPTION
+# PyTVison - Python bindings (through SWIG) for TurboVision by Salvador Tropea
+
+Initial SWIG bindings are Copyright (C) 2004 Alex Novgorodov (drdivano).
+
+Taken from: http://pytvision.sourceforge.net
+
+Archive URL: https://sourceforge.net/projects/pytvision/files/pytvision/0.0.2/.
+
+## DESCRIPTION
 
 This is PyTVision - a set of Python bindings for Turbo Vision.
 
@@ -12,7 +20,7 @@ DJGPP/PythonD (although creating proper compile environment under DOS
 is a non-trivial task).
 
 
-BUILDING
+## BUILDING
 
 To build the module you will need swig 1.3.21.
 
