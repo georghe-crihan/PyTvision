@@ -9,7 +9,7 @@ Archive URL: https://sourceforge.net/projects/pytvision/files/pytvision/0.0.2/.
 TVision 2.2.1-4 by Salvador E. Tropea (SET) taken from: https://sourceforge.net/projects/tvision/files/UNIX/2.2.1%20CVS20161117/
 
 ### DONE:
-* Builds and runs under OSX Sierra with XCode CLANG and ncurses, although it does require macports for SWIG.
+* Builds and runs under OSX Sierra with XCode, ncurses, as well as GCC 4.3 and SWIG from macports.
 * All the examples from TurboVision distribution, apart from those requiring libintl and TurboVision Streams, compile and work in console and XQuartz GUI.
 
 ### TODO:

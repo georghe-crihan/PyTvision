@@ -17,7 +17,7 @@ class TWindowInit
 public:
 
     TWindowInit( TFrame *(*cFrame)( TRect ) );
-    virtual TFrame *defaultInitFrame( TRect& rect);
+//    virtual TFrame *defaultInitFrame( TRect& rect);
 
 protected:
 

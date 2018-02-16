@@ -1,4 +1,6 @@
 build/
 tv.py
+tv.pyc
+_tv.so
 all_wrap.cxx
 all_wrap.h
