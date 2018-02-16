@@ -4,7 +4,10 @@ LIB        = -Ltvision-py/makes -lrhtv -lX11 -lXmu
 CPPFLAGS   = $(INCLUDE)
 CFLAGS     = -pipe -O2
 
-all:    _tv.so
+all:    distutils_build _tv.so
+
+distutils_build:
+	python setup.py build --build-lib .
 
 all_wrap.cxx: *.i
 	swig -c++ -python -DNO_STREAM all.i

@@ -36,6 +36,8 @@
 %include radiobtn.i
 %include checkbox.i
 
+%include views.i
+
 %include menuitem.i
 %include submenu.i
 %include menu.i
@@ -52,7 +54,7 @@
 %include program.i
 %include applictn.i
 
-%include views.i
+//%include views.i
 %include tkeys.i
 
 %include dialog.i
