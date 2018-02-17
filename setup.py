@@ -37,7 +37,7 @@ class build_pytv_ext(build_ext):
 
     def build_extension(self, ext):
 
-        assert(os.system("swig -c++ -python -DNO_STREAM all.i") == 0)
+        assert(os.system("cd interface; swig -c++ -python -DNO_STREAM -outdir .. all.i") == 0)
                 
         # patch C++ file produced by SWIG
         fd = open("all_wrap.cxx", "r+")

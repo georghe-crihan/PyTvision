@@ -1,4 +1,5 @@
 build/
+tvision-py/makes/obj/
 tv.py
 tv.pyc
 _tv.so
