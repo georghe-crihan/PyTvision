@@ -34,7 +34,7 @@ is a non-trivial task).
 
 ## BUILDING
 
-To build the module you will need swig 1.3.21.
+To build the module you will need SWIG (I used 1.3.21).
 
 Use the following to build the module and run the example under Linux:
 ```
