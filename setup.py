@@ -37,12 +37,12 @@ class build_pytv_ext(build_ext):
 
     def build_extension(self, ext):
 
-        assert(os.system("cd interface; swig -c++ -python -DNO_STREAM -outdir .. all.i") == 0)
+        assert(os.system("swig -c++ -python -DNO_STREAM all.i") == 0)
                 
         # patch C++ file produced by SWIG
         fd = open("all_wrap.cxx", "r+")
         text = fd.read()
-        text = text.replace("TAppWrapper(),",
+        text = text.replace("TAppWrapper(arg0),",
                             "TAppWrapper(arg0),TProgInit(&TAppWrapper::_sInitStatusLine,&TAppWrapper::_sInitMenuBar,&TAppWrapper::_sInitDeskTop),")
         fd.seek(0)
         fd.truncate()
@@ -61,7 +61,7 @@ setup(
               library_dirs=[CWD + "/tvision-py/makes", "/opt/X11/lib"],
               libraries=["rhtv", "stdc++", "curses", "X11", "Xmu"],
               extra_compile_args=['-DCLY_EXPORT'],
-              define_macros=[("NO_STREAM", 1)],
+              define_macros=[("NO_STREAM", 1),("SWIG", 1)],
               ),
     ],
 )

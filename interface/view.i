@@ -4,13 +4,13 @@
 #include <tv.h>
 %}
 
-struct write_args
-{
-    void *self;
-    void *target;
-    void *buf;
-    ushort offset;
-};
+//struct write_args
+//{
+//    void *self;
+//    void *target;
+//    void *buf;
+//    ushort offset;
+//};
 
 class TRect;
 struct TEvent;
@@ -167,7 +167,7 @@ private:
                    uchar mode
                  );
     void change( uchar, TPoint delta, TPoint& p, TPoint& s, int grow=0 );
-    static void writeView( write_args );
+//    static void writeView( write_args );
 
 #if !defined( NO_STREAM )
     virtual const char *streamableName() const

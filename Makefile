@@ -7,7 +7,7 @@ CFLAGS     = -pipe -O2
 all:    distutils_build _tv.so
 
 distutils_build:
-	CC=g++ python setup.py build --build-lib .
+	python setup.py build --build-lib .
 
 all_wrap.cxx: *.i
 	swig -c++ -python -DNO_STREAM all.i

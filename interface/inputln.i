@@ -32,10 +32,10 @@ public:
  virtual void handleEvent(TEvent& event);
  void selectAll(Boolean enable);
  virtual void setState(ushort aState, Boolean enable);
- void SetValidator(TValidator *);
+ void setValidator(TValidator *);
  virtual Boolean valid(ushort);
  virtual Boolean insertChar(unsigned val); // Added by SET
- virtual Boolean insertChar(TEvent &event)=0;
+ virtual Boolean insertCharEv(TEvent &event)=0;
  virtual void    assignPos(int index, unsigned val)=0;
  virtual Boolean pasteFromOSClipboard()=0;
  virtual void    copyToOSClipboard()=0;
@@ -130,7 +130,7 @@ class TInputLine : public TInputLineBaseT<char,TDrawBuffer>
 public:
  TInputLine(const TRect& bounds, int aMaxLen);
 
- virtual Boolean insertChar(TEvent &event);
+ virtual Boolean insertCharEv(TEvent &event);
 
 #if !defined( NO_STREAM )
  virtual const char *streamableName() const
@@ -153,7 +153,7 @@ class TInputLineU16 : public TInputLineBaseT<uint16,TDrawBufferU16>
 public:
  TInputLineU16(const TRect& bounds, int aMaxLen);
 
- virtual Boolean insertChar(TEvent &event);
+ virtual Boolean insertCharEv(TEvent &event);
 
 #if !defined( NO_STREAM )
  virtual const char *streamableName() const

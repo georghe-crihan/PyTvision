@@ -48,4 +48,16 @@ python setup.py build --build-lib .
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$PWD/tvision-py/makes
 python test.py
 ```
+For OS X use:
+```
+cd tvision-py
+./configure --no-intl --x-lib=/opt/X11/lib --x-include='/Users/mac/src/PyTvision/tvision-py /opt/X11/include' --cxxflags=-DNO_STREAM
+make
+rm makes/*.dylib
+cd ..
+
+make
+
+./test.py
+```
 

@@ -821,7 +821,7 @@ Modified by Salvador E. Tropea
 #include <tv/configfile.h>
 #endif
 
-#ifndef SWIGPYTHON
+#ifndef SWIG
 #include "compat/iswild.c"
 #include "compat/releasec.c"
 #include "compat/ticks.c"
