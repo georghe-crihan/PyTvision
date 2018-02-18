@@ -2,10 +2,16 @@ build/
 tvision-py/makes/obj/
 tv.py
 tv.pyc
+compatlayer.py
 tvision-py/include/tv/configtv.h
 tvision-py/**/*.mak
 tvision-py/**/rhide.env
+tvision-py/rhtv-config
+tvision-py/configure.cache
 tvision-py/Makefile
 _tv.so
 all_wrap.cxx
 all_wrap.h
+inithelper_wrap.cxx
+inithelper_wrap.h
+inithelper.py

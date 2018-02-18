@@ -60,7 +60,6 @@ setup(
 #              extra_objects=[CWD + "/tvision-py/makes/librhtv.a"],
               library_dirs=[CWD + "/tvision-py/makes", "/opt/X11/lib"],
               libraries=["rhtv", "stdc++", "curses", "X11", "Xmu"],
-              extra_compile_args=['-DCLY_EXPORT'],
               define_macros=[("NO_STREAM", 1),("SWIG", 1)],
               ),
     ],
