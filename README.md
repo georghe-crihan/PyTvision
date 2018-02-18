@@ -31,6 +31,9 @@ The current version PyTVision compiles under Linux and under DOS using
 DJGPP/PythonD (although creating proper compile environment under DOS
 is a non-trivial task).
 
+### tv-patches
+This directory contains a set of patches against vanilla RHTVLib 2.2.1-4 by
+Salvador E. Tropea. Read their descriptions for details.
 
 ## BUILDING
 
@@ -51,11 +54,15 @@ python test.py
 For OS X use:
 ```
 cd tvision-py
-./configure --no-intl --x-lib=/opt/X11/lib --x-include=/opt/X11/include --cxxflags=-DNO_STREAM --include=${PWD}
+sh configure --no-intl --x-lib=/opt/X11/lib --x-include=/opt/X11/include --cxxflags=-DNO_STREAM --include=${PWD}
 make
-rm makes/*.dylib
 cd ..
 
+# Now, either do a
+rm tvision.py/makes/*.dylib
+# or
+(cd py-tvision; sudo make install)
+# as the DYLD_INSERT_LIBRARIES won't allow to load a shared object with embedded full path in it.
 make
 
 ./test.py

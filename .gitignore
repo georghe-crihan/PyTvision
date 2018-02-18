@@ -1,5 +1,7 @@
 build/
 tvision-py/makes/obj/
+tvision-py/makes/*.dylib
+tvision-py/makes/*.a
 tv.py
 tv.pyc
 compatlayer.py
