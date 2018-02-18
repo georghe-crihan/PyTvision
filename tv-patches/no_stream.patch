@@ -1,0 +1,67 @@
+Patches to allow the build of -DNO_STREAM version.
+diff -ur tvision/classes/tresfile.cc tvision-py/classes/tresfile.cc
+--- tvision/classes/tresfile.cc	2007-04-18 19:46:44.000000000 +0400
++++ tvision-py/classes/tresfile.cc	2018-02-16 19:09:51.000000000 +0300
+@@ -12,7 +12,7 @@
+  *
+  *
+  */
+-
++#ifndef NO_STREAM
+ #define Uses_TResourceFile
+ #define Uses_TResourceItem
+ #define Uses_fpstream
+@@ -192,3 +192,4 @@
+     modified = True;
+ }
+ 
++#endif
+diff -ur tvision/classes/tsortedl.cc tvision-py/classes/tsortedl.cc
+--- tvision/classes/tsortedl.cc	2003-12-09 19:01:43.000000000 +0300
++++ tvision-py/classes/tsortedl.cc	2018-02-16 19:09:51.000000000 +0300
+@@ -170,6 +170,7 @@
+     searchPos = USHRT_MAX;
+ }
+ 
++#ifndef NO_STREAM
+ TStreamable *TSortedListBox::build()
+ {
+     return new TSortedListBox( streamableInit );
+@@ -186,3 +187,4 @@
+ 
+     return this;
+ }
++#endif
+diff -ur tvision/classes/tstringc.cc tvision-py/classes/tstringc.cc
+--- tvision/classes/tstringc.cc	2000-05-12 06:29:15.000000000 +0400
++++ tvision-py/classes/tstringc.cc	2018-02-16 19:09:51.000000000 +0300
+@@ -49,7 +49,6 @@
+ {
+     return is.readString();
+ }
+-#endif // NO_STREAM
+ 
+ TStringCollection & TStringCollection::operator = (const TStringCollection & pl)
+ {
+@@ -62,4 +61,4 @@
+   }
+   return *this;
+ }
+-
++#endif // NO_STREAM
+diff -ur tvision/include/tv/clrdisp.h tvision-py/include/tv/clrdisp.h
+--- tvision/include/tv/clrdisp.h	2000-02-01 04:52:11.000000000 +0300
++++ tvision-py/include/tv/clrdisp.h	2018-02-16 19:09:52.000000000 +0300
+@@ -39,10 +39,11 @@
+         { return name; }
+ 
+ protected:
+-
++#ifndef NO_STREAM
+     TColorDisplay( StreamableInit );
+     virtual void write( opstream& );
+     virtual void *read( ipstream& );
++#endif
+ 
+ public:
+ 
