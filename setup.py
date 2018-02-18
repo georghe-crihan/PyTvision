@@ -43,7 +43,13 @@ class build_pytv_ext(build_ext):
         fd = open("all_wrap.cxx", "r+")
         text = fd.read()
         text = text.replace("TAppWrapper(arg0),",
-                            "TAppWrapper(arg0),TProgInit(&TAppWrapper::_sInitStatusLine,&TAppWrapper::_sInitMenuBar,&TAppWrapper::_sInitDeskTop),")
+                            "TProgInit(&TAppWrapper::_sInitStatusLine,&TAppWrapper::_sInitMenuBar,&TAppWrapper::_sInitDeskTop),TAppWrapper(arg0),")
+	text = text.replace("TApplication(),",
+                            "TProgInit(&TApplication::initStatusLine,&TApplication::initMenuBar,&TApplication::initDeskTop),TApplication(),")
+	text = text.replace("TProgram(),",
+	                    "TProgInit(&TProgram::initStatusLine,&TProgram::initMenuBar,&TProgram::initDeskTop),TProgram(),")
+	text = text.replace("TWindow(bounds, aTitle, aNumber),",
+	                    "TWindowInit(&TWindow::initFrame),TWindow(bounds, aTitle, aNumber),")
         fd.seek(0)
         fd.truncate()
         fd.write(text)

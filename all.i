@@ -23,7 +23,7 @@
 %include interface/cmdset.i
 %include interface/view.i
 %include interface/group.i
-//%include interface/window.i
+%include interface/window.i
 %include interface/scrlbar.i
 %include interface/scroller.i
 
@@ -51,10 +51,9 @@
 %include interface/statslin.i
 %include interface/desktop.i
 
-//%include interface/program.i
-//%include interface/applictn.i
+%include interface/program.i
+%include interface/applictn.i
 
-//%include interface/views.i
 %include interface/tkeys.i
 
 %include interface/dialog.i
