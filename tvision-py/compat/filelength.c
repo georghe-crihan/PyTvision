@@ -1,5 +1,3 @@
-#ifndef FILELENGTH_INCLUDED
-#define FILELENGTH_INCLUDED
 /*
  Copyright (C) 1996-1998 Robert H”hne
  Copyright (C) 2000      Salvador E. Tropea
@@ -10,7 +8,7 @@
 #ifdef NEEDS_FILELENGTH
 #include <unistd.h>
 
-inline long CLY_filelength(int fhandle)
+long CLY_filelength(int fhandle)
 {
  long oldval;
  long retval;
@@ -22,5 +20,4 @@ inline long CLY_filelength(int fhandle)
  if (lseek(fhandle,oldval,SEEK_SET)==-1L) return -1L;
  return retval;
 }
-#endif
 #endif

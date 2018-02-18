@@ -1,0 +1,39 @@
+diff -ur tvision/compat/getopt.c tvision-py/compat/getopt.c
+--- tvision/compat/getopt.c	2005-06-21 23:30:17.000000000 +0400
++++ tvision-py/compat/getopt.c	2018-02-16 19:09:51.000000000 +0300
+@@ -24,6 +24,8 @@
+ 
+ 
+ #include <cl/needs.h>
++#include <string.h>
++#include <stdlib.h>
+ 
+ #ifdef NEEDS_GETOPT
+ 
+@@ -218,12 +220,10 @@
+ /* Avoid depending on library functions or files
+    whose names are inconsistent.  */
+ 
+-char *getenv ();
++char *getenv (const char *);
+ 
+ static char *
+-my_index (str, chr)
+-     const char *str;
+-     int chr;
++my_index (const char *str, int chr)
+ {
+   while (*str)
+     {
+@@ -235,10 +235,7 @@
+ }
+ 
+ static void
+-my_bcopy (from, to, size)
+-     const char *from;
+-     char *to;
+-     int size;
++my_bcopy (const char *from, char *to, int size)
+ {
+   int i;
+   for (i = 0; i < size; i++)

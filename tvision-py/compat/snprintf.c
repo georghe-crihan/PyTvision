@@ -1,5 +1,3 @@
-#ifndef SNPRINTF_INCLUDED
-#define SNPRINTF_INCLUDED
 /*
    Unix snprintf implementation.
    Version 1.1
@@ -570,7 +568,7 @@ conv_flag(char * s, struct DATA * p)
   }
 }
 
-inline int
+PUBLIC int
 CLY_vsnprintf(char *string, size_t length, const char * format, va_list args)
 {
   struct DATA data;
@@ -712,7 +710,7 @@ CLY_vsnprintf(char *string, size_t length, const char * format, va_list args)
 
 #ifndef HAVE_SNPRINTF
 
-inline int
+PUBLIC int
 CLY_snprintf(char *string, size_t length, const char * format, ...)
 {
   int rval;
@@ -891,4 +889,4 @@ int main()
 #endif
 
 #endif /* NEEDS_SNPRINTF */
-#endif
+

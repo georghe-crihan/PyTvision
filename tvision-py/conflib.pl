@@ -869,7 +869,7 @@ sub DetectOS
     $stdcxx='-lstdc++';
     $defaultCXX='c++';
     $supportDir='linux';
-    $conf{'GCC'}='g++';
+    $conf{'GCC'}='gcc';
    }
  elsif ($os=~/NetBSD/)
    {

@@ -1,5 +1,3 @@
-#ifndef FIXPATH_INCLUDED
-#define FIXPATH_INCLUDED
 /**[txh]********************************************************************
 
   Description:
@@ -70,7 +68,7 @@ static char* __fp_getcurdir(char* out, int drive)
    6. Adding a drive specification if one wasn't there
    7. Converting all slashes to '/'
  */
-inline void
+void
 _fixpath(const char *in, char *out)
 {
   int           drive_number = 0;
@@ -211,7 +209,7 @@ is_term(int c)
    4. Removing "." in the path
    5. Removing ".." entries in the path (and the directory above them)
  */
-inline void _fixpath(const char *in, char *out)
+void _fixpath(const char *in, char *out)
 {
   const char    *ip = in;
   char          *op = out;
@@ -293,4 +291,4 @@ inline void _fixpath(const char *in, char *out)
   End of modified code from DJGPP's libc 'fixpath.c'
 */
 #endif /* DJGPP, Linux and CygWin */
-#endif
+

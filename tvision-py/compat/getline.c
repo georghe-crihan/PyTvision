@@ -1,5 +1,3 @@
-#ifndef GETLINE_INCLUDED
-#define GETLINE_INCLUDED
 /**[txh]********************************************************************
 
   Description:
@@ -71,7 +69,7 @@ ssize_t CLY_getstr(char **_lineptr, size_t *_n, FILE *_stream,
    should check feof(), if not then errno has been set to indicate the
    error.  */
 
-inline ssize_t CLY_getstr(char **lineptr, size_t *n, FILE *stream, char terminator,
+ssize_t CLY_getstr(char **lineptr, size_t *n, FILE *stream, char terminator,
                    int offset, int limit)
 {
  int nchars_avail;             /* Allocated but unused chars in *LINEPTR.  */
@@ -178,14 +176,14 @@ inline ssize_t CLY_getstr(char **lineptr, size_t *n, FILE *stream, char terminat
  return ret;
 }
 
-inline ssize_t CLY_getline(char **lineptr, size_t *n, FILE *stream)
+ssize_t CLY_getline(char **lineptr, size_t *n, FILE *stream)
 {
  return CLY_getstr(lineptr,n,stream,'\n',0,GETLINE_NO_LIMIT);
 }
 
-inline ssize_t CLY_getline_safe(char **lineptr, size_t *n, FILE *stream, int limit)
+ssize_t CLY_getline_safe(char **lineptr, size_t *n, FILE *stream, int limit)
 {
  return CLY_getstr(lineptr,n,stream,'\n',0,limit);
 }
 #endif // NEEDS_GETLINE
-#endif
+

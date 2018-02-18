@@ -1,5 +1,3 @@
-#ifndef RELEASEC
-#define RELEASEC
 /* Copyright (C) 1996-1998 Robert H”hne */
 /* Modified by Salvador E. Tropea, Vadim Bolodorov and Anatoli Soltan */
 #include <tv/configtv.h>
@@ -7,7 +5,7 @@
 #ifdef TVCompf_djgpp
 #include <dpmi.h>
 
-inline void CLY_ReleaseCPU()
+void CLY_ReleaseCPU()
 {
  __dpmi_yield(); // Release the time slice
 }
@@ -24,7 +22,7 @@ inline void CLY_ReleaseCPU()
 // some message.
 extern void __tvWin32Yield(int micros);
 
-inline void CLY_ReleaseCPU()
+void CLY_ReleaseCPU()
 {
  __tvWin32Yield(-1);
 }
@@ -32,7 +30,7 @@ inline void CLY_ReleaseCPU()
 // By Vadim Beloborodov to be used on WIN32 console
 // SET: Vadim's port just waits 0.1 seconds. I think that's because he uses
 // another thread for input.
-inline void CLY_ReleaseCPU()
+void CLY_ReleaseCPU()
 {
  Sleep(100);
 }
@@ -63,9 +61,8 @@ inline void CLY_ReleaseCPU()
 #ifdef TVOS_UNIX
 #include <unistd.h>
 
-inline void CLY_ReleaseCPU()
+void CLY_ReleaseCPU()
 {
  usleep(1000);   // Linux, release 1 ms
 }
-#endif
 #endif

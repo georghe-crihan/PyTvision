@@ -42,7 +42,7 @@ diff -ur tvision/conflib.pl tvision-py/conflib.pl
      $defaultCXX='c++';
      $supportDir='linux';
 -    $conf{'GCC'}='cc';
-+    $conf{'GCC'}='g++';
++    $conf{'GCC'}='gcc';
     }
   elsif ($os=~/NetBSD/)
     {

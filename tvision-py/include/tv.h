@@ -820,13 +820,3 @@ Modified by Salvador E. Tropea
 #ifdef INCL_CONFIGFILE_H
 #include <tv/configfile.h>
 #endif
-
-#ifndef SWIG
-#include "compat/iswild.c"
-#include "compat/releasec.c"
-#include "compat/ticks.c"
-#include "compat/snprintf.c"
-#include "compat/filelength.c"
-#include "compat/fixpath.c"
-#include "compat/getline.c"
-#endif
