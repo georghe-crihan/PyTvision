@@ -1,0 +1,48 @@
+diff -ur tvision/conflib.pl tvision-py/conflib.pl
+--- tvision/conflib.pl	2013-02-25 16:28:27.000000000 +0400
++++ tvision-py/conflib.pl	2018-02-16 19:09:51.000000000 +0300
+@@ -573,7 +573,7 @@
+     # look there:
+     $conf{'EXTRA_INCLUDE_DIRS'}.=' /usr/local/include' if ($OSf eq 'FreeBSD');
+     # Darwin is using a temporal size
+-    $ret.=' -Wno-long-double' if ($OSf eq 'Darwin');
++#    $ret.=' -Wno-long-double' if ($OSf eq 'Darwin');
+     # QNX4 X11 is in /usr/X11R6
+     # This should be automatic now. (EXTRA_INCLUDE_DIRS).
+     #$ret.=' -I/usr/X11R6/include' if ($OSf eq 'QNX4');
+@@ -649,7 +649,7 @@
+     $ret.=' -pipe' if $UsePipe;
+     $ret.=' -L/usr/local/include' if ($OSf eq 'FreeBSD');
+     $conf{'EXTRA_INCLUDE_DIRS'}.=' /usr/local/include' if ($OSf eq 'FreeBSD');
+-    $ret.=' -Wno-long-double' if ($OSf eq 'Darwin');
++#    $ret.=' -Wno-long-double' if ($OSf eq 'Darwin');
+     # QNX4 X11 is in /usr/X11R6
+     # This should be automatic now. (EXTRA_INCLUDE_DIRS).
+     #$ret.=' -I/usr/X11R6/include' if ($OSf eq 'QNX4');
+@@ -688,7 +688,7 @@
+    {
+     $ret='-O3 -fomit-frame-pointer -ffast-math';
+     $ret.=' -pipe' if $UsePipe;
+-    $ret.=' -Wno-long-double' if ($OSf eq 'Darwin');
++#    $ret.=' -Wno-long-double' if ($OSf eq 'Darwin');
+    }
+  print "$ret\n";
+  $conf{'XCFLAGS'}=$ret;
+@@ -724,7 +724,7 @@
+    {
+     $ret='-O3 -fomit-frame-pointer -ffast-math';
+     $ret.=' -pipe' if $UsePipe;
+-    $ret.=' -Wno-long-double' if ($OSf eq 'Darwin');
++#    $ret.=' -Wno-long-double' if ($OSf eq 'Darwin');
+    }
+  print "$ret\n";
+  $conf{'XCXXFLAGS'}=$ret;
+@@ -869,7 +869,7 @@
+     $stdcxx='-lstdc++';
+     $defaultCXX='c++';
+     $supportDir='linux';
+-    $conf{'GCC'}='cc';
++    $conf{'GCC'}='g++';
+    }
+  elsif ($os=~/NetBSD/)
+    {
