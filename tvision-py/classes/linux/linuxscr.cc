@@ -269,10 +269,10 @@ void TScreenLinux::Init(int mode)
  TScreen::setVideoMode=SetVideoMode;
  TScreen::setVideoModeExt=SetVideoModeExt;
  TScreen::getCharacter=GetCharacter;
- TScreen::System=System;
+ TScreen::SystemP=System;
  TDisplay::checkForWindowSize=CheckForWindowSize;
  TScreen::getFontGeometry=GetFontGeometry;
- TScreen::setFont=SetFont;
+ TScreen::setFontP=SetFont;
  TScreen::restoreFonts=RestoreFonts;
 
  switch (mode)
