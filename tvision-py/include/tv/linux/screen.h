@@ -224,7 +224,7 @@ protected:
 // some problems when compiling for Alpha (__alpha__).
 //   Also make it only for Linux until I know how to do it for FreeBSD.
 
-#if defined(TVCPU_x86)
+#if defined(TVCPU_x86) && defined(LOW_LEVEL_IO)
  // Needed for ioperm, used only by i386.
  // I also noted that glibc 2.1.3 for Alpha, SPARC and PPC doesn't have
  // this header
